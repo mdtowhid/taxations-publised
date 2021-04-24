@@ -1,0 +1,288 @@
+﻿@model Taxations.Models.ParticularsOfIncomeFromSalary
+
+@using Taxations.Models
+
+@{
+    ViewBag.Title = "Total Income";
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+
+    UserInformation ui = new UserInformation();
+    if (ViewBag.UserInformations != null)
+    {
+        ui = ViewBag.UserInformations;
+    }
+}
+
+<div class="informations mt-3">
+    <h2>Total Income</h2>
+
+    @if (Model != null)
+    {
+        <table class="table table-bordered table-condensed table-responsive table-hover bg-white text-center">
+            <thead>
+                <tr>
+                    <th>Salary & Allowences</th>
+                    <th>Income</th>
+                    <th>Tax Free Income</th>
+                    <th>Taxable Income</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @if (Model.BasicPayTaxable != null && Model.BasicPayTaxable != "0")
+                {
+                    <tr>
+                        <td class="pt-3">Basic Salary</td>
+                        <td><input type="text" class="form-control income" readonly /></td>
+                        <td><input type="text" class="form-control tax-free-income" readonly /></td>
+                        <td><input value="@Model.BasicPayTaxable" type="text" class="form-control taxable-income" readonly />
+                            <input type="date" name="DateOfBirth" id="DateOfBirth" class="form-control d-none" value="@ui.DateOfBirth" />
+                        </td>
+                    </tr>
+                }
+
+                @if (Model.SpecialPayTaxable != null && Model.SpecialPayTaxable != "0")
+                {
+                    <tr>
+                        <td class="pt-3">Special Pay</td>
+                        <td><input type="text" class="form-control income" readonly /></td>
+                        <td><input type="text" class="form-control tax-free-income" readonly /></td>
+                        <td><input value="@Model.SpecialPayTaxable" type="text" class="form-control taxable-income" readonly /></td>
+                    </tr>
+                }
+
+
+
+                @if (Model.ArrearPayTaxable != null && Model.ArrearPayTaxable != "0")
+                {
+                    <tr>
+                        <td class="pt-3">Arrear Pay</td>
+                        <td><input type="text" class="form-control income" readonly /></td>
+                        <td><input type="text" class="form-control tax-free-income" readonly /></td>
+                        <td><input value="@Model.ArrearPayTaxable" type="text" class="form-control taxable-income" readonly /></td>
+                    </tr>
+                }
+
+                @if (Model.DearnessAllowanceTaxable != null && Model.DearnessAllowanceTaxable != "0")
+                {
+                    <tr>
+                        <td class="pt-3">Dearness Allowance</td>
+                        <td><input type="text" class="form-control income" readonly /></td>
+                        <td><input type="text" class="form-control tax-free-income" readonly /></td>
+                        <td><input value="@Model.DearnessAllowanceTaxable" type="text" class="form-control taxable-income" readonly /></td>
+                    </tr>
+                }
+
+                @if (Model.HouseRentAllowanceTaxable != null && Model.HouseRentAllowanceTaxable != "0")
+                {
+                    <tr>
+                        <td class="pt-3">House Rent Allowance</td>
+                        <td><input type="text" class="form-control income" readonly /></td>
+                        <td><input type="text" class="form-control tax-free-income" readonly /></td>
+                        <td><input value="@Model.HouseRentAllowanceTaxable" type="text" class="form-control taxable-income" readonly /></td>
+                    </tr>
+                }
+
+                @if (Model.MedicalAllowanceTaxable != null && Model.MedicalAllowanceTaxable != "0")
+                {
+                    <tr>
+                        <td class="pt-3">Medical Allowence</td>
+                        <td><input type="text" class="form-control income" readonly /></td>
+                        <td><input type="text" class="form-control tax-free-income" readonly /></td>
+                        <td><input type="text" value="@Model.MedicalAllowanceTaxable" class="form-control taxable-income" readonly /></td>
+                    </tr>
+                }
+
+                @if (Model.ConveyanceAllowanceTaxable != null && Model.ConveyanceAllowanceTaxable != "0")
+                {
+                    <tr>
+                        <td class="pt-3">Conveyance Allowance</td>
+                        <td><input type="text" class="form-control income" readonly /></td>
+                        <td><input type="text" class="form-control tax-free-income" readonly /></td>
+                        <td><input type="text" value="@Model.ConveyanceAllowanceTaxable" class="form-control taxable-income" readonly /></td>
+                    </tr>
+                }
+
+                @if (Model.FestivalAllowanceTaxable != null && Model.FestivalAllowanceTaxable != "0")
+                {
+                    <tr>
+                        <td class="pt-3">Festival Allowance</td>
+                        <td><input type="text" class="form-control income" readonly /></td>
+                        <td><input type="text" class="form-control tax-free-income" readonly /></td>
+                        <td><input type="text" value="@Model.FestivalAllowanceTaxable" class="form-control taxable-income" readonly /></td>
+                    </tr>
+                }
+
+                @if (Model.AllowanceStaffTaxable != null && Model.AllowanceStaffTaxable != "0")
+                {
+                    <tr>
+                        <td class="pt-3">Allowance Staff</td>
+                        <td><input type="text" class="form-control income" readonly /></td>
+                        <td><input type="text" class="form-control tax-free-income" readonly /></td>
+                        <td><input type="text" value="@Model.AllowanceStaffTaxable" class="form-control taxable-income" readonly /></td>
+                    </tr>
+                }
+
+                @if (Model.LeaveAllowanceTaxable != null && Model.LeaveAllowanceTaxable != "0")
+                {
+                    <tr>
+                        <td class="pt-3">Leave Allowance</td>
+                        <td><input type="text" class="form-control income" readonly /></td>
+                        <td><input type="text" class="form-control tax-free-income" readonly /></td>
+                        <td><input type="text" value="@Model.LeaveAllowanceTaxable" class="form-control taxable-income" readonly /></td>
+                    </tr>
+                }
+
+                @if (Model.HonorariumTaxable != null && Model.HonorariumTaxable != "0")
+                {
+                    <tr>
+                        <td class="pt-3">Honorarium</td>
+                        <td><input type="text" class="form-control income" readonly /></td>
+                        <td><input type="text" class="form-control tax-free-income" readonly /></td>
+                        <td><input type="text" value="@Model.HonorariumTaxable" class="form-control taxable-income" readonly /></td>
+                    </tr>
+                }
+
+                @if (Model.OvertimeAllowanceTaxable != null && Model.OvertimeAllowanceTaxable != "0")
+                {
+                    <tr>
+                        <td class="pt-3">Overtime Allowance</td>
+                        <td><input type="text" class="form-control income" readonly /></td>
+                        <td><input type="text" class="form-control tax-free-income" readonly /></td>
+                        <td><input type="text" value="@Model.OvertimeAllowanceTaxable" class="form-control taxable-income" readonly /></td>
+                    </tr>
+                }
+
+                @if (Model.BonusTaxable != null && Model.BonusTaxable != "0")
+                {
+                    <tr>
+                        <td class="pt-3">Bonus</td>
+                        <td><input type="text" class="form-control income" readonly /></td>
+                        <td><input type="text" class="form-control tax-free-income" readonly /></td>
+                        <td><input type="text" value="@Model.BonusTaxable" class="form-control taxable-income" readonly /></td>
+                    </tr>
+                }
+
+                @if (Model.OtherAllowancesTaxable != null && Model.OtherAllowancesTaxable != "0")
+                {
+                    <tr>
+                        <td class="pt-3">Other Allowances</td>
+                        <td><input type="text" class="form-control income" readonly /></td>
+                        <td><input type="text" class="form-control tax-free-income" readonly /></td>
+                        <td><input type="text" value="@Model.OtherAllowancesTaxable" class="form-control taxable-income" readonly /></td>
+                    </tr>
+                }
+
+                @if (Model.EmployerContributionTaxable != null && Model.EmployerContributionTaxable != "0")
+                {
+                    <tr>
+                        <td class="pt-3">Employer Contribution</td>
+                        <td><input type="text" class="form-control income" readonly /></td>
+                        <td><input type="text" class="form-control tax-free-income" readonly /></td>
+                        <td><input type="text" value="@Model.EmployerContributionTaxable" class="form-control taxable-income" readonly /></td>
+                    </tr>
+                }
+
+                @if (Model.InterestAccruedTaxable != null && Model.InterestAccruedTaxable != "0")
+                {
+                    <tr>
+                        <td class="pt-3">Interest Accrued</td>
+                        <td><input type="text" class="form-control income" readonly /></td>
+                        <td><input type="text" class="form-control tax-free-income" readonly /></td>
+                        <td><input type="text" value="@Model.InterestAccruedTaxable" class="form-control taxable-income" readonly /></td>
+                    </tr>
+                }
+
+                @if (Model.DeemedIncomeTransportTaxable != null && Model.DeemedIncomeTransportTaxable != "0")
+                {
+                    <tr>
+                        <td class="pt-3">Deemed Income Transport</td>
+                        <td><input type="text" class="form-control income" readonly /></td>
+                        <td><input type="text" class="form-control tax-free-income" readonly /></td>
+                        <td><input type="text" value="@Model.DeemedIncomeTransportTaxable" class="form-control taxable-income" readonly /></td>
+                    </tr>
+                }
+
+                @if (Model.DeemedIncomeFurnishedTaxable != null && Model.DeemedIncomeFurnishedTaxable != "0")
+                {
+                    <tr>
+                        <td class="pt-3">Deemed Income Furnished</td>
+                        <td><input type="text" class="form-control income" readonly /></td>
+                        <td><input type="text" class="form-control tax-free-income" readonly /></td>
+                        <td><input type="text" value="@Model.DeemedIncomeFurnishedTaxable" class="form-control taxable-income" readonly /></td>
+                    </tr>
+                }
+
+                @if (Model.OtherIfAny != null && Model.OtherIfAny != "0")
+                {
+                    <tr>
+                        <td class="pt-3">Other If Any</td>
+                        <td><input type="text" class="form-control income" readonly /></td>
+                        <td><input type="text" class="form-control tax-free-income" readonly /></td>
+                        <td><input type="text" value="@Model.OtherIfAny" class="form-control taxable-income" readonly /></td>
+                    </tr>
+                }
+
+                <tr>
+                    <td class="pt-3">Total</td>
+                    <td id="totalIncome" colspan="4" class="text-right pr-3 font-weight-bolder">@Model.Total</td>
+                </tr>
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p class="pl-4 alert alert-danger font-weight-bolder text-danger">
+            Total income isn't calculated yet.
+        </p>
+    }
+
+</div>
+
+
+@if (Model != null)
+{
+    <div id="userInfo" style="display: none">
+        <p id="gender">
+            @Session["UserGender"]
+        </p>
+        <p id="autistic">
+            @Session["IsAutistc"]
+        </p>
+    </div>
+    <div class="informations p-3" id="grandTotal">
+        <h3 class="alert alert-secondary">Taxes based on total income</h3>
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <td>Total Income</td>
+                    <td>Tax Rate</td>
+                    <td>Tax</td>
+                </tr>
+            </thead>
+            <tbody id="incomeTaxTable"></tbody>
+        </table>
+    </div>
+}
+
+<style>
+    #grandTotal h4, #grandTotal p {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: 600
+    }
+
+        #grandTotal p span {
+            text-align: center;
+            display: block
+        }
+</style>
+
+<div class="d-none" id="tickedOnBoxes">
+    @ui.TickOnBoxes
+</div>
+@section Scripts {
+    <script src="~/Scripts/TotalIncome.js" type="module"></script>
+    
+}

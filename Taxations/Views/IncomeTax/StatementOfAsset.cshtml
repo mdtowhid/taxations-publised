@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "Statement Of Asset Calculation";
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+
+    string totalAsset = ViewBag.TotalAssets;
+    var totalIncome = ViewBag.TotalIncome;
+}
+
+<div id="userInfo" style="display: none">
+    <p id="gender">
+        @Session["UserGender"]
+    </p>
+    <p id="autistic">
+        @Session["IsAutistc"]
+    </p>
+
+    <input id="userId" type="hidden" value="@Session["UserId"]" />
+</div>
+
+<div class="informations mt-3 p-2">
+    <h2>Statement Of Asset Calculation</h2>
+    @if (ViewBag.TotalAssets != null && ViewBag.TotalIncome != null)
+    {
+        <span id="totalAssets" class="alert alert-info">@ViewBag.TotalAssets</span>
+        <span id="totalIncome" class="alert alert-info">@totalIncome.Total</span>
+    }
+
+    <p id="notTax"></p>
+
+    <div id="grandTotal"></div>
+</div>
+
+<script src="~/Scripts/Surcharge.js" type="module"></script>

@@ -1,0 +1,260 @@
+$(() => {
+  let basicPayTaxableAmount = 0;
+  let total = 0;
+  let calculateYearlySalary = (amount) => {
+    return parseFloat(amount) * 12;
+  };
+
+  let calculateHalfAmount = (amount) => {
+    return parseFloat(amount) / 2;
+  };
+
+  let calculatePercentage = (amount, percentage) =>
+    parseFloat((percentage / 100) * amount).toFixed(2);
+
+  let calculateTotal = (amount) => {
+    if (!isNaN(amount)) {
+      total = total + parseFloat(amount);
+      $("#Total").val(total);
+    }
+  };
+
+  //Step 19...
+  $("#DeemedIncomeTransportAmount").change(function (e) {
+    //if user has a personal car given from company than
+    let amount = calculatePercentage(parseFloat($(this).val()), 5);
+
+    $("#DeemedIncomeTransportExempted").val("---");
+    $("#DeemedIncomeTransportTaxable").val(amount);
+    calculateTotal(amount);
+
+    //if (amount >= 30000) {
+    //    //if user has a personal car given from company than
+    //    let tenPercentage = calculatePercentage(basicPayTaxableAmount, 10);
+    //    $('#DeemedIncomeExempted').val(tenPercentage);
+    //    $('#DeemedIncomeTaxable').val(amount - tenPercentage);
+    //} else {
+    //    $('#DeemedIncomeExempted').val('---');
+    //    $('#DeemedIncomeTaxable').val(0);
+    //}
+  });
+
+  //Step 18...
+  $("#InterestAccruedAmount").change(function (e) {
+    let amount = parseFloat($(this).val());
+    if (amount >= 30000) {
+      let tenPercentage = calculatePercentage(basicPayTaxableAmount, 10);
+      amount = amount - tenPercentage;
+      $("#InterestAccruedExempted").val(tenPercentage);
+      $("#InterestAccruedTaxable").val(amount);
+
+      calculateTotal(amount);
+    } else {
+      $("#InterestAccruedExempted").val("---");
+      $("#InterestAccruedTaxable").val(0);
+    }
+  });
+
+  //Step 17...
+  $("#EmployerContributionAmount").change(function (e) {
+    let amount = $(this).val();
+    if (amount >= 36000) {
+      $("#EmployerContributionExempted").val("---");
+      $("#EmployerContributionTaxable").val(amount);
+      calculateTotal(amount);
+    } else {
+      $("#EmployerContributionExempted").val("---");
+      $("#EmployerContributionTaxable").val(0);
+    }
+  });
+
+  //Step 16...
+  $("#OtherAllowancesAmount").change(function (e) {
+    let amount = $(this).val();
+    $("#OtherAllowancesExempted").val("---");
+    $("#OtherAllowancesTaxable").val(amount);
+    calculateTotal(amount);
+    /*if (amount >= 30000) {
+            $('#OtherAllowancesExempted').val('---');
+            $('#OtherAllowancesTaxable').val(amount);
+        } else {
+            $('#OtherAllowancesExempted').val('---');
+            $('#OtherAllowancesTaxable').val(0);
+        }*/
+  });
+
+  //Step 15...
+  $("#BonusAmount").change(function (e) {
+    let amount = $(this).val();
+    if (amount >= 30000) {
+      $("#BonusExempted").val("---");
+      $("#BonusTaxable").val(amount);
+      calculateTotal(amount);
+    } else {
+      $("#BonusExempted").val("---");
+      $("#BonusTaxable").val(0);
+    }
+  });
+
+  //Step 14...
+  $("#OvertimeAllowanceAmount").change(function (e) {
+    let amount = $(this).val();
+    if (amount >= 48000) {
+      $("#OvertimeAllowanceExempted").val("---");
+      $("#OvertimeAllowanceTaxable").val(amount);
+      calculateTotal(amount);
+    } else {
+      $("#OvertimeAllowanceExempted").val("---");
+      $("#OvertimeAllowanceTaxable").val(0);
+    }
+  });
+
+  //Step 13...
+  $("#HonorariumAmount").change(function (e) {
+    let amount = $(this).val();
+    if (amount >= 50000) {
+      $("#HonorariumTaxExempted").val("---");
+      $("#HonorariumTaxable").val(amount);
+      calculateTotal(amount);
+    } else {
+      $("#HonorariumTaxExempted").val("---");
+      $("#HonorariumTaxable").val(0);
+    }
+  });
+
+  //Step 12...
+  $("#LeaveAllowanceAmount").change(function (e) {
+    let amount = $(this).val();
+    if (amount >= 30000) {
+      $("#LeaveAllowanceTaxExempted").val("---");
+      $("#LeaveAllowanceTaxable").val(amount);
+      calculateTotal(amount);
+    } else {
+      $("#LeaveAllowanceTaxExempted").val("---");
+      $("#LeaveAllowanceTaxable").val(0);
+    }
+  });
+
+  //Step 11...
+  $("#AllowanceStaffAmount").change(function (e) {
+    let amount = $(this).val();
+    if (amount >= 18000) {
+      $("#AllowanceStaffTaxExempted").val("---");
+      $("#AllowanceStaffTaxable").val(amount);
+      calculateTotal(amount);
+    } else {
+      $("#AllowanceStaffTaxExempted").val("---");
+      $("#AllowanceStaffTaxable").val(0);
+    }
+  });
+
+  //Step 10...
+  $("#FestivalAllowanceAmount").change(function (e) {
+    let amount = $(this).val();
+    if (amount >= 60000) {
+      $("#FestivalAllowanceTaxExempted").val("---");
+      $("#FestivalAllowanceTaxable").val(amount);
+
+      calculateTotal(amount);
+    } else {
+      $("#FestivalAllowanceTaxExempted").val("---");
+      $("#FestivalAllowanceTaxable").val(0);
+    }
+  });
+  AllowanceStaffAmount;
+  //Step 10...
+  $("#FestivalAllowanceAmount").change(function (e) {
+    let amount = $(this).val();
+    $("#FestivalAllowanceTaxExempted").val("---");
+    $("#FestivalAllowanceTaxable").val(amount);
+
+    calculateTotal(amount);
+  });
+
+  //Step 9...
+  $("#ConveyanceAllowanceAmount").change(function (e) {
+    let amount = parseFloat($(this).val());
+    if (amount >= 60000) {
+      let halfAmount = calculateHalfAmount(amount);
+      $("#ConveyanceAllowanceTaxExempted").val(halfAmount);
+      $("#ConveyanceAllowanceTaxable").val(halfAmount);
+
+      calculateTotal(halfAmount);
+    } else if (amount < 240000) {
+      $("#ConveyanceAllowanceTaxExempted").val("");
+      $("#ConveyanceAllowanceTaxable").val(0);
+    }
+  });
+
+  //Step 8...
+
+  $("#MedicalAllowanceAmountId").change(function (e) {
+    let amount = parseFloat($(this).val());
+    if (amount >= 48000) {
+      let tenPercentage = calculatePercentage(basicPayTaxableAmount, 10);
+      amount = amount - tenPercentage;
+      $("#MedicalAllowanceTaxExemptedId").val(tenPercentage);
+      $("#MedicalAllowanceTaxableId").val(amount);
+
+      calculateTotal(amount);
+    } else if (amount) {
+      $("#MedicalAllowanceTaxExemptedId").val("");
+      $("#MedicalAllowanceTaxableId").val(0);
+    }
+  });
+
+  //Step 7...
+  $("#HouseRentAllowanceAmountId").change(function (e) {
+    let amount = parseFloat($(this).val());
+    if (amount >= 240000) {
+      let halfAmount = calculateHalfAmount(basicPayTaxableAmount);
+      amount = amount - calculatePercentage(basicPayTaxableAmount, 50);
+      $("#HouseRentAllowanceTaxExemptedId").val(halfAmount);
+      $("#HouseRentAllowanceTaxableId").val(amount);
+
+      calculateTotal(amount);
+    } else if (amount < 240000) {
+      $("#HouseRentAllowanceTaxExemptedId").val("");
+      $("#HouseRentAllowanceTaxableId").val(0);
+    }
+  });
+
+  //Step 3...
+  let basicPayAmountId = $("#BasicPayAmountId");
+  basicPayAmountId.change(function (e) {
+    let amount = calculateYearlySalary($(this).val());
+    $("#BasicPayTaxExemptedId").val("---");
+    $("#BasicPayTaxableId").val(amount);
+    basicPayTaxableAmount = parseFloat(amount);
+    calculateTotal(basicPayTaxableAmount);
+  });
+
+  //Step 4...
+  let specialPayAmountId = $("#SpecialPayAmountId");
+  specialPayAmountId.change(function (e) {
+    let amount = $(this).val();
+    $("#SpecialPayTaxExemptedId").val("---");
+    $("#SpecialPayTaxableId").val(amount);
+    calculateTotal(amount);
+  });
+
+  //Step 5...
+  $("#ArrearPayAmountId").change(function (e) {
+    let amount = $(this).val();
+    $("#ArrearPayTaxExemptedId").val("---");
+    $("#ArrearPayTaxableId").val(amount);
+    calculateTotal(amount);
+  });
+
+  //Step 6...
+  $("#DearnessAllowanceAmountId").change(function (e) {
+    amount = $(this).val();
+    $("#DearnessAllowanceTaxExemptedId").val("---");
+    $("#DearnessAllowanceTaxableId").val(amount);
+    calculateTotal(amount);
+  });
+
+  //ends
+
+  $("input").css("text-align", "center");
+});

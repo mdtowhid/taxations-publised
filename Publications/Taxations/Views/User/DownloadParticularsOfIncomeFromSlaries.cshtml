@@ -1,0 +1,344 @@
+﻿@model Taxations.Models.ParticularsOfIncomeFromSalary
+
+@using Taxations.Models
+
+@{
+    ViewBag.Title = "Download Particulars Of Income From Slaries";
+    Layout = "~/Views/Shared/downloads.cshtml";
+
+    UserInformation userInformation = new UserInformation();
+    ParticularsOfIncomeFromSalary pifs = new ParticularsOfIncomeFromSalary();
+
+    if (ViewBag.UserInformations != null)
+    {
+        userInformation = ViewBag.UserInformations;
+    }
+
+    if (ViewBag.ParticularsOfIncomeFromSalaries != null)
+    {
+        pifs = ViewBag.ParticularsOfIncomeFromSalaries;
+    }
+}
+<div class="informations mt-3">
+
+    <div class="m-3">
+        <br />
+        <button onclick="getPDF('ParticularsOfIncomeFromSalaries')" class="btn btn- btn-success">Download</button>
+    </div>
+
+    @if (Model != null)
+    {
+
+        <div id="downloadWrapper">
+            <div class="alert alert-success text-center render-body-heade" style="border-radius: 0">
+                <h3 class="mb-2">Particulars of income from Salaries</h3>
+                <p class="lead m-0 pb-1"> Annex this Schedule to the return of income if you have income from Salaries.</p>
+            </div>
+            @using (Html.BeginForm("Create", "ParticularsOfIncomeFromSlaries", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="forms" id="statementOfExpensesId">
+
+                    @if (ViewBag.SuccessMessage != null)
+                    {
+                        <div class="p-4 pt-0 pb-0">
+                            <div class="alert alert-success mb-0 mt-0 border shadow" role="alert">
+                                <p class="lead mb-0">@ViewBag.SuccessMessage</p>
+                            </div>
+                        </div>
+                    }
+
+
+                    <input type="hidden" name="UserId" value="@Session["UserId"]" />
+                    <input type="hidden"
+                           id="TotalTaxExempted"
+                           name="TotalTaxExempted" />
+                    <input id="EmployeementStatus" type="hidden" name="EmployeementStatus" value="@Session["UserType"]" />
+
+                    <div class="data-wrapper border--bottom" style="margin-bottom: 20px">
+                        <div class="left">
+                            <div class="data-indicators">
+                                01
+                            </div>
+                            <div class="assesment-year">
+                                <div style="padding: 10px; padding-left:66px">
+                                    <label>Assessment Year</label>
+                                    <div>@userInformation.AssessmentYear</div>
+                                    <input type="hidden" name="AssessmentYear" value="@userInformation.AssessmentYear" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <div class="data-indicators">
+                                02
+                            </div>
+                            <div class="pt-4">
+                                <h5 class=" pl-2">TIN: @userInformation.NewTIN</h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="particularsOfIncomeFromSlariesId">
+
+                        <div class="data-wrapper border--bottom-none" style="border: none">
+
+                            <p id="numberErrorId"></p>
+
+                            <table class="table table-bordered">
+                                <tr class=" text-center">
+                                    <th>Particulars</th>
+                                    <th>Amount (A)</th>
+                                    <th>Tax exempted (B)</th>
+                                    <th>Taxable (C = A-B)</th>
+                                </tr>
+
+                                <tr class="text-center">
+                                    <td>
+                                        <div class="data-indicators">03</div>
+                                        <label>Basic pay</label>
+                                    </td>
+                                    <td><input id="BasicPayAmountId" type="number" class="form-control" /></td>
+                                    <td><input id="BasicPayTaxExemptedId" type="text" class="form-control b" readonly /></td>
+                                    <td><input id="BasicPayTaxableId" value="@pifs.BasicPayTaxable" name="BasicPayTaxable" type="text" class="form-control" readonly /></td>
+                                </tr>
+
+                                <tr class="text-center">
+                                    <td>
+                                        <div class="data-indicators">04</div>
+                                        <label>Special pay</label>
+                                    </td>
+                                    <td><input type="number" id="SpecialPayAmountId" class="form-control" /></td>
+                                    <td><input type="text" id="SpecialPayTaxExemptedId" class="form-control b" readonly /></td>
+                                    <td><input type="text" id="SpecialPayTaxableId" value="@pifs.SpecialPayTaxable" name="SpecialPayTaxable" class="form-control" readonly /></td>
+                                </tr>
+
+                                <tr class="text-center">
+                                    <td>
+                                        <div class="data-indicators">05</div>
+                                        <label style="display: initial !important">Arrear pay (if not included in taxable income earlier)</label>
+                                    </td>
+                                    <td><input type="number" id="ArrearPayAmountId" class="form-control" /></td>
+                                    <td><input type="text" id="ArrearPayTaxExemptedId" class="form-control b" readonly /></td>
+                                    <td><input type="text" id="ArrearPayTaxableId" value="@pifs.ArrearPayTaxable" name="ArrearPayTaxable" class="form-control" readonly /></td>
+                                </tr>
+
+                                <tr class="text-center">
+                                    <td>
+                                        <div class="data-indicators">06</div>
+                                        <label>Dearness allowance</label>
+                                    </td>
+                                    <td><input type="number" id="DearnessAllowanceAmountId" class="form-control" /></td>
+                                    <td><input type="text" id="DearnessAllowanceTaxExemptedId" class="form-control b" readonly /></td>
+                                    <td><input type="text" name="DearnessAllowanceTaxable" value="@pifs.DearnessAllowanceTaxable" id="DearnessAllowanceTaxableId" class="form-control" readonly /></td>
+                                </tr>
+
+                                <tr class="text-center">
+                                    <td>
+                                        <div class="data-indicators">07</div>
+                                        <label>House rent allowance</label>
+                                    </td>
+                                    <td><input type="number" id="HouseRentAllowanceAmountId" class="form-control" /></td>
+                                    <td><input type="text" id="HouseRentAllowanceTaxExemptedId b" class="form-control" readonly /></td>
+                                    <td><input type="text" name="HouseRentAllowanceTaxable" value="@pifs.HouseRentAllowanceTaxable" id="HouseRentAllowanceTaxableId" class="form-control" readonly /></td>
+                                </tr>
+
+                                <tr class="text-center">
+                                    <td>
+                                        <div class="data-indicators">08</div>
+                                        <label>Medical allowance</label>
+                                    </td>
+                                    <td><input type="number" id="MedicalAllowanceAmountId" class="form-control" /></td>
+                                    <td><input type="text" id="MedicalAllowanceTaxExemptedId" class="form-control b" readonly /></td>
+                                    <td><input type="text" name="MedicalAllowanceTaxable" value="@pifs.MedicalAllowanceTaxable" id="MedicalAllowanceTaxableId" class="form-control" readonly /></td>
+                                </tr>
+
+                                <tr class="text-center">
+                                    <td>
+                                        <div class="data-indicators">09</div>
+                                        <label>Conveyance allowance</label>
+                                    </td>
+                                    <td><input type="number" id="ConveyanceAllowanceAmount" class="form-control" /></td>
+                                    <td><input type="text" id="ConveyanceAllowanceTaxExempted" class="form-control b" readonly /></td>
+                                    <td><input type="text" name="ConveyanceAllowanceTaxable" value="@pifs.ConveyanceAllowanceTaxable" id="ConveyanceAllowanceTaxable" class="form-control" readonly /></td>
+                                </tr>
+
+                                <tr class="text-center">
+                                    <td>
+                                        <div class="data-indicators">10</div>
+                                        <label>Festival Allowance</label>
+                                    </td>
+                                    <td><input type="number" id="FestivalAllowanceAmount" class="form-control" /></td>
+                                    <td><input type="text" id="FestivalAllowanceTaxExempted" class="form-control b" readonly /></td>
+                                    <td><input type="text" name="FestivalAllowanceTaxable" value="@pifs.FestivalAllowanceTaxable" id="FestivalAllowanceTaxable" class="form-control" readonly /></td>
+                                </tr>
+
+                                <tr class="text-center">
+                                    <td>
+                                        <div class="data-indicators">11</div>
+                                        <label>Allowance for support staff</label>
+                                    </td>
+                                    <td><input type="number" id="AllowanceStaffAmount" class="form-control" /></td>
+                                    <td><input type="text" id="AllowanceStaffTaxExempted" class="form-control b" readonly /></td>
+                                    <td><input type="text" name="AllowanceStaffTaxable" value="@pifs.AllowanceStaffTaxable" id="AllowanceStaffTaxable" class="form-control" readonly /></td>
+                                </tr>
+
+                                <tr class="text-center">
+                                    <td>
+                                        <div class="data-indicators">12</div>
+                                        <label>Leave allowance</label>
+                                    </td>
+                                    <td><input type="number" id="LeaveAllowanceAmount" class="form-control" /></td>
+                                    <td><input type="text" id="LeaveAllowanceTaxExempted" class="form-control b" readonly /></td>
+                                    <td><input type="text" name="LeaveAllowanceTaxable" value="@pifs.LeaveAllowanceTaxable" id="LeaveAllowanceTaxable" class="form-control" readonly /></td>
+                                </tr>
+
+                                <tr class="text-center">
+                                    <td>
+                                        <div class="data-indicators">13</div>
+                                        <label>Honorarium/ Reward/Fee</label>
+                                    </td>
+                                    <td><input type="number" id="HonorariumAmount" class="form-control" /></td>
+                                    <td><input type="text" id="HonorariumTaxExempted" class="form-control b" readonly /></td>
+                                    <td><input type="text" name="HonorariumTaxable" value="@pifs.HonorariumTaxable" id="HonorariumTaxable" class="form-control" readonly /></td>
+                                </tr>
+
+                                <tr class="text-center">
+                                    <td>
+                                        <div class="data-indicators">14</div>
+                                        <label>Overtime allowance</label>
+                                    </td>
+                                    <td><input type="number" id="OvertimeAllowanceAmount" class="form-control" /></td>
+                                    <td><input type="text" id="OvertimeAllowanceExempted" class="form-control b" readonly /></td>
+                                    <td>
+                                        <input type="text" id="OvertimeAllowanceTaxable"
+                                               name="OvertimeAllowanceTaxable" value="@pifs.OvertimeAllowanceTaxable" class="form-control" readonly />
+                                    </td>
+                                </tr>
+
+                                <tr class="text-center">
+                                    <td>
+                                        <div class="data-indicators">15</div>
+                                        <label>Bonus / Ex-gratia</label>
+                                    </td>
+                                    <td><input type="number" id="BonusAmount" class="form-control" /></td>
+                                    <td><input type="text" id="BonusExempted" class="form-control b" readonly /></td>
+                                    <td><input type="text" name="BonusTaxable" value="@pifs.BonusTaxable" id="BonusTaxable" class="form-control" readonly /></td>
+                                </tr>
+
+                                <tr class="text-center">
+                                    <td>
+                                        <div class="data-indicators">16</div>
+                                        <label>Other allowances</label>
+                                    </td>
+                                    <td><input type="number" id="OtherAllowancesAmount" class="form-control" /></td>
+                                    <td><input type="text" id="OtherAllowancesExempted" class="form-control b" readonly /></td>
+                                    <td><input type="text" name="OtherAllowancesTaxable" value="@pifs.OtherAllowancesTaxable" id="OtherAllowancesTaxable" class="form-control" readonly /></td>
+                                </tr>
+
+                                <tr class="text-center">
+                                    <td>
+                                        <div class="data-indicators">17</div>
+                                        <label style="display: initial !important">Employer’s contribution to a recognized provident fund</label>
+                                    </td>
+                                    <td><input type="number" id="EmployerContributionAmount" class="form-control" /></td>
+                                    <td><input type="text" id="EmployerContributionExempted" class="form-control b" readonly /></td>
+                                    <td><input type="text" name="EmployerContributionTaxable" value="@pifs.EmployerContributionTaxable" id="EmployerContributionTaxable" class="form-control" readonly /></td>
+                                </tr>
+
+                                <tr class="text-center">
+                                    <td>
+                                        <div class="data-indicators">18</div>
+                                        <label style="display: initial !important">Interest accrued on a recognized provident fund</label>
+                                    </td>
+                                    <td><input type="number" id="InterestAccruedAmount" class="form-control" /></td>
+                                    <td><input type="text" id="InterestAccruedExempted" class="form-control b" readonly /></td>
+                                    <td>
+                                        <input type="text" name="InterestAccruedTaxable" value="@pifs.InterestAccruedTaxable" id="InterestAccruedTaxable"
+                                               class="form-control" readonly />
+                                    </td>
+                                </tr>
+
+                                <tr class="text-center">
+                                    <td>
+                                        <div class="data-indicators">19</div>
+                                        <label style="display: initial !important">Deemed income for transport facility </label>
+                                    </td>
+                                    <td><input type="number" id="DeemedIncomeTransportAmount" class="form-control" /></td>
+                                    <td><input type="text" id="DeemedIncomeTransportExempted" class="form-control b" readonly /></td>
+                                    <td><input type="text" name="DeemedIncomeTransportTaxable" value="@pifs.DeemedIncomeTransportTaxable" id="DeemedIncomeTransportTaxable" class="form-control" readonly /></td>
+                                </tr>
+
+                                <tr class="text-center">
+                                    <td>
+                                        <div class="data-indicators">20</div>
+                                        <label style="display: initial !important">Deemed income for free furnished/ unfurnished accommodation </label>
+                                    </td>
+                                    <td><input type="number" id="DeemedIncomeFurnishedAmount" class="form-control" /></td>
+                                    <td><input type="text" id="DeemedIncomeFurnishedExempted" class="form-control b" readonly /></td>
+                                    <td><input type="text" name="DeemedIncomeFurnishedTaxable" value="@pifs.DeemedIncomeFurnishedTaxable" id="DeemedIncomeFurnishedTaxable" class="form-control" readonly /></td>
+                                </tr>
+
+                                <tr class="text-center">
+                                    <td>
+                                        <div class="data-indicators">21</div>
+                                        <label>Other, if any (give detail) </label>
+                                    </td>
+                                    <td>
+                                        <input type="number" class="form-control" id="OtherIfAnyAmount" />
+                                    </td>
+                                    <td><input type="text" class="form-control" id="OtherIfAnyExempted b" readonly /></td>
+                                    <td><input type="text" name="OtherIfAny" id="OtherIfAnyTaxable" value="@pifs.OtherIfAny" class="form-control" readonly /></td>
+                                </tr>
+
+                                <tr class="text-center">
+                                    <td class="p-3 font-weight-bolder" style="width: 70%">
+                                        Total
+                                    </td>
+
+                                    <td class="border-0">
+                                        <input type="text" name="total" id="total" value="@pifs.Total" class="form-control p-3 mt-2 ml-3" readonly />
+                                    </td>
+                                </tr>
+
+
+                            </table>
+                        </div>
+
+
+                        <div class="data-wrapper" style="margin-top: 25px">
+                            <div class="data-indicators" style="height: 100px">22</div>
+                            <div style="" class="off-bottom-form">
+                                <div class="left border-right">
+                                    <label>Name</label>
+                                    <input type="text" name="Name" value="@pifs.Name" class="form-control" />
+                                </div>
+                                <div class="right">
+                                    @if (pifs.PhotoPath != null)
+                                    {
+                                        <div id="prevImage">
+                                            <p class="lead mb-1">Photo</p>
+                                            <img class="img-thumbnail" src="@Url.Content(pifs.PhotoPath)"
+                                                 style="        width: 120px;
+                                                height: 120px;
+                                                display: block;
+                                                margin: 0 auto;" />
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <h3 class="text-danger">Please Peovide Particulars Of Income From Slaries</h3>
+    }
+</div>
+<script src="@Url.Content("~/Scripts/PDFMaker.js")"></script>

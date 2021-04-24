@@ -1,0 +1,600 @@
+﻿@using Taxations.Models
+@{
+    ViewBag.Title = "Add Statement Of Expenses";
+    Layout = "~/Views/shared/mainLayout.cshtml";
+    UserInformation user = new UserInformation();
+    BasicInformation bi = new BasicInformation();
+    StatementOfExpense statementOfExpense = new StatementOfExpense();
+    if (ViewBag.StatementOfExpense != null)
+    {
+        statementOfExpense = ViewBag.StatementOfExpense;
+    }
+
+    if (ViewBag.UserInformations != null)
+    {
+        user = ViewBag.UserInformations;
+    }
+
+    string a13 = "0";
+    string b13 = "0";
+
+    if (ViewBag.BasicInformations != null)
+    {
+        bi = ViewBag.BasicInformations;
+        a13 = bi.TotalAmountPayable;
+        b13 = bi.TaxDeducted;
+    }
+
+}
+
+<style>
+    .mt-minus {
+        margin-top: -5px !important;
+    }
+</style>
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 bg-white mt-3 p-0">
+        <div class="alert alert-success render-body-header" style="border-radius: 0">
+            <h3 class="mb-0">Statement of Expenses</h3>
+            <p class="lead mt-1 pb-3">Please provide your expenses infomations.</p>
+        </div>
+
+        @using (Html.BeginForm("CreateStatementOfExpenses", "StatementOfExpenses", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="forms container p-0" id="statementOfExpensesId">
+
+                @if (ViewBag.SuccessMessage != null)
+                {
+                    <div class="row mt-minus p-2 bg-transparent shadow m-1 mt-3 mb-3 border" id="submittingStatus">
+                        <div class="col-md-10">
+                            <p class="p-0 m-0 p-3 font-weight-bolder text-success"><b>@ViewBag.SuccessMessage</b></p>
+                        </div>
+                        <div class="col-md-2 border">
+                            <h3 id="cancelSubmittingStatus"
+                                class="m-0 text-center text-danger">
+                                <b style="font-size: 30px; font-weight: 900; cursor: pointer; padding-top: 30px; display: block">&times;</b>
+                            </h3>
+                        </div>
+                    </div>
+                }
+
+                <input type="hidden" name="UserId" value="@Session["UserId"]" />
+                <input type="hidden" name="EmployeementStatus" value="@Session["UserType"]" />
+                <input type="hidden"
+                       class="form-control text-left"
+                       name="AssessmentYear"
+                       value="@user.AssessmentYear" readonly />
+
+                <div class="row m-0 m-1">
+                    <div class="col-md-6">
+                        <div class="container m-0 p-0">
+                            <div class="row border border-right-0">
+                                <div class="col-md-2 border-right pt-4 text-center">01</div>
+                                <div class="col-md-10">
+                                    <label>Assessment Year</label>
+                                    @if (Session["FAY"] != null)
+                                    {
+                                        <input type="text"
+                                               class="form-control mb-2 text-left"
+                                               name=""
+                                               value="@Session["FAY"]" readonly />
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="container m-0 p-0">
+                            <div class="row border">
+                                <div class="col-md-2 border-right pt-4 text-center">02</div>
+                                <div class="col-md-10">
+                                    <label>Statement as on (DD-MM-YYYY)</label>
+                                    <input type="date" class="form-control" name="StatementDate" required value="@statementOfExpense.StatementDate" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row m-0 m-1 mt-minus mb-3">
+                    <div class="col-md-6">
+                        <div class="container m-0 p-0">
+                            <div class="row border border-right-0 border-top-0">
+                                <div class="col-md-2 border-right pt-4 text-center">03</div>
+                                <div class="col-md-10">
+                                    <label>Name of the Assessee</label>
+                                    <input type="text" class="form-control" name="NameOfAssessee" value="@user.NameOfAssessee" readonly />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="container m-0 p-0">
+                            <div class="row border border-top-0">
+                                <div class="col-md-2 border-right pt-4 text-center">04</div>
+                                <div class="col-md-10">
+                                    <label>TIN: </label>
+                                    <input type="text" name="TIN" value="@user.NewTIN" class="form-control" readonly />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row m-1 mb-0">
+                    <div class="col-md-6 border border-right-0"><h4 class="p-2 m-0">Particulars</h4></div>
+                    <div class="col-md-3 border border-right-0"><h4 class="p-2 m-0">Amount</h4></div>
+                    <div class="col-md-3 border"><h4 class="p-2 m-0">Comment</h4></div>
+                </div>
+
+                <div class="row m-1 mt-0 mt-minus">
+                    <div class="col-md-6 border m-0 p-0 border-right-0 border-top-0">
+                        <div class="container m-0">
+                            <div class="row">
+                                <div class="col-md-2 border-right text-center m-0 p-0 pt-2 pb-2">
+                                    <span class="">05</span>
+                                </div>
+                                <div class="col-md-10">Expenses for food, clothing and other essentials</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 border border-right-0 border-top-0">
+                        <input type="number"
+                               id="AgriculturalProperty"
+                               name="AgriculturalProperty"
+                               value="@statementOfExpense.AgriculturalProperty"
+                               class="form-control t mt-2" />
+                    </div>
+                    <div class="col-md-3 border border-top-0">
+                        <input type="text" class="form-control mt-2" />
+                    </div>
+                </div>
+
+                <div class="row m-1 mt-0 mt-minus">
+                    <div class="col-md-6 border m-0 p-0 border-right-0 border-top-0">
+                        <div class="container m-0">
+                            <div class="row">
+                                <div class="col-md-2 border-right text-center m-0 p-0 pt-2 pb-2">
+                                    <span class="pt-">06</span>
+                                </div>
+                                <div class="col-md-10 mt-2"><p>Housing expense</p></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 border border-right-0 border-top-0">
+                        <input type="number"
+                               id="HousingExpense"
+                               name="HousingExpense"
+                               value="@statementOfExpense.HousingExpense" class="form-control t mt-2" />
+                    </div>
+                    <div class="col-md-3 border border-top-0">
+                        <input type="text" class="form-control mt-2" />
+                    </div>
+                </div>
+
+                <div class="row mt-minus m-1">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-1 border border-bottom-0 pt-3 text-center">07</div>
+                            <div class="col-md-5 border-bottom">Auto and transportation expenses (07A+07B)</div>
+                            <div class="col-md-3 border">
+                                <input type="text"
+                                       id="AutoAndTransportationExpenses07A08B"
+                                       name="AutoAndTransportationExpenses07A08B"
+                                       value="@statementOfExpense.AutoAndTransportationExpenses07A08B"
+                                       readonly class="form-control t mt-2" />
+                            </div>
+                            <div class="col-md-3 border border-left-0">
+                                <input type="text" readonly class="form-control mt-2" />
+                            </div>
+                        </div>
+
+                        <div class="row border-top-0">
+                            <div class="col-md-1 border-left"></div>
+                            <div class="col-md-1 border border-top-0 border-right-0">07A</div>
+                            <div class="col-md-4 border border-top-0">Driver’s salary, fuel and maintenance</div>
+                            <div class="col-md-3 border-bottom">
+                                <input type="number"
+                                       name="DriverSalary07A"
+                                       id="DriverSalary07A"
+                                       value="@statementOfExpense.DriverSalary07A" class="form-control 7 mt-2" />
+                            </div>
+                            <div class="col-md-3 border border-top-0">
+                                <div>
+                                    <input type="text" class="form-control mt-2" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row border border-top-0">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-1 border border-top-0 border-bottom-0">07B</div>
+                            <div class="col-md-4 border-right">Driver’s salary, fuel and maintenance</div>
+                            <div class="col-md-3">
+                                <input type="number"
+                                       id="OtherTransportation"
+                                       name="OtherTransportation"
+                                       value="@statementOfExpense.OtherTransportation" class="form-control 7" />
+                            </div>
+                            <div class="col-md-3 border-left">
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-minus m-1">
+                    <div class="container">
+                        <div class="row border border-bottom-0 border-top-0">
+                            <div class="col-md-1 border-right border-bottom-0 pt-2">08</div>
+                            <div class="col-md-5">Household and utility expenses(8A+8B+8C+8D)</div>
+                            <div class="col-md-3 border-left border-right">
+                                <input type="number"
+                                       id="HouseholdAndUtilityExpenses08A08B08C08D"
+                                       name="HouseholdAndUtilityExpenses08A08B08C08D"
+                                       value="@statementOfExpense.HouseholdAndUtilityExpenses08A08B08C08D"
+                                       readonly class="form-control t" />
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" readonly class="form-control mt-2" />
+                            </div>
+                        </div>
+
+                        <div class="row border-top-0">
+                            <div class="col-md-1 border-left"></div>
+                            <div class="col-md-1 border border-top-0">08A</div>
+                            <div class="col-md-4 border-right border-bottom">Electricity</div>
+                            <div class="col-md-3 border-bottom">
+                                <input type="number"
+                                       id="Electricity08A"
+                                       name="Electricity08A"
+                                       value="@statementOfExpense.Electricity08A" class="form-control 8 mt-2" />
+                            </div>
+                            <div class="col-md-3 border border-top-0">
+                                <div>
+                                    <input type="text" class="form-control mt-2" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row border border-bottom-0 border-top-0">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-1 border border-top-0">08B</div>
+                            <div class="col-md-4 border-right">Gas, water, sewer and garbage</div>
+                            <div class="col-md-3">
+                                <input type="number"
+                                       id="GasWaterSewerAndGarbage08B"
+                                       name="GasWaterSewerAndGarbage08B"
+                                       value="@statementOfExpense.GasWaterSewerAndGarbage08B" class="form-control 8 mt-2" />
+                            </div>
+                            <div class="col-md-3 border-left">
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="row border border-bottom-0 border-top-0">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-1 border border-top-0">08C</div>
+                            <div class="col-md-4 border-right">Phone, internet, TV channels subscription</div>
+                            <div class="col-md-3">
+                                <input type="number"
+                                       id="PhoneInternet08C"
+                                       name="PhoneInternet08C"
+                                       value="@statementOfExpense.PhoneInternet08C" class="form-control 8 mt-2" />
+                            </div>
+                            <div class="col-md-3 border-left">
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="row border border-top-0">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-1 border border-top-0 border-bottom-0">08D</div>
+                            <div class="col-md-4 border-right">Home-support staff and other expenses</div>
+                            <div class="col-md-3">
+                                <input type="number"
+                                       id="HomeSupport08D"
+                                       name="HomeSupport08D"
+                                       value="@statementOfExpense.HomeSupport08D" class="form-control 8 mt-2" />
+                            </div>
+                            <div class="col-md-3 border-left">
+                                <input type="text" class="form-control mt-2" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row m-1 mt-0 mt-minus">
+                    <div class="col-md-6 border m-0 p-0 border-right-0 border-top-0">
+                        <div class="container m-0">
+                            <div class="row">
+                                <div class="col-md-2 border-right text-center m-0 p-0 pt-2 pb-2">
+                                    <span class="pt-">09</span>
+                                </div>
+                                <div class="col-md-10 mt-2"><p>Children’s education expenses</p></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 border border-right-0 border-top-0">
+                        <input type="number"
+                               id="ChildrenEducation"
+                               name="ChildrenEducation"
+                               value="@statementOfExpense.ChildrenEducation" class="form-control t mt-2" />
+                    </div>
+                    <div class="col-md-3 border border-top-0">
+                        <input type="text" class="form-control mt-2" />
+                    </div>
+                </div>
+
+                <div class="row mt-minus m-1">
+                    <div class="container">
+                        <div class="row border border-bottom-0 border-top-0">
+                            <div class="col-md-1 border-right pt-2">10</div>
+                            <div class="col-md-5 border-bottom">Special expenses (10A+10B+10C+10D)</div>
+                            <div class="col-md-3 border-bottom border-left border-right">
+                                <input type="number"
+                                       id="SpecialExpenses10A10B10C10D"
+                                       name="SpecialExpenses10A10B10C10D"
+                                       readonly
+                                       value="@statementOfExpense.SpecialExpenses10A10B10C10D"
+                                       class="form-control t mt-2" />
+                            </div>
+                            <div class="col-md-3 border-bottom">
+                                <input type="text" readonly class="form-control mt-2" />
+                            </div>
+                        </div>
+
+                        <div class="row border border-top-0 border-bottom-0">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-1 border border-top-0">10A</div>
+                            <div class="col-md-4 border-right border-bottom">Festival, party, events and gifts</div>
+                            <div class="col-md-3 border-bottom">
+                                <input type="number"
+                                       id="FestivalParty10A"
+                                       name="FestivalParty10A"
+                                       value="@statementOfExpense.FestivalParty10A" class="form-control 10 mt-2" />
+                            </div>
+                            <div class="col-md-3 border-left border-bottom">
+                                <div>
+                                    <input type="text" class="form-control mt-2" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row border border-top-0 border-bottom-0">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-1 border border-top-0">10B</div>
+                            <div class="col-md-4 border-right">Domestic and overseas tour, holiday, etc.</div>
+                            <div class="col-md-3">
+                                <input type="number"
+                                       id="DomesticAndOverseasTour10B"
+                                       name="DomesticAndOverseasTour10B"
+                                       value="@statementOfExpense.DomesticAndOverseasTour10B" class="form-control 10 mt-2" />
+                            </div>
+                            <div class="col-md-3 border-left">
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="row border border-top-0">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-1 border border-top-0 border-bottom-0">10C</div>
+                            <div class="col-md-4 border-right">Donation, philanthropy, etc.</div>
+                            <div class="col-md-3">
+                                <input type="number"
+                                       id="Donation10C"
+                                       name="Donation10C"
+                                       value="@statementOfExpense.Donation10C" class="form-control 10 mt-2" />
+                            </div>
+                            <div class="col-md-3 border-left">
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="row border border-top-0">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-1 border border-top-0 border-bottom-0">10D</div>
+                            <div class="col-md-4 border-right">Other special expenses</div>
+                            <div class="col-md-3">
+                                <input type="number"
+                                       id="OtherSpecialExpenses10D"
+                                       name="OtherSpecialExpenses10D"
+                                       value="@statementOfExpense.OtherSpecialExpenses10D" class="form-control 10 mt-2" />
+                            </div>
+                            <div class="col-md-3 border-left">
+                                <input type="text" class="form-control mt-2" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row m-1 mt-0 mt-minus">
+                    <div class="col-md-6 border m-0 p-0 border-right-0 border-top-0">
+                        <div class="container m-0">
+                            <div class="row">
+                                <div class="col-md-2 border-right text-center m-0 p-0 pt-2 pb-2">
+                                    <span class="pt-">11</span>
+                                </div>
+                                <div class="col-md-10 mt-2"><p>Any other expenses</p></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 border border-right-0 border-top-0">
+                        <input type="number"
+                               id="AnyOtherExpenses"
+                               name="AnyOtherExpenses"
+                               value="@statementOfExpense.AnyOtherExpenses"
+                               class="form-control t mt-2" />
+                    </div>
+                    <div class="col-md-3 border border-top-0">
+                        <input type="text" class="form-control mt-2" />
+                    </div>
+                </div>
+
+                <div class="row m-1 mt-0 mt-minus">
+                    <div class="col-md-6 border m-0 p-0 border-right-0 border-top-0">
+                        <div class="container m-0">
+                            <div class="row">
+                                <div class="col-md-2 border-right text-center m-0 p-0 pt-2 pb-2">
+                                    <span class="pt-">12</span>
+                                </div>
+                                <div class="col-md-10 mt-2"><p>Total expense relating to lifestyle (5+6+7+8+9+10+11)</p></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 border border-right-0 border-top-0">
+                        <input type="number"
+                               readonly
+                               id="TotalExpenseRelating"
+                               name="TotalExpenseRelating"
+                               value="@statementOfExpense.TotalExpenseRelating" class="form-control mt-2" />
+                    </div>
+                    <div class="col-md-3 border border-top-0">
+                        <input type="text" class="form-control mt-2" />
+                    </div>
+                </div>
+
+
+
+
+                <div class="row mt-minus m-1">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-1 border-right border-left border-bottom-0 pt-2">13</div>
+                            <div class="col-md-5 border-bottom">Payment of tax, charges, etc. (13A+13B)</div>
+                            <div class="col-md-3 border-left border-right border-bottom">
+                                <input type="number"
+                                       id="PaymentOfTax13A13B"
+                                       name="PaymentOfTax13A13B"
+                                       readonly
+                                       value="@statementOfExpense.PaymentOfTax13A13B" class="form-control mt-2" />
+                            </div>
+                            <div class="col-md-3 border-bottom">
+                                <input type="text" readonly class="form-control mt-2" />
+                            </div>
+                        </div>
+
+                        <div class="row border border-top-0 border-bottom-0">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-1 border border-top-0 border-bottom">13A</div>
+                            <div class="col-md-4 border-right border-bottom">Payment of tax at source</div>
+                            <div class="col-md-3 border-bottom">
+                                <input type="number"
+                                       id="PaymentOfTax13A"
+                                       name="PaymentOfTax13A"
+                                       value="@a13" class="form-control 13 mt-2" readonly />
+                            </div>
+                            <div class="col-md-3 border-left border-bottom">
+                                <div>
+                                    <input type="text" class="form-control mt-2" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row border border-top-0">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-1 border border-top-0 border-bottom-0">13B</div>
+                            <div class="col-md-4 border-right">Payment of tax, surcharge or other amount</div>
+                            <div class="col-md-3">
+                                <input type="number"
+                                       id="PaymentOfTax13B"
+                                       name="PaymentOfTax13B"
+                                       value="@b13" class="form-control 13" readonly />
+                            </div>
+                            <div class="col-md-3 border-left">
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row m-1 mt-0 mt-minus">
+                    <div class="col-md-6 border m-0 p-0 border-right-0 border-top-0">
+                        <div class="container m-0">
+                            <div class="row">
+                                <div class="col-md-2 border-right text-center m-0 p-0 pt-2 pb-2">
+                                    <span class="pt-">14</span>
+                                </div>
+                                <div class="col-md-10 mt-2"><p>Total amount of expense and tax (12+13)</p></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 border border-right-0 border-top-0">
+                        <input type="number"
+                               readonly
+                               id="TotalAmountOfExpense"
+                               name="TotalAmountOfExpense"
+                               value="@statementOfExpense.TotalAmountOfExpense" class="form-control mt-2" />
+                    </div>
+                    <div class="col-md-3 border border-top-0">
+                        <input type="text" class="form-control mt-2" />
+                    </div>
+                </div>
+
+                <div class="row m-1 mt-0 mt-minus border-bottom border-right">
+                    <div class="col-md-1 border border-bottom-0 border-top-0">15</div>
+                    <div class="col-md-11">
+                        <div class="container m-0 p-0">
+                            <div class="col-md-12">
+                                <p class="text-center pt-3"><b>Verification and signature</b></p>
+                            </div>
+                            <div class="col-md-12 p-0">
+                                <h5><b>Verification</b></h5>
+                                <p>
+                                    I solemnly declare that to the best of my knowledge and belief the information
+                                    given in this statement and the schedule annexed herewith are correct and complete.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="container m-0 p-0 overflow-hidden">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p><b>Name</b></p>
+                                    <input type="text" readonly name="Name" value="@user.NameOfAssessee" class="form-control" />
+                                </div>
+                                <div class="col-md-6">
+                                    <p><b>Signature & date</b></p>
+                                    @if (Session["Signature"] != null)
+                                    {
+                                        <img src="@Url.Content(Session["Signature"].ToString())"
+                                             style="width: 150px; height: 50px; box-shadow: 0 0 5px #ccc;
+                                                    padding: 3px; display: block; margin-bottom: 5px" />
+                                    }
+                                    else
+                                    {
+                                        <b class="text-danger">Not provided signature.</b>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row border m-1 mt-0 mt-minus border-top-0">
+                    <div class="col-md-12 p-3">
+                        <input name="submit" type="submit" value="Save" class="btn btn-md btn-outline-success float-right" />
+                    </div>
+                </div>
+
+
+                <div class="d-none">
+                    <div class="col-md-8 border-right">Total</div>
+                    <div class="col-md-4">
+                        <input id="total" readonly name="Total" type="number" value="@statementOfExpense.Total" class="form-control" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="col-md-3"></div>
+</div>
+
+<script>
+    $(e => { $('#offBottomForm .data-indicators').height($('#offBottomForm').height()); });
+</script>
+@section Scripts{
+    <script src="@Url.Content("~/Scripts/StatementOfExpenses.js")" type="module"></script>
+}

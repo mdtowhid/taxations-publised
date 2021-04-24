@@ -1,0 +1,106 @@
+﻿@{
+    ViewBag.Title = "Taxation Home";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+<style>
+    body {
+        background: #fbfbfb;
+        min-height: 100vh;
+    }
+
+    .video-wrapper {
+        width: 700px;
+        border-radius: 5px;
+        margin-top: 90px !important;
+        box-shadow: 0px 0px 15px #a79999;
+    }
+
+        .video-wrapper video {
+            width: 100%;
+            height: 100%;
+            vertical-align: middle;
+            border-radius: 5px;
+        }
+
+    .main-video {
+        height: 410px !important;
+    }
+
+    #helpBoxes > div {
+        overflow: hidden;
+    }
+
+        #helpBoxes > div > div {
+            min-height: 230px;
+            overflow: hidden;
+        }
+
+    #e3 {
+        width: 340px;
+        height: 15px;
+        background: darkcyan;
+        margin: 0 auto;
+        border-radius: 4px;
+        box-shadow: 0 0 5px #ccc;
+        margin-top: 25px !important;
+    }
+
+    #footer {
+        margin-left: -20px;
+    }
+</style>
+
+
+@Html.Partial("~/views/components/banner.cshtml", null)
+
+
+
+<div class="border mt-5 pb-5 d-none" style=" clip-path: ellipse(80% 63% at 50% 36%); background: #DCF1FF; height: 600px;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div style="" class="video-wrapper">
+                <video controls="controls" poster="~/images/poster.png">
+                    <source src="@Url.Content("~/Videos/Sequence%2001_2.mp4")" type="video/mp4" />
+                </video>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mt-5"></div>
+<br />
+
+<div class="container-fluid mt-5 border-bottom"
+     style="width: 1000px; margin: 0 auto; position: relative;margin-bottom: 225px;">
+    <div id="e3" class="mb-3 mt-2"></div>
+    <div class="row justify-content-center" id="helpBoxes">
+
+        <div class="col-md-3 p-1 pb-2">
+            <div class="shadow border p-5">
+                <a href="https://vat.gov.bd/sap/bc/ui5_ui5/sap/zmcf_pri/index.html#/Welcome"
+                   class="btn btn-lg btn-block btn-link" target="_blank">Online VAT Returning file...</a>
+            </div>
+        </div>
+        <div class="col-md-3 p-1 pb-2">
+            <div class="shadow border p-5">
+                <a href="http://nbrelearning.gov.bd/" class="btn btn-lg btn-block btn-link" target="_blank">
+                    Learn vat
+                    online
+                </a>
+            </div>
+        </div>
+        <div class="col-md-3 p-1 pb-2">
+            <div class="shadow border p-5">
+                <a href="https://vat.gov.bd/sap/bc/ui5_ui5/sap/zmcf_pri/index.html#/Welcome"
+                   class="btn btn-lg btn-block btn-link" target="_blank">Online VAT Reg.</a>
+            </div>
+        </div>
+        <div class="col-md-3 p-1 pb-2">
+            <div class="shadow border p-5">
+                <a href="https://secure.incometax.gov.bd/TINHome" class="btn btn-lg btn-block btn-link"
+                   target="_blank">E-TIN</a>
+            </div>
+        </div>
+    </div>
+</div>

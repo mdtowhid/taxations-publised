@@ -1,0 +1,308 @@
+﻿@model Taxations.Models.ParticularsOfTaxCredit
+
+@{
+    ViewBag.Title = "GetParticularsOfTaxCredit";
+    Layout = "~/Views/Containers/Admin.cshtml";
+}
+
+
+<div id="adminUserDetails">
+    <h4>ParticularsOfTaxCredit</h4>
+    <a class="btn btn-md btn-outline-success"
+       href="/admins/gr?repName=ParticularsOfTaxCredit&&id=@Model.UserId"
+       target="_blank">Generate Report</a>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AssessmentYear)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AssessmentYear)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TIN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TIN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LifeInsurance)
+        </dt>
+
+        <dd>
+            @if (Model.LifeInsurance != null)
+            {
+                <span>@Html.DisplayFor(model => model.LifeInsurance)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContributionToDeposit)
+        </dt>
+
+        <dd>
+            @if (Model.ContributionToDeposit != null)
+            {
+                <span>@Html.DisplayFor(model => model.ContributionToDeposit)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InvestmentInApprovedSavings)
+        </dt>
+
+        <dd>
+            @if (Model.InvestmentInApprovedSavings != null)
+            {
+                <span>@Html.DisplayFor(model => model.InvestmentInApprovedSavings)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InvestmentInApprovedDebenture)
+        </dt>
+
+        <dd>
+            @if (Model.InvestmentInApprovedDebenture != null)
+            {
+                <span>@Html.DisplayFor(model => model.InvestmentInApprovedDebenture)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContributionToProvidentFund)
+        </dt>
+
+        <dd>
+            @if (Model.ContributionToProvidentFund != null)
+            {
+                <span>@Html.DisplayFor(model => model.ContributionToProvidentFund)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SelfContributionAndEmployer)
+        </dt>
+
+        <dd>
+            @if (Model.SelfContributionAndEmployer != null)
+            {
+                <span>@Html.DisplayFor(model => model.SelfContributionAndEmployer)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContributionToSuperAnnuationFund)
+        </dt>
+
+        <dd>
+            @if (Model.ContributionToSuperAnnuationFund != null)
+            {
+                <span>@Html.DisplayFor(model => model.ContributionToSuperAnnuationFund)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContributionToBenevolentFund)
+        </dt>
+
+        <dd>
+            @if (Model.ContributionToBenevolentFund != null)
+            {
+                <span>@Html.DisplayFor(model => model.ContributionToBenevolentFund)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContributionToZakatFund)
+        </dt>
+
+        <dd>
+            @if (Model.ContributionToZakatFund != null)
+            {
+                <span>@Html.DisplayFor(model => model.ContributionToZakatFund)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OthersIfAny)
+        </dt>
+
+        <dd>
+            @if (Model.OthersIfAny != null)
+            {
+                <span>@Html.DisplayFor(model => model.OthersIfAny)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalAllowableInvestment)
+        </dt>
+
+        <dd>
+            @if (Model.TotalAllowableInvestment != null)
+            {
+                <span>@Html.DisplayFor(model => model.TotalAllowableInvestment)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EligibleAmountForRebate)
+        </dt>
+
+        <dd>
+            @if (Model.EligibleAmountForRebate != null)
+            {
+                <span>@Html.DisplayFor(model => model.EligibleAmountForRebate)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalAllowableInvestmentContribution)
+        </dt>
+
+        <dd>
+            @if (Model.TotalAllowableInvestmentContribution != null)
+            {
+                <span>@Html.DisplayFor(model => model.TotalAllowableInvestmentContribution)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalIncome14B)
+        </dt>
+
+        <dd>
+            @if (Model.TotalIncome14B != null)
+            {
+                <span>@Html.DisplayFor(model => model.TotalIncome14B)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Crore14C)
+        </dt>
+
+        <dd>
+            @if (Model.Crore14C != null)
+            {
+                <span>@Html.DisplayFor(model => model.Crore14C)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AmountOfTaxRebateCalculated)
+        </dt>
+
+        <dd>
+            @if (Model.AmountOfTaxRebateCalculated != null)
+            {
+                <span>@Html.DisplayFor(model => model.AmountOfTaxRebateCalculated)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @if (Model.Name != null)
+            {
+                <span>@Html.DisplayFor(model => model.Name)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SignatureAndDatePhoto)
+        </dt>
+
+        <dd>
+            <img src="@Url.Content(Model.SignatureAndDatePhoto)" />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeementStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmployeementStatus)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,127 @@
+﻿@using Taxations.Models
+@using Taxations.Dtos
+@{
+    ViewBag.Title = "Total Investment";
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+    ParticularsOfTaxCredit potc = ViewBag.TaxCredit;
+    var dPSInfos = ViewBag.DpsInfoes;
+}
+
+@if (potc != null)
+{
+    <div class="informations mt-3 investment-rebate" style="width: 600px; overflow: hidden">
+        <h2>Total Investment</h2>
+        <table class="table table-bordered table-condensed table-responsive table-hover bg-white">
+
+            <tbody id="investmentInformations">
+                @if (potc.SelfContributionAndEmployer != null && potc.SelfContributionAndEmployer != "0")
+                {
+                    <tr>
+                        <td class="pt-3">Provident Fund</td>
+                        <td><input type="text" class="form-control income" readonly value="@potc.SelfContributionAndEmployer" /></td>
+                    </tr>
+                }
+                
+                @if (dPSInfos != null)
+                {
+                    foreach (DPSInfo dps in dPSInfos)
+                    {
+                        <tr>
+                            <td class="pt-3">@dps.BankName</td>
+                            <td><input type="text" class="form-control income" readonly value="@dps.Amount" /></td>
+                        </tr>
+                    }
+                }
+
+                @if (potc.LifeInsurance != null && potc.LifeInsurance != "0")
+                {
+                    <tr>
+                        <td class="pt-3">Life insurance premium</td>
+                        <td><input type="text" class="form-control income" readonly value="@potc.LifeInsurance" /></td>
+                    </tr>
+                }
+                @if (potc.InvestmentInApprovedSavings != null && potc.InvestmentInApprovedSavings != "0")
+                {
+                    <tr>
+                        <td class="pt-3">Investment in approved savings certificate</td>
+                        <td><input type="text" class="form-control income" readonly value="@potc.LifeInsurance" /></td>
+                    </tr>
+                }
+                @if (potc.InvestmentInApprovedDebenture != null && potc.InvestmentInApprovedDebenture != "0")
+                {
+                    <tr>
+                        <td class="pt-3">Investment in approved debenture or debenture stock, Stock or Shares</td>
+                        <td><input type="text" class="form-control income" readonly value="@potc.InvestmentInApprovedDebenture" /></td>
+                    </tr>
+                }
+                @if (potc.ContributionToProvidentFund != null && potc.ContributionToProvidentFund != "0")
+                {
+                    <tr>
+                        <td class="pt-3">Contribution to provident fund to which Provident Fund Act, 1925 applies</td>
+                        <td><input type="text" class="form-control income" readonly value="@potc.ContributionToProvidentFund" /></td>
+                    </tr>
+                }
+                @if (potc.ContributionToSuperAnnuationFund != null && potc.ContributionToSuperAnnuationFund != "0")
+                {
+                    <tr>
+                        <td class="pt-3">Contribution to Super Annuation Fund</td>
+                        <td><input type="text" class="form-control income" readonly value="@potc.ContributionToSuperAnnuationFund" /></td>
+                    </tr>
+
+                }
+                @if (potc.ContributionToBenevolentFund != null && potc.ContributionToBenevolentFund != "0")
+                {
+
+                    <tr>
+                        <td class="pt-3">Contribution to Benevolent Fund and Group Insurance Premium</td>
+                        <td><input type="text" class="form-control income" readonly value="@potc.ContributionToBenevolentFund" /></td>
+                    </tr>
+                }
+                @if (potc.ContributionToZakatFund != null && potc.ContributionToZakatFund != "0")
+                {
+                    <tr>
+                        <td class="pt-3">Contribution to Zakat Fund</td>
+                        <td><input type="text" class="form-control income" readonly value="@potc.ContributionToZakatFund" /></td>
+                    </tr>
+                }
+                @if (potc.OthersIfAny != null && potc.OthersIfAny != "0")
+                {
+                    <tr>
+                        <td class="pt-3">Others, if any ( give details )</td>
+                        <td><input type="text" class="form-control income" readonly value="@potc.OthersIfAny" /></td>
+                    </tr>
+                }
+
+                <tr class="bg-light">
+                    <td class="pt-3 font-weight-bolder">Total</td>
+                    <td><input id="totalInvestment" type="text" class="form-control font-weight-bolder" readonly/></td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+}
+else
+{
+    <div class="container">
+            <div class="row"><div class="col-md-2"></div>
+            <div class="col-md-8 mt-4">
+                <h1 class="text-danger alert alert-danger">Total investment not yet calculated.</h1>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+}
+
+<script>
+    const investmentInformationsInputs = $('#investmentInformations input');
+    let total = 0;
+    for (let inputBox of investmentInformationsInputs) {
+        total += +$(inputBox).val();
+    }
+    $('#totalInvestment').val(total);
+
+
+
+</script>

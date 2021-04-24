@@ -1,0 +1,334 @@
+﻿@using Taxations.Models;
+@{
+    UserInformation userInformation = new UserInformation(); ;
+
+    if (ViewBag.UserInformations != null)
+    {
+        userInformation = ViewBag.UserInformations;
+    }
+
+    StatementOfAsset statementOfAsset = new StatementOfAsset();
+    if (ViewBag.StatementOfAsset != null)
+    {
+        statementOfAsset = ViewBag.StatementOfAsset;
+    }
+
+    StatementOfExpense ste = new StatementOfExpense();
+
+    if (ViewBag.SateMentOfExpenses != null)
+    {
+        ste = ViewBag.SateMentOfExpenses;
+    }
+
+    ParticularsOfIncomeFromSalary pifs = new ParticularsOfIncomeFromSalary();
+
+    if (ViewBag.ParticularsOfIncomeFromSalaries != null)
+    {
+        pifs = ViewBag.ParticularsOfIncomeFromSalaries;
+    }
+}
+
+<div class="forms form-slides">
+
+    <div class="row border m-1 bg-light mt-3">
+        <div class="col-md-8 p-2 border-right">
+            <h3 class="m-0">Particulars</h3>
+        </div>
+        <div class="col-md-4 p-2 ">
+            <h3 class="m-0 text-center">Amount</h3>
+        </div>
+    </div>
+
+    <div class="row mt-minus m-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-1 border border-bottom-0 border-top-0 pt-4 text-center">13</div>
+                <div class="col-md-7 border-bottom pt-2">Cash and fund outside business (13A+13B+13C+13D)</div>
+                <div class="col-md-4 border">
+                    <input type="number" readonly id="CashAndFundOutsideBusiness" name="CashAndFundOutsideBusiness"
+                        value="@statementOfAsset.CashAndFundOutsideBusiness" class="form-control cashAndFundOutsideBusiness_Prev_Total" />
+                </div>
+            </div>
+
+            <div class="row border-top-0">
+                <div class="col-md-1 border-left"></div>
+                <div class="col-md-1 border border-top-0 border-right-0 pt-2">13A</div>
+                <div class="col-md-6 border border-top-0">
+                    Notes and currencies
+                </div>
+                <div class="col-md-4 border-bottom border-right">
+                    <input type="number" id="NotesAndCurrencies13A" name="NotesAndCurrencies13A"
+                        value="@statementOfAsset.NotesAndCurrencies13A" class="form-control 13 cashAndFundOutsideBusiness_Prev" />
+                </div>
+            </div>
+
+            <div class="row border border-top-0">
+                <div class="col-md-1"></div>
+                <div class="col-md-1 pt-2 border border-top-0 border-bottom-0">13B</div>
+                <div class="col-md-6 border-right">Banks, cards and other electronic cash</div>
+                <div class="col-md-4 pt-1">
+                    <input type="number" id="BanksCardsAndOtherElectronicCash13B"
+                        name="BanksCardsAndOtherElectronicCash13B"
+                        value="@statementOfAsset.BanksCardsAndOtherElectronicCash13B" class="form-control 13 cashAndFundOutsideBusiness_Prev" />
+                </div>
+            </div>
+
+            <div class="row border border-top-0">
+                <div class="col-md-1"></div>
+                <div class="col-md-1 pt-2 border border-top-0 border-bottom-0">13C</div>
+                <div class="col-md-6 border-right">Provident fund and other fund</div>
+                <div class="col-md-4 pt-1">
+                    <input type="number" id="ProvidentFundAndOtherFund13C" name="ProvidentFundAndOtherFund13C"
+                        value="@statementOfAsset.ProvidentFundAndOtherFund13C" class="form-control 13 cashAndFundOutsideBusiness_Prev" />
+                </div>
+            </div>
+
+            <div class="row border border-top-0">
+                <div class="col-md-1"></div>
+                <div class="col-md-1 pt-2 border border-top-0 border-bottom-0">13D</div>
+                <div class="col-md-6 border-right">Other deposits, balance and advance (other than 08)</div>
+                <div class="col-md-4 pt-1">
+                    <input type="number" id="OtherDepositBalanceAndAdvance13D" name="OtherDepositBalanceAndAdvance13D"
+                        value="@statementOfAsset.OtherDepositBalanceAndAdvance13D" class="form-control 13 cashAndFundOutsideBusiness_Prev" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row m-1 mt-0 mt-minus border-top-0 mt-minus border">
+        <div class="col-md-1 p-2 border-right pt-3 text-center">14</div>
+        <div class="col-md-7 p-2 border-right pt-3">Gross wealth (aggregate of 05 to 13)</div>
+        <div class="col-md-4 pt-1 pb-1">
+            <input type="number" id="GrossWealth14" readonly name="GrossWealth14"
+                value="@statementOfAsset.GrossWealth14" class="form-control" />
+        </div>
+    </div>
+
+    <div class="row mt-minus m-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-1 border border-bottom-0 border-top-0 pt-4 text-center">15</div>
+                <div class="col-md-7 border-bottom pt-2">Liabilities outside business (15A+15B+15C)</div>
+                <div class="col-md-4 border">
+                    <input type="number" readonly id="LiabilitiesButsideBusines15" name="LiabilitiesButsideBusines15"
+                        value="@statementOfAsset.LiabilitiesButsideBusines15" class="form-control liabilitiesButsideBusines15_Prev_Total" />
+                </div>
+            </div>
+
+            <div class="row border-top-0">
+                <div class="col-md-1 border-left"></div>
+                <div class="col-md-1 border border-top-0 border-right-0 pt-2">15A</div>
+                <div class="col-md-6 border border-top-0">
+                    Borrowings from banks and other financial institutions
+                </div>
+                <div class="col-md-4 border-bottom border-right">
+                    <input type="number" id="BorrowingsFromBanks15A" name="BorrowingsFromBanks15A"
+                        value="@statementOfAsset.BorrowingsFromBanks15A" class="form-control 15 liabilitiesButsideBusines15_Prev" />
+                </div>
+            </div>
+
+            <div class="row border border-top-0">
+                <div class="col-md-1"></div>
+                <div class="col-md-1 pt-2 border border-top-0 border-bottom-0">15B</div>
+                <div class="col-md-6 border-right">Unsecured loan (mention name and TIN)</div>
+                <div class="col-md-4 pt-1">
+                    <input type="number" id="UnsecuredLoan15B" name="UnsecuredLoan15B"
+                        value="@statementOfAsset.UnsecuredLoan15B" class="form-control 15 liabilitiesButsideBusines15_Prev" />
+                </div>
+            </div>
+
+            <div class="row border border-top-0">
+                <div class="col-md-1"></div>
+                <div class="col-md-1 pt-2 border border-top-0 border-bottom-0">15C</div>
+                <div class="col-md-6 border-right">Other loans or overdrafts</div>
+                <div class="col-md-4 pt-1">
+                    <input type="number" id="OtherLoansOrOverdrafts15C" name="OtherLoansOrOverdrafts15C"
+                        value="@statementOfAsset.OtherLoansOrOverdrafts15C" class="form-control 15 liabilitiesButsideBusines15_Prev" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row m-1 mt-0 mt-minus border-top-0 mt-minus border">
+        <div class="col-md-1 p-2 border-right pt-3 text-center">16</div>
+        <div class="col-md-7 p-2 border-right pt-3">Net wealth (14-15)</div>
+        <div class="col-md-4 pt-1 pb-1">
+            <input type="number" id="NetWealth16" readonly name="NetWealth16" value="@statementOfAsset.NetWealth16"
+                class="form-control" />
+        </div>
+    </div>
+
+    <div class="row m-1 mt-0 mt-minus border-top-0 mt-minus border">
+        <div class="col-md-1 p-2 border-right pt-3 text-center">17</div>
+        <div class="col-md-7 p-2 border-right pt-2">Net wealth at the last date of the previous income year</div>
+        <div class="col-md-4 pt-1 pb-1" id="netWealth17NextYear">
+            <input type="number" readonly id="NetWealth17" name="NetWealth17" value="@statementOfAsset.NetWealth17"
+                class="form-control 17" />
+        </div>
+    </div>
+
+    <div class="row m-1 mt-0 mt-minus border-top-0 mt-minus border">
+        <div class="col-md-1 p-2 border-right pt-3 text-center">18</div>
+        <div class="col-md-7 p-2 border-right pt-3">Change in net wealth (16-17)</div>
+        <div class="col-md-4 pt-1 pb-1">
+            <input type="number" id="ChangeIn18" readonly name="ChangeIn18" value="@statementOfAsset.ChangeIn18"
+                class="form-control" />
+        </div>
+    </div>
+
+    <div class="row mt-minus m-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-1 border border-bottom-0 border-top-0 pt-4 text-center">19</div>
+                <div class="col-md-7 border-bottom pt-2">Other fund outflow during the income year</div>
+                <div class="col-md-4 border">
+                    <input type="number" readonly id="OtherFundOutflow19" name="OtherFundOutflow19"
+                        value="@statementOfAsset.OtherFundOutflow19" class="form-control" />
+                </div>
+            </div>
+
+            <div class="row border-top-0">
+                <div class="col-md-1 border-left"></div>
+                <div class="col-md-1 border border-top-0 border-right-0 pt-2">19A</div>
+                <div class="col-md-6 border border-top-0">
+                    Annual living expenditure and tax payments (as IT-10BB2016)
+                </div>
+                <div class="col-md-4 border-bottom border-right">
+                    <input readonly type="number" id="AnnualLiving19A" name="AnnualLiving19A" value="@ste.Total"
+                        class="form-control 19" />
+                </div>
+            </div>
+
+            <div class="row border border-top-0">
+                <div class="col-md-1"></div>
+                <div class="col-md-1 pt-2 border border-top-0 border-bottom-0">19B</div>
+                <div class="col-md-6 border-right">Loss, deductions, expenses, etc. not mentioned in IT-10BB2016</div>
+                <div class="col-md-4 pt-1">
+                    <input type="number" id="LossDeductionsExpenses19B" name="LossDeductionsExpenses19B"
+                        value="@statementOfAsset.LossDeductionsExpenses19B" class="form-control 19" />
+                </div>
+            </div>
+
+            <div class="row border border-top-0">
+                <div class="col-md-1"></div>
+                <div class="col-md-1 pt-2 border border-top-0 border-bottom-0">19C</div>
+                <div class="col-md-6 border-right">Gift, donation and contribution (mention name of recipient)</div>
+                <div class="col-md-4 pt-1">
+                    <input type="number" id="GiftDonation19C" name="GiftDonation19C"
+                        value="@statementOfAsset.GiftDonation19C" class="form-control 19" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row m-1 mt-0 mt-minus border-top-0 mt-minus border">
+        <div class="col-md-1 p-2 border-right pt-3 text-center">20</div>
+        <div class="col-md-7 p-2 border-right pt-3">Total fund outflow in the income year (18+19)</div>
+        <div class="col-md-4 pt-1 pb-1">
+            <input type="number" id="TotalFundOutflow20" name="TotalFundOutflow20"
+                value="@statementOfAsset.TotalFundOutflow20" class="form-control" />
+        </div>
+    </div>
+
+    <div class="row mt-minus m-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-1 border border-bottom-0 border-top-0 pt-4 text-center">21</div>
+                <div class="col-md-7 border-bottom pt-2">Sources of fund (21A+21B+21C)</div>
+                <div class="col-md-4 border">
+                    <input type="number" readonly id="SourcesOfFund21" name="SourcesOfFund21"
+                        value="@statementOfAsset.SourcesOfFund21" class="form-control" />
+                </div>
+            </div>
+
+            <div class="row border-top-0">
+                <div class="col-md-1 border-left"></div>
+                <div class="col-md-1 border border-top-0 border-right-0 pt-2">21A</div>
+                <div class="col-md-6 border border-top-0">
+                    Income shown in the return
+                </div>
+                <div class="col-md-4 border-bottom border-right">
+                    <input readonly type="number" id="IncomeShown21A" name="IncomeShown21A" value="@pifs.Total"
+                        class="form-control 21" />
+                </div>
+            </div>
+
+            <div class="row border border-top-0">
+                <div class="col-md-1"></div>
+                <div class="col-md-1 pt-2 border border-top-0 border-bottom-0">21B</div>
+                <div class="col-md-6 border-right">Tax exempted income and allowance</div>
+                <div class="col-md-4 pt-1">
+                    <input readonly type="number" id="TaxExempted21B" name="TaxExempted21B"
+                        value="@pifs.TotalTaxExempted" class="form-control 21" />
+                </div>
+            </div>
+
+            <div class="row border border-top-0">
+                <div class="col-md-1"></div>
+                <div class="col-md-1 pt-2 border border-top-0 border-bottom-0">21C</div>
+                <div class="col-md-6 border-right">Other receipts and sources</div>
+                <div class="col-md-4 pt-1">
+                    <input type="number" id="OtherReceipts21C" name="OtherReceipts21C"
+                        value="@statementOfAsset.OtherReceipts21C" class="form-control 21" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row m-1 mt-0 mt-minus border-top-0 mt-minus border">
+        <div class="col-md-1 p-2 border-right pt-3 text-center">22</div>
+        <div class="col-md-7 p-2 border-right pt-3">Shortage of fund, if any (21-20)</div>
+        <div class="col-md-4 pt-1 pb-1">
+            <input type="number" readonly id="ShortageOfFund22" name="ShortageOfFund22"
+                value="@statementOfAsset.ShortageOfFund22" class="form-control" />
+        </div>
+    </div>
+
+    <div class="row m-1 border mt-3 text-center bg-light">
+        <div class="col-md-12 p-2">
+            <b>Verification and signature</b>
+        </div>
+    </div>
+
+    <div class="row m-1 border mt-minus border-top-0">
+        <div class="col-md-1 p-2 border-right pt-3 pl-2">23</div>
+        <div class="col-md-11">
+            <div class="container m-0 p-0">
+                <div class="row pt-2">
+                    <div class="col-md-12">
+                        <p class="m-0 pt-1"><b>Verification</b></p>
+                        <p>
+                            I solemnly declare that to the best of my knowledge and belief the
+                            information given in this return and statements and
+                            documents annexed or attached herewith are correct and complete.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row pt-2">
+                    <div class="col-md-6">
+                        <label>Name</label>
+                        <input type="text" value="@userInformation.NameOfAssessee" name="Name" class="form-control"
+                            readonly="">
+
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>Signature & date</label>
+
+                        @if (Session["Signature"] != null)
+                        {
+                            <img src="@Url.Content(Session["Signature"].ToString())"
+                                 style="width: 150px; height: 50px; box-shadow: 0 0 5px #ccc;
+                                                    padding: 3px; display: block; margin-bottom: 5px" />
+                        }
+                        else
+                        {
+                            <b class="text-danger">Not provided signature.</b>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,237 @@
+﻿/*font-family: 'News Cycle', sans-serif;
+
+font-family: 'Overlock', cursive;
+
+font-family: 'Fira Mono', monospace;*/
+
+body {
+    background: #1E1E1E !important;
+    font-family: 'Fira Mono', monospace;
+}
+
+table th, table td{
+    text-align: center;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    /*color: #858585 !important;*/
+    color: #fff !important;
+    list-style: none;
+}
+
+* > input{
+    color: black !important
+}
+
+
+#adminNavWrapper {
+    right: 0;
+    position: fixed;
+    top: 0;
+    width: calc(100% - 250px);
+    height: 50px;
+    background: #1E1E1E;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    z-index: 9999;
+}
+
+#adminNavWrapper nav {}
+
+#adminNavWrapper nav ul {
+    margin: 0 !important;
+}
+
+#adminNavWrapper nav ul li {}
+
+#adminNavWrapper nav ul li a {
+    padding: 10px;
+    display: block;
+    float: left;
+    margin: 3px 3px 0;
+    text-align: center;
+    text-transform: uppercase;
+    transition: .5s linear;
+    border: 1px solid transparent;
+    position: relative;
+    min-width: 120px;
+}
+
+#adminNavWrapper nav ul li a:first-child {
+    margin-left: 0px;
+}
+
+#adminNavWrapper nav ul li a:hover {
+    background: #242526;
+    /*border: 1px solid #242526;*/
+}
+
+#adminLeftMenuWrapper {
+    position: fixed;
+    left: 0;
+    width: 250px;
+    height: 100vh;
+    border-right: 1px solid #242526;
+    text-transform: uppercase;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+#adminLeftMenuWrapper ul li a {
+    padding: 10px;
+    display: block;
+    transition: .5s linear;
+    border-bottom: 1px solid transparent;
+    position: relative;
+}
+
+#adminLeftMenuWrapper ul li a.active:after, #adminNavWrapper nav ul li a.active:after {
+    position: absolute;
+    content: '';
+    width: 12px;
+    height: 12px;
+    background: seagreen;
+    top: 50%;
+    right: 8px;
+    border-radius: 50%;
+    transform: translateY(-50%);
+}
+
+#adminLeftMenuWrapper ul li a:hover #adminNavWrapper nav ul li a:hover {
+    background: #242526;
+    border-bottom: 1px solid #858585;
+}
+
+.admin-left-menu-header {
+    text-transform: uppercase;
+    font-size: 1.5em;
+    height: 50px;
+    background: #1E1E1E;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    padding: 10px;
+    padding-top: 7px;
+    transition: .5s linear;
+}
+
+.render-body {
+    width: 800px;
+    margin: 60px 400px 0;
+}
+
+.admin-content {
+    width: 720px;
+    margin: 0 auto;
+    padding: 15px;
+    height: auto;
+    background: #242526;
+    border-radius: 10px;
+    font-size: 18px !important;
+    overflow: hidden;
+}
+
+#footer, #footer .custom-container {
+    background: #242526 !important;
+}
+
+#footer {
+    border-radius: 10px;
+}
+
+#userImgBox {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    float: left;
+}
+
+#userImgBox img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+#userDetails {
+    float: right;
+    width: 500px;
+}
+
+#userFullDetails {
+    width: 350px;
+}
+
+.user-full-details-imgBox {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.user-full-details-imgBox img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    object-fit: cover;
+    filter: contrast(1.5);
+}
+
+#footer, #footer .custom-container .row .col-md-12 p .supervisor {
+    color: white !important;
+}
+
+#userList {
+    width: 353px;
+    padding: 10px 15px;
+    height: auto;
+    background: #242526;
+    border-radius: 10px;
+    font-size: 18px !important;
+    margin-left: 40px;
+    margin-bottom: 15px;
+    border: 1px solid black;
+    box-shadow: 0 0 2px black;
+    outline: none;
+}
+
+#adminUserDetails {
+    max-width: calc(100% - 10%);
+    margin: 0 auto;
+    padding: 30px;
+    border: 5px solid #333;
+    box-shadow: 0 0 5px #000;
+}
+
+#adminUserDetailsDt{
+    display: grid;
+}
+
+dl {
+    width: 100%;
+    overflow: hidden;
+    padding: 0;
+    margin: 0
+}
+
+dt {
+    float: left;
+    width: 30%;
+    padding: 10px 0;
+    margin: 0;
+    display: block;
+    border-right: 1px solid black;
+    margin-right: 34px;
+    line-height: 10px;
+}
+
+dd {
+    float: left;
+    width: 50%;
+    /* adjust the width; make sure the total of both is 100% */
+    padding: 10px 0;
+    margin: 0
+}
+
+dd img{
+    width: 80px;
+    height: 80px;
+    box-shadow: 0 0 5px black;
+}

@@ -1,0 +1,464 @@
+﻿@model Taxations.Models.ParticularsOfIncomeFromSalary
+
+@{
+    ViewBag.Title = "GetParticularOfIncomeFromSalary";
+    Layout = "~/Views/Containers/Admin.cshtml";
+}
+
+<div id="adminUserDetails">
+    <h4>Particulars Of IncomeFromSalary</h4>
+    <a class="btn btn-md btn-outline-success"
+       href="/admins/gr?repName=IncomeFromSalaries&&id=@Model.UserId"
+       target="_blank">Generate Report</a>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AssessmentYear)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AssessmentYear)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TIN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TIN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BasicPayTaxable)
+        </dt>
+
+        <dd>
+            @if (Model.BasicPayTaxable != null)
+            {
+                <span>@Html.DisplayFor(model => model.BasicPayTaxable)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SpecialPayTaxable)
+        </dt>
+
+        <dd>
+            @if (Model.SpecialPayTaxable != null)
+            {
+                <span>@Html.DisplayFor(model => model.SpecialPayTaxable)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ArrearPayTaxable)
+        </dt>
+
+        <dd>
+            @if (Model.ArrearPayTaxable != null)
+            {
+                <span>@Html.DisplayFor(model => model.ArrearPayTaxable)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DearnessAllowanceTaxable)
+        </dt>
+
+        <dd>
+            @if (Model.DearnessAllowanceTaxable != null)
+            {
+                <span>@Html.DisplayFor(model => model.DearnessAllowanceTaxable)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HouseRentAllowanceTaxable)
+        </dt>
+
+        <dd>
+            @if (Model.HouseRentAllowanceTaxable != null)
+            {
+                <span>@Html.DisplayFor(model => model.HouseRentAllowanceTaxable)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }@Html.DisplayFor(model => model.HouseRentAllowanceTaxable)
+        </dd>
+
+        <dt>
+            @Html.DisplayFor(m => m.MedicalAllowanceTaxable)
+        </dt>
+
+        <dd>
+            @if (Model.MedicalAllowanceTaxable != null)
+            {
+                <span>@Html.DisplayFor(model => model.MedicalAllowanceTaxable)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayFor(model => model.ConveyanceAllowanceTaxable)
+        </dt>
+
+        <dd>
+            @if (Model.ConveyanceAllowanceTaxable != null)
+            {
+                <span>@Html.DisplayFor(model => model.ConveyanceAllowanceTaxable)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FestivalAllowanceTaxable)
+        </dt>
+
+        <dd>
+            @if (Model.FestivalAllowanceTaxable != null)
+            {
+                <span>@Html.DisplayFor(model => model.FestivalAllowanceTaxable)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AllowanceStaffTaxable)
+        </dt>
+
+        <dd>
+            @if (Model.AllowanceStaffTaxable != null)
+            {
+                <span>@Html.DisplayFor(model => model.AllowanceStaffTaxable)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LeaveAllowanceTaxable)
+        </dt>
+
+        <dd>
+            @if (Model.LeaveAllowanceTaxable != null)
+            {
+                <span>@Html.DisplayFor(model => model.LeaveAllowanceTaxable)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HonorariumTaxable)
+        </dt>
+
+        <dd>
+            @if (Model.HonorariumTaxable != null)
+            {
+                <span>@Html.DisplayFor(model => model.HonorariumTaxable)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OvertimeAllowanceTaxable)
+        </dt>
+
+        <dd>
+            @if (Model.OtherAllowancesTaxable != null)
+            {
+                <span>@Html.DisplayFor(model => model.OtherAllowancesTaxable)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BonusTaxable)
+        </dt>
+
+        <dd>
+            @if (Model.BonusTaxable != null)
+            {
+                <span>@Html.DisplayFor(model => model.BonusTaxable)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OtherAllowancesTaxable)
+        </dt>
+
+        <dd>
+            @if (Model.OtherAllowancesTaxable != null)
+            {
+                <span>@Html.DisplayFor(model => model.OtherAllowancesTaxable)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployerContributionTaxable)
+        </dt>
+
+        <dd>
+            @if (Model.EmployerContributionTaxable != null)
+            {
+                <span>@Html.DisplayFor(model => model.EmployerContributionTaxable)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InterestAccruedTaxable)
+        </dt>
+
+        <dd>
+            @if (Model.InterestAccruedTaxable != null)
+            {
+                <span>@Html.DisplayFor(model => model.InterestAccruedTaxable)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeemedIncomeTransportTaxable)
+        </dt>
+
+        <dd>
+            @if (Model.DeemedIncomeTransportTaxable != null)
+            {
+                <span>@Html.DisplayFor(model => model.DeemedIncomeTransportTaxable)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeemedIncomeFurnishedTaxable)
+        </dt>
+
+        <dd>
+            @if (Model.DeemedIncomeFurnishedTaxable != null)
+            {
+                <span>@Html.DisplayFor(model => model.DeemedIncomeFurnishedTaxable)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OtherIfAny)
+        </dt>
+
+        <dd>
+            @if (Model.OtherIfAny != null)
+            {
+                <span>@Html.DisplayFor(model => model.OtherIfAny)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @if (Model.Name != null)
+            {
+                <span>@Html.DisplayFor(model => model.Name)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Total)
+        </dt>
+
+        <dd>
+            @if (Model.Total != null)
+            {
+                <span>@Html.DisplayFor(model => model.Total)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            Image
+        </dt>
+
+        <dd>
+            @if (!string.IsNullOrEmpty(Model.PhotoPath))
+            {
+                <img src="@Url.Content(Model.PhotoPath)" />
+            }
+            else
+            {
+                <span class="text-danger">Not Provided</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeementStatus)
+        </dt>
+
+        <dd>
+            @if (Model.EmployeementStatus != null)
+            {
+                <span>@Html.DisplayFor(model => model.EmployeementStatus)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalTaxExempted)
+        </dt>
+
+        <dd>
+            @if (Model.TotalTaxExempted != null)
+            {
+                <span>@Html.DisplayFor(model => model.TotalTaxExempted)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GrossTaxBeforeTaxRebate)
+        </dt>
+
+        <dd>
+            @if (Model.GrossTaxBeforeTaxRebate != null)
+            {
+                <span>@Html.DisplayFor(model => model.GrossTaxBeforeTaxRebate)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GrossTaxBeforeTaxRebateMaxPercentage)
+        </dt>
+
+        <dd>
+            @if (Model.GrossTaxBeforeTaxRebateMaxPercentage != null)
+            {
+                <span>@Html.DisplayFor(model => model.GrossTaxBeforeTaxRebateMaxPercentage)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalSurcharge)
+        </dt>
+
+        <dd>
+            @if (Model.TotalSurcharge != null)
+            {
+                <span>@Html.DisplayFor(model => model.TotalSurcharge)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SurchargePercentage)
+        </dt>
+
+        <dd>
+            @if (Model.SurchargePercentage != null)
+            {
+                <span>@Html.DisplayFor(model => model.SurchargePercentage)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+    </dl>
+    <p>
+        <a href="/admins/GetParticularOfIncomeFromSalaries" class="border btn btn-lg btn-secondary bg-dark text-white mt-2">Back to List</a>
+    </p>
+</div>
+

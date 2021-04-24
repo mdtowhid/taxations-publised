@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <link href="https://fonts.googleapis.com/css?family=Maven+Pro&display=swap" rel="stylesheet">
+    <script src="@Url.Content("~/Scripts/Main.js")"></script>
+    <link href="@Url.Content("~/Content/ContainerCSS/GovtEmployee.css")" rel="stylesheet" />
+</head>
+<body>
+    <div class="render-body">
+        @RenderBody()
+    </div>
+</body>
+</html>

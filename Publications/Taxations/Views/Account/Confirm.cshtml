@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "Email Confirmation";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+<br />
+
+<div class="jumbotron mt-3 mb-5"
+     style="
+            background:transparent !important;
+            min-height: 40vh;">
+    <div id="previous">
+        <h3 class="mt-2 mb-4">Confirm Your Account</h3>
+        <input type="submit" class="btn btn-outline-warning" value="Confirm" onclick="verified()" />
+    </div>
+
+    <div class="alert alert-success p-4" id="next" style="display: none; font-size: 1.5rem">
+        <b><span class="msg"></span> Your account is active now.</b>
+        <div class="mt-3">
+            @Html.ActionLink("Login", "login", "account", new { @class = "btn btn-lg btn-outline-success" })
+        </div>
+    </div>
+</div>
+
+
+<section>
+    @Html.Partial("~/Views/components/Footer.cshtml", null)
+</section>
+
+<script>
+    function verified() {
+        $.ajax({
+            type: "POST",
+            url: "RegisterConfirm",
+            data: { 'regId': '@ViewBag.regId' },
+            success: function(msg) {
+                $('#previous').hide();
+                $('#next').show();
+                $('.msg').text(msg).addClass('text-success');
+            }
+        });
+    }
+</script>

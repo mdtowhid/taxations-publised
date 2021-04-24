@@ -1,0 +1,215 @@
+﻿@model IEnumerable<Taxations.Models.ParticularsOfIncomeFromSalary>
+
+@{
+    ViewBag.Title = "Particular Of Income From Salaries";
+    Layout = "~/Views/Containers/Admin.cshtml";
+}
+<div id="adminUsersTableWrapper">
+    <h2>Particular Of Income From Salaries</h2>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AssessmentYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TIN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BasicPayTaxable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SpecialPayTaxable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ArrearPayTaxable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DearnessAllowanceTaxable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HouseRentAllowanceTaxable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MedicalAllowanceTaxable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ConveyanceAllowanceTaxable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FestivalAllowanceTaxable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AllowanceStaffTaxable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LeaveAllowanceTaxable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HonorariumTaxable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OvertimeAllowanceTaxable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BonusTaxable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherAllowancesTaxable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployerContributionTaxable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InterestAccruedTaxable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeemedIncomeTransportTaxable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeemedIncomeFurnishedTaxable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherIfAny)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Total)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhotoPath)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeementStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalTaxExempted)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GrossTaxBeforeTaxRebate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GrossTaxBeforeTaxRebateMaxPercentage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalSurcharge)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SurchargePercentage)
+            </th>
+            <th>Actions</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AssessmentYear)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TIN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BasicPayTaxable)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SpecialPayTaxable)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ArrearPayTaxable)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DearnessAllowanceTaxable)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HouseRentAllowanceTaxable)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MedicalAllowanceTaxable)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ConveyanceAllowanceTaxable)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FestivalAllowanceTaxable)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AllowanceStaffTaxable)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LeaveAllowanceTaxable)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HonorariumTaxable)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OvertimeAllowanceTaxable)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BonusTaxable)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OtherAllowancesTaxable)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployerContributionTaxable)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InterestAccruedTaxable)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeemedIncomeTransportTaxable)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeemedIncomeFurnishedTaxable)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OtherIfAny)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Total)
+                </td>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.PhotoPath))
+                    {
+                        <img src="@Url.Content(item.PhotoPath)" />
+                    }
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeementStatus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalTaxExempted)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GrossTaxBeforeTaxRebate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GrossTaxBeforeTaxRebateMaxPercentage)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalSurcharge)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SurchargePercentage)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "GetParticularOfIncomeFromSalaries", new { id = item.Id }, new { @class = "border btn btn-lg btn-secondary bg-dark text-white" })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

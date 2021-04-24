@@ -1,0 +1,113 @@
+﻿@using Taxations.Models
+@{
+    ViewBag.Title = "Final Calculation";
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+    ParticularsOfTaxCredit potc = new ParticularsOfTaxCredit();
+
+    Surcharge surcharge = new Surcharge();
+
+    if (ViewBag.TaxCredit != null)
+    {
+        potc = ViewBag.TaxCredit;
+    }
+
+    FinalCalculation fc = new FinalCalculation();
+    if (ViewBag.FinalCalc != null)
+    {
+        fc = ViewBag.FinalCalc;
+    }
+
+    if (ViewBag.Surcharges != null)
+    {
+        surcharge = ViewBag.Surcharges;
+    }
+}
+
+
+
+@if (ViewBag.Error != null)
+{
+    <div class="informations mt-3 investment-rebate" style="width: 600px;">
+        <div class="p-3 border alert alert-danger">
+            @ViewBag.Error
+        </div>
+    </div>
+}
+else
+{
+
+    <div id="userInfo">
+        <p id="gender">
+            @Session["UserGender"]
+        </p>
+        <p id="autistic">
+            @Session["IsAutistc"]
+        </p>
+        <p id="totalIncome">@ViewBag.TotalIncome</p>
+        <p id="rebateOnCalculated">@potc.AmountOfTaxRebateCalculated</p>
+        <span id="totalAssets" class="alert alert-info">@ViewBag.TotalAssets</span>
+    </div>
+
+    <div class="informations mt-3 investment-rebate" style="width: 600px;">
+        <h2>Final Calculation</h2>
+        <h4 id="userId" class="d-none">@Session["UserId"]</h4>
+        <table class="table table-bordered table-condensed table-hover bg-white">
+
+            <tbody id="finalCalculation">
+                <tr>
+                    <td>Payable Tax</td>
+                    <td>
+                        <input readonly value="" type="text" id="payableTax" class="form-control" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Rebate on investment</td>
+                    <td>
+                        <input readonly value="" type="text" id="rebateOnInvestment" class="form-control" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="font-weight-bolder" style="background: #fbfbfb">Tax Payable</td>
+                    <td>
+                        <input readonly value="" type="text" id="taxPayable" class="form-control" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Surcharge</td>
+                    <td>
+                        <input readonly value="@Math.Ceiling(Convert.ToDouble(surcharge.SurchargeValue))" type="text"
+                            id="surcharge" class="form-control" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Deducted by source</td>
+                    <td>
+                        <input value="@fc.DeductedSource" type="number" id="bySource" class="form-control" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Deducted by source(Bank)</td>
+                    <td>
+                        <input value="@fc.DeductedSourceBank" type="number" id="bySourceBank" class="form-control" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="font-weight-bolder" style="background: #fbfbfb">Net Payable Tax</td>
+                    <td>
+                        <input readonly value="@fc.NetPayableTax" type="text" id="netPayableTax" class="form-control" />
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+}
+
+
+@*<script src="../../Scripts/FinalCalculations.js" type="module"></script>*@

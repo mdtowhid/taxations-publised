@@ -1,0 +1,1087 @@
+﻿body {
+    position: relative;
+}
+
+.render-body {
+    min-height: 100vh !important;
+    position: relative;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+nav a {
+    font-family: sans-serif !important;
+}
+
+.mt-minus {
+    margin-top: -5px !important;
+}
+
+#footer {
+    display: block;
+}
+
+ul {
+    list-style-type: none !important;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+table, table thead, table tbody {
+    white-space: nowrap !important;
+}
+
+a.disabled {
+    cursor: default;
+    pointer-events: none;
+    opacity: .5;
+    background: #fbfbfb;
+    position: relative;
+}
+
+#numberErrorId {
+    color: red;
+}
+
+body {
+    background: #E8EAED !important;
+}
+
+.form-slides {
+    display: none;
+}
+
+.form-slides.active {
+    height: auto;
+    opacity: 1;
+    visibility: visible;
+}
+
+.required-warning {
+    font-size: 18px;
+    color: red;
+}
+
+.custom-container {
+    width: 100%;
+    height: auto;
+    position: relative;
+    margin: 0 auto;
+}
+
+form {
+    margin: 30px auto;
+}
+
+.left-menu>div>a {
+    display: block;
+    padding: 5px;
+    padding-left: 10px;
+    text-decoration: none;
+    color: black;
+    font-family: consolas;
+    font-size: 1.2rem;
+    font-weight: 100;
+}
+
+.left-menu>div>a:hover {
+    background: coral;
+    color: white;
+}
+
+.left-menu>div>a.active {
+    display: block;
+    padding: 5px;
+    padding-left: 10px;
+    color: white;
+    font-size: 1.25em;
+    background: coral;
+    position: relative
+}
+
+.prev {
+    margin-right: 15px;
+}
+
+.left-menu {
+    width: 300px;
+    float: left !important;
+    overflow: hidden;
+    position: fixed;
+    left: 0;
+    top: 0;
+    box-shadow: 0px 0px 4px black;
+    height: 100vh;
+}
+
+.render-body {
+    width: calc(100% - 350px);
+    height: auto;
+    margin: 0 auto;
+    float: left !important;
+}
+
+.render-body-header {
+    height: 90px;
+}
+
+#leftFeedsMenu {
+    width: 250px;
+    height: 100vh;
+    margin-left: 100px;
+    background: #fff;
+    overflow: hidden;
+    float: left;
+    box-shadow: 0 1px 2px 0 rgba(60, 64, 67, .3), 0 1px 3px 1px rgba(60, 64, 67, .15);
+    padding: 10px;
+    transition: .5s linear;
+}
+
+#leftFeedsMenu ul li#leftFeedsMenuHeader {
+    padding-left: 15px;
+    background: #E8EAED;
+    width: 250px;
+    margin: -10px;
+    margin-bottom: 10px;
+    height: 70px;
+    font-size: 20px;
+    line-height: 70px;
+    text-transform: uppercase;
+}
+
+#leftFeedsMenu ul li a {
+    color: black;
+    padding: 5px;
+    display: block;
+    font-size: 17px;
+    border: 2px solid transparent;
+    transition: .5s linear;
+}
+
+#leftFeedsMenu ul li a:hover, #leftFeedsMenu ul li a.active {
+    background: #1A73E8;
+    color: white;
+}
+
+#topMenu {
+    width: 100%;
+    height: 50px;
+    background: white;
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    left: 0;
+}
+
+#leftFeedsMenu.active {
+    position: fixed;
+    top: 50px;
+    z-index: 3;
+    background: white;
+}
+
+.render-body.active {
+    margin-left: 350px;
+}
+
+#topMenu ul li a {
+    text-decoration: none;
+    color: black;
+    padding: 10px 10px;
+    display: inline-block;
+    font-size: 17px;
+    border: dashed 2px transparent;
+    transition: .3s ease-in-out;
+}
+
+#topMenu ul li a.active, #topMenu ul li a:hover, #taxationBrand a:hover {
+    background: #1A73E8;
+    color: white;
+}
+
+#taxationBrand ul li a {
+    padding: 8px;
+    display: inline-block;
+    margin-left: 100px;
+    text-transform: uppercase;
+    color: black;
+    text-decoration: none;
+    font-size: 20px;
+    border: dashed 2px transparent;
+}
+
+#taxation-header {
+    margin-top: 26px;
+    height: 60px;
+    background: #1A73E8;
+    width: 100%;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12)
+}
+
+/*#taxation-header .taxation-header-left-brand {
+    margin-left: 100px;
+    padding-top: 16px;
+}*/
+
+#taxation-header .taxation-header-left-brand a {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 24px;
+    text-shadow: 2px 2px 0 #4074b5, 2px -2px 0 #4074b5, -2px 2px 0 #4074b5, -2px -2px 0 #4074b5, 2px 0px 0 #4074b5, 0px 2px 0 #4074b5, -2px 0px 0 #4074b5, 0px -2px 0 #4074b5, 5px 5px 8px #A39DCE;
+}
+
+#notice {
+    width: 250px;
+    float: right;
+    margin-top: 20px;
+    border-left: 5px solid #1A73E8;
+    font-size: 16px;
+    padding-left: 10px;
+}
+
+#basicInformationPartOneId, #basicInformationPartTwoId, #basicInformationPartThreeId, #statementOfAssetsPartOneId, #statementOfExpensesId, #particularsOfTaxCreditId, #statementOfAssetsPartTwoId {
+    width: calc(100% - 40px);
+    margin: 0 auto;
+    box-shadow: 0.5px 2px 2px whitesmoke;
+}
+
+#formWrapperDiv {
+    width: 850px;
+    float: left;
+    background: white;
+    margin-left: 50px;
+    box-shadow: 0 1px 2px 0 rgba(60, 64, 67, .3), 0 1px 3px 1px rgba(60, 64, 67, .15);
+    margin-top: 20px;
+}
+
+.data-wrapper {
+    width: 100%;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    border-bottom: none;
+}
+
+.left, .right {
+    width: 50%;
+    float: left;
+    /*border: 1px solid #ccc;*/
+    position: relative;
+}
+
+.left {
+    border-right: 1px solid #ccc;
+}
+
+.data-indicators {
+    width: 50px;
+    height: 80px;
+    border-right: 1px solid #ccc;
+    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-data {
+    width: calc(100% - 50px);
+    float: right;
+    padding-left: 15px;
+}
+
+.form-data label {
+    display: block;
+    font-weight: 400;
+}
+
+.label-padding {
+    padding-top: 12px;
+    padding-left: 60px;
+}
+
+.checkbox-right {
+    position: absolute;
+    top: 45%;
+    right: 8px;
+}
+
+.form-data .form-control {
+    width: 96%;
+}
+
+.assesment-year input {
+    width: 14%;
+    padding: 6px;
+    margin: 0 0 8px;
+}
+
+.date-birth input {
+    width: 10%;
+    padding: 5px;
+}
+
+.tin-number-wrapper {
+    width: 95%;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.tin-number-wrapper h3 {
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.tin-number-wrapper input {
+    width: 7%;
+    padding: 5px 2px;
+}
+
+#basicInformationPartTwoId .left {
+    width: 65%;
+    float: left;
+}
+
+#basicInformationPartTwoId .right {
+    width: 35%;
+    float: right;
+}
+
+#basicInformationPartTwoId .data-indicators {
+    height: 55px !important;
+}
+
+#basicInformationPartTwoId label {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    padding-left: 15px;
+}
+
+#basicInformationPartTwoId .right .form-data input {
+    margin-top: 8px;
+}
+
+#basicInformationPartThreeId {
+    margin-top: 10px;
+}
+
+#scheduleAnnexedId .data-indicators {
+    width: 25%;
+    height: 77px;
+}
+
+#statemantAnnexedId .data-indicators {
+    width: 50%;
+    height: 77px;
+}
+
+#basicInformationPartThreeId .instructions {
+    padding-left: 65px;
+    padding-top: 15px;
+}
+
+#basicInformationPartThreeId .form-bottom-header {
+    text-align: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+#dateofSignatureId input {
+    float: left;
+    margin-left: 5px;
+}
+
+#signatureDateId input {
+    width: 10%;
+    float: left;
+    margin-left: 5px;
+}
+
+.root-header-heading, .sub-root-header-heading {
+    padding: 10px;
+    display: inline-block;
+}
+
+.border--bottom {
+    border-bottom: 1px solid #ccc;
+}
+
+.border--bottom-none {
+    border-bottom: none !important;
+}
+
+.motor-cars {
+    overflow: hidden
+}
+
+.motor-cars p {
+    padding: 10px;
+}
+
+.motor-cars-table {
+    width: 100%;
+    float: left;
+    margin-top: -16px;
+    overflow: hidden;
+}
+
+.motor-cars-table tr th, .motor-cars-table tr td {
+    border-right: 1px solid #ccc;
+}
+
+.submit-wrapper {
+    height: 100px;
+    position: relative;
+}
+
+.submit-wrapper .next {
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.off-bottom-form {
+    width: calc(100% - 50px);
+    float: left;
+    padding: 10px;
+}
+
+.off-bottom-form .left, .off-bottom-form .right {
+    width: 47% !important;
+    border: none !important;
+}
+
+.off-bottom-form .left input, .off-bottom-form .right input {
+    margin: 0 auto !important;
+}
+
+/*Particulars Of Income From Slaries Id*/
+
+#particularsOfIncomeFromSlariesId table tr {
+    width: 100%;
+}
+
+#particularsOfIncomeFromSlariesId table tr th, #particularsOfIncomeFromSlariesId table tr td {
+    width: 20%;
+    float: left;
+}
+
+#particularsOfIncomeFromSlariesId table tr th:nth-child(1) {
+    width: 40%;
+    text-align: left;
+}
+
+#particularsOfIncomeFromSlariesId table tr td {
+    width: 20%;
+    padding: 0;
+}
+
+#particularsOfIncomeFromSlariesId table tr td:nth-child(1) {
+    width: 40%;
+    text-align: left;
+}
+
+#particularsOfIncomeFromSlariesId table tr td:nth-child(1) label {
+    padding: 8px;
+    padding-top: 10px;
+}
+
+#particularsOfIncomeFromSlariesId tr td .data-indicators {
+    height: 50px;
+}
+
+#particularsOfIncomeFromSlariesId table tr td input {
+    margin: 6px auto;
+    width: 95%;
+}
+
+/*DataWrapper Particulars Of Tax Credit Id*/
+
+#dataWrapperParticularsOfTaxCreditId {
+    width: 100%;
+}
+
+#dataWrapperParticularsOfTaxCreditId .data-wrapper .root-header {
+    width: 100%;
+    position: relative;
+    height: 50px;
+}
+
+#dataWrapperParticularsOfTaxCreditId .data-wrapper .root-header .left {
+    width: 64.1%;
+    height: 50px;
+    border-bottom: 1px solid #ccc;
+}
+
+#dataWrapperParticularsOfTaxCreditId .data-wrapper .root-header .right {
+    width: 30%;
+    height: 50px;
+}
+
+#dataWrapperParticularsOfTaxCreditId .data-wrapper .sub-root-header {
+    width: calc(100% - 50px);
+    float: right;
+}
+
+#dataWrapperParticularsOfTaxCreditId .data-wrapper .sub-root-header .data-indicators {
+    height: 45px;
+}
+
+#dataWrapperParticularsOfTaxCreditId .data-wrapper .sub-root-header .left {
+    width: 61.9%;
+    border-bottom: 1px solid #ccc;
+}
+
+#dataWrapperParticularsOfTaxCreditId .data-wrapper .sub-root-header .right {
+    width: 31.85%;
+    height: 45px;
+    border-bottom: 1px solid #ccc;
+}
+
+#dataWrapperParticularsOfTaxCreditId .data-wrapper .sub-root-header .right input {
+    width: 90%;
+    margin: 3.3px auto;
+}
+
+#dataWrapperParticularsOfTaxCreditId .left {
+    width: 70%;
+}
+
+#dataWrapperParticularsOfTaxCreditId .right {
+    width: 30%;
+}
+
+#dataWrapperParticularsOfTaxCreditId input {
+    width: 90%;
+    margin: 5px auto;
+}
+
+.display--initial {
+    display: initial
+}
+
+#progressId {
+    width: 99%;
+    height: 60px;
+    margin: -10px auto;
+    box-shadow: 0px 0px 5px #ccc;
+    border-radius: 5px;
+    position: sticky;
+    top: 0;
+    left: 0;
+    background: rgba(255, 255, 255, 0.3) !important;
+    z-index: 1;
+    transition: .5s linear;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+#progressId.shrink {
+    background: rgba(0, 0, 0, 0.6) !important;
+    color: white;
+}
+
+#progressId.shrink #requiredId {
+    color: white !important;
+    font-size: 1.2em;
+    font-weight: 400;
+}
+
+.page-header, #requiredId {
+    position: absolute;
+    transition: .5s linear;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 8px 0 5px;
+}
+
+/*#progressId:hover{
+    height: 100px;
+}*/
+
+/*#progressId:hover .page-header {
+        transition-delay: .3s;
+        top: 0;
+    }*/
+
+/*#progressId:hover #requiredId {
+    transition-delay: .7s;
+    top: 60%;
+}
+
+    #requiredId {
+        top: 100%;
+    }*/
+
+#progressElemntsId {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 75%;
+    height: 18px;
+    background: transparent;
+    border-radius: 15px;
+}
+
+#progressElemntsId span {
+    width: 33.333%;
+    height: 100%;
+    position: relative;
+    float: left;
+    background: #8E8CD8;
+    box-shadow: inset 0 0 10px blueviolet;
+    border-radius: 10px;
+    color: white;
+    text-align: center;
+    line-height: 16px;
+    font-size: .9em;
+}
+
+#progressElemntsId span.active {
+    background: deeppink;
+}
+
+#progressElemntsId span:after {
+    content: '';
+    position: absolute;
+    right: -10px;
+    top: -4px;
+    width: 26px;
+    height: 26px;
+    background: deeppink;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+#progressElemntsId span:before {
+    content: 'Step';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#progressElemntsId span:nth-child(1):before {
+    content: 'Step 1';
+}
+
+#progressElemntsId span:nth-child(2):before {
+    content: 'Step 2';
+}
+
+#progressElemntsId span:nth-child(3):before {
+    content: 'Step 3';
+}
+
+#progressElemntsId span.active:before {
+    content: 'Completed';
+}
+
+.data-wrapper input.err {
+    border: 1px solid red;
+    transition: 1s
+}
+
+.current-completed-step {
+    border: 5px solid #ccc;
+    margin: 30px 0 0;
+}
+
+.details {
+    width: calc(100% - 40px);
+    margin: 60px auto 20px;
+    background: #fcfcfc;
+}
+
+#help {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 3;
+    border: 1px solid #006400;
+    padding: 5px;
+    text-align: center;
+    box-shadow: 0 0 4px;
+    background: black;
+    color: white;
+    cursor: pointer;
+    width: 60px;
+    height: 40px;
+    line-height: 37px;
+    border-radius: 5px;
+    transition: .6s ease-in-out;
+}
+
+#help:hover {
+    background: purple;
+    color: white;
+}
+
+#help:before {
+    content: "Help";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: .5s linear;
+}
+
+#help.active:before {
+    content: "Close";
+}
+
+#helpDetails {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 2;
+    display: none;
+    transition: .6s ease-in-out;
+    transform: translateY(-110%);
+}
+
+#helpDetails.active {
+    display: block;
+    transition: .6s ease-in-out;
+    transform: translateY(0);
+}
+
+#helpDetails .details {
+    width: calc(100% - 100px);
+    height: calc(100% - 70px);
+    margin: 60px auto 0;
+    background: transparent;
+    border: 15px solid rgba(255, 255, 255, 0.7);
+}
+
+.next-perv-wrapper {
+    width: calc(100% - 4.5%);
+    margin: 30px auto;
+    padding: 0;
+    border: 1px solid #ccc;
+    position: relative;
+    height: 70px;
+}
+
+.next-prev {
+    padding: 12px;
+    height: 100%;
+}
+
+.next-prev button {
+    /*padding: 10px;
+        border: none;
+        outline: none;
+        background: #ccc;
+        width: 100px;*/
+    float: right;
+}
+
+#prevBtn {
+    margin-right: 15px;
+}
+
+/**
+    ::::::::::::::::::::::::::::::::::
+    :::::::             """"""""""""::::
+*/
+
+#footer {
+    width: 100%;
+    height: auto;
+    background: #F7F7F7;
+    float: left;
+    padding: 20px;
+    margin-top: 100px;
+}
+
+#footerMenu {
+    list-style: none;
+    display: block;
+    width: 100%;
+    height: 25px;
+}
+
+#footerMenu li {
+    float: left;
+}
+
+.tin-h3 {
+    font-weight: 100;
+    font-size: 1.3em;
+    width: 70px;
+    margin-left: 20px;
+    text-align: right;
+    margin-top: 3px;
+}
+
+#tinNumnerSpanTextId span {
+    width: 25px;
+    height: 35px;
+    border: 1px solid #ddd;
+    text-align: center;
+    line-height: 29px;
+    float: left;
+    margin: 0 5px;
+    font-weight: bold;
+}
+
+#userMenu ul #imageLi {
+    margin: 2px;
+}
+
+#userMenu ul #imageLi a {
+    margin: 0;
+    padding: 0 !important;
+    border: none;
+}
+
+#userMenu img {
+    width: 45px;
+    height: 45px;
+    margin: 0;
+    padding: 0;
+    border-radius: 50%;
+}
+
+#userProfileDropDownWrapper {
+    position: absolute;
+    width: 200px;
+    height: 10vh;
+    background: white;
+    top: 50px;
+    right: 5px;
+    box-shadow: 0 0 5px #ccc;
+    z-index: 5;
+    border-top: 2px solid rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    visibility: hidden;
+    transition: .5s cubic-bezier(.40%, 0.43%, 0.89%, 0, 77%);
+}
+
+#userProfileDropDownWrapper.active {
+    opacity: 1;
+    visibility: visible;
+    transition: .5s cubic-bezier(.40%, 0.43%, 0.89%, 0, 77%);
+}
+
+.submit-wrapper input[type="submit"] {
+    position: absolute;
+    width: 50%;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.download-links a {
+    display: block;
+    width: 31%;
+    float: left;
+    margin-right: 2%;
+}
+
+.download-informations-wrapper {
+    padding: 20px;
+    width: 850px;
+    margin-left: 50px;
+}
+
+#downloadWrapper {
+    padding: 15px;
+}
+
+.informations {
+    width: 974px;
+    margin: 0 auto;
+    background: #fff;
+    box-shadow: 0 1px 2px 0 rgba(60, 64, 67, .3), 0 1px 3px 1px rgba(60, 64, 67, .15);
+    font-family: Verdana;
+    border-radius: 5px;
+}
+
+.informations h2 {
+    padding: 10px;
+    padding-bottom: 7px;
+    font-weight: 400;
+    text-align: center;
+}
+
+.informations .table-bordered th, .informations .table-bordered td {
+    border-bottom: none !important;
+}
+
+.informations .table-bordered tr th:first-child, .informations .table-bordered tr td:first-child {
+    border-left: none;
+}
+
+.informations .table-bordered tr th:last-child, .informations .table-bordered tr td:last-child {
+    border-right: none !important;
+}
+
+.informations-bottom {
+    width: 100%;
+    height: 65px;
+}
+
+.informations-bottom .btn {
+    margin-right: 15px;
+}
+
+.investment-rebate {
+    width: 500px;
+}
+
+.investment-rebate tr td:first-child {
+    width: 60%;
+}
+
+.investment-rebate tr td:last-child {
+    width: 40%;
+}
+
+/*CALCULATOR CSS*/
+
+div.all-you-need {
+    margin-left: 102px !important;
+}
+
+a.all-you-need {
+    font-size: 18px;
+    margin-top: -5px;
+    display: inline-block;
+    text-align: center;
+}
+
+#calcBtn {
+    background: #34B8F8;
+    font-weight: 400;
+    font-size: 1.2rem;
+    border: none;
+    padding: 5px 10px;
+    margin-top: -5px;
+    box-shadow: 0 0 5px #34B8F8;
+    border-radius: 4px;
+    cursor: pointer;
+    outline: none;
+}
+
+#calcBtn:hover {
+    box-shadow: 0 0 15px #34B8F8;
+    color: aqua;
+}
+
+.calc-wrapper {
+    width: 350px;
+    height: auto;
+    background: #ffff;
+    position: absolute;
+    right: 15px;
+    z-index: 2;
+    top: 60px;
+    border-radius: 2px;
+    display: none;
+}
+
+.calc-wrapper.active {
+    display: block;
+}
+
+.calc-header {
+    display: flex;
+    justify-content: space-between;
+    background: #34B8F8;
+}
+
+.calc-header h3 {
+    color: white;
+}
+
+.calc-menu {
+    cursor: pointer;
+}
+
+.calc-result {
+    width: 100%;
+    height: 100px;
+    background: #34B8F8;
+}
+
+.calc-btns {
+    display: flex;
+    justify-content: space-around
+}
+
+.calc-btns>button {
+    width: 24%;
+    border: none;
+    font-weight: 900;
+    font-size: 1.5rem;
+    padding: 10px;
+    cursor: pointer;
+}
+
+#equalTo {
+    width: 100% !important;
+    background: #34B8F8;
+}
+
+.deleteInsurance {
+    float: right;
+    color: red;
+    cursor: pointer;
+    font-size: 20px;
+    transition: .5s linear;
+}
+
+.deleteInsurance:hover {
+    font-size: 23px;
+}
+
+#adminUsersTableWrapper {
+    width: calc(100% - 60px);
+    overflow: hidden;
+    margin: 0 auto;
+    padding: 20px;
+    padding-bottom: 0;
+    border: 1px solid;
+    box-shadow: 0 0 20px #000;
+}
+
+#adminUsersTableWrapper table {
+    width: 100% !important;
+    overflow: scroll !important;
+    display: block;
+    min-height: 40vh
+}
+
+#adminUsersTableWrapper table::-webkit-scrollbar {
+    background-color: #476573;
+}
+
+#adminUsersTableWrapper table::-webkit-scrollbar-track {
+    width: 10px;
+    background-color: #476573;
+}
+
+#adminUsersTableWrapper table::-webkit-scrollbar-thumb {
+    width: 10px;
+    background-color: black;
+    box-shadow: 0 0 5px black;
+}
+
+#adminUsersTableWrapper table img {
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    margin: 0 auto;
+    box-shadow: 0 0 5px black;
+    
+}

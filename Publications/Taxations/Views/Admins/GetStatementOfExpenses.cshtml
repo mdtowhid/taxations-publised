@@ -1,0 +1,213 @@
+﻿@model IEnumerable<Taxations.Models.StatementOfExpense>
+
+@{
+    ViewBag.Title = "Statement Of Expenses";
+    Layout = "~/Views/Containers/Admin.cshtml";
+}
+<div id="adminUsersTableWrapper">
+    <h2>Statement Of Expenses</h2>
+    <table class="table">
+        <tr>
+           
+            <th>
+                @Html.DisplayNameFor(model => model.AssessmentYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StatementDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NameOfAssessee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TIN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AgriculturalProperty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HousingExpense)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AutoAndTransportationExpenses07A08B)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DriverSalary07A)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherTransportation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HouseholdAndUtilityExpenses08A08B08C08D)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Electricity08A)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GasWaterSewerAndGarbage08B)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneInternet08C)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HomeSupport08D)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ChildrenEducation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SpecialExpenses10A10B10C10D)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FestivalParty10A)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DomesticAndOverseasTour10B)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Donation10C)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherSpecialExpenses10D)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AnyOtherExpenses)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalExpenseRelating)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PaymentOfTax13A13B)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PaymentOfTax13A)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PaymentOfTax13B)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalAmountOfExpense)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SignatureAndDatePhotoPath)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeementStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Total)
+            </th>
+            <th>Actions</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+               
+                <td>
+                    @Html.DisplayFor(modelItem => item.AssessmentYear)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StatementDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NameOfAssessee)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TIN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AgriculturalProperty)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HousingExpense)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AutoAndTransportationExpenses07A08B)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DriverSalary07A)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OtherTransportation)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HouseholdAndUtilityExpenses08A08B08C08D)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Electricity08A)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GasWaterSewerAndGarbage08B)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneInternet08C)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HomeSupport08D)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ChildrenEducation)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SpecialExpenses10A10B10C10D)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FestivalParty10A)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DomesticAndOverseasTour10B)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Donation10C)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OtherSpecialExpenses10D)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AnyOtherExpenses)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalExpenseRelating)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PaymentOfTax13A13B)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PaymentOfTax13A)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PaymentOfTax13B)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalAmountOfExpense)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @if (item.SignatureAndDatePhotoPath != null)
+                    {
+                        <img src="@Url.Content(item.SignatureAndDatePhotoPath)" />
+                    }
+                    else
+                    {
+                        <span class="text-danger">Not provided.</span>
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeementStatus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Total)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "GetStatementOfExpenses", new { id = item.Id }, new { @class = "border btn btn-lg btn-secondary bg-dark text-white" })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

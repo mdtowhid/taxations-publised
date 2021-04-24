@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script src="@Url.Content("~/Scripts/Main.js")"></script>
+    
+</head>
+<body>
+
+<div id="help"></div>
+<div id="helpDetails">
+    <div class="details">
+        <h3 class="text-center text-white" style="margin: 20px 0 0">Some Instructions will be render here.</h3>
+    </div>
+</div>
+<div class="custom-container">
+    <div class="left-menu">
+        <div>
+            @Html.ActionLink("Home", "Index", "Home")
+            @Html.ActionLink("Salary And Allowances", "SalaryAndAllowances", "IncomeTax")
+            @Html.ActionLink("Income Informations", "IncomeInformations", "IncomeTax")
+            @Html.ActionLink("Investments", "InvesmentIndex", "IncomeTax")
+            @Html.ActionLink("Rebate", "Rebate", "IncomeTax")
+            <br />
+            @Html.ActionLink("Basic Informations", "BasicInformations", "BasicInformation")
+            @Html.ActionLink("Statement Of Assets", "StatementOfAssets", "StatementOfAssets")
+            @Html.ActionLink("Statement Of Expenses", "CreateStatementOfExpenses", "StatementOfExpenses")
+            @Html.ActionLink("Particulars Of Income From Slaries", "Create", "ParticularsOfIncomeFromSlaries")
+            @Html.ActionLink("Particulars Of Tax Credit", "CreateParticularsOfTaxCredit", "ParticularsOfTaxCredit")
+
+        </div>
+    </div>
+    <div class="render-body">
+
+        @RenderBody()
+    </div>
+</div>
+</body>
+</html>

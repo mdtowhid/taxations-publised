@@ -1,0 +1,106 @@
+﻿* {
+    font-family: 'Nanum Gothic';
+    /*font-family: 'Inconsolata',;
+    font-family: 'Dosis',;
+    font-family: 'Abel',;
+    font-family: 'Maven Pro',;*/
+}
+
+form {
+    /*padding-top: 10px;
+    padding-bottom: 20px;*/
+}
+
+
+.render-body {
+    margin: 0 auto;
+    float: none !important;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.submit-wrapper {
+    position: relative;
+    height: 70px;
+}
+
+    .submit-wrapper input[type="submit"] {
+        position: absolute;
+        width: 50%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+.display--initial {
+    display: block !important;
+    float: none;
+    padding-left: 70px;
+}
+label {
+    display: block !important;
+    padding-left: 70px;
+    padding-top: 10px;
+}
+
+.ovrride-left-particular-tax {
+    height: 65px;
+    background: #e0dede;
+    padding: 20px;
+}
+#dataWrapperParticularsOfTaxCreditId .data-wrapper .root-header .left {
+    width: 63.8%;
+    height: 50px;
+    border-bottom: 1px solid #ccc;
+}
+#dataWrapperParticularsOfTaxCreditId .data-wrapper .root-header .right {
+    width: 29.982%;
+    height: 50px;
+}
+
+#dataWrapperParticularsOfTaxCreditId .data-wrapper .sub-root-header .left {
+    width: 61.4%;
+    border-bottom: 1px solid #ccc;
+}
+
+#dataWrapperParticularsOfTaxCreditId .data-wrapper .sub-root-header .right {
+    width: 31.695%;
+    height: 45px;
+    border-bottom: 1px solid #ccc;
+}
+
+.assesment-year-label,
+.tin-label {
+    padding: 5px;
+    padding-top: 12px;
+}
+.tin-label{
+
+}
+
+.ovrride-left-particular-tax h4{
+    font-size: 21px;
+}
+
+#dataWrapperParticularsOfTaxCreditId .data-indicators {
+    height: 66px;
+}
+
+.margin-top15px {
+    margin-top: 15px !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

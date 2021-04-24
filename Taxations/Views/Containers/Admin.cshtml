@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <link href="~/Content/ContainerCSS/Admin.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Fira+Mono|News+Cycle|Overlock&display=swap" rel="stylesheet">
+    <script src="~/Scripts/Main.js"></script>
+    <script src="~/Scripts/admin.js"></script>
+    <script src="~/Scripts/jspdf.min.js"></script>
+    <style>
+        .custom-container {
+            width: calc(100% - 250px) !important;
+            height: auto !important;
+            position: relative !important;
+            margin: 0 auto !important;
+            float: right !important;
+            margin-top: 50px !important;
+        }
+    </style>
+</head>
+<body>
+    @*<header id="adminNavWrapper">
+        <nav>
+            <ul>
+                <li>
+                    <a href="/admins/index">Home</a>
+                    <a href="#!">Taxations</a>
+                    <a href="#!">Basic Information</a>
+                    <a href="#!">Notifications</a>
+
+                </li>
+            </ul>
+        </nav>
+    </header>*@
+    <section id="adminLeftMenuWrapper">
+        <ul>
+            <li class="admin-left-menu-header">Dashboards</li>
+            <li>
+                <a href="/admins/GetAllUsers"
+                   class="btn btn-sm btn-secondary bg-dark text-white text-left rounded-0">
+                    User Manager
+                </a>
+            </li>
+            <li>
+                <a href="/admins/GetUserInformations" 
+                   class="btn btn-sm btn-secondary bg-dark text-white text-left rounded-0">
+                    User Informations
+                </a>
+            </li>
+            <li>
+                <a href="/admins/GetBasicInformations"
+                   class="btn btn-sm btn-secondary bg-dark text-white text-left rounded-0">
+                    Basic Informations
+                </a>
+            </li>
+            <li>
+                <a href="/admins/GetParticularOfIncomeFromSalaries"
+                   class="btn btn-sm btn-secondary bg-dark text-white text-left rounded-0">
+                    Income From Salaries
+                </a>
+            </li>
+            <li>
+                <a href="/admins/getParticularOfTaxCredits"
+                   class="btn btn-sm btn-secondary bg-dark text-white text-left rounded-0">
+                    Particular Of Tax Credits
+                </a>
+            </li>
+            <li>
+                <a href="/admins/GetStatementofAssets"
+                   class="btn btn-sm btn-secondary bg-dark text-white text-left rounded-0">
+                    Statement of Assets
+                </a>
+            </li>
+            <li>
+                <a href="/admins/GetStatementOfExpenses"
+                   class="btn btn-sm btn-secondary bg-dark text-white text-left rounded-0">
+                    Statement Of Expenses
+                </a>
+            </li>
+        </ul>
+    </section>
+    <div class="custom-container">
+        <div class="">
+            @RenderBody()
+        </div>
+    </div>
+</body>
+</html>

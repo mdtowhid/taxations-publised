@@ -1,0 +1,414 @@
+﻿@using Taxations.Models
+@{
+    ViewBag.Title = "Create Particulars Of Tax Credit";
+    Layout = "~/Views/shared/mainlayout.cshtml";
+    UserInformation user = new UserInformation();
+    ParticularsOfTaxCredit parTaxCredit = new ParticularsOfTaxCredit();
+    ParticularsOfIncomeFromSalary poifs = new ParticularsOfIncomeFromSalary();
+    ParticularsOfIncomeFromSalary poifs1 = new ParticularsOfIncomeFromSalary();
+    if (ViewBag.UserInformations != null)
+    {
+        user = ViewBag.UserInformations;
+    }
+    if (ViewBag.ParticularsOfTaxCredits != null)
+    {
+        parTaxCredit = ViewBag.ParticularsOfTaxCredits;
+    }
+
+    if (ViewBag.ParticularsOfIncomeFromSalaries != null)
+    {
+        poifs1 = ViewBag.ParticularsOfIncomeFromSalaries;
+    }
+
+    if (ViewBag.ParticularsOfIncomeFromSalariesTotal != null)
+    {
+        poifs = ViewBag.ParticularsOfIncomeFromSalariesTotal;
+    }
+}
+
+
+
+@if (ViewBag.ParticularsOfIncomeFromSalariesTotal != null)
+{
+    <div id="particularsOfIncomeFromSlariesTotal" style="display: none">
+        @poifs.Total
+    </div>
+}
+
+<style>
+    .dps-form-wrapper {
+        width: 100%;
+        background: white;
+        box-shadow: 0 1px 2px 0 rgba(60, 64, 67, .3), 0 1px 3px 1px rgba(60, 64, 67, .15);
+    }
+
+    .dps-form-field {
+        position: relative;
+    }
+
+    .dps-form-field-cancel {
+        display: block;
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        right: 15px;
+        font-weight: bolder;
+        text-align: center;
+        font-size: 2rem;
+        color: red;
+        top: 6px;
+        cursor: pointer;
+        z-index: 1;
+        line-height: 30px;
+    }
+
+        .dps-form-field-cancel:hover {
+            box-shadow: 0 0 3px #ccc;
+        }
+
+    #formWrapperDiv {
+        display: none;
+    }
+
+    #initalBankAddingInstructions {
+        width: 60%;
+        height: 300px;
+        position: fixed;
+        top: 120px;
+        left: 55%;
+        color: white;
+        background-color: rgba(0, 0,0,0.8);
+        transform: translate(-50%, 0%);
+    }
+
+    #closer {
+        font-size: 1.5rem;
+        font-weight: bolder;
+        background-color: red;
+        position: absolute;
+        right: 0px;
+        width: 40px;
+        height: 40px;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .mt-minus {
+        margin-top: -5px !important;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-6 mt-3 p-0">
+        @using (Html.BeginForm("CreateParticularsOfTaxCredit", "ParticularsOfTaxCredit", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <input type="hidden" name="UserId" id="UserId" value="@Session["UserId"]" />
+            <input type="hidden" name="EmployeementStatus" id="EmployeementStatus" value="@Session["UserType"]" />
+            <input type="hidden"
+                   class="form-control text-left"
+                   name="AssessmentYear"
+                   value="@user.AssessmentYear" readonly />
+
+            <div class="row m-1 mb-0 mt-minus bg-white border">
+                <div class="col-md-6">
+                    <div class="container m-0 p-0">
+                        <div class="row border border-right-0 border-top-0">
+                            <div class="col-md-2 border-right pt-4 text-center">01</div>
+                            <div class="col-md-10">
+                                <label class="pt-2">Assessment Year</label>
+                                @if (Session["FAY"] != null)
+                                {
+                                    <input type="text"
+                                           class="form-control mb-2 text-left"
+                                           name=""
+                                           value="@Session["FAY"]" readonly />
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="container m-0 p-0">
+                        <div class="row border border-top-0">
+                            <div class="col-md-2 border-right pt-4 text-center">02</div>
+                            <div class="col-md-10">
+                                <label class="pt-2">TIN: </label>
+                                <input type="text" name="TIN" value="@user.NewTIN" class="form-control mb-2" readonly />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row m-1 bg-white border mb-0 mt-0 border-bottom-0">
+                <div class="col-md-9 border-right p-3">
+                    <span class="font-weight-bold">Particulars of rebatable investment, contribution, etc.</span>
+                </div>
+                <div class="col-md-3 p-3 text-center">
+                    <span><b>Amount</b></span>
+                </div>
+            </div>
+
+            <div class="row m-1 mt-0 mt-minus bg-white mt-minus border border-bottom-0">
+                <div class="col-md-1 p-2 border-right pt-3 text-center">03</div>
+                <div class="col-md-8 p-2 border-right pt-3">Life insurance premium</div>
+                <div class="col-md-3 p-2">
+                    <input type="number" name="LifeInsurance" id="LifeInsurance" value="@parTaxCredit.LifeInsurance"
+                           class="form-control margin-top15px a" readonly />
+                </div>
+            </div>
+
+            <div class="row m-1 mt-0 mt-minus bg-white mt-minus border">
+                <div class="col-md-1 p-2 border-right pt-3 text-center">04</div>
+                <div class="col-md-8 p-2 border-right">Contribution to deposit pension scheme (not exceeding allowable limit)</div>
+                <div class="col-md-3 p-2">
+                    <input readonly type="number" name="ContributionToDeposit" id="ContributionToDeposit" value="@parTaxCredit.ContributionToDeposit" class="margin-top15px form-control a" />
+                </div>
+            </div>
+
+            <div class="row m-1 mt-0 mt-minus bg-white mt-minus border border-bottom-0">
+                <div class="col-md-1 p-2 border-right pt-3 text-center">05</div>
+                <div class="col-md-8 p-2 border-right">Investment in approved savings certificate</div>
+                <div class="col-md-3 p-2">
+                    <input type="number" name="InvestmentInApprovedSavings" id="InvestmentInApprovedSavings"
+                           value="@parTaxCredit.InvestmentInApprovedSavings" class="form-control margin-top15px a" />
+                </div>
+            </div>
+
+            <div class="row m-1 mt-0 mt-minus bg-white mt-minus border border-bottom-0">
+                <div class="col-md-1 p-2 border-right pt-3 text-center">06</div>
+                <div class="col-md-8 p-2 border-right">Investment in approved debenture or debenture stock, Stock or Shares</div>
+                <div class="col-md-3 p-2">
+                    <input type="number" name="InvestmentInApprovedDebenture" id="InvestmentInApprovedDebenture" value="@parTaxCredit.InvestmentInApprovedDebenture" class="form-control margin-top15px a" />
+                </div>
+            </div>
+
+            <div class="row m-1 mt-0 mt-minus bg-white mt-minus border border-bottom-0">
+                <div class="col-md-1 p-2 border-right pt-3 text-center">07</div>
+                <div class="col-md-8 p-2 border-right">Contribution to provident fund to which Provident Fund  Act, 1925 applies</div>
+                <div class="col-md-3 p-2">
+                    <input type="number" name="ContributionToProvidentFund" id="ContributionToProvidentFund"
+                           value="@parTaxCredit.ContributionToProvidentFund" class="form-control margin-top15px a" />
+                </div>
+            </div>
+
+            <div class="row m-1 mt-0 mt-minus bg-white mt-minus border border-bottom-0">
+                <div class="col-md-1 p-2 border-right pt-3 text-center">08</div>
+                <div class="col-md-8 p-2 border-right">Self contribution and employer’s contribution to Recognized Provident Fund</div>
+                <div class="col-md-3 p-2">
+                    <input type="number" name="SelfContributionAndEmployer" id="SelfContributionAndEmployer" value="@parTaxCredit.SelfContributionAndEmployer" class="form-control margin-top15px a" />
+                </div>
+            </div>
+
+            <div class="row m-1 mt-0 mt-minus bg-white mt-minus border border-bottom-0">
+                <div class="col-md-1 p-2 border-right pt-3 text-center">09</div>
+                <div class="col-md-8 p-2 border-right">Contribution to Super Annuation Fund</div>
+                <div class="col-md-3 p-2">
+                    <input type="number" name="ContributionToSuperAnnuationFund" id="ContributionToSuperAnnuationFund"
+                           value="@parTaxCredit.ContributionToSuperAnnuationFund" class="form-control margin-top15px a" />
+                </div>
+            </div>
+
+            <div class="row m-1 mt-0 mt-minus bg-white mt-minus border border-bottom-0">
+                <div class="col-md-1 p-2 border-right pt-3 text-center">10</div>
+                <div class="col-md-8 p-2 border-right">Contribution to Benevolent Fund and Group Insurance Premium</div>
+                <div class="col-md-3 p-2">
+                    <input type="number" name="ContributionToBenevolentFund" id="ContributionToBenevolentFund" value="@parTaxCredit.ContributionToBenevolentFund" class="form-control margin-top15px a" />
+                </div>
+            </div>
+
+            <div class="row m-1 mt-0 mt-minus bg-white mt-minus border border-bottom-0">
+                <div class="col-md-1 p-2 border-right pt-3 text-center">11</div>
+                <div class="col-md-8 p-2 border-right">Contribution to Zakat Fund</div>
+                <div class="col-md-3 p-2">
+                    <input type="number" name="ContributionToZakatFund" id="ContributionToZakatFund" value="@parTaxCredit.ContributionToZakatFund" class="form-control margin-top15px a" />
+                </div>
+            </div>
+
+            <div class="row m-1 mt-0 mt-minus bg-white mt-minus border">
+                <div class="col-md-1 p-2 border-right pt-3 text-center">12</div>
+                <div class="col-md-8 p-2 border-right">Others, if any ( give details )</div>
+                <div class="col-md-3 p-2">
+                    <input type="number" name="OthersIfAny" id="OthersIfAny" value="@parTaxCredit.OthersIfAny" class="form-control margin-top15px a" />
+                </div>
+            </div>
+
+            <div class="row m-1 mt-0 mt-minus bg-white mt-minus border border-bottom-0">
+                <div class="col-md-1 p-2 border-right pt-3 text-center">13</div>
+                <div class="col-md-8 p-2 border-right">Total allowable investment, contribution etc.</div>
+                <div class="col-md-3 p-2">
+                    <input readonly type="number" name="TotalAllowableInvestment" id="TotalAllowableInvestment" value="@parTaxCredit.TotalAllowableInvestment" class="form-control margin-top15px" />
+                </div>
+            </div>
+
+            <div class="row mt-minus m-1 bg-white border">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-1 border border-top-0 border-bottom-0 pt-3 text-center">14</div>
+                        <div class="col-md-8 border-bottom">Eligible amount for rebate (the lesser of 14A, 14B or 14C)</div>
+                        <div class="col-md-3 border border-top-0">
+                            <input type="number" readonly name="EligibleAmountForRebate" id="EligibleAmountForRebate" value="@parTaxCredit.EligibleAmountForRebate" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="row border-top-0">
+                        <div class="col-md-1 border-left"></div>
+                        <div class="col-md-1 border border-top-0 border-right-0">14A</div>
+                        <div class="col-md-7 border border-top-0 pt-2">Total allowable investment, contribution, etc. (as in 13)</div>
+                        <div class="col-md-3 border-bottom">
+                            <input readonly
+                                   type="number"
+                                   name="TotalAllowableInvestmentContribution"
+                                   id="TotalAllowableInvestmentContribution"
+                                   value="@parTaxCredit.TotalAllowableInvestment"
+                                   class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="row border-top-0">
+                        <div class="col-md-1 border-left"></div>
+                        <div class="col-md-1 border border-top-0 border-right-0">14B</div>
+                        <div class="col-md-7 border border-top-0">
+                            25% of the total income [excluding any income for which a
+                            tax exemption or a reduced rate is applicable under sub-section (4)
+                            of section 44 or any income from any
+                            source or sources mentioned in clause (a) of sub-section (2) of section 82C.]
+                        </div>
+                        <div class="col-md-3 border-bottom pt-4">
+                            <input readonly type="number" name="TotalIncome14B" id="TotalIncome14B" value="@parTaxCredit.AmountOfTaxRebateCalculated" class="form-control" style="margin-top: 20px" />
+                        </div>
+                    </div>
+
+                    <div class="row border-top-0">
+                        <div class="col-md-1 border-left"></div>
+                        <div class="col-md-1 border border-top-0 border-right-0 border-bottom-0">14C</div>
+                        <div class="col-md-7 border border-top-0 border-bottom-0">1.5 crore</div>
+                        <div class="col-md-3">
+                            <input type="number" name="Crore14C" id="Crore14C" value="150000000" class="form-control" readonly />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row m-1 mt-0 mt-minus bg-white mt-minus border mb-3">
+                <div class="col-md-1 p-2 border-right pt-3 text-center">15</div>
+                <div class="col-md-8 p-2 border-right border-top-0">Amount of tax rebate calculated on eligible amount (Serial14) under section 44(2)(b)</div>
+                <div class="col-md-3 p-2">
+                    <input readonly type="number" name="AmountOfTaxRebateCalculated"
+                           id="AmountOfTaxRebateCalculated"
+                           value="" class="form-control border-top-0" />
+                </div>
+            </div>
+
+            <div class="row m-1 mt-0 mt-minus bg-white border">
+                <div class="col-md-6 p-3 border-right">
+                    <label class="pl-1">Name</label>
+                    <input type="text" name="Name" id="Name" value="@user.NameOfAssessee" readonly
+                           class="form-control" />
+                </div>
+                <div class="col-md-6 p-2 border-right">
+                    <label>Signature & Date</label>
+
+                    @if (Session["Signature"] != null)
+                    {
+                        <img src="@Url.Content(Session["Signature"].ToString())"
+                             style="width: 150px; height: 50px; box-shadow: 0 0 5px #ccc;
+                                                    padding: 3px; display: block; margin-bottom: 5px" />
+                    }
+                    else
+                    {
+                        <b class="text-danger">Not provided signature.</b>
+                    }
+                </div>
+            </div>
+
+            <div class="row m-1 mt-0 mt-minus bg-white mt-minus border mb-3 pt-3 pb-3 border-top-0">
+                <div class="col-md-9"></div>
+                <div class="col-md-3">
+                    <input name="submit" id="submitBtn" type="submit" value="Save" class="btn btn-md btn-outline-success float-right" />
+                </div>
+            </div>
+        }
+    </div>
+
+
+    <div class="col-md-4 mt-5">
+        @if (ViewBag.SuccessMessage != null)
+        {
+            <div class="row p-2 bg-white shadow m-1 mb-3 border" id="submittingStatus" style="margin-top:-2px !important">
+                <div class="col-md-10">
+                    <p class="p-0 m-0 p-3 font-weight-bolder text-success"><b>@ViewBag.SuccessMessage</b></p>
+                </div>
+                <div class="col-md-2 border">
+                    <h3 id="cancelSubmittingStatus"
+                        class="m-0 text-center text-danger">
+                        <b style="font-size: 30px; font-weight: 900; cursor: pointer; padding-top: 28px; display: block">&times;</b>
+                    </h3>
+                </div>
+            </div>
+        }
+
+        <div id="dpsInfo" class="dps-form-wrapper p-3 pb-1">
+            <button id="dpsAddBtn" class="btn btn-sm btn-block btn-outline-info font-weight-bolder">Add DPS Informations.</button>
+            <div id="dpsForm">
+
+            </div>
+
+            <p id="dpsInfoStatus" class="m-0"></p>
+        </div>
+
+        <div class="bg-white">
+            
+            <div id="dpsFetchedInfoes"></div>
+        </div>
+        
+        <div class="mt-3">
+            <div class="card">
+                <div class="p-3">
+                    <button 
+                            class="card-img-top btn btn-sm btn-block btn-outline-info font-weight-bolder" 
+                            id="btnOpeInsuranceForm">Add Incsurance</button>
+                </div>
+
+                <div id="insuranceForm" class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label><b>Company Name</b></label>
+                            <input id="companyName" type="text" class="form-control" required/>
+                        </div>
+                        <div class="col-md-6">
+                            <label><b>Amount</b></label>
+                            <input id="insuraceAmount" type="number" class="form-control" required/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12" id="insuranceError"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button id="insuranceBtnSubmit" class="btn btn-sm btn-success mt-2 mb-2">Add</button>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="m-0"/>
+
+                <h3 class="m-0 pt-0 p-3 text-info">Insurance information(s)</h3>
+                
+                <ul class="list-group list-group-flush" id="insuranceList">
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-1"></div>
+</div>
+
+@section Scripts{
+    <script src="@Url.Content("~/Scripts/TaxCredit.js")"></script>
+    <script src="@Url.Content("~/Scripts/DynamicForm.js")"></script>
+    <script src="@Url.Content("~/Scripts/insurance.js")"></script>
+}

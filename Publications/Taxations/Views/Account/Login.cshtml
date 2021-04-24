@@ -1,0 +1,58 @@
+﻿@model Taxations.Models.User
+
+@{
+    ViewBag.Title = "Log in";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal sign-up-log-in-forms" style="min-height: 440px">
+        <h3 class="pl-3 text-uppercase">Log In</h3>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            <div class="col-md-12">
+                <label>Email</label>
+                <input type="text" name="Email" class="form-control" required />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-12">
+                <label>Password</label>
+                <input type="password" name="Password" class="form-control" required />
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.EmploymentStatus, htmlAttributes: new { @class = "control-label col-md-6" })
+            <div class="col-md-12">
+                <select name="EmploymentStatus" id="EmploymentStatus" class="form-control">
+                    <option value="none">--Select Employment Status--</option>
+                    <option value="govt">Government Employee</option>
+                    <option value="pvt">Private Employee</option>
+                </select>
+                <span class="text-danger" id="EmploymentStatusError"></span>
+            </div>
+        </div>
+
+
+
+        <div class="form-group" style="">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Log In" class="btn btn-outline-success float-left btn-bd ml-2" />
+                @Html.ActionLink("Sign up", "signup", "account", new { @class = "btn btn-outline-info btn-md float-left ml-2" })
+                @Html.ActionLink("Forgot Password?", "getPassword", "account", new { @class = "float-left ml-2" })
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="@Url.Content("~/Scripts/accont-validate.js")"></script>
+}

@@ -1,0 +1,516 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.10.9\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.props" Condition="Exists('..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.10.9\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.props')" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{925DEA9F-AC3A-420C-B21C-A12EBDF0422A}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Taxations</RootNamespace>
+    <AssemblyName>Taxations</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>3.1</TypeScriptToolsVersion>
+    <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
+    <DockerLaunchUrl>http://{ServiceIPAddress}</DockerLaunchUrl>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.TemplateEngine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <HintPath>..\packages\CrystalReports.TemplateEngine.13.0.4000\lib\net40\CrystalDecisions.CrystalReports.TemplateEngine.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Rotativa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rotativa.1.7.3\lib\net461\Rotativa.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.4\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.4\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.4\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.4\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.4\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.DiagnosticSource">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.4.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.TelemetryCorrelation">
+      <HintPath>..\packages\Microsoft.AspNet.TelemetryCorrelation.1.0.0\lib\net45\Microsoft.AspNet.TelemetryCorrelation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="BusinessLogic\CommaSeparator.cs" />
+    <Compile Include="BusinessLogic\CustomFilesGateway.cs" />
+    <Compile Include="BusinessLogic\CustomFormatter.cs" />
+    <Compile Include="BusinessLogic\EmailConfirmation.cs" />
+    <Compile Include="BusinessLogic\FileHandlingGateway.cs" />
+    <Compile Include="BusinessLogic\ActionInterceptor.cs" />
+    <Compile Include="BusinessLogic\TotalCalculation.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminsController.cs" />
+    <Compile Include="Controllers\BasicInformationController.cs" />
+    <Compile Include="Controllers\CrystalReportController.cs" />
+    <Compile Include="Controllers\DefaultController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IncomeTaxController.cs" />
+    <Compile Include="Controllers\IndexController.cs" />
+    <Compile Include="Controllers\NotFoundController.cs" />
+    <Compile Include="Controllers\ParticularsOfIncomeFromSlariesController.cs" />
+    <Compile Include="Controllers\ParticularsOfTaxCreditController.cs" />
+    <Compile Include="Controllers\StatementOfAssetsController.cs" />
+    <Compile Include="Controllers\StatementOfExpensesController.cs" />
+    <Compile Include="Controllers\Test\ReportTestController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\UserInformationController.cs" />
+    <Compile Include="DataAccessLayer\UserHandling.cs" />
+    <Compile Include="Dtos\DPSInfo.cs" />
+    <Compile Include="Dtos\PasswordRecoveryDto.cs" />
+    <Compile Include="Models\Admin.cs" />
+    <Compile Include="Models\AppExpiration.cs" />
+    <Compile Include="Models\BasicInformation.cs" />
+    <Compile Include="Models\EditViewModels\EditBasicInformationViewModel.cs" />
+    <Compile Include="Models\EditViewModels\EditParticularsOfAmountViewModel.cs" />
+    <Compile Include="Models\EditViewModels\EditParticularsOfIncomeFromSalaryViewModel.cs" />
+    <Compile Include="Models\EditViewModels\EditParticularsOfTaxCreditViewModel.cs" />
+    <Compile Include="Models\EditViewModels\EditStatementOfAssetViewModel.cs" />
+    <Compile Include="Models\EditViewModels\EditStatementOfExpensesViewModel.cs" />
+    <Compile Include="Models\EditViewModels\EditUserInformation.cs" />
+    <Compile Include="Models\FinalCalculation.cs" />
+    <Compile Include="Models\Income.cs" />
+    <Compile Include="Models\Insurance.cs" />
+    <Compile Include="Models\ParticularsOfIncomeFromSalary.cs" />
+    <Compile Include="Models\ParticularsOfTaxCredit.cs" />
+    <Compile Include="BusinessLogic\SessionHandling.cs" />
+    <Compile Include="Models\StatementOfAsset.cs" />
+    <Compile Include="Models\StatementOfExpense.cs" />
+    <Compile Include="Models\Surcharge.cs" />
+    <Compile Include="Models\TaxableIncomeTax.cs" />
+    <Compile Include="Models\TaxExempted.cs" />
+    <Compile Include="Models\ParticularsOfIncomeAmount.cs" />
+    <Compile Include="Models\TotalInfo.cs" />
+    <Compile Include="Models\UserInformation.cs" />
+    <Compile Include="Models\Invesment.cs" />
+    <Compile Include="Models\RebateCalculation.cs" />
+    <Compile Include="Models\SalaryAndAllowance.cs" />
+    <Compile Include="Models\TaxationDbContext.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Removed\TaxationController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Signatures\Settings.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include=".gitignore" />
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\ContainerCSS\Admin.css" />
+    <Content Include="Content\ContainerCSS\BasicInformation.css" />
+    <Content Include="Content\ContainerCSS\GovtEmployee.css" />
+    <Content Include="Content\ContainerCSS\HomeLayout.css" />
+    <Content Include="Content\ContainerCSS\ParticularsOfTaxCredit.css" />
+    <Content Include="Content\ContainerCSS\StatementOfExpenses.css" />
+    <Content Include="Content\ContainerCSS\UserInformation.css" />
+    <Content Include="Content\ContainerCSS\StatementOfAssets.css" />
+    <Content Include="Content\settings.css" />
+    <Content Include="Content\Styles.css" />
+    <Content Include="Docs\AppDelete.txt" />
+    <Content Include="Docs\before submitting the project.txt" />
+    <Content Include="Dtos\Delete.sql.txt" />
+    <Content Include="Scripts\AgeCalculation.js" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Removed\StyleSheet1.css" />
+    <Content Include="Rotativa\help-wkhtmltoimage.txt" />
+    <Content Include="Rotativa\help-wkhtmltopdf.txt" />
+    <Content Include="Rotativa\wkhtmltoimage.exe" />
+    <Content Include="Rotativa\wkhtmltopdf.exe" />
+    <Content Include="Scripts\accont-validate.js" />
+    <Content Include="Scripts\admin.js" />
+    <Content Include="Scripts\BasicInformation.js" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Calculator.js" />
+    <Content Include="Scripts\DomSelector.js" />
+    <Content Include="Scripts\DynamicForm.js" />
+    <Content Include="Scripts\esm\popper-utils.js" />
+    <Content Include="Scripts\esm\popper-utils.min.js" />
+    <Content Include="Scripts\esm\popper.js" />
+    <Content Include="Scripts\esm\popper.min.js" />
+    <Content Include="Scripts\esm\popper.min.js.map" />
+    <Content Include="Scripts\esm\popper.js.map" />
+    <Content Include="Scripts\esm\popper-utils.min.js.map" />
+    <Content Include="Scripts\esm\popper-utils.js.map" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Files\Nirdeshikha 19 - 20 .pdf" />
+    <Content Include="App_Browsers\qt.browser" />
+    <None Include="Dockerfile" />
+    <None Include=".dockerignore">
+      <DependentUpon>Dockerfile</DependentUpon>
+    </None>
+    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\FinalCalculations.js" />
+    <Content Include="Scripts\IncomeFromSalaries.js" />
+    <Content Include="Scripts\Insurance.js" />
+    <Content Include="Scripts\jquery-3.4.1.js" />
+    <Content Include="Scripts\jquery-3.4.1.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.4.1.min.map" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jspdf.min.js" />
+    <Content Include="Scripts\Main.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\PDFMaker.js" />
+    <Content Include="Scripts\popper-utils.js" />
+    <Content Include="Scripts\popper-utils.min.js" />
+    <Content Include="Scripts\popper.js" />
+    <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\RecoverPassword.js" />
+    <Content Include="Scripts\render-body-content-scripts.js" />
+    <Content Include="Scripts\settings.js" />
+    <Content Include="Scripts\StatementOfAssets.js" />
+    <Content Include="Scripts\StatementOfExpenses.js" />
+    <Content Include="Scripts\Surcharge.js" />
+    <Content Include="Scripts\TaxCredit.js" />
+    <Content Include="Scripts\TaxesBasedOnIncome.js" />
+    <Content Include="Scripts\tin-number.js" />
+    <Content Include="Scripts\TotalIncome.js" />
+    <Content Include="Scripts\umd\popper-utils.js" />
+    <Content Include="Scripts\umd\popper-utils.min.js" />
+    <Content Include="Scripts\umd\popper.js" />
+    <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Removed\Taxation\BasicInformation.cshtml" />
+    <Content Include="Removed\Taxation\StatementOfAssets.cshtml" />
+    <Content Include="Removed\Taxation\StatementOfExpenses.cshtml" />
+    <Content Include="Scripts\umd\popper.min.js.map" />
+    <Content Include="Scripts\umd\popper.js.map" />
+    <Content Include="Scripts\umd\popper-utils.min.js.map" />
+    <Content Include="Scripts\umd\popper-utils.js.map" />
+    <Content Include="Scripts\README.md" />
+    <Content Include="Scripts\popper.min.js.map" />
+    <Content Include="Scripts\popper.js.map" />
+    <Content Include="Scripts\popper-utils.min.js.map" />
+    <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\BasicInformation\DataCollectStepOne.cshtml" />
+    <Content Include="Views\BasicInformation\DataCollectStepTwo.cshtml" />
+    <Content Include="Views\BasicInformation\DataCollectStepThree.cshtml" />
+    <Content Include="Views\StatementOfAssets\StatementOfAssetsPartOne.cshtml" />
+    <Content Include="Views\StatementOfExpenses\CreateStatementOfExpenses.cshtml" />
+    <Content Include="Views\ParticularsOfTaxCredit\CreateParticularsOfTaxCredit.cshtml" />
+    <Content Include="Views\StatementOfAssets\StatementOfAssetsPartTwo.cshtml" />
+    <Content Include="Views\StatementOfAssets\StatementOfAssetsPartThree.cshtml" />
+    <Content Include="Views\ParticularsOfIncomeFromSlaries\Create.cshtml" />
+    <Content Include="Views\Shared\_BasicInformation.cshtml" />
+    <Content Include="Views\Shared\_ParticularsOfIncomeFromSlaries.cshtml" />
+    <Content Include="Views\Shared\_ParticularsOfTaxCredit.cshtml" />
+    <Content Include="Views\Shared\_StatementOfAssets.cshtml" />
+    <Content Include="Views\Shared\_StatementOfExpenses.cshtml" />
+    <Content Include="Views\BasicInformation\BasicInformations.cshtml" />
+    <Content Include="Views\StatementOfAssets\StatementOfAssets.cshtml" />
+    <Content Include="Views\Shared\_HomeLayout.cshtml" />
+    <Content Include="Views\Index\Index.cshtml" />
+    <Content Include="Views\Account\Delete.cshtml" />
+    <Content Include="Views\Account\Details.cshtml" />
+    <Content Include="Views\Account\UpdateAccount.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Account\SignUp.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Shared\_LayoutPage1.cshtml" />
+    <Content Include="Views\Containers\UserInformation.cshtml" />
+    <Content Include="Views\UserInformation\Create.cshtml" />
+    <Content Include="Views\UserInformation\Delete.cshtml" />
+    <Content Include="Views\UserInformation\Details.cshtml" />
+    <Content Include="Views\UserInformation\Edit.cshtml" />
+    <Content Include="Views\UserInformation\Index.cshtml" />
+    <Content Include="Views\Containers\BasicInformation.cshtml" />
+    <Content Include="Views\Containers\StatementOfAssets.cshtml" />
+    <Content Include="Views\Containers\StatementOfExpenses.cshtml" />
+    <Content Include="Views\Containers\ParticularsOfTaxCredit.cshtml" />
+    <Content Include="Views\Components\Footer.cshtml" />
+    <Content Include="Views\Components\TopMenu.cshtml" />
+    <Content Include="Views\Components\FooterMenu.cshtml" />
+    <Content Include="Views\Shared\MainLayout.cshtml" />
+    <Content Include="Views\Components\TaxationHeader.cshtml" />
+    <Content Include="Views\Components\LeftFeedsMenu.cshtml" />
+    <Content Include="Views\Components\TaxationNotice.cshtml" />
+    <Content Include="Views\Default\Index.cshtml" />
+    <Content Include="Views\Components\TopHamBurgerDropDown.cshtml" />
+    <Content Include="Views\User\Profile.cshtml" />
+    <Content Include="Views\Components\Banner.cshtml" />
+    <Content Include="Views\Default\Settings.cshtml" />
+    <Content Include="Views\User\UserManual.cshtml" />
+    <Content Include="Views\User\Downloads.cshtml" />
+    <Content Include="Views\User\Documentaions.cshtml" />
+    <Content Include="Views\User\Contacts.cshtml" />
+    <Content Include="Views\User\Helps.cshtml" />
+    <Content Include="Views\Containers\Admin.cshtml" />
+    <Content Include="Views\Containers\GovtEmployee.cshtml" />
+    <Content Include="Views\Admins\Index.cshtml" />
+    <Content Include="Views\Admins\AllUser.cshtml" />
+    <Content Include="Views\NotFound\Index.cshtml" />
+    <Content Include="Views\Admins\UserDetails.cshtml" />
+    <Content Include="Views\Admins\LogIn.cshtml" />
+    <Content Include="Views\User\DownloadBasicInformation.cshtml" />
+    <Content Include="Views\User\DownloadParticularsOfIncomeFromSlaries.cshtml" />
+    <Content Include="Views\User\DownloadParticularsOfTaxCredit.cshtml" />
+    <Content Include="Views\User\DownloadStatementOfAssets.cshtml" />
+    <Content Include="Views\User\DownloadStatementOfExpenses.cshtml" />
+    <Content Include="Views\User\DownloadUserInformation.cshtml" />
+    <Content Include="Views\IncomeTax\TotalIncome.cshtml" />
+    <Content Include="Views\IncomeTax\TotalInvestment.cshtml" />
+    <Content Include="Views\IncomeTax\RebateCalculation.cshtml" />
+    <Content Include="Views\IncomeTax\StatementOfAsset.cshtml" />
+    <Content Include="Views\IncomeTax\FinalCalculation.cshtml" />
+    <Content Include="Views\Components\EmailTemplate.cshtml" />
+    <Content Include="Views\Account\Confirm.cshtml" />
+    <Content Include="Views\Account\RegistrationSuccess.cshtml" />
+    <Content Include="Views\Account\GetPassword.cshtml" />
+    <Content Include="Views\Components\RecoverEmailTemplate.cshtml" />
+    <Content Include="Views\Account\RecoverAccount.cshtml" />
+    <Content Include="Views\Shared\Downloads.cshtml" />
+    <Content Include="Views\Admins\Users.cshtml" />
+    <Content Include="Views\CrystalReport\BasicInformations.cshtml" />
+    <Content Include="Views\CrystalReport\StatementOfExpenses.cshtml" />
+    <Content Include="Views\CrystalReport\GenerateReport.cshtml" />
+    <Content Include="Views\CrystalReport\IncomeFromSalaries.cshtml" />
+    <Content Include="Views\CrystalReport\ParticularsOfTaxCredit.cshtml" />
+    <Content Include="Views\CrystalReport\StatementOfAssets.cshtml" />
+    <Content Include="Views\CrystalReport\Home.cshtml" />
+    <Content Include="Views\Account\editProfile.cshtml" />
+    <Content Include="Views\ReportTest\BI.cshtml" />
+    <Content Include="Views\Admins\GetAllUsers.cshtml" />
+    <Content Include="Views\Admins\GetUserInformations.cshtml" />
+    <Content Include="Views\Admins\GetUserInformation.cshtml" />
+    <Content Include="Views\Admins\GetBasicInformations.cshtml" />
+    <Content Include="Views\Admins\BI.cshtml" />
+    <Content Include="Views\Admins\GetParticularOfIncomeFromSalaries.cshtml" />
+    <Content Include="Views\Admins\GetParticularOfIncomeFromSalary.cshtml" />
+    <Content Include="Views\Admins\GetParticularOftaxCredits.cshtml" />
+    <Content Include="Views\Admins\GetParticularOfTaxCredit.cshtml" />
+    <Content Include="Views\Admins\GetStatementOfAssets.cshtml" />
+    <Content Include="Views\Admins\GetGetStatementOfAsset.cshtml" />
+    <Content Include="Views\Admins\GetStatementOfExpenses.cshtml" />
+    <Content Include="Views\Admins\GetStatementOfExpense.cshtml" />
+    <Content Include="Views\Admins\PutUser.cshtml" />
+    <Content Include="Views\Admins\GetStatementOfAsset.cshtml" />
+    <Content Include="Views\Admins\BasicInformations.cshtml" />
+    <Content Include="Views\Admins\GR.cshtml" />
+    <Content Include="Views\Admins\Home.cshtml" />
+    <Content Include="Views\Admins\IncomeFromSalaries.cshtml" />
+    <Content Include="Views\Admins\ParticularsOfTaxCredit.cshtml" />
+    <Content Include="Views\Admins\StatementOfExpenses.cshtml" />
+    <Content Include="Views\Admins\StatementOfAssets.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Images\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>1940</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:1940</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.10.9\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.10.9\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.10.9\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.10.9\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.targets'))" />
+  </Target>
+  <Import Project="..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.10.9\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.targets" Condition="Exists('..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.10.9\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

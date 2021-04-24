@@ -1,0 +1,255 @@
+﻿/**{
+    margin: 0; padding: 0;
+}*/
+/*ul{
+    list-style-type: none;
+}
+ul li a{
+    padding: 7px;
+}
+body{
+    background: #fbfbfb;
+}
+.form-step-indicators {
+    display: block;
+    float: left;
+    width: 45px;
+    height: calc(100% - 0px);
+    text-align: center;
+    line-height: 68px;
+    font-size: 1.5em;
+    font-weight: 600;
+    border: 1px solid #ccc;
+    margin-right: 20px;
+}*/
+/*.tin-number {
+    width: 75%;
+    margin: 0 auto !important;
+}
+    .tin-number .col-md-1{
+        max-width: 6.7%;
+    }
+
+
+.tin-number-wrapper {
+    border: 1px solid #ccc;
+    width: 100.55%;
+    padding: 13px;
+}
+.tin-number-wrapper h3{
+    margin-top: 6px;
+    font-weight: 350;
+}
+
+.form-row-header{
+    border: 1px solid #ccc;
+    border-top: none;
+    padding: 10px;
+}
+
+.form-row-header h3{
+    font-size: 1.5rem;
+    margin-top: 5px;
+}
+.step-form-row {
+    border: 1px solid #ccc;
+    border-top-color: rgb(204, 204, 204);
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-top: none;
+    line-height: 40px;
+    padding-bottom: 5px;
+    height: 43px;
+    overflow: hidden;
+}
+    .step-form-row-height-auto{
+        height: auto;
+        line-height: normal;
+        padding: 10px;
+    }
+
+    .step-form-row .col-md-8, .step-form-row .col-md-9, .step-form-row .col-md-1 {
+        border-right: 1px solid #ccc;
+    }
+    .step-form-row .col-md-8, .step-form-row .col-md-9{
+        padding-left: 15px;
+    }
+    .step-form-row .col-md-3 .form-control {   
+        margin-top: 4px;
+        height: 72%;
+    }
+
+#signatureDateId1 input, signatureDateId2 input, #textOfficeEntryNumber input{
+    margin-right: 3px;
+}
+
+.step-form-row .col-md-9 .badge-secondary {
+    color: #fff;
+    background-color: #6c757d;
+    padding: 7px;
+}*/
+
+
+
+
+
+
+
+
+
+
+
+/*.left-menu {
+    border-right: 10px solid coral;
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.forms .form-row .col-md-6,
+.forms .form-row .col-md-12 {
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 15px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+    .forms .form-row .col-md-6 .sub-form-row .col-md-6 {
+        border: none;
+    }
+
+.forms .form-row:first-child .col-md-6,
+.forms .form-row:first-child .col-md-5{
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 15px;
+    border-radius: 5px;
+    border-top: 1px solid #ccc;
+}
+.forms .form-row .col-md-6:last-child {
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0;
+    border-left: none;
+}
+
+.forms .form-row .col-md-6:first-child {
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0;
+}
+
+    .form-row {
+        margin-left: 0;
+    }*/
+/*.forms .form-row input[type="checkbox"]{
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #006400;
+    cursor: pointer;
+    transition: .5s;
+    transform: scale(.9);
+}
+    .forms .form-row input[type="checkbox"]:active,
+    .forms .form-row input[type="checkbox"]:focus,
+    .forms .form-row input[type="checkbox"]:hover{
+        background: red;
+        transform: scale(1);
+    }
+    .basic-form-gender {
+        padding-top: 20px;
+    }*/
+/*.basic-form-gender span{
+        border: 1px solid #ccc;
+        padding: 5px;
+        text-align: center;
+        margin-right: 5px;
+    }
+    .assesment-year {
+    }
+.assesment-year input{
+    display: block;
+}
+.assesment-year span {
+    margin-right: 8px;
+    line-height: 30px;
+    font-size: 30px;
+    opacity: 0.6;
+    font-weight: 100;
+}*/
+
+
+
+
+/*.admin-forms fieldset .form-group .col-md-4,
+.admin-forms fieldset .form-group .col-md-2 {
+    text-align: left;
+}
+
+.steps{
+    position: relative;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    width: 100%;
+    height: 50px;
+}
+.steps div{
+    width: 33.3333%;
+    height: 20px;
+    background: lightgreen;
+    position: relative;
+    float: left;
+    border-radius: 10px;
+}
+
+.steps div:before{
+    position: absolute;
+    content: '';
+    width: 30px;
+    height: 30px;
+    background: lightcoral;
+    left: 0;
+    top: 0;
+    border-radius: 50%;
+    margin: -5px 0px 5px;
+}
+    .steps div:after {
+        content: 'Step 1';
+        position: absolute;
+        right: 50%;
+        top: 50%;
+        transform: translate(50%, -50%);
+        color: white;
+    }
+    .steps div:nth-child(2):after {
+        content: 'Step 2';
+    }
+    
+.steps div:nth-child(3):after {
+    content: 'Step 3';
+}
+    .steps div.active, .steps div.active:before {
+        background: coral;
+    }
+.steps div.active:after{
+    content: 'Completed';
+}
+
+#submitBtn{
+    position: absolute;
+    left: 50%;
+    top: 102%;
+    transform: translate(-50%, 2%);
+}
+
+
+
+#basicInformationPartOneId{
+}
+#basicInformationPartOneId .col-md-1 {
+}
+
+form input.input-empty-error {
+    border-color: red;
+    transition: .5s;
+}*/
+
+
+

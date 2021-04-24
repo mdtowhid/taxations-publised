@@ -1,0 +1,156 @@
+﻿@model IEnumerable<Taxations.Models.ParticularsOfTaxCredit>
+
+@{
+    ViewBag.Title = "Particular Of Tax Credits";
+    Layout = "~/Views/Containers/Admin.cshtml";
+}
+<div id="adminUsersTableWrapper">
+    <h2>Particular Of Tax Credits</h2>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AssessmentYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TIN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LifeInsurance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContributionToDeposit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InvestmentInApprovedSavings)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InvestmentInApprovedDebenture)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContributionToProvidentFund)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SelfContributionAndEmployer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContributionToSuperAnnuationFund)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContributionToBenevolentFund)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContributionToZakatFund)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OthersIfAny)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalAllowableInvestment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EligibleAmountForRebate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalAllowableInvestmentContribution)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalIncome14B)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Crore14C)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AmountOfTaxRebateCalculated)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SignatureAndDatePhoto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeementStatus)
+            </th>
+            <th>Actions</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AssessmentYear)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TIN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LifeInsurance)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContributionToDeposit)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InvestmentInApprovedSavings)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InvestmentInApprovedDebenture)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContributionToProvidentFund)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SelfContributionAndEmployer)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContributionToSuperAnnuationFund)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContributionToBenevolentFund)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContributionToZakatFund)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OthersIfAny)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalAllowableInvestment)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EligibleAmountForRebate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalAllowableInvestmentContribution)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalIncome14B)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Crore14C)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AmountOfTaxRebateCalculated)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <img src="@Url.Content(item.SignatureAndDatePhoto)"/>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeementStatus)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "GetParticularOfTaxCredits", new { id = item.Id }, new { @class = "border btn btn-lg btn-secondary bg-dark text-white" })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

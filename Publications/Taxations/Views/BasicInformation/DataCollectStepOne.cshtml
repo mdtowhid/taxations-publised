@@ -1,0 +1,490 @@
+﻿@using Taxations.Models;
+@{
+
+    UserInformation userInformation = new UserInformation();
+    if (ViewBag.UserInformations != null)
+    {
+        userInformation = ViewBag.UserInformations;
+    }
+    BasicInformation bi = null;
+    if (ViewBag.BasicInformations != null)
+    {
+        bi = ViewBag.BasicInformations;
+    }
+
+    string[] tickedOnBoxes = new string[] { };
+    if (userInformation.TickOnBoxes !=null)
+    {
+        tickedOnBoxes = userInformation.TickOnBoxes.Trim().Split(',');
+    }
+    string a = "";
+    string b = "";
+    string c = "";
+    string d = "";
+    string res = "";
+
+    foreach (string item in tickedOnBoxes)
+    {
+        res = item;
+        res = res.Replace(",", "");
+        if (res == "A gazetted war-wounded freedom fighter")
+        {
+            a = res;
+        }
+        if (res == "A person with disability")
+        {
+            b = res;
+        }
+        if (res == "Aged 65 years or more")
+        {
+            c = res;
+        }
+        if (res == "A parent/legal guardian of a personwith disability")
+        {
+            d = res;
+        }
+    }
+}
+
+
+
+<div class="forms form-slides" id="basicInformationPartOneId">
+
+    <input type="hidden" name="UserId" value="@Session["UserId"]" />
+    <input type="hidden" name="AdditionalColumn" value="none" />
+    <input type="hidden" name="EmployeementStatus" value="@Session["UserType"]" />
+    <input type="hidden"
+           class="form-control mb-2 text-left"
+           name="AssessmentYear"
+           value="@userInformation.AssessmentYear" readonly />
+
+
+    <div class="row m-1 mb-0 bg-white border">
+        <div class="col-md-6">
+            <div class="container m-0 p-0">
+                <div class="row border-right border-top-0">
+                    <div class="col-md-2 border-right pt-4 text-center">01</div>
+                    <div class="col-md-10">
+                        <label class="pt-2">Assessment Year</label>
+                        @if (Session["FAY"] != null)
+                        {
+                            <input type="text"
+                                   class="form-control mb-2 text-left"
+                                   name=""
+                                   value="@Session["FAY"]" readonly />
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="container m-0 p-0">
+                <div class="row border-top-0">
+                    <div class="col-md-2 border-right pt-4 text-center">02</div>
+                    <div class="col-md-10">
+                        <p class="pt-1 border-bottom m-0">Return submitted under section 82BB? (tick one)</p>
+                        @if (userInformation.ReturnSubmitted == "Yes")
+                        {
+                            <label><input type="radio" name="ReturnSubmitted" value="Yes" checked /> Yes </label>
+                        }
+                        else
+                        {
+                            <label><input type="radio" name="ReturnSubmitted" value="No" checked /> No</label>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row m-1 mb-0 bg-white border mt-minus">
+        <div class="col-md-6">
+            <div class="container m-0 p-0">
+                <div class="row border-right border-top-0">
+                    <div class="col-md-2 border-right pt-4 text-center">03</div>
+                    <div class="col-md-10">
+                        <label class="pt-2">
+                            Name of the Assessee
+                            <span class="required-warning">*</span>
+                        </label>
+                        <input type="text" value="@userInformation.NameOfAssessee" class="form-control" name="NameOfAssessee" readonly />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="container m-0 p-0">
+                <div class="row border-top-0">
+                    <div class="col-md-2 border-right pt-3 text-center" style="min-height: 100px">04</div>
+                    <div class="col-md-10">
+                        <p class="border-bottom m-0 pt-2 pb-2">Gender (tick one) <b>@userInformation.Gender</b></p>
+                        @if (userInformation.Gender.ToLower() == "male")
+                        {
+
+                            <input type="radio" name="Gender" value="Male" checked class="mt-" /> <span>Male </span>
+                        }
+                        else
+                        {
+                            <input type="radio" name="Gender" value="Female" checked class="mt-" /> <span>Female </span>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row m-1 mb-0 bg-white border mt-minus border-top-0">
+        <div class="col-md-6">
+            <div class="container m-0 p-0">
+                <div class="row border-right border-top-0">
+                    <div class="col-md-2 border-right pt-4 text-center">05</div>
+                    <div class="col-md-10">
+                        <label class="pt-2">
+                            Twelve-digit TIN
+                            <span title="This Field Must Be Required." class="required-warning">*</span>
+                        </label>
+                        <input type="text" value="@userInformation.NewTIN" readonly name="NewTIN" class="form-control" placeholder="Twelve-digit TIN" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="container m-0 p-0">
+                <div class="row border-top-0">
+                    <div class="col-md-2 border-right pt-4 text-center">06</div>
+                    <div class="col-md-10">
+                        <label class="pt-2">
+                            Old TIN <span title="This Field Must Be Required." class="required-warning">*</span>
+                        </label>
+                        <input type="text" value="@userInformation.OldTIN" readonly name="OldTIN" class="form-control" placeholder="Old TIN" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row m-1 mb-0 bg-white border mt-minus">
+        <div class="col-md-6">
+            <div class="container m-0 p-0">
+                <div class="row border-right border-top-0">
+                    <div class="col-md-2 border-right pt-4 text-center">07</div>
+                    <div class="col-md-10">
+                        <label class="pt-2">
+                            Circle <span title="This Field Must Be Required." class="required-warning">*</span>
+                        </label>
+                        <input type="text" name="Circle" value="@userInformation.Circle" readonly class="form-control" placeholder="Circle" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="container m-0 p-0">
+                <div class="row border-top-0">
+                    <div class="col-md-2 border-right pt-4 text-center">08</div>
+                    <div class="col-md-10">
+                        <label class="pt-2">Zone <span title="This Field Must Be Required." class="required-warning">*</span></label>
+                        <input type="text" name="Zone" value="@userInformation.Zone" readonly class="form-control" placeholder="Zone" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row m-1 mb-0 bg-white border mt-minus">
+        <div class="col-md-6">
+            <div class="container m-0 p-0">
+                <div class="row border-right border-top-0">
+                    <div class="col-md-2 border-right pt-2 pb-2 text-center">09</div>
+                    <div class="col-md-10 pt-2">
+                        Resident Status
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="container m-0 p-0">
+                <div class="row border-top-0">
+                    @if (userInformation.ResidentStatus == "Yes")
+                    {
+
+                        <div class="pt-1 pl-2">
+                            Resident <input type="radio" name="ResidentStatus" value="@userInformation.ResidentStatus" checked />
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="pt-2 pl-2">
+                            Non-Resident <input name="ResidentStatus" value="@userInformation.ResidentStatus" type="radio" checked />
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row m-1 mb-0 bg-white border mt-minus" id="TickOnBoxesDivId">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-1 border border-left-0 border-bottom-0 pt-3 text-center">10</div>
+                <div class="col-md-11 pt-2 border-bottom">Tick on the box(es) below if you are:</div>
+
+            </div>
+
+            <div class="row border-top-0">
+                <div class="col-md-1"></div>
+                <div class="col-md-1 border border-top-0 pt-3">10A</div>
+                <div class="col-md-5 border-bottom">
+                    <label class="p-2">
+                        A gazetted war-wounded freedom fighter
+                        @if (a.Length > 0)
+                        {
+                            <input type="checkbox" name="" value="A gazetted war-wounded
+                            freedom fighter" class="checkbox-right" checked disabled />
+                        }
+                        else
+                        {
+                            <input type="checkbox" name="" value="A gazetted war-wounded
+                            freedom fighter" class="checkbox-right" disabled />
+                        }
+                    </label>
+                </div>
+                <div class="col-md-1 border border-top-0 border-right-0 pt-3">10B</div>
+                <div class="col-md-4 border border-top-0 border-right-0">
+                    <label class="pt-4">
+                        A person with disability
+                        @if (b.Length > 0)
+                        {
+                            <input type="checkbox" class="checkbox-right" name="" value="A person with disability" checked disabled />
+                        }
+                        else
+                        {
+                            <input type="checkbox" class="checkbox-right" name="" value="A person with disability" disabled />
+                        }
+                    </label>
+                </div>
+            </div>
+
+            <div class="row border-top-0 border-bottom-0">
+                <div class="col-md-1"></div>
+                <div class="col-md-1 border border-top-0 pt-3">10C</div>
+                <div class="col-md-5 border-bottom">
+                    <label class="pt-3">
+                        Aged 65 years or more
+                        @if (c.Length > 0)
+                        {
+                            <input type="checkbox" name="" value="Aged 65 years or more" class="ml-2" checked disabled />
+                        }
+                        else
+                        {
+                            <input type="checkbox" name="" value="Aged 65 years or more" class="ml-2" disabled />
+                        }
+                    </label>
+                </div>
+                <div class="col-md-1 border border-top-0 pt-3 border-right-0">10D</div>
+                <div class="col-md-4 border border-top-0 border-right-0">
+                    <label>
+                        A parent/legal guardian of a person
+
+                        <br />with disability
+                        @if (d.Length > 0)
+                        {
+                            <input type="checkbox" name="" value="A parent/legal guardian of a person
+                                with disability" class="checkbox-right" checked disabled />
+                        }
+                        else
+                        {
+                            <input type="checkbox" name="" value="A parent/legal guardian of a person
+                                with disability" class="checkbox-right" disabled />
+                        }
+
+                    </label>
+                </div>
+            </div>
+
+            <input type="hidden" name="TickOnBoxes" id="TickOnBoxesInputResult" value="@userInformation.TickOnBoxes" />
+        </div>
+    </div>
+
+    <div class="row m-1 mb-0 bg-white border mt-minus border-top-0">
+        <div class="col-md-6">
+            <div class="container m-0 p-0">
+                <div class="row border-right border-top-0">
+                    <div class="col-md-2 border-top border-right pt-4 text-center border-bottom">11</div>
+                    <div class="col-md-10 border-bottom">
+                        <label class="pt-2">Date of birth (DD-MM-YYYY)  <span title="This Field Must Be Required." class="required-warning">*</span></label>
+                        <input name="DateOfBirth" type="date" class="form-control" value="@userInformation.DateOfBirth" readonly />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="container m-0 p-0">
+                <div class="row border-top-0">
+                    <div class="col-md-2 border-right pt-4 text-center border-bottom">12</div>
+                    <div class="col-md-10 border-bottom">
+                        <label class="pt-2">Income Year </label>
+                        <div class="container m-0 p-0">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="text" value="@userInformation.IncomeYearFrom" readonly class="form-control" placeholder="From year" name="YearFrom" />
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" value="@userInformation.IncomeYearTo" readonly class="form-control" placeholder="To year" name="YearTo" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row m-1 mb-0 bg-white border mt-minus border-top-0">
+        <div class="col-md-1 border-bottom border-right pt-4 text-center">13</div>
+        <div class="col-md-11 border-bottom">
+            <label class="pt-2">If employed, employer’s name</label>
+            <input type="text" value="@userInformation.EmployerName" readonly class="form-control" name="EmployerName" />
+        </div>
+    </div>
+
+    <div class="row m-1 mb-0 bg-white border mt-minus border-top-0">
+        <div class="col-md-6">
+            <div class="container m-0 p-0">
+                <div class="row border-right border-top-0">
+                    <div class="col-md-2 border-right pt-4 text-center">14</div>
+                    <div class="col-md-10">
+                        <label class="pt-2">Spouse Name</label>
+                        <input type="text" class="form-control" value="@userInformation.SpouseName" readonly name="SpouseName" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="container m-0 p-0">
+                <div class="row border-top-0">
+                    <div class="col-md-2 border-right pt-4 text-center">15</div>
+                    <div class="col-md-10">
+                        <label class="pt-2">Spouse TIN (if any)</label>
+                        <input type="text" class="form-control"
+                               value="@userInformation.SpouseTIN" readonly name="SpouseTIN" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row m-1 mb-0 bg-white border mt-minus border-top-0">
+        <div class="col-md-6 border-bottom">
+            <div class="container m-0 p-0">
+                <div class="row border-right border-top-0">
+                    <div class="col-md-2 border-right pt-4 text-center">16</div>
+                    <div class="col-md-10">
+                        <label class="pt-2">Father’s Name</label>
+                        <input type="text" class="form-control" value="@userInformation.FatherName" readonly name="FatherName" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 border-bottom">
+            <div class="container m-0 p-0">
+                <div class="row border-top-0">
+                    <div class="col-md-2 border-right pt-4 text-center">17</div>
+                    <div class="col-md-10">
+                        <label class="pt-2">Mother’s Name</label>
+                        <input type="text" class="form-control" value="@userInformation.MotherName" readonly name="MotherName" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row m-1 mb-0 bg-white border mt-minus border-top-0">
+        <div class="col-md-6 border-bottom">
+            <div class="container m-0 p-0">
+                <div class="row border-right border-top-0">
+                    <div class="col-md-2 border-right pt-4 text-center">18</div>
+                    <div class="col-md-10">
+                        <label class="pt-2">Present Address</label>
+                        <input type="text" class="form-control" value="@userInformation.PresentAddress" readonly name="PresentAddress" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 border-bottom">
+            <div class="container m-0 p-0">
+                <div class="row border-top-0">
+                    <div class="col-md-2 border-right pt-4 text-center">19</div>
+                    <div class="col-md-10">
+                        <label class="pt-2">Permanent Address</label>
+                        <input type="text" class="form-control" value="@userInformation.PermanentAddress" readonly name="PermanentAddress" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row m-1 mb-0 bg-white border mt-minus border-top-0">
+        <div class="col-md-6 border-bottom">
+            <div class="container m-0 p-0">
+                <div class="row border-right border-top-0">
+                    <div class="col-md-2 border-right pt-4 text-center">20</div>
+                    <div class="col-md-10">
+                        <label class="pt-2">Contact Telephone  <span title="This Field Must Be Required." class="required-warning">*</span></label>
+                        <input type="text" class="form-control" value="@userInformation.ContactTelephone" readonly name="ContactTelephone" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 border-bottom">
+            <div class="container m-0 p-0">
+                <div class="row border-top-0">
+                    <div class="col-md-2 border-right pt-4 text-center">21</div>
+                    <div class="col-md-10">
+                        <label class="pt-2">E-mail  <span title="This Field Must Be Required." class="required-warning">*</span></label>
+                        <input type="text" class="form-control" value="@userInformation.Email" readonly name="Email" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row m-1 mb-0 bg-white border mt-minus border-top-0">
+        <div class="col-md-6 border-bottom">
+            <div class="container m-0 p-0">
+                <div class="row border-right border-top-0">
+                    <div class="col-md-2 border-right pt-4 text-center">22</div>
+                    <div class="col-md-10">
+                        <label class="pt-2">National Identification Number  <span title="This Field Must Be Required." class="required-warning">*</span></label>
+                        <input type="text" class="form-control" value="@userInformation.NID" readonly name="NID" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 border-bottom">
+            <div class="container m-0 p-0">
+                <div class="row border-top-0">
+                    <div class="col-md-2 border-right pt-4 text-center">23</div>
+                    <div class="col-md-10">
+                        <label class="pt-2">Business Identification Number(s)</label>
+                        <input type="text" class="form-control" value="@userInformation.BIN" readonly name="BIN" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    $(() => {
+        let tickOnBoxesDivCheckBoxText = '';
+        $('#TickOnBoxesDivId input[type="checkbox"]').change(function () {
+            tickOnBoxesDivCheckBoxText += $(this).val().trim() + ', ';
+            console.log(tickOnBoxesDivCheckBoxText);
+            $('#TickOnBoxesInputResult').val(tickOnBoxesDivCheckBoxText);
+        })
+    });
+</script>
+

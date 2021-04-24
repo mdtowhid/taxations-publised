@@ -1,0 +1,726 @@
+﻿@model Taxations.Models.StatementOfAsset
+
+@{
+    ViewBag.Title = "GetStatementOfAsset";
+    Layout = "~/Views/Containers/Admin.cshtml";
+}
+
+<div id="adminUserDetails">
+    <h4>StatementOfAsset</h4>
+    <a class="btn btn-md btn-outline-success"
+       href="/admins/gr?repName=StatementOfAssets&&id=@Model.UserId"
+       target="_blank">Generate Report</a>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AssessmentYear)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AssessmentYear)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StatementAsOn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StatementAsOn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NameOfAssessee)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NameOfAssessee)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TIN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TIN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BusinessCapital)
+        </dt>
+
+        <dd>
+            @if (Model.BusinessCapital != null)
+            {
+                <span>@Html.DisplayFor(model => model.BusinessCapital)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BusinessCapital05A)
+        </dt>
+
+        <dd>
+            @if (Model.BusinessCapital05A != null)
+            {
+                <span>@Html.DisplayFor(model => model.BusinessCapital05A)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BusinessCapital05B)
+        </dt>
+
+        <dd>
+            @if (Model.BusinessCapital05B != null)
+            {
+                <span>@Html.DisplayFor(model => model.BusinessCapital05B)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DirectorShareholdingsInLimitedCompanies05B)
+        </dt>
+
+        <dd>
+            @if (Model.DirectorShareholdingsInLimitedCompanies05B != null)
+            {
+                <span>@Html.DisplayFor(model => model.DirectorShareholdingsInLimitedCompanies05B)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NonAgricultural06A)
+        </dt>
+
+        <dd>
+            @if (Model.NonAgricultural06A != null)
+            {
+                <span>@Html.DisplayFor(model => model.NonAgricultural06A)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AdvanceMadeForNonAgriculturalProperty06B)
+        </dt>
+
+        <dd>
+            @if (Model.AdvanceMadeForNonAgriculturalProperty06B != null)
+            {
+                <span>@Html.DisplayFor(model => model.AdvanceMadeForNonAgriculturalProperty06B)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalOf06A06B)
+        </dt>
+
+        <dd>
+            @if (Model.TotalOf06A06B != null)
+            {
+                <span>@Html.DisplayFor(model => model.TotalOf06A06B)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AgriculturalProperty07)
+        </dt>
+
+        <dd>
+            @if (Model.AgriculturalProperty07 != null)
+            {
+                <span>@Html.DisplayFor(model => model.AgriculturalProperty07)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FinancialAssetsValue08)
+        </dt>
+
+        <dd>
+            @if (Model.FinancialAssetsValue08 != null)
+            {
+                <span>@Html.DisplayFor(model => model.FinancialAssetsValue08)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShareDebentures08A)
+        </dt>
+
+        <dd>
+            @if (Model.ShareDebentures08A != null)
+            {
+                <span>@Html.DisplayFor(model => model.ShareDebentures08A)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SavingsCertificate08B)
+        </dt>
+
+        <dd>
+            @if (Model.SavingsCertificate08B != null)
+            {
+                <span>@Html.DisplayFor(model => model.SavingsCertificate08B)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FixedDeposit08C)
+        </dt>
+
+        <dd>
+            @if (Model.FixedDeposit08C != null)
+            {
+                <span>@Html.DisplayFor(model => model.FixedDeposit08C)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LoansGivenToOthers08D)
+        </dt>
+
+        <dd>
+            @if (Model.LoansGivenToOthers08D != null)
+            {
+                <span>@Html.DisplayFor(model => model.LoansGivenToOthers08D)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OtherFinancialAssets08D)
+        </dt>
+
+        <dd>
+            @if (Model.OtherFinancialAssets08D != null)
+            {
+                <span>@Html.DisplayFor(model => model.OtherFinancialAssets08D)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MotorCars09)
+        </dt>
+
+        <dd>
+            @if (Model.MotorCars09 != null)
+            {
+                <span>@Html.DisplayFor(model => model.MotorCars09)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GoldDiamond10)
+        </dt>
+
+        <dd>
+            @if (Model.GoldDiamond10 != null)
+            {
+                <span>@Html.DisplayFor(model => model.GoldDiamond10)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FurnitureEquipmentAndElectronicItems11)
+        </dt>
+
+        <dd>
+            @if (Model.FurnitureEquipmentAndElectronicItems11 != null)
+            {
+                <span>@Html.DisplayFor(model => model.FurnitureEquipmentAndElectronicItems11)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OtherAssetsOfSignificantValue12)
+        </dt>
+
+        <dd>
+            @if (Model.OtherAssetsOfSignificantValue12 != null)
+            {
+                <span>@Html.DisplayFor(model => model.OtherAssetsOfSignificantValue12)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CashAndFundOutsideBusiness)
+        </dt>
+
+        <dd>
+            @if (Model.CashAndFundOutsideBusiness != null)
+            {
+                <span>@Html.DisplayFor(model => model.CashAndFundOutsideBusiness)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NotesAndCurrencies13A)
+        </dt>
+
+        <dd>
+            @if (Model.NotesAndCurrencies13A != null)
+            {
+                <span>@Html.DisplayFor(model => model.NotesAndCurrencies13A)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BanksCardsAndOtherElectronicCash13B)
+        </dt>
+
+        <dd>
+            @if (Model.BanksCardsAndOtherElectronicCash13B != null)
+            {
+                <span>@Html.DisplayFor(model => model.BanksCardsAndOtherElectronicCash13B)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProvidentFundAndOtherFund13C)
+        </dt>
+
+        <dd>
+            @if (Model.ProvidentFundAndOtherFund13C != null)
+            {
+                <span>@Html.DisplayFor(model => model.ProvidentFundAndOtherFund13C)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OtherDepositBalanceAndAdvance13D)
+        </dt>
+
+        <dd>
+            @if (Model.OtherDepositBalanceAndAdvance13D != null)
+            {
+                <span>@Html.DisplayFor(model => model.OtherDepositBalanceAndAdvance13D)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GrossWealth14)
+        </dt>
+
+        <dd>
+            @if (Model.GrossWealth14 != null)
+            {
+                <span>@Html.DisplayFor(model => model.GrossWealth14)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LiabilitiesButsideBusines15)
+        </dt>
+
+        <dd>
+            @if (Model.LiabilitiesButsideBusines15 != null)
+            {
+                <span>@Html.DisplayFor(model => model.LiabilitiesButsideBusines15)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BorrowingsFromBanks15A)
+        </dt>
+
+        <dd>
+            @if (Model.BorrowingsFromBanks15A != null)
+            {
+                <span>@Html.DisplayFor(model => model.BorrowingsFromBanks15A)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UnsecuredLoan15B)
+        </dt>
+
+        <dd>
+            @if (Model.UnsecuredLoan15B != null)
+            {
+                <span>@Html.DisplayFor(model => model.UnsecuredLoan15B)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OtherLoansOrOverdrafts15C)
+        </dt>
+
+        <dd>
+            @if (Model.OtherLoansOrOverdrafts15C != null)
+            {
+                <span>@Html.DisplayFor(model => model.OtherLoansOrOverdrafts15C)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NetWealth16)
+        </dt>
+
+        <dd>
+            @if (Model.NetWealth16 != null)
+            {
+                <span>@Html.DisplayFor(model => model.NetWealth16)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NetWealth17)
+        </dt>
+
+        <dd>
+            @if (Model.NetWealth17 != null)
+            {
+                <span>@Html.DisplayFor(model => model.NetWealth17)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ChangeIn18)
+        </dt>
+
+        <dd>
+            @if (Model.ChangeIn18 != null)
+            {
+                <span>@Html.DisplayFor(model => model.ChangeIn18)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OtherFundOutflow19)
+        </dt>
+
+        <dd>
+            @if (Model.OtherFundOutflow19 != null)
+            {
+                <span>@Html.DisplayFor(model => model.OtherFundOutflow19)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AnnualLiving19A)
+        </dt>
+
+        <dd>
+            @if (Model.AnnualLiving19A != null)
+            {
+                <span>@Html.DisplayFor(model => model.AnnualLiving19A)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LossDeductionsExpenses19B)
+        </dt>
+
+        <dd>
+            @if (Model.LossDeductionsExpenses19B != null)
+            {
+                <span>@Html.DisplayFor(model => model.LossDeductionsExpenses19B)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GiftDonation19C)
+        </dt>
+
+        <dd>
+            @if (Model.GiftDonation19C != null)
+            {
+                <span>@Html.DisplayFor(model => model.GiftDonation19C)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalFundOutflow20)
+        </dt>
+
+        <dd>
+            @if (Model.TotalFundOutflow20 != null)
+            {
+                <span>@Html.DisplayFor(model => model.TotalFundOutflow20)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SourcesOfFund21)
+        </dt>
+
+        <dd>
+            @if (Model.SourcesOfFund21 != null)
+            {
+                <span>@Html.DisplayFor(model => model.SourcesOfFund21)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IncomeShown21A)
+        </dt>
+
+        <dd>
+            @if (Model.IncomeShown21A != null)
+            {
+                <span>@Html.DisplayFor(model => model.IncomeShown21A)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TaxExempted21B)
+        </dt>
+
+        <dd>
+            @if (Model.TaxExempted21B != null)
+            {
+                <span>@Html.DisplayFor(model => model.TaxExempted21B)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OtherReceipts21C)
+        </dt>
+
+        <dd>
+            @if (Model.OtherReceipts21C != null)
+            {
+                <span>@Html.DisplayFor(model => model.OtherReceipts21C)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShortageOfFund22)
+        </dt>
+
+        <dd>
+            @if (Model.ShortageOfFund22 != null)
+            {
+                <span>@Html.DisplayFor(model => model.ShortageOfFund22)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            Name
+        </dt>
+
+        <dd>
+            @if (Model.SecondPageName != null)
+            {
+                <span>@Html.DisplayFor(model => model.SecondPageName)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            Signature
+        </dt>
+
+        <dd>
+            @if (Model.SecondPageName != null)
+            {
+            <img src="@Url.Content(Model.SecondPageName)" />
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+            
+        </dd>
+
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Active)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Active)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeementStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmployeementStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsPrevYearCalculated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsPrevYearCalculated)
+        </dd>
+
+    </dl>
+
+    <p>
+        <a href="/admins/GetStatementofAssets" class="border btn btn-lg btn-secondary bg-dark text-white mt-2">Back to List</a>
+    </p>
+
+</div>

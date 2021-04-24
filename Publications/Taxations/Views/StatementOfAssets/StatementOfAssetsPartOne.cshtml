@@ -1,0 +1,335 @@
+﻿@using Taxations.Models
+@using Taxations.Dtos
+@{
+    UserInformation userInformation = new UserInformation(); ;
+
+    if (ViewBag.UserInformations != null)
+    {
+        userInformation = ViewBag.UserInformations;
+    }
+
+    StatementOfAsset statementOfAsset = new StatementOfAsset();
+    if (ViewBag.StatementOfAsset != null)
+    {
+        statementOfAsset = ViewBag.StatementOfAsset;
+    }
+
+    long dPSInfoTotalAmount = 0;
+    if (ViewBag.DPSInfoes != null)
+    {
+        dPSInfoTotalAmount = ViewBag.DPSInfoes;
+    }
+
+    long totalInsuranceAmount = 0;
+    if (ViewBag.TotalInsuranceAmount != null)
+    {
+        totalInsuranceAmount = ViewBag.TotalInsuranceAmount;
+    }
+
+    
+}
+
+
+
+
+<div class="forms form-slides">
+
+    <input type="hidden" name="UserId" id="UserId" value="@Session["UserId"]" />
+    <input type="hidden" name="EmployeementStatus" id="EmployeementStatus" value="@Session["UserType"]" />
+    <input type="hidden"
+           class="form-control text-left"
+           name="AssessmentYear"
+           value="@userInformation.AssessmentYear" readonly />
+
+    <div class="row m-0 m-1">
+        <div class="col-md-6">
+            <div class="container m-0 p-0">
+                <div class="row border border-right-0">
+                    <div class="col-md-2 border-right pt-4 text-center">01</div>
+                    <div class="col-md-10">
+                        <label>Assessment Year</label>
+                        @if (Session["FAY"] != null)
+                        {
+                            <input type="text"
+                                   class="form-control mb-2 text-left"
+                                   name=""
+                                   value="@Session["FAY"]" readonly />
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="container m-0 p-0">
+                <div class="row border">
+                    <div class="col-md-2 border-right pt-4 text-center">02</div>
+                    <div class="col-md-10">
+                        <label>Statement as on (DD-MM-YYYY)</label>
+                        <input type="date" id="statementAsOn" class="form-control" name="StatementAsOn"
+                               value="@statementOfAsset.StatementAsOn" required />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row m-0 m-1 mt-minus mb-3">
+        <div class="col-md-6">
+            <div class="container m-0 p-0">
+                <div class="row border border-right-0 border-top-0">
+                    <div class="col-md-2 border-right pt-4 text-center">03</div>
+                    <div class="col-md-10">
+                        <label>Name of the Assessee</label>
+                        <input type="text" class="form-control" name="NameOfAssessee"
+                               value="@userInformation.NameOfAssessee" readonly />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="container m-0 p-0">
+                <div class="row border border-top-0">
+                    <div class="col-md-2 border-right pt-4 text-center">04</div>
+                    <div class="col-md-10">
+                        <label>TIN: </label>
+                        <input type="text" name="TIN" value="@userInformation.NewTIN" class="form-control" readonly />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row border m-1 bg-light mt-3">
+        <div class="col-md-8 p-2 border-right">
+            <h3 class="m-0">Particulars</h3>
+        </div>
+        <div class="col-md-4 p-2 ">
+            <h3 class="m-0 text-center">Amount</h3>
+        </div>
+    </div>
+
+    <div class="row mt-minus m-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-1 border border-bottom-0 pt-3 text-center">05</div>
+                <div class="col-md-7 border-bottom pt-2">Business capital (05A+05B)</div>
+                <div class="col-md-4 border">
+                    <input readonly type="number" id="BusinessCapital" value="@statementOfAsset.BusinessCapital"
+                           name="BusinessCapital" class="form-control pt-1 pb-1 businessCapital_Prev_Total" />
+                </div>
+            </div>
+
+            <div class="row border-top-0">
+                <div class="col-md-1 border-left"></div>
+                <div class="col-md-1 border border-top-0 border-right-0 pt-2">05A</div>
+                <div class="col-md-6 border border-top-0">Business capital other than 05B</div>
+                <div class="col-md-4 border-bottom border-right">
+                    <input type="number" id="BusinessCapital05A" name="BusinessCapital05A"
+                           value="@statementOfAsset.BusinessCapital05A" class="form-control 5 businessCapital_Prev" />
+                </div>
+            </div>
+
+            <div class="row border border-top-0">
+                <div class="col-md-1"></div>
+                <div class="col-md-1 pt-2 border border-top-0 border-bottom-0">05B</div>
+                <div class="col-md-6 border-right">Director’s shareholdings in limited companies</div>
+                <div class="col-md-4 pt-1">
+                    <input type="number" id="BusinessCapital05B" name="BusinessCapital05B"
+                           value="@statementOfAsset.BusinessCapital05B" class="form-control 5 businessCapital_Prev" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row mt-minus m-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-1 border border-bottom-0 border-top-0 pt-4 text-center">06</div>
+                <div class="col-md-7 border-bottom pt-2">----------</div>
+                <div class="col-md-4 border">
+                    <input readonly type="number" id="TotalOf06A06B" name="TotalOf06A06B"
+                           value="@statementOfAsset.TotalOf06A06B" class="form-control totalOf06A06B_Prev_Total" />
+                </div>
+            </div>
+
+            <div class="row border-top-0">
+                <div class="col-md-1 border-left"></div>
+                <div class="col-md-1 border border-top-0 border-right-0 pt-2">06A</div>
+                <div class="col-md-6 border border-top-0">
+                    Non-agricultural property (as in Schedule 25)
+                </div>
+                <div class="col-md-4 border-bottom border-right">
+                    <input type="number" id="NonAgricultural06A" name="NonAgricultural06A"
+                           value="@statementOfAsset.NonAgricultural06A" class="form-control 6 totalOf06A06B_Prev" />
+                </div>
+            </div>
+
+            <div class="row border border-top-0">
+                <div class="col-md-1"></div>
+                <div class="col-md-1 pt-2 border border-top-0 border-bottom-0">06B</div>
+                <div class="col-md-6 border-right">Advance made for non-agricultural property (as in Schedule25)</div>
+                <div class="col-md-4 pt-1">
+                    <input type="number" id="AdvanceMadeForNonAgriculturalProperty06B"
+                           name="AdvanceMadeForNonAgriculturalProperty06B"
+                           value="@statementOfAsset.AdvanceMadeForNonAgriculturalProperty06B" class="form-control 6 totalOf06A06B_Prev" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row m-1 mt-0 mt-minus border-top-0 mt-minus border">
+        <div class="col-md-1 p-2 border-right pt-3 text-center">07</div>
+        <div class="col-md-7 p-2 border-right pt-3">Agricultural property (as in Schedule25)</div>
+        <div class="col-md-4 pt-1 pb-1">
+            <input type="number" name="AgriculturalProperty07" id="AgriculturalProperty07"
+                   value="@statementOfAsset.AgriculturalProperty07" class="form-control 7" />
+        </div>
+    </div>
+
+    <div class="row mt-minus m-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-1 border border-bottom-0 border-top-0 pt-4 text-center">08</div>
+                <div class="col-md-7 border-bottom pt-2">Financial assets value (08A+08B+08C+08D+08E)</div>
+                <div class="col-md-4 border">
+                    <input type="number" readonly name="FinancialAssetsValue08" id="FinancialAssetsValue08"
+                           value="@statementOfAsset.FinancialAssetsValue08" class="form-control financialAssetsValue08_Prev_Total" />
+                </div>
+            </div>
+
+            <div class="row border-top-0">
+                <div class="col-md-1 border-left"></div>
+                <div class="col-md-1 border border-top-0 border-right-0 pt-2">08A</div>
+                <div class="col-md-6 border border-top-0">
+                    Share, debentures etc.
+                </div>
+                <div class="col-md-4 border-bottom border-right">
+                    <input type="number" name="ShareDebentures08A" id="ShareDebentures08A"
+                           value="@statementOfAsset.ShareDebentures08A" class="form-control 8 financialAssetsValue08_Prev" />
+                </div>
+            </div>
+
+            <div class="row border border-top-0">
+                <div class="col-md-1"></div>
+                <div class="col-md-1 pt-2 border border-top-0 border-bottom-0">08B</div>
+                <div class="col-md-6 border-right">Savings certificate, bonds and other government securities</div>
+                <div class="col-md-4 pt-1">
+                    <input type="number" name="SavingsCertificate08B" id="SavingsCertificate08B"
+                           value="@statementOfAsset.SavingsCertificate08B" class="form-control 8 financialAssetsValue08_Prev" />
+                </div>
+            </div>
+
+            <div class="row border border-top-0">
+                <div class="col-md-1"></div>
+                <div class="col-md-1 pt-2 border border-top-0 border-bottom-0">08C</div>
+                <div class="col-md-6 border-right">Fixed deposit, Term deposits and DPS</div>
+                <div class="col-md-4 pt-1">
+                    <input type="number" id="FixedDeposit08C" name="FixedDeposit08C"
+                           value="@dPSInfoTotalAmount" class="form-control 8 financialAssetsValue08_Prev" readonly />
+                </div>
+            </div>
+
+            <div class="row border border-top-0">
+                <div class="col-md-1"></div>
+                <div class="col-md-1 pt-2 border border-top-0 border-bottom-0">08D</div>
+                <div class="col-md-6 border-right">Loans given to others (mention name and TIN)</div>
+                <div class="col-md-4 pt-1">
+                    <input type="number" id="LoansGivenToOthers08D" name="LoansGivenToOthers08D"
+                           value="@statementOfAsset.LoansGivenToOthers08D" class="form-control 8 financialAssetsValue08_Prev" />
+                </div>
+            </div>
+
+            <div class="row border border-top-0">
+                <div class="col-md-1"></div>
+                <div class="col-md-1 pt-2 border border-top-0 border-bottom-0">08E</div>
+                <div class="col-md-6 border-right">Other financial assets (give details)</div>
+                <div class="col-md-4 pt-1">
+                    <input type="number" name="OtherFinancialAssets08D" id="OtherFinancialAssets08D"
+                           value="@totalInsuranceAmount" class="form-control 8 financialAssetsValue08_Prev" readonly />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-minus m-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-1 border border-bottom-0 border-top-0 pt-4 text-center">09</div>
+                <div class="col-md-9 border-bottom pt-2">
+                    Motor car (s) (use additional papers if more than two cars)
+                </div>
+                <div class="col-md-2 border border-left-0 border-top-0">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-1 border border-bottom-0 border-top-0 pt-4 text-center"></div>
+                <div class="col-md-1 border-bottom p-2 pl-3 border-right"><b>Sl.</b></div>
+                <div class="col-md-3 p-2 border-bottom"><b>Brand name</b></div>
+                <div class="col-md-3 p-2 border-bottom"><b>Engine (CC)</b></div>
+                <div class="col-md-3 p-2 border-bottom"><b>Registration No.</b></div>
+                <div class="col-md-1 p-2 border-bottom border-right"><b></b></div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-1 border border-bottom-0 border-top-0 pt-4 text-center"></div>
+                <div class="col-md-1 border-bottom p-2 pt-3 pl-4 border-right"><b>1</b></div>
+                <div class="col-md-3 p-2 border-bottom border-right"><input type="text" class="form-control" /></div>
+                <div class="col-md-3 p-2 border-bottom border-right"><input type="text" class="form-control" /></div>
+                <div class="col-md-3 p-2 border-bottom border-right"><input type="text" class="form-control" /></div>
+                <div class="col-md-1 p-2 border-bottom border-right"><input type="text" class="form-control" /></div>
+            </div>
+        </div>
+
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-1 border border-top-0 pt-4 text-center"></div>
+                <div class="col-md-1 border-bottom p-2 pt-3 pl-4 border-right"><b>2</b></div>
+                <div class="col-md-3 p-2 border-bottom border-right"><input type="text" class="form-control" /></div>
+                <div class="col-md-3 p-2 border-bottom border-right"><input type="text" class="form-control" /></div>
+                <div class="col-md-3 p-2 border-bottom border-right"><input type="text" class="form-control" /></div>
+                <div class="col-md-1 p-2 border-bottom border-right"><input type="text" class="form-control" /></div>
+            </div>
+        </div>
+        <input type="number" name="MotorCars09" id="MotorCars09" value="@statementOfAsset.MotorCars09" hidden />
+    </div>
+
+
+    <div class="row m-1 mt-0 mt-minus border-top-0 mt-minus border">
+        <div class="col-md-1 p-2 border-right pt-3 text-center">10</div>
+        <div class="col-md-7 p-2 border-right pt-3">Gold, diamond, gems and other items (mention</div>
+        <div class="col-md-4 pt-1 pb-1">
+            <input type="number" id="GoldDiamond10" name="GoldDiamond10" value="@statementOfAsset.GoldDiamond10"
+                   class="form-control 10" />
+        </div>
+    </div>
+
+    <div class="row m-1 mt-0 mt-minus border-top-0 mt-minus border">
+        <div class="col-md-1 p-2 border-right pt-3 text-center">11</div>
+        <div class="col-md-7 p-2 border-right pt-3">Furniture, equipment and electronic items</div>
+        <div class="col-md-4 pt-1 pb-1">
+            <input type="number" name="FurnitureEquipmentAndElectronicItems11"
+                   id="FurnitureEquipmentAndElectronicItems11"
+                   value="@statementOfAsset.FurnitureEquipmentAndElectronicItems11" class="form-control 11" />
+        </div>
+    </div>
+
+    <div class="row m-1 mt-0 mt-minus border-top-0 mt-minus border">
+        <div class="col-md-1 p-2 border-right pt-3 text-center">12</div>
+        <div class="col-md-7 p-2 border-right pt-3">Other assets of significant value</div>
+        <div class="col-md-4 pt-1 pb-1">
+            <input type="number" id="OtherAssetsOfSignificantValue12" name="OtherAssetsOfSignificantValue12"
+                   value="@statementOfAsset.OtherAssetsOfSignificantValue12" class="form-control 12" />
+        </div>
+    </div>
+</div>

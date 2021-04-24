@@ -1,0 +1,941 @@
+﻿@model Taxations.Models.BasicInformation
+@using Taxations.Models
+
+@{
+    ViewBag.Title = "Basic Informations Report";
+    //Layout = "~/Views/Shared/MainLayout.cshtml";
+    Layout = null;
+
+    UserInformation ui = new UserInformation();
+    if (ViewBag.UserInformations != null)
+    {
+        ui = ViewBag.UserInformations;
+    }
+
+    User user = new User();
+    if (ViewBag.User != null)
+    {
+        user = ViewBag.User;
+    }
+
+    ParticularsOfIncomeFromSalary poifs = new ParticularsOfIncomeFromSalary();
+
+
+    if (ViewBag.ParticularsOfSalaries != null)
+    {
+        poifs = ViewBag.ParticularsOfSalaries;
+    }
+
+    StatementOfAsset soa = null;
+    string s = null;
+    if (ViewBag.StatementOfAssets != null)
+    {
+        soa = ViewBag.StatementOfAssets;
+
+    }
+
+    string it1 = "";
+    string it2 = "";
+    string a = "";
+    string b = "";
+    string c = "";
+    string d = "";
+
+    if (Model != null)
+    {
+        string[] schedules = new string[] { };
+        string[] statements = new string[] { };
+        if (Model.SchedulesAnnexed != null) {
+            schedules = Model.SchedulesAnnexed.Split(',');
+            statements = Model.StatementsAnnexed.Split(',');
+        }
+        foreach (string schedule in schedules)
+
+        {
+            if (schedule == "24A")
+            {
+                a = "24A";
+            }
+            if (schedule == "24B")
+            {
+                b = "24B";
+            }
+
+            if (schedule == "24C")
+            {
+                c = "24C";
+            }
+
+            if (schedule == "24D")
+            {
+                d = "24D";
+            }
+        }
+
+        foreach (string statement in statements)
+        {
+            if (statement.Trim() == "IT-10B2016")
+            {
+                it1 = "IT-10B2016";
+            }
+            if (statement.Trim() == "IT-10BB2016")
+            {
+                it2 = "IT-10BB2016";
+            }
+        }
+    }
+
+    string[] tickedOnBoxes = new string[] { };
+    if (ui.TickOnBoxes != null)
+    {
+        tickedOnBoxes = ui.TickOnBoxes.Trim().Split(',');
+    }
+    string res = "";
+    string a1 = "", b1 = "", c1 = "", d1 = "";
+    foreach (string item in tickedOnBoxes)
+    {
+        res = item;
+        res = res.Replace(",", "");
+        if (res == "A gazetted war-wounded freedom fighter")
+        {
+            a1 = res;
+        }
+        if (res == "A person with disability")
+        {
+            b1 = res;
+        }
+        if (res == "Aged 65 years or more")
+        {
+            c1 = res;
+        }
+        if (res == "A parent/legal guardian of a personwith disability")
+        {
+            d1 = res;
+        }
+    }
+}
+
+@d1
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 21px;
+        padding: 5px;
+        border-collapse: collapse;
+    }
+
+    tr td:first-child {
+        padding: 10px;
+    }
+
+    @*th,td{padding:0px;text-align:left;}*@input[type="text"] {
+        width: 100%;
+        padding: 5px;
+    }
+
+    table tr td:nth-child(odd) {
+        text-align: center;
+    }
+
+    p,
+    input,
+    td {
+        margin: 0 !important;
+    }
+
+    tr th {
+        border: 1px solid black;
+    }
+
+    .page2Table {
+        width: 100%;
+        margin-top: ;
+    }
+
+    .page2Table tr th {
+        padding: ;
+    }
+    #tableBorderNone tr td{
+        border: none;
+        padding: 0;
+    }
+    #tableBorderNone tr{
+        margin-bottom: 20px;
+    }
+</style>
+
+@*<table style="border:none;width:100%;">
+        <tr style="border:none">
+            <td style="border: none;width:33%"></td>
+            <td style="border: none;width:33%">
+                <p style="text-align:center">National Board of Revenue</p>
+            </td>
+            <td style="border: none;width:33%">
+                <p style="text-align:right"><b>IT-11GA2016</b></p>
+            </td>
+        </tr>
+    </table>*@
+
+<br />
+<br />
+
+<div style="width: 100%;">
+    <div style="width: 50%;float:left">National Board of Revenue</div>
+    <div style="width: 50%;float:right; text-align: right"><b>IT-11GA2016</b></div>
+</div>
+<br />
+<br />
+<h3 style="text-align:center;padding:0px;margin:0px;">
+    RETURN OF INCOME
+</h3>
+<h3 style="text-align:center;padding:0px;margin:0px;">
+    For an Individual Assessee
+</h3>
+<br />
+<br />
+<table style="width:100%" id="tableBorderNone">
+    <tr>
+        <td colspan="2" style="text-align: left">
+            The following schedules shall be the integral part of this return and must be annexed to
+            return in the following cases:
+        </td>
+        <td rowspan="5" style="width:250px; margin: 0; padding: 0;">
+            @if (user.PhotoPath != "NOIMAGE_PATH")
+            {
+                <img src="@user.PhotoPath.Replace("~","")"
+                     style="width: 120px; height: 120px;padding: 20px; padding-bottom: 0; float: right" />
+            }
+            else
+            {
+                <b><mark>Signature not provided.</mark></b>
+            }
+        </td>
+    </tr>
+    <tr style="">
+        <td style="text-align: left"><i>Schedule 24A</i></td>
+        <td><i>if you have income from Salaries</i></td>
+    </tr>
+    <tr>
+        <td style="text-align: left"><i>Schedule 24B</i></td>
+        <td><i>if you have income from house property</i></td>
+    </tr>
+    <tr>
+        <td style="text-align: left"><i>Schedule 24C</i></td>
+        <td><i>if you have income from business or profession</i></td>
+    </tr>
+    <tr>
+        <td style="text-align: left"><i>Schedule 24D</i></td>
+        <td><i>if you claim tax rebate</i></td>
+    </tr>
+</table>
+<br />
+<br />
+<br />
+<h3 style="text-align:center;padding:0px;margin:0px;margin-top:10px">
+    Part I
+</h3>
+<h3 style="text-align:center;padding:0px;margin:0px;margin-bottom:5px">
+    Basic Information
+</h3>
+
+<table style="width: 100%; margin-bottom: 15px">
+    <tr>
+        <td style="width: 4%;">01</td>
+        <td style="width: 45%;">Assessment Year: @ui.AssessmentYear</td>
+        <td style="width: 4%;">02</td>
+        <td style="padding: 0; margin-bottom: 0; width: 44%">
+            <div style="border-bottom: 1px solid black;margin: 0">
+                Return submitted under section 82BB? (tick one): 
+            </div>
+            @if (ui.ReturnSubmitted == "Yes")
+            {
+
+                <div style="margin: 0; width: 100%">
+                    <span style="width: 49%; float: left;border-right: 1px solid">
+                        @ui.ReturnSubmitted <input type="checkbox" id="scales" name="scales" checked>
+                    </span>
+                    <span style="width: 50%; float: right;">
+                        No <input type="checkbox" id="scales" name="scales">
+                    </span>
+                </div>
+            }
+            @if (ui.ReturnSubmitted == "No")
+            {
+                <div style="margin: 0; width: 100%">
+                    <span style="width: 49%; float: left;border-right: 1px solid">
+                        Yes <input type="checkbox" id="scales" name="scales">
+                    </span>
+                    <span style="width: 50%; float: right;">
+                        @ui.ReturnSubmitted <input type="checkbox" id="scales" name="scales" checked>
+                    </span>
+                </div>
+            }
+
+        </td>
+    </tr>
+    <tr>
+        <td>03</td>
+        <td>Name of the Assessee: @ui.NameOfAssessee</td>
+        <td>04</td>
+        <td>
+            <p>
+                <span style="margin-right: 10px">Gender (tick one):</span>
+                @if (Model.Gender == "Male")
+                {
+                    <span style="border-right: 1px solid;padding-right: 10px">Male <input type="checkbox" checked /></span>
+                    <span style="text-align: right">Female <input type="checkbox" /></span>
+                }
+
+                @if (Model.Gender == "Female")
+                {
+                    <span style="">Male <input type="checkbox" /></span>
+                    <span style="text-align: right">Female <input type="checkbox" checked/></span>
+                }
+            </p>
+        </td>
+    </tr>
+
+    <tr>
+        <td>05</td>
+        <td>Twelve-digit TIN: @ui.NewTIN</td>
+        <td>06</td>
+        <td>Old TIN: @ui.OldTIN</td>
+    </tr>
+    <tr>
+        <td>07</td>
+        <td>Circle: @ui.Circle</td>
+        <td>08</td>
+        <td>Zone: @ui.Zone</td>
+    </tr>
+
+    <tr>
+        <td>09</td>
+        <td colspan="1">Resident Status</td>
+        <td colspan="2" style="text-align: left;">
+            @if (ui.ResidentStatus == "Yes")
+            {
+                <div style="width: 49%;float: left;border-right: 1px solid">
+                    Resident <input type="checkbox" checked />
+                </div>
+                <div style="width: 49%;float: right;">
+                    Non Resident <input type="checkbox" />
+                </div>
+            }
+            @if (ui.ResidentStatus == "No")
+            {
+                <div style="width: 49%; float: left; border-right: 1px solid">
+                    Resident <input type="checkbox" />
+                </div>
+                <div style="width: 50%;float: right">
+                    Non Resident <input type="checkbox" checked />
+                </div>
+            }
+        </td>
+    </tr>
+
+    <tr style="width: 100%; border: none">
+        <td style="width: 4%">10</td>
+        <td colspan="3" style="padding: 0; width: 90%">
+
+            <!--COMPLEX TABLE-->
+            <table style="width:%;">
+                <tr style="border: none;">
+                    <td colspan="4" style="border: none; text-align: left;">Tick on the box(es) below if you are:</td>
+                </tr>
+                <tr>
+                    <td style="border-bottom: none; border-left: none; width: 4%">10A</td>
+                    <td style="width: 39%">
+                        A gazetted war-wounded freedom fighter
+                        @if (a1.Length > 0)
+                        {
+                            <input type="checkbox" name="" value="A gazetted war-wounded
+                            freedom fighter" class="checkbox-right" checked disabled />
+                        }
+                        else
+                        {
+                            <input type="checkbox" name="" value="A gazetted war-wounded
+                            freedom fighter" class="checkbox-right" disabled />
+                        }
+                    </td>
+                    <td style="width: 4%">10B</td>
+                    <td style="width: 43%">
+                        A person with disability
+                        @if (b1.Length > 0)
+                        {
+                            <input type="checkbox" class="checkbox-right" name="" value="A person with disability" checked disabled />
+                        }
+                        else
+                        {
+                            <input type="checkbox" class="checkbox-right" name="" value="A person with disability" disabled />
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border-left: none; border-bottom: none;">10C</td>
+                    <td style="border-bottom: none;">
+                        Aged 65 years or more
+                        @if (c1.Length > 0)
+                        {
+                            <input type="checkbox" name="" value="Aged 65 years or more" class="ml-2" checked disabled />
+                        }
+                        else
+                        {
+                            <input type="checkbox" name="" value="Aged 65 years or more" class="ml-2" disabled />
+                        }
+                    </td>
+                    <td style="border-bottom: none;">10D</td>
+                    <td style="border: none">
+                        A parent/legal guardian of a person
+                        with disability
+                        @if (d1.Length > 0)
+                        {
+                            <input type="checkbox" name="" value="A parent/legal guardian of a person
+                                with disability" class="checkbox-right" checked disabled />
+                        }
+                        else
+                        {
+                            <input type="checkbox" name="" value="A parent/legal guardian of a person
+                                with disability" class="checkbox-right" disabled />
+                        }
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+
+    <tr>
+        <td>11</td>
+        <td>Date of birth (DD-MM-YYYY)<br /> @ui.DateOfBirth</td>
+        <td style="">12</td>
+        <td>
+            Income Year <br />
+            <span style="border: 1px solid;padding: 0 20px">@ui.IncomeYearFrom</span>
+            to <span style="border: 1px solid;padding: 0 20px">@ui.IncomeYearTo</span>
+        </td>
+    </tr>
+
+    <tr>
+        <td>13</td>
+        <td colspan="3">If employed, employer’s name: @ui.EmployerName</td>
+    </tr>
+
+    <tr>
+        <td>14</td>
+        <td>Spouse Name: @ui.SpouseName</td>
+        <td>15</td>
+        <td>Spouse TIN (if any): @ui.SpouseTIN</td>
+    </tr>
+    <tr>
+        <td>16</td>
+        <td>Father’s Name: @ui.FatherName</td>
+        <td>17</td>
+        <td>Mother’s Name: @ui.MotherName</td>
+    </tr>
+    <tr>
+        <td>18</td>
+        <td>Present Address: @ui.PresentAddress</td>
+        <td>19</td>
+        <td>Permanent Address: @ui.PermanentAddress</td>
+    </tr>
+    <tr>
+        <td>20</td>
+        <td>Contact Telephone: @ui.ContactTelephone</td>
+        <td>21</td>
+        <td>E-mail: @ui.Email</td>
+    </tr>
+
+    <tr>
+        <td>22</td>
+        <td>National Identification Number: <br /> @ui.NID</td>
+        <td>23</td>
+        <td>Business Identification Number(s): @ui.BIN</td>
+    </tr>
+</table>
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<h3 style="text-align:center;padding:0px;margin:0px;margin-top:5px">
+    Part II
+</h3>
+<p style="margin: 0;text-align: center;font-size: 1.5rem; margin: 0px">
+    TIN: <span style="letter-spacing: 10px">@ui.NewTIN</span>
+</p>
+<h3 style="text-align:center;padding:0px;margin:0px;margin-bottom:px">
+    Particulars of Income and Tax
+</h3>
+
+<table class="page2Table">
+    <tr>
+        <th colspan="3" style="text-align: left;border: none">Particulars of Total Income</th>
+        <th style="border: none">Amount</th>
+    </tr>
+    <tr>
+        <td>24</td>
+        <td>Salaries (annex Schedule 24A)</td>
+        <td>S.21</td>
+        <td style="text-align: center;">@String.Format("{0:n0}", Convert.ToInt64(poifs.Total)) </td>
+    </tr>
+    <tr>
+        <td>25</td>
+        <td>Interest on securities</td>
+        <td>S.22</td>
+        <td style="text-align: center;">@String.Format("{0:n0}", Convert.ToInt64(Model.InterestOnSecurities))</td>
+    </tr>
+    <tr>
+        <td>26</td>
+        <td>Income from house property (annex Schedule 24B)</td>
+        <td>S.24</td>
+        <td style="text-align: center;">@String.Format("{0:n0}", Convert.ToInt64(Model.IncomeFromHouseProperty))</td>
+    </tr>
+    <tr>
+        <td>27</td>
+        <td>Agricultural income</td>
+        <td>S.26</td>
+        <td style="text-align: center;">@String.Format("{0:n0}", Convert.ToInt64(Model.AgriculturalIncome))</td>
+    </tr>
+    <tr>
+        <td>28</td>
+        <td>Income from business or profession (annex Schedule 24C)</td>
+        <td>S.28</td>
+        <td style="text-align: center;">@String.Format("{0:n0}", Convert.ToInt64(Model.IncomeFromBusinessOrProfession))</td>
+    </tr>
+    <tr>
+        <td>29</td>
+        <td>Capital gains</td>
+        <td>S.31</td>
+        <td style="text-align: center;">@String.Format("{0:n0}", Convert.ToInt64(Model.CapitalGains))</td>
+    </tr>
+    <tr>
+        <td>30</td>
+        <td>Income from other sources</td>
+        <td>S.33</td>
+        <td style="text-align: center;">@String.Format("{0:n0}", Convert.ToInt64(Model.IncomeFromOtherSources))</td>
+    </tr>
+
+    <tr>
+        <td>31</td>
+        <td>Share of income from firm or AOP</td>
+        <td colspan="2" style="text-align: right; padding-right: 17px">
+        @String.Format("{0:n0}", Convert.ToInt64(Model.ShareOfIncomeFromFirmOrAOP))</td>
+    </tr>
+    <tr>
+        <td>32</td>
+        <td>Income of minor or spouse under section 43(4)</td>
+        <td>S.43</td>
+        <td style="text-align: center;">@String.Format("{0:n0}", Convert.ToInt64(Model.IncomeFromOtherSources))</td>
+    </tr>
+    <tr>
+        <td>33</td>
+        <td>Foreign income</td>
+        <td colspan="2" style="text-align: right; padding-right: 17px">@String.Format("{0:n0}", Convert.ToInt64(Model.ForeignIncome))</td>
+    </tr>
+    <tr>
+        <td>34</td>
+        <td>Total income (aggregate of 24 to 33)</td>
+        <td colspan="2" style="text-align: right; padding-right: 17px">@String.Format("{0:n0}", Convert.ToInt64(Model.TotalIncome))</td>
+    </tr>
+</table>
+
+<table class="page2Table" style="margin-top: 20px">
+    <tr>
+        <th colspan="3" style="text-align: left;border: none">Tax Computation and Payment</th>
+        <th style="border: none">Amount</th>
+    </tr>
+
+    <tr>
+        <td>35</td>
+        <td>Gross tax before tax rebate</td>
+        <td colspan="2" style="text-align: right; padding-right: 17px; width: 112px">
+        @String.Format("{0:n0}", Convert.ToInt64(Model.GrossTaxBeforeTaxRebate))</td>
+    </tr>
+    <tr>
+        <td>36</td>
+        <td>Tax rebate (annex Schedule 24D)</td>
+        <td colspan="2" style="text-align: right; padding-right: 17px">@String.Format("{0:n0}", Convert.ToInt64(Model.TaxRebate))</td>
+    </tr>
+    <tr>
+        <td>37</td>
+        <td>Net tax after tax rebate</td>
+        <td colspan="2" style="text-align: right; padding-right: 17px">@String.Format("{0:n0}", Convert.ToInt64(Model.NetTaxAfterTaxRebate))</td>
+    </tr>
+
+    <tr>
+        <td>38</td>
+        <td>Minimum tax</td>
+        <td colspan="2" style="text-align: right; padding-right: 17px">@String.Format("{0:n0}", Convert.ToInt64(Model.MinimumTax))</td>
+    </tr>
+    <tr>
+        <td>39</td>
+        <td>Net wealth surcharge</td>
+        <td colspan="2" style="text-align: right; padding-right: 17px">@String.Format("{0:n0}", Convert.ToInt64(Model.NetWealthSurcharge))</td>
+    </tr>
+    <tr>
+        <td>40</td>
+        <td>Interest or any other amount under the Ordinance (if any)</td>
+        <td colspan="2" style="text-align: right; padding-right: 17px">@String.Format("{0:n0}", Convert.ToInt64(Model.InterestOrOrdinance))</td>
+    </tr>
+    <tr>
+        <td>41</td>
+        <td>Total amount payable</td>
+        <td colspan="2" style="text-align: right; padding-right: 17px">@String.Format("{0:n0}", Convert.ToInt64(Model.TotalAmountPayable))</td>
+    </tr>
+    <tr>
+        <td>42</td>
+        <td>Tax deducted or collected at source (attach proof)</td>
+        <td colspan="2" style="text-align: right; padding-right: 17px">@String.Format("{0:n0}", Convert.ToInt64(Model.TaxDeducted))</td>
+    </tr>
+    <tr>
+        <td>43</td>
+        <td>Advance tax paid (attach proof)</td>
+        <td colspan="2" style="text-align: right; padding-right: 17px">@String.Format("{0:n0}", Convert.ToInt64(Model.AdvanceTaxPaid))</td>
+    </tr>
+    <tr>
+        <td>44</td>
+        <td>Adjustment of tax refund [mention assessment year(s) of refund]</td>
+        <td colspan="2" style="text-align: right; padding-right: 17px">@String.Format("{0:n0}", Convert.ToInt64(Model.AdjustmentOfTaxRefund))</td>
+    </tr>
+    <tr>
+        <td>45</td>
+        <td>Amount paid with return (attach proof)</td>
+        <td colspan="2" style="text-align: right; padding-right: 17px">@String.Format("{0:n0}", Convert.ToInt64(Model.AmountPaidWithReturn))</td>
+    </tr>
+    <tr>
+        <td>46</td>
+        <td>Total amount paid and adjusted (42+43+44+45)</td>
+        <td colspan="2" style="text-align: right; padding-right: 17px">@String.Format("{0:n0}", Convert.ToInt64(Model.TotalAmountPaidAndAdjusted))</td>
+    </tr>
+
+    <tr>
+        <td>47</td>
+        <td>Deficit or excess (refundable) (41-46)</td>
+        <td colspan="2" style="text-align: right; padding-right: 17px">@String.Format("{0:n0}", Convert.ToInt64(Model.DeficitOrExcess))</td>
+    </tr>
+    <tr>
+        <td>48</td>
+        <td>Tax exempted income</td>
+        <td colspan="2" style="text-align: right; padding-right: 17px">@String.Format("{0:n0}", Convert.ToInt64(Model.TaxExemptedIncome))</td>
+    </tr>
+</table>
+<br />
+
+
+<h3 style="text-align:center;padding:0px;margin:0px;margin-top:5px">
+    Part III
+</h3>
+<p style="margin: 0;text-align: center;font-size: 1.5rem; margin: 30px">
+    TIN: <span style="letter-spacing: 10px">@ui.NewTIN</span>
+</p>
+<h3 style="text-align:center;padding:0px;margin:0px;margin-bottom:5px">
+    Instruction, Enclosures and Verification
+</h3>
+
+<table class="page3Table" style="margin-top: 60px; margin-bottom: 80px;">
+    <tr style="padding: 20px">
+        <td>49</td>
+        <td colspan="5">
+            <b>Instructions:</b> <br>
+
+            1. Statement of assets, liabilities and expenses (IT-10B2016) and statement of life style expense
+            (IT-10BB2016) must be furnished with the return unless you are exempted from furnishing such statement(s)
+            under section 80. <br>
+
+            2. Proof of payments of tax, including advance tax and withholding tax and the proof of investment for tax
+            rebate must be provided along with return. <br>
+
+            3. Attach account statements and other documents where applicable.
+        </td>
+    </tr>
+
+    <tr>
+        <td>50</td>
+        <td colspan="3">
+            If you are a parent of a person with disability, has your spouse availed the extended tax exemption
+            threshold? (tick
+            one)
+        </td>
+        <td colspan="2" style="padding: 0 !important; width: 300px">
+            @if (Model.IsParentOfPersonWithDisability == "yes")
+            {
+                <div style="width: 49%; border-right: 1px solid; float: left">
+                    Yes <input type="checkbox" value="yes" checked />
+                </div>
+
+                <div style="width: 49%; float: left">
+                    No <input type="checkbox" value="no" />
+                </div>
+            }
+
+            @if (Model.IsParentOfPersonWithDisability == "no")
+            {
+                <div style="width: 49%; border-right: 1px solid; float: left">
+                    Yes <input type="checkbox" value="yes" />
+                </div>
+
+                <div style="width: 49%; float: left">
+                    No <input type="checkbox" value="no" checked />
+                </div>
+            }
+        </td>
+    </tr>
+
+    <tr style="width: 100%">
+        <td>51</td>
+        <td colspan="3">
+            Are you required to submit a statement of assets, liabilities and expenses (IT-10B2016) under section 80(1)?
+            (tick one)
+        </td>
+
+        <td colspan="2" style="padding: 0 !important; width: 300px">
+            @if (Model.AreYouRequiredToSubmitStatementOfAssets == "yes")
+            {
+                <div style="width: 49%; border-right: 1px solid; float: left">
+                    Yes <input type="checkbox" value="yes" checked />
+                </div>
+
+                <div style="width: 49%; float: left">
+                    No <input type="checkbox" value="no" />
+                </div>
+            }
+
+            @if (Model.AreYouRequiredToSubmitStatementOfAssets == "no")
+            {
+                <div style="width: 49%; border-right: 1px solid; float: left">
+                    Yes <input type="checkbox" value="yes" />
+                </div>
+
+                <div style="width: 49%; float: left">
+                    No <input type="checkbox" value="no" checked />
+                </div>
+            }
+        </td>
+    </tr>
+
+    <tr style="width: 100%">
+        <td style="width: 5%">52</td>
+        <td style="width: 44%">Schedules annexed (tick all that are applicable)</td>
+        <td style="width: 12.5%">
+            @if (a.Length > 0)
+            {
+                <span>24A <input type="checkbox" checked /></span>
+            }
+            else
+            {
+                <span>24A <input type="checkbox" /></span>
+            }
+        </td>
+        <td style="width: 12.5%">
+            @if (b.Length > 0)
+            {
+                <span>24B <input type="checkbox" checked /></span>
+            }
+            else
+            {
+                <span>24B <input type="checkbox" /></span>
+            }
+        </td>
+        <td style="width: 12.5%">
+            @if (c.Length > 0)
+            {
+                <span>24C <input type="checkbox" checked /></span>
+            }
+            else
+            {
+                <span>24C <input type="checkbox" /></span>
+            }
+        </td>
+        <td style="width: 12.5%;">
+            @if (d.Length > 0)
+            {
+                <span>24D <input type="checkbox" checked /></span>
+            }
+            else
+            {
+                <span>24D <input type="checkbox" /></span>
+            }
+        </td>
+    </tr>
+
+    <tr>
+        <td>53</td>
+        <td colspan="1">Statements annexed (tick all that are applicable)</td>
+        <td colspan="2">
+            @if (it1.Length > 0)
+            {
+                <span>IT-10B2016 <input type="checkbox" checked /></span>
+            }
+            else
+            {
+                <span>IT-10B2016 <input type="checkbox" /></span>
+            }
+        </td>
+        <td colspan="2" style="text-align: center;">
+            @if (it2.Length > 0)
+            {
+                <span>IT-10BB2016 <input type="checkbox" checked /></span>
+            }
+            else
+            {
+                <span>IT-10BB2016 <input type="checkbox" /></span>
+            }
+        </td>
+    </tr>
+
+    <tr>
+        <td rowspan="5">54</td>
+        <td colspan="5">Other statements, documents, etc. attached (list all)</td>
+    </tr>
+    <tr>
+        <td colspan="6" style="text-align: left">@Model.OtherStatementsDocuments</td>
+    </tr>
+</table>
+
+<table class="page3Table" style="margin-top: 40px; margin-bottom: 50px">
+    <tr>
+        <td colspan="3"><b>Verification and signature</b></td>
+    </tr>
+    <tr>
+        <td>55</td>
+        <td colspan="">
+            <p style="padding-top: 20px">
+                I solemnly declare that to the best of my knowledge and belief the information given in this return and
+                statements and documents annexed or attached herewith are correct and complete.
+            </p>
+
+            <table style="margin-top: 20px; margin-bottom: 30px">
+                <tr>
+                    <td style="text-align: left;">Name: @ui.NameOfAssessee</td>
+                    <td>
+                        Signature <br />
+                        @if (Model.Signature != "NOIMAGE_PATH")
+                        {
+                            <img src="@Model.Signature.Replace("~","")"
+                                 style="width: 100px; height: 80px; margin-top: 10px" />
+                        }
+                        else
+                        {
+                            <b><mark>Signature not provided.</mark></b>
+                        }
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="text-align: left;">Date of Signature (DD-MM-YYYY): @Model.DateOfSignature</td>
+                    <td>Place of Signature: @Model.PlaceOfSignatur</td>
+                </tr>
+            </table>
+        </td>
+
+    </tr>
+</table>
+
+<table class="page3Table" style="margin-top: 80px; margin-bottom: 150px">
+    <tr>
+        <td colspan="2"><b>For official use only</b><br> Return Submission Information</td>
+    </tr>
+    <tr>
+        <td style="text-align: left">Date of Submission (DD-MM-YYYY): @Model.DateOfSubmition</td>
+        <td>Tax Office Entry Number: @Model.TaxOfficeEntryNumber</td>
+    </tr>
+</table>
+
+<div style="margin-top: 30px;">
+    <p>
+        National Board of Revenue
+        <br> www.nbr.gov.bd
+
+        <b style="float: right;">Individual</b>
+    </p>
+</div>
+
+<h3 style="margin: 0;text-align: center; margin-top: 100px; margin-bottom: 50px">
+    ACKNOWLEDGEMENT RECEIPT OF
+    <br />
+    RETURN OF INCOME
+</h3>
+
+<table style="margin-top: 40px;">
+    <tr style="width: 100%; padding: 0">
+        <td style="width: 49%; border-right: 1px solid; text-align: left;">Assessment Year <br>@ui.AssessmentYear</td>
+        <td style="padding: 0; margin-bottom: 0; width: 50%; float: right;">
+
+            <div style="border-bottom: 1px solid black;margin: 0">
+                Return submitted under section 82BB? (tick one) @ui.ReturnSubmitted
+            </div>
+            @if (ui.ReturnSubmitted == "Yes")
+            {
+
+                <div style="margin: 0; width: 100%">
+                    <span style="width: 49%; float: left;border-right: 1px solid">
+                        @ui.ReturnSubmitted <input type="checkbox" id="scales" name="scales" checked>
+                    </span>
+                    <span style="width: 50%; float: right;">
+                        No <input type="checkbox" id="scales" name="scales">
+                    </span>
+                </div>
+            }
+            @if (ui.ReturnSubmitted == "No")
+            {
+                <div style="margin: 0; width: 100%">
+                    <span style="width: 49%; float: left;border-right: 1px solid">
+                        Yes <input type="checkbox" id="scales" name="scales">
+                    </span>
+                    <span style="width: 50%; float: right;">
+                        @ui.ReturnSubmitted <input type="checkbox" id="scales" name="scales" checked>
+                    </span>
+                </div>
+            }
+
+        </td>
+    </tr>
+    <tr>
+        <td style="text-align: left">Name of the Assessee: @ui.NameOfAssessee</td>
+        <td>Gender (tick one): @ui.Gender</td>
+    </tr>
+
+    <tr>
+        <td style="text-align: left">Twelve-digit TIN: @ui.NewTIN</td>
+        <td>Old TIN: @ui.OldTIN</td>
+    </tr>
+    <tr>
+        <td style="text-align: left">Circle: @ui.Circle</td>
+        <td>Zone: @ui.Zone</td>
+    </tr>
+    <tr>
+        <td colspan="2" style="text-align: left">
+            Total income shown (serial 34)
+            <br />
+            @String.Format("{0:n0}", Convert.ToInt64(Model.Salaries))
+        </td>
+    </tr>
+    <tr>
+        <td style="text-align: left">Amount payable (serial 41) <br>@String.Format("{0:n0}", Convert.ToInt64(Model.TotalAmountPayable))</td>
+        <td>Amount paid and adjusted (serial 46) <br>@String.Format("{0:n0}", Convert.ToInt64(Model.TotalAmountPaidAndAdjusted))</td>
+    </tr>
+    <tr>
+        <td style="text-align: left">Amount of net wealth shown in IT10B2016 <br>@String.Format("{0:n0}", Convert.ToInt64(soa.NetWealth16))</td>
+        <td>Amount of net wealth surcharge paid <br>@String.Format("{0:n0}", Convert.ToInt64(Model.NetWealthSurcharge))</td>
+    </tr>
+    <tr>
+        <td style="text-align: left">Date of Submission (DD-MM-YYYY) <br>@String.Format("{0:dd/MM/yyyy}", Model.DateOfSubmition) </td>
+        <td>Tax Office Entry Number <br>@Model.TaxOfficeEntryNumber</td>
+    </tr>
+    <tr>
+        <td colspan="2" style="text-align: left">
+            Signature and seal of the official receiving the return
+        </td>
+    </tr>
+    <tr>
+        <td style="text-align: left">Date of Signature : <br>@Model.DateOfSignature</td>
+        <td>Contact Number of Tax Office <br></td>
+    </tr>
+</table>

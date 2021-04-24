@@ -1,0 +1,611 @@
+﻿@model Taxations.Models.UserInformation
+@using Taxations.Models
+@{
+    ViewBag.Title = "User Information";
+    Layout = "~/views/shared/mainlayout.cshtml";
+    UserInformation ui = new UserInformation();
+    if (ViewBag.UserInformations != null)
+    {
+        ui = ViewBag.UserInformations;
+    }
+
+    User user = new User();
+    if (ViewBag.User != null)
+    {
+        user = ViewBag.User;
+    }
+
+
+    string[] tickedOnBoxes = new string[] { };
+    if (ui.TickOnBoxes != null)
+    {
+        tickedOnBoxes = ui.TickOnBoxes.Trim().Split(',');
+    }
+    string a = "";
+    string b = "";
+    string c = "";
+    string d = "";
+    string res = "";
+
+    foreach (string item in tickedOnBoxes)
+    {
+        res = item;
+        res = res.Replace(",", "");
+        if (res == "A gazetted war-wounded freedom fighter")
+        {
+            a = res;
+        }
+        if (res == "A person with disability")
+        {
+            b = res;
+        }
+        if (res == "Aged 65 years or more")
+        {
+            c = res;
+        }
+        if (res == "A parent/legal guardian of a personwith disability")
+        {
+            d = res;
+        }
+    }
+
+    bool isSignatureUploaded = false;
+    if (!string.IsNullOrEmpty(ui.Signature))
+    {
+        isSignatureUploaded = true;
+    }
+}
+
+<style>
+    input[type="submit"]:disabled {
+        cursor: not-allowed;
+    }
+
+    input[type="submit"]:enabled {
+        cursor: pointer;
+    }
+
+    #calcBtn {
+        display: none;
+    }
+</style>
+
+<div id="" class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 p-0" style="background: white;margin-top: 30px;">
+        <div class="alert alert-success" style="border-radius: 0">
+            <h3 class="mb-2">User Informations</h3>
+            <p class="lead mt-1">Please provide your infomations.</p>
+        </div>
+
+        @using (Html.BeginForm("create", "userInformation", FormMethod.Post,
+                    new { enctype = "multipart/form-data" }))
+        {
+            if (ViewBag.SuccessMessage != null)
+            {
+                <div class="row mt-minus p-2 bg-transparent shadow m-4 mb-0 mt-3 mb-3 border border-bottom-0" id="submittingStatus">
+                    <div class="col-md-10">
+                        <p class="p-0 m-0 p-3 font-weight-bolder text-success"><b>@ViewBag.SuccessMessage</b></p>
+                    </div>
+                    <div class="col-md-2 border">
+                        <h3 id="cancelSubmittingStatus"
+                            class="m-0 text-center text-danger">
+                            <b style="font-size: 30px; font-weight: 900; cursor: pointer; padding-top: 15px; display: block">&times;</b>
+                        </h3>
+                    </div>
+                </div>
+            }
+
+
+            <div class="form-horizontal">
+                <h4>User Information</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <input type="hidden" name="UserId" value="@Session["UserId"]" />
+                <input type="hidden" name="EmployeementStatus" value="@Session["UserType"]" />
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Assessment Year</label>
+                            <div>
+                                <input type="date" class="form-control" name="AssessmentYear" value="@ui.AssessmentYear" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Name Of Assessee</label>
+                            <div>
+                                @Html.EditorFor(model => model.NameOfAssessee, new
+                                {
+                                    htmlAttributes =
+                                    new { @class = "form-control", @Value = ui.NameOfAssessee }
+                                })
+                                @Html.ValidationMessageFor(model => model.NameOfAssessee, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <input type="hidden" name="EmployeementStatus" value="@Session["UserType"]" />
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>New TIN</label>
+                            <div>
+                                @Html.EditorFor(model => model.NewTIN,
+                                            new
+                                                 {
+                                                     htmlAttributes =
+                                                    new { @class = "form-control", @Value = ui.NewTIN, @Type = "number" }
+                                                 })
+                                @Html.ValidationMessageFor(model => model.NewTIN, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Gender</label>
+                            <div>
+
+                                @if (user.Gender == "male")
+                                {
+                                    <div>
+                                        <input type="radio" name="Gender" value="male" checked />Male
+
+                                        <input type="radio" name="Gender" value="female" />Female
+                                    </div>
+                                }
+
+
+                                @if (user.Gender == "female")
+                                {
+                                    <div>
+                                        <input type="radio" name="Gender" value="male" />Male
+                                        <input type="radio" name="Gender" value="female" checked />Female
+                                    </div>
+                                }
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>Old TIN</label>
+                            <div>
+                                @Html.EditorFor(model => model.OldTIN,
+                                    new { htmlAttributes = new { @class = "form-control", @Value = ui.OldTIN, @Type = "number" } })
+                                @Html.ValidationMessageFor(model => model.OldTIN, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label>Circle</label>
+                            <div>
+                                @Html.EditorFor(model => model.Circle,
+                                    new { htmlAttributes = new { @type = "number", @class = "form-control", @Value = ui.Circle } })
+                                @Html.ValidationMessageFor(model => model.Circle, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label>Zone</label>
+                            <div>
+                                @Html.EditorFor(model => model.Zone,
+                                    new { htmlAttributes = new { @type = "number", @class = "form-control", @Value = ui.Zone } })
+                                @Html.ValidationMessageFor(model => model.Zone, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Tick On Boxes</label>
+                            <div id="TickOnBoxesDivId">
+                                <p>
+                                    @if (a.Length > 0)
+                                    {
+                                        <input type="checkbox" value="A gazetted war-wounded freedom fighter" checked />
+                                    }
+                                    else
+                                    {
+                                        <input type="checkbox" value="A gazetted war-wounded freedom fighter" />
+                                    }
+                                    <span>A gazetted war-wounded freedom fighter</span>
+                                </p>
+                                <p>
+                                    @if (b.Length > 0)
+                                    {
+                                        <input type="checkbox" value="A person with disability" checked />
+                                    }
+                                    else
+                                    {
+                                        <input type="checkbox" value="A person with disability" />
+                                    }
+                                    <span>A person with disability</span>
+                                </p>
+                                <p>
+                                    @if (c.Length > 0)
+                                    {
+                                        <input type="checkbox" value="Aged 65 years or more" checked />
+                                    }
+                                    else
+                                    {
+                                        <input type="checkbox" value="Aged 65 years or more" />
+                                    }
+                                    <span>Aged 65 years or more</span>
+                                </p>
+                                <p>
+                                    @if (d.Length > 0)
+                                    {
+                                        <input type="checkbox" value="A parent/legal guardian of a personwith disability" checked />
+                                    }
+                                    else
+                                    {
+                                        <input type="checkbox" value="A parent/legal guardian of a personwith disability" />
+                                    }
+                                    <span>
+                                        A parent/legal guardian of a person
+                                        with disability
+                                    </span>
+                                </p>
+                                <input type="hidden" name="TickOnBoxes" id="TickOnBoxesDivResult" value="@ui.TickOnBoxes" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Date Of Birth</label>
+                            <div>
+                                <input type="date" name="DateOfBirth" id="DateOfBirth" class="form-control" value="@ui.DateOfBirth" />
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Income Year From</label>
+                            <div>
+                                <input value="@ui.IncomeYearFrom" class="form-control text-box single-line input-validation-error" data-val="true" data-val-maxlength="Income year from must be 4 digits long" data-val-maxlength-max="4" data-val-minlength="Income year from must be 4 digits long" data-val-minlength-min="4" data-val-required="The Income Year From field is required." id="IncomeYearFrom" name="IncomeYearFrom" type="number" aria-describedby="IncomeYearFrom-error" aria-invalid="true" />
+
+
+                                @*@Html.EditorFor(model => model.IncomeYearFrom,
+                                new { htmlAttributes = new { @class = "form-control", @Value = ui.IncomeYearFrom } })*@
+                                @Html.ValidationMessageFor(model => model.IncomeYearFrom, "",
+                                new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Income Year To</label>
+                            <div>
+                                <input value="@ui.IncomeYearTo" class="form-control text-box single-line input-validation-error" data-val="true" data-val-maxlength="Income year to must be 4 digits long" data-val-maxlength-max="4" data-val-minlength="Income year to must be 4 digits long" data-val-minlength-min="4" data-val-required="The Income Year To field is required." id="IncomeYearTo" name="IncomeYearTo" type="number" aria-describedby="IncomeYearTo-error" aria-invalid="true" />
+                                @Html.ValidationMessageFor(model => model.IncomeYearTo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Employer Name</label>
+                            <div>
+                                @Html.EditorFor(model => model.EmployerName,
+                                    new { htmlAttributes = new { @class = "form-control", @Value = ui.EmployerName } })
+                                @Html.ValidationMessageFor(model => model.EmployerName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Spouse Name</label>
+                            <div>
+                                @Html.EditorFor(model => model.SpouseName,
+                                    new { htmlAttributes = new { @class = "form-control", @Value = ui.SpouseName } })
+                                @Html.ValidationMessageFor(model => model.SpouseName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>Spouse TIN</label>
+                            <div>
+                                @Html.EditorFor(model => model.SpouseTIN,
+                                    new { htmlAttributes = new { @class = "form-control", @Value = ui.SpouseTIN, type = "number" } })
+                                @Html.ValidationMessageFor(model => model.SpouseTIN, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Father Name</label>
+                            <div>
+                                @Html.EditorFor(model => model.FatherName,
+                               new { htmlAttributes = new { @class = "form-control", @Value = ui.FatherName } })
+                                @Html.ValidationMessageFor(model => model.FatherName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Mother Name</label>
+                            <div>
+                                @Html.EditorFor(model => model.MotherName,
+                                    new { htmlAttributes = new { @class = "form-control", @Value = ui.MotherName } })
+                                @Html.ValidationMessageFor(model => model.MotherName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Present Address</label>
+                            <div>
+                                @Html.EditorFor(model => model.PresentAddress,
+                                    new { htmlAttributes = new { @class = "form-control", @Value = ui.PresentAddress } })
+                                @Html.ValidationMessageFor(model => model.PresentAddress, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Permanent Address</label>
+                            <div>
+                                @Html.EditorFor(model => model.PermanentAddress,
+                                    new { htmlAttributes = new { @class = "form-control", @Value = ui.PermanentAddress } })
+                                @Html.ValidationMessageFor(model => model.PermanentAddress, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Contact Telephone</label>
+                            <div>
+                                @Html.EditorFor(model => model.ContactTelephone,
+                                    new { htmlAttributes = new { @class = "form-control", @Value = ui.ContactTelephone } })
+                                @Html.ValidationMessageFor(model => model.ContactTelephone, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Email</label>
+                            <div>
+                                @Html.EditorFor(model => model.Email,
+                                    new { htmlAttributes = new { @class = "form-control", @Value = user.Email, @readonly = true } })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>NID</label>
+                            <div>
+                                @Html.EditorFor(model => model.NID,
+                                    new { htmlAttributes = new { @class = "form-control", @Value = ui.NID } })
+                                <span id="nidError"></span>
+                                @Html.ValidationMessageFor(model => model.NID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label>BIN</label>
+                            <div>
+                                @Html.EditorFor(model => model.BIN,
+                                    new { htmlAttributes = new { @class = "form-control", @Value = ui.BIN } })
+                                @Html.ValidationMessageFor(model => model.BIN, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="form-group border-bottom pb-2">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Return submitted under section 82BB? (tick one)</label>
+                            <div>
+                                @if (ui.ReturnSubmitted == null || ui.ReturnSubmitted == "")
+                                {
+                                    <input type="radio" name="ReturnSubmitted" value="Yes" /><span>Yes</span>
+                                    <input type="radio" name="ReturnSubmitted" value="No" /> <span>No</span>
+                                }
+                                @if (ui.ReturnSubmitted == "Yes")
+                                {
+                                    <input type="radio" name="ReturnSubmitted" value="Yes" checked /><span>Yes</span>
+                                    <input type="radio" name="ReturnSubmitted" value="No" /> <span>No</span>
+                                }
+                                else if (ui.ReturnSubmitted == "No")
+                                {
+                                    <input type="radio" name="ReturnSubmitted" value="Yes" /><span>Yes</span>
+                                    <input type="radio" name="ReturnSubmitted" value="No" checked /> <span>No</span>
+                                }
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Resident Status</label>
+                            <div>
+
+                                @if (ui.ResidentStatus == null || ui.ResidentStatus == "")
+                                {
+                                    <input type="radio" name="ResidentStatus" value="Yes" /><span>Yes</span>
+                                    <input type="radio" name="ResidentStatus" value="No" /> <span>No</span>
+                                }
+                                @if (ui.ResidentStatus == "Yes")
+                                {
+                                    <input type="radio" name="ResidentStatus" value="Yes" checked /><span>Yes</span>
+                                    <input type="radio" name="ResidentStatus" value="No" /> <span>No</span>
+                                }
+                                else if (ui.ResidentStatus == "No")
+                                {
+                                    <input type="radio" name="ResidentStatus" value="Yes" /><span>Yes</span>
+                                    <input type="radio" name="ResidentStatus" value="No" checked /> <span>No</span>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group border-bottom pb-2">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label><b>Signature</b></label>
+                            <div class="custom-file">
+                                <input type="hidden" name="Signature" value="replace" />
+                                @if (!isSignatureUploaded)
+                                {
+                                    <input type="file"
+                                           name="signatureFile"
+                                           class="custom-file-input"
+                                           id="customFile"
+                                           value="@ui.Signature"
+                                           required>
+                                }
+
+                                @if (isSignatureUploaded)
+                                {
+                                    <input type="file"
+                                           name="signatureFile"
+                                           class="custom-file-input"
+                                           id="customFile"
+                                           value="@ui.Signature">
+                                }
+
+                                <label class="custom-file-label" for="customFile">Choose file</label>
+                            </div>
+                        </div>
+                    </div>
+                    @if (isSignatureUploaded)
+                    {
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div>
+                                    <b>Previous Signature</b>
+                                </div>
+                                <img src="@Url.Content(ui.Signature)"
+                                     style="width: 100px; height: 100px; object-fit: cover" />
+                            </div>
+                        </div>
+                    }
+
+                </div>
+
+
+                <div class="form-group border-bottom pb-2 d-none">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Are you pay for house rent provided by office?</label>
+                            <div>
+                                @if (ui.HouseRentByOffice == null || ui.HouseRentByOffice == "")
+                                {
+                                    <input type="radio" name="HouseRentByOffice" value="Yes" /> <span>Yes</span>
+                                    <input type="radio" name="HouseRentByOffice" value="No" /> <span>No</span>
+                                }
+                                @if (ui.HouseRentByOffice == "Yes")
+                                {
+                                    <input type="radio" name="HouseRentByOffice" value="Yes" checked /> <span>Yes</span>
+                                    <input type="radio" name="HouseRentByOffice" value="No" /> <span>No</span>
+                                }
+                                else if (ui.HouseRentByOffice == "No")
+                                {
+                                    <input type="radio" name="HouseRentByOffice" value="Yes" /> <span>Yes</span>
+                                    <input type="radio" name="HouseRentByOffice" value="No" checked /> <span>No</span>
+                                }
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Are you using any vehicles provided by office?</label>
+                            <div>
+                                @if (ui.VehiclesByOffice == null || ui.VehiclesByOffice == "")
+                                {
+                                    <input type="radio" name="VehiclesByOffice" value="Yes" /> <span>Yes</span>
+                                    <input type="radio" name="VehiclesByOffice" value="No" /> <span>No</span>
+                                }
+                                @if (ui.VehiclesByOffice == "Yes")
+                                {
+                                    <input type="radio" name="VehiclesByOffice" value="Yes" checked /> <span>Yes</span>
+                                    <input type="radio" name="VehiclesByOffice" value="No" /> <span>No</span>
+                                }
+                                else if (ui.VehiclesByOffice == "No")
+                                {
+                                    <input type="radio" name="VehiclesByOffice" value="Yes" /> <span>Yes</span>
+                                    <input type="radio" name="VehiclesByOffice" value="No" checked /> <span>No</span>
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input id="submit"
+                                   type="submit"
+                                   value="Save"
+                                   class="btn btn-outline-success btn-md float-right mr-4 mt-3" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        @*<form action="/userInformation/create" enctype="multipart/form-data" method="post">
+
+        </form>*@
+    </div>
+    <div class="col-md-3"></div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="@Url.Content("~/Scripts/AgeCalculation.js")"></script>
+}
+
+<script>
+    const tickOnBoxesDivId = $('#TickOnBoxesDivId input[type="checkbox"]');
+    const tickOnBoxesDivResult = $('#TickOnBoxesDivResult');
+    let res = [];
+
+    tickOnBoxesDivId.each((i, el) => {
+        res = tickOnBoxesDivResult.val().split(',');
+        console.log(res);
+        $(el).change(() => {
+            let b = $(el).is(':checked');
+            if (b) {
+                let val = $(el).val();
+                res.push(val);
+            }
+
+            if (!b) {
+                let val = $(el).val();
+                let e = res.filter(x => x == val);
+                if (e) {
+                    let i = res.map(x => x == val).indexOf(val == val);
+                    if (i != -1)
+                        res.splice(i, 1);
+                }
+            }
+            let resVal = '';
+            for (var i = 0; i < res.length; i++) {
+                resVal += res[i] + ',';
+            }
+            tickOnBoxesDivResult.val(resVal);
+        });
+    });
+</script>

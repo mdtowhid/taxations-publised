@@ -1,0 +1,105 @@
+﻿* {
+    font-family: 'Nanum Gothic Coding';
+}
+
+.render-body {
+    margin: 0 auto;
+    float: none !important;
+    border-radius: 10px;
+    overflow: hidden;
+    font-size: 1.09em;
+}
+
+#dataWrapperStatementOfAssetId .data-wrapper .left {
+    width: 70%;
+}
+
+
+#dataWrapperStatementOfAssetId .data-wrapper .right {
+    width: 30%;
+}
+
+    #dataWrapperStatementOfAssetId .data-wrapper .right input {
+        width: 95%;
+        margin: 5px auto;
+    }
+
+#dataWrapperStatementOfAssetId .data-wrapper .left .form-data {
+    padding: 0 !important;
+}
+
+    #dataWrapperStatementOfAssetId .data-wrapper .left .form-data .data-indicators {
+        height: 50px;
+    }
+
+
+
+
+#dataWrapperStatementOfAssetId .data-wrapper .root-header {
+    width: 101.2%;
+    position: relative;
+    height: 50px;
+}
+
+    #dataWrapperStatementOfAssetId .data-wrapper .root-header .data-indicators {
+        height: 150px;
+    }
+
+    #dataWrapperStatementOfAssetId .data-wrapper .root-header .left {
+        width: 63%;
+        height: 50px;
+        border-bottom: 1px solid #ccc;
+    }
+
+    #dataWrapperStatementOfAssetId .data-wrapper .root-header .right {
+        width: 29.98%;
+        height: 50px;
+    }
+
+        #dataWrapperStatementOfAssetId .data-wrapper .root-header .right input {
+            width: 90%;
+            margin: 3px auto;
+        }
+#dataWrapperStatementOfAssetId .data-wrapper .sub-root-header {
+    width: calc(100% - 50px);
+    float: right;
+}
+
+    #dataWrapperStatementOfAssetId .data-wrapper .sub-root-header .left {
+        width: 61.4%;
+        border-bottom: 1px solid #ccc;
+    }
+
+    #dataWrapperStatementOfAssetId .data-wrapper .sub-root-header .right {
+        width: 31.5%;
+        height: 50px;
+        border-bottom: 1px solid #ccc;
+    }
+
+        #dataWrapperStatementOfAssetId .data-wrapper .sub-root-header .right input {
+            width: 90%;
+            margin: 3.3px auto;
+            margin-top: 5px;
+        }
+
+    #dataWrapperStatementOfAssetId .data-wrapper .sub-root-header .data-indicators {
+        height: 50px;
+    }
+.root-header-heading, .sub-root-header-heading {
+    padding: 10px;
+    display: inline-block;
+    height: 49px !important;
+}
+
+.form-slides-third {
+    padding: 20px;
+    border: 1px solid #fbfbfb;
+}
+
+.indicator-height63px{
+    height: 63px !important;
+}
+
+.indicator-height62px {
+    height: 62px !important;
+}

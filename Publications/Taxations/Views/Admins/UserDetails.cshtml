@@ -1,0 +1,120 @@
+﻿@model Taxations.Models.User
+
+@{
+    ViewBag.Title = "UserDetails";
+    Layout = "~/Views/Containers/Admin.cshtml";
+}
+
+
+<div id="adminUserDetails">
+    <h2>@Model.FirstName @Model.LastName's Details</h2>
+    <hr />
+
+    <div class="adminUserDetailsDt"></div>
+    <dl class="dl-horizontal" id="">
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsEmailConfirmed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsEmailConfirmed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Active)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Active)
+        </dd>
+
+        <dt style="line-height: 70px">Image</dt>
+
+        <dd>
+            <img src="@Model.PhotoPath.Replace("~", "")">
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmploymentStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmploymentStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Gender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Gender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsAutistc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsAutistc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Bio)
+        </dt>
+
+        <dd>
+            @if (Model.Bio != null)
+            {
+                <span>@Html.DisplayFor(model => model.Bio)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WhoYouAre)
+        </dt>
+
+        <dd>
+
+            @if (Model.WhoYouAre != null)
+            {
+                <span>@Html.DisplayFor(model => model.WhoYouAre)</span>
+            }
+            else
+            {
+                <span class="text-danger">Not provided.</span>
+            }
+        </dd>
+
+    </dl>
+    <p>
+        <a href="/admins/GetAllUsers" class="border btn btn-lg btn-secondary bg-dark text-white mt-2">Back to List</a>
+    </p>
+</div>
+

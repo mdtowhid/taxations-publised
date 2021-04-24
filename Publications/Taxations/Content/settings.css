@@ -1,0 +1,55 @@
+﻿#colors
+{
+    display: flex;
+    width: 100%;
+    height: 100px;
+    background: #ccc;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.color {
+    width: 50px;
+    height: 50px;
+    background: black;
+    border-radius: 50%;
+    margin: 15px;
+    cursor: pointer;
+}
+
+    .color:nth-child(1) {
+        background: #242424;
+    }
+    .color:nth-child(2) {
+        background: #fff;
+    }
+
+
+    .color:nth-child(3) {
+        background: #1A73E8;
+    }
+
+
+body.black, #topMenu.black,
+#topMenu.black ul, #taxation-header.black,
+#leftFeedsMenu.black, .black a {
+    background: #242424 !important;
+    color: white;
+}
+
+#topMenu.black li a{
+    color: white;
+}
+
+
+
+body.light {
+    background: #fff !important;
+}
+
+
+body.blue {
+    background: #007ACC !important;
+}
+

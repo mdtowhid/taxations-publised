@@ -1,0 +1,402 @@
+﻿@model IEnumerable<Taxations.Models.BasicInformation>
+
+@{
+    ViewBag.Title = "Basic Informations";
+    Layout = "~/Views/Containers/Admin.cshtml";
+}
+<div id="adminUsersTableWrapper">
+    <h2>Basic Informations</h2>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AssessmentYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReturnSubmitted)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NameOfAssessee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NewTIN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OldTIN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Circle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Zone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ResidentStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TickOnBoxes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateOfBirth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.YearFrom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.YearTo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SpouseName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SpouseTIN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FatherName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MotherName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PresentAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PermanentAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContactTelephone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BIN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Salaries)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InterestOnSecurities)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IncomeFromHouseProperty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AgriculturalIncome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IncomeFromBusinessOrProfession)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CapitalGains)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IncomeFromOtherSources)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShareOfIncomeFromFirmOrAOP)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IncomeOfMinor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ForeignIncome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalIncome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GrossTaxBeforeTaxRebate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TaxRebate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NetTaxAfterTaxRebate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MinimumTax)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NetWealthSurcharge)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InterestOrOrdinance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalAmountPayable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TaxDeducted)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AdvanceTaxPaid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AdjustmentOfTaxRefund)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AmountPaidWithReturn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalAmountPaidAndAdjusted)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeficitOrExcess)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TaxExemptedIncome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsParentOfPersonWithDisability)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AreYouRequiredToSubmitStatementOfAssets)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SchedulesAnnexed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StatementsAnnexed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherStatementsDocuments)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Signature)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateOfSignature)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PlaceOfSignatur)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateOfSubmition)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TaxOfficeEntryNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AdditionalColumn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeementStatus)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AssessmentYear)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReturnSubmitted)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NameOfAssessee)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NewTIN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OldTIN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Circle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Zone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ResidentStatus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TickOnBoxes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateOfBirth)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.YearFrom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.YearTo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SpouseName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SpouseTIN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FatherName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MotherName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PresentAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PermanentAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContactTelephone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BIN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Salaries)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InterestOnSecurities)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IncomeFromHouseProperty)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AgriculturalIncome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IncomeFromBusinessOrProfession)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CapitalGains)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IncomeFromOtherSources)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShareOfIncomeFromFirmOrAOP)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IncomeOfMinor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ForeignIncome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalIncome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GrossTaxBeforeTaxRebate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TaxRebate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NetTaxAfterTaxRebate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MinimumTax)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NetWealthSurcharge)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InterestOrOrdinance)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalAmountPayable)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TaxDeducted)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AdvanceTaxPaid)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AdjustmentOfTaxRefund)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AmountPaidWithReturn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalAmountPaidAndAdjusted)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeficitOrExcess)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TaxExemptedIncome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsParentOfPersonWithDisability)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AreYouRequiredToSubmitStatementOfAssets)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SchedulesAnnexed)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StatementsAnnexed)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OtherStatementsDocuments)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Signature)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateOfSignature)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlaceOfSignatur)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateOfSubmition)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TaxOfficeEntryNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AdditionalColumn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeementStatus)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "getbasicinformations", new { id = item.Id }, new { @class = "border btn btn-lg btn-secondary bg-dark text-white" })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

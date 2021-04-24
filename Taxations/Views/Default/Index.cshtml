@@ -1,0 +1,87 @@
+﻿@using Taxations.Models
+@{
+    ViewBag.Title = "Taxations Home";
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+
+    BasicInformation bi = new BasicInformation();
+    if (ViewBag.BasicInformations != null)
+    {
+        bi = ViewBag.BasicInformations;
+    }
+
+    StatementOfAsset sa = new StatementOfAsset();
+    if (ViewBag.StatementOfAsset != null)
+    {
+        sa = ViewBag.StatementOfAsset;
+    }
+
+    ParticularsOfTaxCredit potc = new ParticularsOfTaxCredit();
+    if (ViewBag.ParticularsOfTaxCredits != null)
+    {
+        potc = ViewBag.ParticularsOfTaxCredits;
+    }
+
+    ParticularsOfIncomeFromSalary poifs = new ParticularsOfIncomeFromSalary();
+    if (ViewBag.ParticularsOfIncomeFromSalaries != null)
+    {
+        poifs = ViewBag.ParticularsOfIncomeFromSalaries;
+    }
+
+
+    StatementOfExpense soe = new StatementOfExpense();
+    if (ViewBag.StatementOfExpense != null)
+    {
+        soe = ViewBag.StatementOfExpense;
+    }
+}
+
+<style>
+    .footerClass {
+        margin-top: 70vh !important;
+    }
+
+    button {
+        display: block;
+        margin: 20px;
+        margin-left: 0;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 m-0 p-0 m-3 mt-5">
+        <h3>Taxations User Menual Diagram</h3>
+        <hr />
+        <pre class="m-0 p-0">Account Creation <b>(SignUp + Login)</b></pre>
+        <pre class="m-0 p-0">:      :</pre>
+        <pre class="m-0 p-0">:      ---Account Recovery+Password Reset</pre>
+        <pre class="m-0 p-0">:      :</pre>
+        <pre class="m-0 p-0">---User Information <b>(Creation + Update)</b></pre>
+        <pre class="m-0 p-0">:      </pre>
+        <pre class="m-0 p-0">:      :---Basic Informations <b>(Creation + Update)</b></pre>
+        <pre class="m-0 p-0">:      :  ---<b>Part I </b> Basic Information</pre>
+        <pre class="m-0 p-0">:      :  ---<b>Part II </b>Particulars of Income and Tax</pre>
+        <pre class="m-0 p-0">:      :  ---<b>Part III </b>Instruction, Enclosures and Verification</pre>
+        <pre class="m-0 p-0">:      :</pre>
+        <pre class="m-0 p-0">:      :---Particulars Of Income From Slaries <b>(Creation + Update)</b></pre>
+        <pre class="m-0 p-0">:      :</pre>
+        <pre class="m-0 p-0">:      :---Statement Of Expenses <b>(Creation + Update)</b></pre>
+        <pre class="m-0 p-0">:      :</pre>
+        <pre class="m-0 p-0">:      :---Particulars Of Tax Credit <b>(Creation + Update)</b></pre>
+        <pre class="m-0 p-0">:      :</pre>
+        <pre class="m-0 p-0">:      :---Statement Of Assets <b>(Creation + Update)</b></pre>
+        <pre class="m-0 p-0">:      :  ---Deposit Informations <b>(Crud)</b></pre>
+        <pre class="m-0 p-0">:      :  ---Life Insurance Informations <b>(Crud)</b></pre>
+        <pre class="m-0 p-0">:</pre>
+        <pre class="m-0 p-0">:</pre>
+        <pre class="m-0 p-0">---Report Generations<b>(Will Generate Dynamically after Submitting All of the Forms)</b></pre>
+        <pre class="m-0 p-0">:      ---For Basic Informations<b>(BI)</b></pre>
+        <pre class="m-0 p-0">:      ---Particulars of Income from Salaries<b>(PIS)</b></pre>
+        <pre class="m-0 p-0">:      ---Statement of Expenses<b>(SE)</b></pre>
+        <pre class="m-0 p-0">:      ---For Particulars of Tax Credit<b>(PIT)</b></pre>
+        <pre class="m-0 p-0">:      ---For Statement Of Assets<b>(SA)</b></pre>
+        <pre class="m-0 p-0">:------------------------------------------------------------------------------:</pre>
+    </div>
+    <div class="col-md-3"></div>
+
+</div>

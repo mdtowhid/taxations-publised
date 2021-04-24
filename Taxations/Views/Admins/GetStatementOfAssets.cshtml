@@ -1,0 +1,340 @@
+﻿@model IEnumerable<Taxations.Models.StatementOfAsset>
+
+@{
+    ViewBag.Title = "Statement Of Assets";
+    Layout = "~/Views/Containers/Admin.cshtml";
+}
+<div id="adminUsersTableWrapper">
+    <h2>Statement Of Assets</h2>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AssessmentYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StatementAsOn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NameOfAssessee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TIN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BusinessCapital)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BusinessCapital05A)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BusinessCapital05B)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DirectorShareholdingsInLimitedCompanies05B)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NonAgricultural06A)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AdvanceMadeForNonAgriculturalProperty06B)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalOf06A06B)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AgriculturalProperty07)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FinancialAssetsValue08)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShareDebentures08A)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SavingsCertificate08B)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FixedDeposit08C)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LoansGivenToOthers08D)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherFinancialAssets08D)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MotorCars09)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GoldDiamond10)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FurnitureEquipmentAndElectronicItems11)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherAssetsOfSignificantValue12)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CashAndFundOutsideBusiness)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NotesAndCurrencies13A)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BanksCardsAndOtherElectronicCash13B)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProvidentFundAndOtherFund13C)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherDepositBalanceAndAdvance13D)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GrossWealth14)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LiabilitiesButsideBusines15)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BorrowingsFromBanks15A)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UnsecuredLoan15B)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherLoansOrOverdrafts15C)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NetWealth16)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NetWealth17)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ChangeIn18)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherFundOutflow19)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AnnualLiving19A)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LossDeductionsExpenses19B)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GiftDonation19C)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalFundOutflow20)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SourcesOfFund21)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IncomeShown21A)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TaxExempted21B)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherReceipts21C)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShortageOfFund22)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SecondPageName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SecondPagePhotoPath)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ThirdPageName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ThirdPagePhtotPath)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Active)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeementStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsPrevYearCalculated)
+            </th>
+            <th>Actions</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AssessmentYear)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StatementAsOn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NameOfAssessee)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TIN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BusinessCapital)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BusinessCapital05A)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BusinessCapital05B)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DirectorShareholdingsInLimitedCompanies05B)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NonAgricultural06A)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AdvanceMadeForNonAgriculturalProperty06B)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalOf06A06B)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AgriculturalProperty07)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FinancialAssetsValue08)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShareDebentures08A)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SavingsCertificate08B)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FixedDeposit08C)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LoansGivenToOthers08D)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OtherFinancialAssets08D)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MotorCars09)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GoldDiamond10)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FurnitureEquipmentAndElectronicItems11)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OtherAssetsOfSignificantValue12)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CashAndFundOutsideBusiness)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NotesAndCurrencies13A)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BanksCardsAndOtherElectronicCash13B)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProvidentFundAndOtherFund13C)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OtherDepositBalanceAndAdvance13D)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GrossWealth14)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LiabilitiesButsideBusines15)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BorrowingsFromBanks15A)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnsecuredLoan15B)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OtherLoansOrOverdrafts15C)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NetWealth16)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NetWealth17)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ChangeIn18)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OtherFundOutflow19)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AnnualLiving19A)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LossDeductionsExpenses19B)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GiftDonation19C)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalFundOutflow20)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SourcesOfFund21)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IncomeShown21A)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TaxExempted21B)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OtherReceipts21C)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShortageOfFund22)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SecondPageName)
+                </td>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.SecondPagePhotoPath))
+                    {
+                        <img src="@Url.Content(item.SecondPagePhotoPath)" />
+                    }
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ThirdPageName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ThirdPagePhtotPath)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Active)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeementStatus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsPrevYearCalculated)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "GetStatementofAssets", new { id = item.Id }, new { @class = "border btn btn-lg btn-secondary bg-dark text-white" })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

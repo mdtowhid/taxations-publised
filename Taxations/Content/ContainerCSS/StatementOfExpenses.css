@@ -1,0 +1,116 @@
+﻿* {
+    font-family: 'Nanum Gothic Coding';
+    font-size: 1.1rem;
+}
+
+.render-body {
+    margin-top: 20px;
+}
+
+form {
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+
+/*.left, .right {
+    width: 56.5%;
+}*/
+
+
+.data-indicators {
+    height: 92px;
+}
+
+
+
+#statementOfExpensesId {
+}
+
+#dataWrapperStatementOfExpensesId .data-wrapper .root-header {
+    width: 100%;
+    position: relative;
+    height: 50px;
+}
+
+    #dataWrapperStatementOfExpensesId .data-wrapper .root-header .left {
+        width: 50%;
+        height: 50px;
+        border-bottom: 1px solid #ccc;
+    }
+
+    #dataWrapperStatementOfExpensesId .data-wrapper .root-header .right {
+        width: 43%;
+        height: 50px;
+    }
+
+        #dataWrapperStatementOfExpensesId .data-wrapper .root-header .right input {
+            width: 90%;
+        }
+
+        #dataWrapperStatementOfExpensesId .data-wrapper .root-header .right .right input {
+            width: 110%;
+            margin-left: 8px;
+        }
+
+
+#dataWrapperStatementOfExpensesId .data-wrapper .sub-root-header {
+    width: calc(100% - 50px);
+    float: right;
+}
+
+    #dataWrapperStatementOfExpensesId .data-wrapper .sub-root-header .data-indicators {
+        height: 50px;
+        width: 50px;
+    }
+
+
+    #dataWrapperStatementOfExpensesId .data-wrapper .sub-root-header .left {
+        width: 46.8%;
+        border-bottom: 1px solid #ccc;
+    }
+
+    #dataWrapperStatementOfExpensesId .data-wrapper .sub-root-header .right {
+        width: 46.4%;
+        height: 50px;
+        border-bottom: 1px solid #ccc;
+    }
+
+
+        #dataWrapperStatementOfExpensesId .data-wrapper .sub-root-header .right input {
+            width: 89%;
+        }
+
+
+
+        #dataWrapperStatementOfExpensesId .data-wrapper .sub-root-header .right .left,
+        #dataWrapperStatementOfExpensesId .data-wrapper .sub-root-header .right .right {
+            width: 50%
+        }
+
+            #dataWrapperStatementOfExpensesId .data-wrapper .sub-root-header .right .right input {
+                /*width: 66%;
+                margin-left: 21px;*/
+            }
+
+
+
+input {
+    margin: 5px auto;
+}
+
+.submit-wrapper {
+    position: relative;
+    height: 70px;
+}
+
+    .submit-wrapper input[type="submit"] {
+        position: absolute;
+        width: 50%;
+        top: 45%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+#taxation-header {
+    margin-top: 25px;
+}

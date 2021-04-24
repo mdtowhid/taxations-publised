@@ -1,0 +1,382 @@
+﻿@model Taxations.Models.StatementOfExpense
+@using Taxations.Models
+
+@{
+    ViewBag.Title = "Report Of Statement Of Expenses";
+    Layout = null;
+
+    UserInformation ui = new UserInformation();
+    if (ViewBag.UserInformations != null)
+    {
+        ui = ViewBag.UserInformations;
+    }
+
+    User user = new User();
+    if (ViewBag.User != null)
+    {
+        user = ViewBag.User;
+    }
+
+    ParticularsOfIncomeFromSalary poifs = new ParticularsOfIncomeFromSalary();
+
+
+    if (ViewBag.ParticularsOfSalaries != null)
+    {
+        poifs = ViewBag.ParticularsOfSalaries;
+    }
+}
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 18px;
+        padding: 3px;
+        border-collapse: collapse;
+    }
+
+    tr td:first-child {
+        padding: 10px;
+    }
+
+    @*th,td{padding:0px;text-align:left;}*@input[type="text"] {
+        width: 100%;
+        padding: 5px;
+    }
+
+    table tr td:nth-child(odd) {
+        text-align: center;
+    }
+
+    p,
+    input,
+    td {
+        margin: 0 !important;
+    }
+
+    tr th {
+        border: 1px solid black;
+    }
+
+    .page2Table {
+        width: 100%;
+        margin-top: 15px;
+    }
+
+    .page2Table tr th {
+        padding: 12px;
+    }
+</style>
+
+<table style="border:none;width:100%;">
+    <tr style="border:none">
+        <td style="border: none">
+            <p style="text-align:left">National Board of Revenue</p>
+        </td>
+        <td style="border:none">
+            <p style="text-align:right"><b>IT-10BB2016</b></p>
+        </td>
+    </tr>
+</table>
+
+<h3 style="text-align:center;padding:0px;margin:0px;margin-top:5px">
+    STATEMENT OF EXPENSES RELATING TO LIFESTYLE
+</h3>
+<p style="text-align:center;padding:0px;margin:0px;">
+    under section 80(2) of the Income Tax Ordinance, 1984 (XXXVI of 1984)
+</p>
+
+<table style="margin-top: 15px; margin-bottom: 15px">
+    <tr>
+        <td>01</td>
+        <td>Assessment Year <br>@Session["FAY"]</td>
+        <td>02</td>
+        <td>Statement as on (DD-MM-YYYY) <br>@Model.StatementDate</td>
+    </tr>
+    <tr>
+        <td>03</td>
+        <td>Name of the Assessee <br>@ui.NameOfAssessee</td>
+        <td>04</td>
+        <td>TIN <br>@ui.NewTIN</td>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <th colspan="2" style="text-align: left">Particulars</th>
+        <th>Amount</th>
+        <th>Comment</th>
+    </tr>
+
+    <tr>
+        <td>05</td>
+        <td>Expenses for food, clothing and other essentials</td>
+        <td style="text-align: center">@String.Format("{0:n0}", Convert.ToInt64(Model.AgriculturalProperty))</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td>06</td>
+        <td>Housing expense</td>
+        <td style="text-align: center">@String.Format("{0:n0}", Convert.ToInt64(Model.HousingExpense))</td>
+        <td></td>
+    </tr>
+
+    <tr style="width: 100%; border: none">
+        <td rowspan="3">07</td>
+        <td>Auto and transportation expenses (07A+07B)</td>
+        <td style="text-align: center">@String.Format("{0:n0}", Convert.ToInt64(Model.AutoAndTransportationExpenses07A08B))</td>
+        <td></td>
+    </tr>
+
+    <tr style="padding: 0px;margin:0px;">
+        <td style="padding: 0px;margin:0px;">
+            <table style="padding: 0px;margin:0px;">
+                <tr style="padding: 0px;margin:0px;">
+                    <td style="border:none ;">07A</td>
+                    <td style="border:none;border-left:1px solid;">Driver’s salary, fuel and maintenance </td>
+                </tr>
+            </table>
+        </td>
+
+        <td style="text-align: center;">@String.Format("{0:n0}", Convert.ToInt64(Model.DriverSalary07A))</td>
+        <td></td>
+    </tr>
+    <tr style="padding: 0px;margin:0px;">
+        <td style="padding: 0px;margin:0px;">
+            <table style="padding: 0px;margin:0px;">
+                <tr style="padding: 0px;margin:0px;">
+                    <td style="border:none;width: 35px">07B</td>
+                    <td style="border:none ;border-left:1px solid;width: 300px">Other transportation</td>
+                </tr>
+            </table>
+        </td>
+        <td style="text-align: center">@String.Format("{0:n0}", Convert.ToInt64(Model.OtherTransportation))</td>
+        <td></td>
+    </tr>
+
+    <tr style="width: 100%; border: none">
+        <td rowspan="5">08</td>
+        <td>Household and utility expenses(8A+8B+8C+8D)</td>
+        <td style="text-align: center">@String.Format("{0:n0}", Convert.ToInt64(Model.HouseholdAndUtilityExpenses08A08B08C08D))</td>
+        <td></td>
+    </tr>
+
+    <tr style="padding: 0px;margin:0px;">
+        <td style="padding: 0px;margin:0px;">
+            <table style="padding: 0px;margin:0px;">
+                <tr style="padding: 0px;margin:0px;">
+                    <td style="border:none; width: 70px;">08A</td>
+                    <td style="border:none;border-left:1px solid;">Electricity</td>
+                </tr>
+            </table>
+        </td>
+
+        <td style="text-align: center">@String.Format("{0:n0}", Convert.ToInt64(Model.Electricity08A))</td>
+        <td></td>
+    </tr>
+    <tr style="padding: 0px;margin:0px;">
+
+        <td style="padding: 0px;margin:0px;">
+            <table style="padding: 0px;margin:0px;">
+                <tr style="padding: 0px;margin:0px;">
+                    <td style="border:none; width: 70px;">08B</td>
+                    <td style="border:none ;border-left:1px solid;">Gas, water, sewer and garbage</td>
+                </tr>
+            </table>
+        </td>
+        <td style="text-align: center">@String.Format("{0:n0}", Convert.ToInt64(Model.GasWaterSewerAndGarbage08B))</td>
+        <td></td>
+    </tr>
+
+    <tr style="padding: 0px;margin:0px;">
+        <td style="padding: 0px;margin:0px;">
+            <table style="padding: 0px;margin:0px;">
+                <tr style="padding: 0px;margin:0px;">
+                    <td style="border:none; width: 70px;">08C</td>
+                    <td style="border:none ;border-left:1px solid;">Phone, internet, TV channels subscription</td>
+                </tr>
+            </table>
+        </td>
+        <td style="text-align: center">@String.Format("{0:n0}", Convert.ToInt64(Model.PhoneInternet08C))</td>
+        <td></td>
+    </tr>
+    <tr style="padding: 0px;margin:0px;">
+        <td style="padding: 0px;margin:0px;">
+            <table style="padding: 0px;margin:0px;">
+                <tr style="padding: 0px;margin:0px;">
+                    <td style="border:none; width: 70px;">08D</td>
+                    <td style="border:none ;border-left:1px solid;">Home-support staff and other expenses</td>
+                </tr>
+            </table>
+        </td>
+        <td style="text-align: center">@String.Format("{0:n0}", Convert.ToInt64(Model.HomeSupport08D))</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td>09</td>
+        <td>Children’s education expenses</td>
+        <td style="text-align: center">@String.Format("{0:n0}", Convert.ToInt64(Model.ChildrenEducation))</td>
+        <td></td>
+    </tr>
+
+
+    <tr style="width: 100%; border: none">
+        <td rowspan="5">10</td>
+        <td>Special expenses (10A+10B+10C+10D)</td>
+        <td style="text-align: center">@String.Format("{0:n0}", Convert.ToInt64(Model.SpecialExpenses10A10B10C10D))</td>
+        <td></td>
+    </tr>
+
+    <tr style="padding: 0px;margin:0px;">
+        <td style="padding: 0px;margin:0px;">
+            <table style="padding: 0px;margin:0px;">
+                <tr style="padding: 0px;margin:0px;">
+                    <td style="border:none; width: 70px;">10A</td>
+                    <td style="border:none;border-left:1px solid;">Festival, party, events and gifts</td>
+                </tr>
+            </table>
+        </td>
+
+        <td style="text-align: center">@String.Format("{0:n0}", Convert.ToInt64(Model.FestivalParty10A))</td>
+        <td></td>
+    </tr>
+    <tr style="padding: 0px;margin:0px;">
+
+        <td style="padding: 0px;margin:0px;">
+            <table style="padding: 0px;margin:0px;">
+                <tr style="padding: 0px;margin:0px;">
+                    <td style="border:none; width: 70px;">10B</td>
+                    <td style="border:none ;border-left:1px solid;">Domestic and overseas tour, holiday, etc.</td>
+                </tr>
+            </table>
+        </td>
+        <td style="text-align: center">@String.Format("{0:n0}", Convert.ToInt64(Model.DomesticAndOverseasTour10B))</td>
+        <td></td>
+    </tr>
+
+    <tr style="padding: 0px;margin:0px;">
+        <td style="padding: 0px;margin:0px;">
+            <table style="padding: 0px;margin:0px;">
+                <tr style="padding: 0px;margin:0px;">
+                    <td style="border:none; width: 70px;">10C</td>
+                    <td style="border:none ;border-left:1px solid;">Donation, philanthropy, etc.</td>
+                </tr>
+            </table>
+        </td>
+        <td style="text-align: center">@String.Format("{0:n0}", Convert.ToInt64(Model.Donation10C))</td>
+        <td></td>
+    </tr>
+    <tr style="padding: 0px;margin:0px;">
+        <td style="padding: 0px;margin:0px;">
+            <table style="padding: 0px;margin:0px;">
+                <tr style="padding: 0px;margin:0px;">
+                    <td style="border:none; width: 70px;">10D</td>
+                    <td style="border:none ;border-left:1px solid;">Other special expenses</td>
+                </tr>
+            </table>
+        </td>
+        <td style="text-align: center">@String.Format("{0:n0}", Convert.ToInt64(Model.OtherSpecialExpenses10D))</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td>11</td>
+        <td>Any other expenses</td>
+        <td style="text-align: center">@String.Format("{0:n0}", Convert.ToInt64(Model.AnyOtherExpenses))</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td>12</td>
+        <td>Total expense relating to lifestyle (5+6+7+8+9+10+11)</td>
+        <td style="text-align: center">@String.Format("{0:n0}", Convert.ToInt64(Model.TotalExpenseRelating))</td>
+        <td></td>
+    </tr>
+
+    <tr style="width: 100%; border: none">
+        <td rowspan="3">13</td>
+        <td>Payment of tax, charges, etc. (13A+13B)</td>
+        <td style="text-align: center">@String.Format("{0:n0}", Convert.ToInt64(Model.PaymentOfTax13A13B))</td>
+        <td></td>
+    </tr>
+
+    <tr style="padding: 0px;margin:0px;">
+        <td style="padding: 0px;margin:0px;">
+            <table style="padding: 0px;margin:0px;">
+                <tr style="padding: 0px;margin:0px;">
+                    <td style="border:none; width: 70px;">13A</td>
+                    <td style="border:none;border-left:1px solid;">Payment of tax at source</td>
+                </tr>
+            </table>
+        </td>
+
+        <td style="text-align: center">@String.Format("{0:n0}", Convert.ToInt64(Model.PaymentOfTax13A))</td>
+        <td></td>
+    </tr>
+    <tr style="padding: 0px;margin:0px;">
+        <td style="padding: 0px;margin:0px;">
+            <table style="padding: 0px;margin:0px;">
+                <tr style="padding: 0px;margin:0px;">
+                    <td style="border:none; width: 70px;">13B</td>
+                    <td style="border:none ;border-left:1px solid;">Payment of tax, surcharge or other amount</td>
+                </tr>
+            </table>
+        </td>
+        <td style="text-align: center">@String.Format("{0:n0}", Convert.ToInt64(Model.PaymentOfTax13B))</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td>14</td>
+        <td>Total amount of expense and tax (12+13)</td>
+        <td style="text-align: center">@String.Format("{0:n0}", Convert.ToInt64(Model.TotalAmountOfExpense))</td>
+        <td></td>
+    </tr>
+</table>
+
+<h3 style="text-align: center; margin: 5px !important">Verification and signature</h3>
+
+<table>
+
+    <tr style="width: 100%; border: none">
+        <td rowspan="3">15</td>
+        <td>
+            <b>Verification</b><br>
+            I solemnly declare that to the best of my knowledge and belief the information given in this statement and
+            the schedule annexed herewith are correct and complete.
+        </td>
+    </tr>
+
+    <tr style="padding: 0px;margin:0px;">
+        <td style="padding: 0px;margin:0px;">
+            <table style="padding: 0px;margin:0px;">
+                <tr style="padding: 0px;margin:0px;">
+                    <td style="border:none; width: 50%;text-align: left;">Name <br />@ui.NameOfAssessee</td>
+                    <td style="width: 50%;border:none ;border-left:1px solid;text-align: left;">
+                        Signature & date
+                        <br>
+                        @if (Model.SignatureAndDatePhotoPath != null || Model.SignatureAndDatePhotoPath != "NOIMAGE_PATH")
+                        {
+                            <img src="@Url.Content(Model.SignatureAndDatePhotoPath)"
+                                 style="width: 50px; height: 50px;" />
+                        }
+                        else
+                        {
+                            <h3>Signature And Date isn't provided yet.</h3>
+                        }
+
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+
+
+</table>

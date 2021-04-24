@@ -1,0 +1,39 @@
+﻿@using Taxations.Models;
+@{
+    User user = new User();
+    if (ViewBag.User != null)
+    {
+        user = ViewBag.User;
+    }
+    string userName = user.FirstName + " " + user.LastName;
+}
+<style>
+    #userProfileDropDownWrapper .custom-container {
+        width: 1200px;
+        margin-left: 100px;
+    }
+</style>
+<div id="userProfileDropDownWrapper">
+    <div class="p-3 rounded">
+        <button class="btn btn-outline-primary btn-block" id="logout">Logout</button>
+    </div>
+</div>
+
+<script>
+    $(e => {
+        $('#logout').click(e => {
+            $.ajax({
+                url: '/account/logout/',
+                data: '',
+                dataType: 'json',
+                success: (data) => {
+                    if (data)
+                        window.location.href = '/';
+                },
+                error: data => {
+                    console.log(data);
+                }
+            });
+        });
+    });
+</script>

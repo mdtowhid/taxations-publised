@@ -1,0 +1,79 @@
+﻿
+@*@using Taxations.Models;
+@{
+    UserInformation userInformation = new UserInformation(); ;
+
+    if (ViewBag.UserInformations != null)
+    {
+        userInformation = ViewBag.UserInformations;
+    }
+
+    StatementOfAsset statementOfAsset = new StatementOfAsset();
+    if (ViewBag.StatementOfAsset != null)
+    {
+        statementOfAsset = ViewBag.StatementOfAsset;
+    }
+}
+
+<div class="form-slides forms">
+
+    <div class="row m-1 border mt-minus border-top-0">
+        <div class="col-md-12">
+            <div class="container m-0 p-0">
+                <div class="row pt-2">
+                    <div class="col-md-12">
+                        <p class="m-0 pt-1"><b>Verification</b></p>
+                        <p>
+                            I solemnly declare that to the best of my knowledge and belief the
+                            information given in this return and statements and
+                            documents annexed or attached herewith are correct and complete.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row pt-2">
+                    <div class="col-md-6">
+                        <label>Name</label>
+                        <input type="text" value="@userInformation.NameOfAssessee" name="ThirdPageName" class="form-control" readonly="">
+
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>Signature & date</label>
+                        <div class="custom-file">
+                            <input type="hidden" name="PhotoPath" value="replace" />
+                            <input type="file" name="thirdPagePhoto" class="custom-file-input" id="customFile" required>
+                            <label class="custom-file-label" for="customFile">Choose file</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row step-form-row" style="border-top: 1px solid #ccc;height: auto">
+        <div class="col-md-12" style="border: none">
+            <b>Verification</b>
+            <p class="lead">
+                I solemnly declare that to the best of my knowledge and belief the
+                information given in this statement and the schedule annexed herewith are correct and complete.
+            </p>
+        </div>
+    </div>
+
+    <div class="form-row step-form-row" style="height: 97px; border: 1px solid #ccc;">
+        <div class="col-md-6" style="border: none; border-right: 1px solid #cccccc;">
+            <label>Name</label>
+            <input type="text" name="ThirdPageName" value="@statementOfAsset.ThirdPageName" class="form-control" />
+        </div>
+
+        <div class="col-md-6" style="border: none;">
+            <label>Signature & date</label>
+            <div class="custom-file">
+                <input type="hidden" name="PhotoPath" value="replace" />
+                <input type="file" name="thirdPagePhoto" class="custom-file-input" id="customFile" required>
+                <label class="custom-file-label" for="customFile">Choose file</label>
+            </div>
+        </div>
+    </div>
+</div>*@

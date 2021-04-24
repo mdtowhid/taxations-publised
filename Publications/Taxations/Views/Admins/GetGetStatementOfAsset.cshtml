@@ -1,0 +1,443 @@
+﻿@model Taxations.Models.StatementOfAsset
+
+@{
+    ViewBag.Title = "GetGetStatementOfAsset";
+    Layout = "~/Views/Containers/Admin.cshtml";
+}
+
+<h2>GetGetStatementOfAsset</h2>
+
+<div>
+    <h4>StatementOfAsset</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AssessmentYear)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AssessmentYear)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StatementAsOn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StatementAsOn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NameOfAssessee)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NameOfAssessee)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TIN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TIN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BusinessCapital)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BusinessCapital)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BusinessCapital05A)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BusinessCapital05A)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BusinessCapital05B)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BusinessCapital05B)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DirectorShareholdingsInLimitedCompanies05B)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DirectorShareholdingsInLimitedCompanies05B)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NonAgricultural06A)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NonAgricultural06A)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AdvanceMadeForNonAgriculturalProperty06B)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdvanceMadeForNonAgriculturalProperty06B)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalOf06A06B)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalOf06A06B)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AgriculturalProperty07)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AgriculturalProperty07)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FinancialAssetsValue08)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FinancialAssetsValue08)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShareDebentures08A)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShareDebentures08A)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SavingsCertificate08B)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SavingsCertificate08B)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FixedDeposit08C)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FixedDeposit08C)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LoansGivenToOthers08D)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoansGivenToOthers08D)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OtherFinancialAssets08D)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OtherFinancialAssets08D)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MotorCars09)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MotorCars09)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GoldDiamond10)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GoldDiamond10)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FurnitureEquipmentAndElectronicItems11)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FurnitureEquipmentAndElectronicItems11)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OtherAssetsOfSignificantValue12)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OtherAssetsOfSignificantValue12)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CashAndFundOutsideBusiness)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CashAndFundOutsideBusiness)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NotesAndCurrencies13A)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NotesAndCurrencies13A)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BanksCardsAndOtherElectronicCash13B)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BanksCardsAndOtherElectronicCash13B)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProvidentFundAndOtherFund13C)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProvidentFundAndOtherFund13C)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OtherDepositBalanceAndAdvance13D)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OtherDepositBalanceAndAdvance13D)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GrossWealth14)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GrossWealth14)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LiabilitiesButsideBusines15)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LiabilitiesButsideBusines15)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BorrowingsFromBanks15A)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BorrowingsFromBanks15A)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UnsecuredLoan15B)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UnsecuredLoan15B)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OtherLoansOrOverdrafts15C)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OtherLoansOrOverdrafts15C)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NetWealth16)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NetWealth16)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NetWealth17)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NetWealth17)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ChangeIn18)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChangeIn18)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OtherFundOutflow19)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OtherFundOutflow19)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AnnualLiving19A)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AnnualLiving19A)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LossDeductionsExpenses19B)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LossDeductionsExpenses19B)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GiftDonation19C)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GiftDonation19C)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalFundOutflow20)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalFundOutflow20)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SourcesOfFund21)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SourcesOfFund21)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IncomeShown21A)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IncomeShown21A)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TaxExempted21B)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TaxExempted21B)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OtherReceipts21C)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OtherReceipts21C)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShortageOfFund22)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShortageOfFund22)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SecondPageName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SecondPageName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SecondPagePhotoPath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SecondPagePhotoPath)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ThirdPageName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ThirdPageName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ThirdPagePhtotPath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ThirdPagePhtotPath)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Active)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Active)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeementStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmployeementStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsPrevYearCalculated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsPrevYearCalculated)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

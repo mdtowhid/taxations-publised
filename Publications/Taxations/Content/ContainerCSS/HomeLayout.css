@@ -1,0 +1,103 @@
+﻿body {
+    background: #fff !important;
+    font-family: 'Maven Pro', sans-serif !important;
+}
+.custom-container {
+    width: 95%;
+}
+
+.home-nav {
+    width: 100%;
+    height: 50px;
+    background: #FFFFFF;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    transition: .5s linear;
+}
+    .home-nav.active {
+        box-shadow: 0 1px 2px 0 rgba(60,64,67,.3), 0 1px 3px 1px rgba(60,64,67,.15);
+        background: #FED400;
+    }
+    .brand {
+        float: left;
+    }
+.home-nav ul {
+    list-style-type: none;
+    margin-left: 30px;
+}
+    .home-nav ul.brand li a {
+        text-transform: uppercase;
+        font-size: 20px;
+    }
+        .home-nav ul.brand li a:hover{
+            background: black;
+            color: white;
+        }
+        .home-nav ul li a {
+            padding: 10px;
+            display: block;
+            overflow: hidden;
+            transition: .5s;
+            color: black;
+        }
+
+
+.r-menu {
+    float: right;
+    margin-right: 20px;
+}
+    .r-menu li a {
+        padding: 13px !important;
+        text-transform: uppercase;
+        font-size: 17px;
+    }
+
+    .r-menu li a:hover,
+    ul li a.active{
+        background: #000;
+        color: white;
+    }
+
+    #banner {
+        width: 100%;
+        height: 300px;
+        background: #FFFFFF;
+        position: relative;
+    }
+
+.banner-left, .banner-right {
+    width: 50%;
+    height: 346px;
+    padding: 30px 35px;
+    box-shadow: 0 1px 2px 0 rgba(60,64,67,.3), 0 1px 3px 1px rgba(60,64,67,.15);
+}
+.banner-left {
+    background: #FED400;
+}
+
+.banner-right {
+    background: #34B8F8;
+}
+
+.home-rend-content {
+    width: 100%;
+    overflow: auto;
+    height: auto;
+    background: #fff;
+    margin-top: 50px;
+}
+
+.anonymus-user {
+    width: 150px;
+    height: 150px;
+    background: #F3F3F3;
+    margin: 0 auto;
+    text-align: center;
+    line-height: 150px;
+}
+
+#footer .custom-container{
+    margin-left: 20px;
+}

@@ -1,0 +1,200 @@
+﻿
+@using Taxations.Models
+@{
+    ViewBag.Title = "Statement Of Assets";
+    //Layout = "~/Views/Containers/StatementOfAssets.cshtml";
+    Layout = "~/views/shared/mainlayout.cshtml";
+    StatementOfAsset prevYearInfo = new StatementOfAsset();
+    if (ViewBag.PrevYearAssetsInfo != null)
+    {
+        prevYearInfo = ViewBag.PrevYearAssetsInfo;
+    }
+
+    StatementOfAsset statementOfAsset = new StatementOfAsset();
+    if (ViewBag.StatementOfAsset != null)
+    {
+        statementOfAsset = ViewBag.StatementOfAsset;
+    }
+}
+<div class="d-none" id="prevYearInfo">
+    @if(prevYearInfo.AssessmentYear != null) 
+    { 
+        @prevYearInfo.AssessmentYear.Split('-')[2]
+    }
+</div>
+<style>
+    .prevYearColumn {
+        width: 100%;
+        height: 90vh;
+        overflow: hidden;
+        overflow-y: scroll;
+        position: sticky;
+        right: 0;
+        top: 75px;
+    }
+
+        .prevYearColumn::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .prevYearColumn::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .prevYearColumn::-webkit-scrollbar-thumb {
+            background: #888;
+        }
+    .cc {
+        margin: 0 !important
+    }
+</style>
+
+<div class="row" style="margin-top: 55px">
+    <div class="col-md-2"></div>
+    <div class="col-md-6 bg-white mt-3">
+        <div class="alert alert-success m-1 mt-3"
+             style="border-radius: 0;margin: 0px -15px 11px -15px !important;">
+            <h3 class="">Assets Informations</h3>
+            <p class="">Please provide your Assetes infomations.</p>
+        </div>
+        @using (Html.BeginForm("StatementOfAssets", "StatementOfAssets", FormMethod.Post,
+            new { enctype = "multipart/form-data", id = "statementOfAssetsForm", @class = "cc" }))
+        {
+            if (ViewBag.SuccessMessage != null)
+            {
+                <div class="row mt-minus p-2 bg-transparent shadow m-1 mt-3 mb-3 border" id="submittingStatus">
+                    <div class="col-md-10">
+                        <p class="p-0 m-0 p-3 font-weight-bolder text-success"><b>@ViewBag.SuccessMessage</b></p>
+                    </div>
+                    <div class="col-md-2 border">
+                        <h3 id="cancelSubmittingStatus"
+                            class="m-0 text-center text-danger">
+                            <b style="font-size: 30px; font-weight: 900; cursor: pointer; padding-top: 15px; display: block">&times;</b>
+                        </h3>
+                    </div>
+                </div>
+            }
+
+            @Html.Partial("~/Views/StatementOfAssets/StatementOfAssetsPartOne.cshtml", null)
+
+            @Html.Partial("~/Views/StatementOfAssets/StatementOfAssetsPartTwo.cshtml", null)
+
+            @Html.Partial("~/Views/StatementOfAssets/StatementOfAssetsPartThree.cshtml", null)
+
+            <div class="next-perv-wrapper">
+                <div class="next-prev">
+                    <button type="button" id="nextBtn" onclick="nextPrev(1)" class="btn btn-md btn-outline-success">Next</button>
+                    <button type="button" id="prevBtn" onclick="nextPrev(-1)" class="btn btn-md btn-outline-info">Previous</button>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="col-md-3 mt-3 prevYearColumn">
+
+        <div class="card">
+            <div class="card-header" id="prevYearInfoCardHeader">
+                <b>Informations of Statement of  </b>
+                <mark>
+                    @if (prevYearInfo.AssessmentYear != null)
+                    {
+                        @prevYearInfo.AssessmentYear.Split('-')[0]
+                    }
+                </mark>
+            </div>
+
+            <div class="card-body" id="prevCardWrap">
+                <p class="m-0"><b>5. Business capital</b></p>
+                <p id="isPrevYearCalculated"
+                   class="d-none">@statementOfAsset.IsPrevYearCalculated.ToString().ToLower()</p>
+
+                <input id="businessCapitalPrev"
+                       class="form-control" value="@prevYearInfo.BusinessCapital"/>
+                <hr class="" />
+                <p class="m-0"><b>6. (6A+6B) Total</b></p>
+                <input id="totalOf06A06BPrev"
+                       class="form-control" value="@prevYearInfo.TotalOf06A06B"/>
+
+                <hr class="" />
+                <p class="m-0"><b>7. Agricultural Property</b></p>
+                <input id="agriculturalProperty07Prev"
+                       class="form-control sp-7" value="@prevYearInfo.AgriculturalProperty07"/>
+
+                <hr class="" />
+                <p class="m-0"><b>8. Total Financial Assets Value</b></p>
+                <input id="financialAssetsValue08Prev"
+                       class="form-control" value="@prevYearInfo.FinancialAssetsValue08"/>
+
+                <hr class="" />
+                <p class="m-0"><b>10. Gold Diamond...</b></p>
+                <input id="goldDiamond10Prev"
+                       class="form-control sp-10" value="@prevYearInfo.GoldDiamond10"/>
+
+                <hr class="" />
+                <p class="m-0"><b>11. Furniture Equipment & Electronic Items</b></p>
+                <input id="furnitureEquipmentAndElectronicItems11Prev" class="form-control sp-11" value="@prevYearInfo.FurnitureEquipmentAndElectronicItems11"/>
+
+                <hr class="" />
+                <p class="m-0"><b>12. Other Assets Of Significant</b></p>
+                <input id="otherAssetsOfSignificantValue12Prev" class="form-control sp-12" value="@prevYearInfo.OtherAssetsOfSignificantValue12"/>
+
+                <hr class="" />
+                <p class="m-0"><b>13. Cash & Fund Outside Business</b></p>
+                <input id="cashAndFundOutsideBusinessPrev"
+                       class="form-control" value="@prevYearInfo.CashAndFundOutsideBusiness"/>
+
+                <hr class="" />
+                <p class="m-0"><b>14. Gross Wealth</b></p>
+                <input id="grossWealth14Prev"
+                       class="form-control sp-14" value="@prevYearInfo.GrossWealth14"/>
+
+                <hr class="" />
+                <p class="m-0"><b>15. Liabilities But side Busines</b></p>
+                <input id="liabilitiesButsideBusines15Prev"
+                       class="form-control" value="@prevYearInfo.LiabilitiesButsideBusines15"/>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-md-1"></div>
+</div>
+
+<script>
+
+    var currentTab = 0;
+    showTab(currentTab);
+
+    function showTab(n) {
+        var x = document.getElementsByClassName("form-slides");
+        x[n].style.display = "block";
+
+        if (n == 0) {
+            document.getElementById("prevBtn").style.display = "none";
+        } else {
+            document.getElementById("prevBtn").style.display = "inline";
+        }
+        if (n == (x.length - 1)) {
+            document.getElementById("nextBtn").innerHTML = "Save";
+        } else {
+            document.getElementById("nextBtn").innerHTML = "Next";
+        }
+
+    }
+
+    function nextPrev(n) {
+        var x = document.getElementsByClassName("form-slides");
+        x[currentTab].style.display = "none";
+        currentTab += n;
+        if (currentTab >= x.length) {
+            document.getElementById("statementOfAssetsForm").submit();
+            return false;
+        }
+        showTab(currentTab);
+    }
+
+</script>
+@section Scripts{
+    <script src="@Url.Content("~/Scripts/StatementOfAssets.js")"></script>
+}
+

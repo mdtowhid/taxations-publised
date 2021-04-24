@@ -1,0 +1,86 @@
+﻿
+@{
+    Layout = "~/Views/shared/mainLayout.cshtml";
+    string linkText = "Preview & Download";
+    string actionName = "generateReport";
+    string controllerName = "crystalReport";
+}
+
+
+<div class="row" style="margin-top: 100px">
+    <div class="col-md-1"></div>
+    @if (ViewBag.BasicInformations != null)
+    {
+        <div class="card col-md-3 m-3 p-0" style="min-height: 100px;">
+            <h5 class="card-header">Basic Informations</h5>
+            <div class="card-body">
+                @Html.ActionLink(linkText, actionName, controllerName,
+                    new {
+                        repName= "BasicInformations",
+                        id= @Session["UserId"]
+                    }, new { @class= "card-link btn btn-md btn-outline-success", target="_blank"})
+            </div>
+        </div>
+    }
+    @if (ViewBag.ParticularsOfSalaries != null)
+    {
+        <div class="card col-md-3 m-3 p-0">
+            <h5 class="card-header">Particulars of Income from Salaries</h5>
+            <div class="card-body">
+                @Html.ActionLink(linkText, actionName, controllerName,
+                    new { repName = "IncomeFromSalaries", id = @Session["UserId"] }, 
+                    new { @class = "card-link btn btn-md btn-outline-success", target = "_blank" })
+                <div class="col-md-3">
+                </div>
+            </div>
+        </div>
+    }
+
+    @if (ViewBag.StatementOfExpenses != null)
+    {
+        <div class="card col-md-3 m-3 p-0">
+            <h5 class="card-header">Statement Of Expenses</h5>
+            <div class="card-body">
+                @Html.ActionLink(linkText, actionName, controllerName,
+                    new { repName = "StatementOfExpenses", id = @Session["UserId"] },
+                    new { @class = "card-link btn btn-md btn-outline-success", target = "_blank" })
+                <div class="col-md-3">
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+<div class="row mb-5">
+    <div class="col-md-2"></div>
+
+    @if (ViewBag.TaxCredits != null)
+    {
+        <div class="card col-md-3 m-3 p-0">
+            <h5 class="card-header">Particulars of Tax Credit</h5>
+            <div class="card-body">
+                @Html.ActionLink(linkText, actionName, controllerName,
+                    new { repName = "ParticularsOfTaxCredit", id = @Session["UserId"] },
+                    new { @class = "card-link btn btn-md btn-outline-success", target = "_blank" })
+                <div class="col-md-3">
+                </div>
+            </div>
+        </div>
+    }
+
+    @if (ViewBag.StatementOfAssets != null)
+    {
+        <div class="card col-md-3 m-3 p-0">
+            <h5 class="card-header">Statement of Assets</h5>
+            <div class="card-body">
+                @Html.ActionLink(linkText, actionName, controllerName,
+                    new { repName = "StatementOfAssets", id = @Session["UserId"] },
+                    new { @class = "card-link btn btn-md btn-outline-success", target = "_blank" })
+                <div class="col-md-3">
+                </div>
+            </div>
+        </div>
+
+    }
+</div>

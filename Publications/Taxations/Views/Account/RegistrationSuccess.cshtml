@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "Registration Success";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+
+<div class="jumbotron mt-3 mb-5"
+     style="
+            background:transparent !important;
+            min-height: 40vh;">
+    <h1 class="display-4">Welcome!</h1>
+    @if (ViewBag.SuccessStatus != null)
+    {
+        <p style="font-size: 20px">@ViewBag.SuccessStatus</p>
+    }
+</div>
+
+
+@*<section>
+    @Html.Partial("~/Views/components/Footer.cshtml", null)
+</section>*@
+

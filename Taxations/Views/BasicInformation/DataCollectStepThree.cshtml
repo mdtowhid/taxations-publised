@@ -1,0 +1,392 @@
+﻿@using Taxations.Models;
+@{
+    UserInformation userInformation = ViewBag.UserInformations;
+    BasicInformation basicInformation = new BasicInformation();
+    if (ViewBag.BasicInformations != null)
+    {
+        basicInformation = ViewBag.BasicInformations;
+    }
+
+    string a = "";
+    string b = "";
+    string c = "";
+    string d = "";
+    string it1 = "";
+    string it2 = "";
+
+    if (basicInformation != null)
+    {
+        string[] schedules = basicInformation.SchedulesAnnexed != null ? basicInformation.SchedulesAnnexed.Split(','):new string[] { };
+        string[] statements = basicInformation.StatementsAnnexed !=null ? basicInformation.StatementsAnnexed.Split(','):new string[] { };
+        foreach (string schedule in schedules)
+        {
+            if (schedule == "24A")
+            {
+                a = "24A";
+            }
+            if (schedule == "24B")
+            {
+                b = "24B";
+            }
+
+            if (schedule == "24C")
+            {
+                c = "24C";
+            }
+
+            if (schedule == "24D")
+            {
+                d = "24D";
+            }
+        }
+
+        foreach (string statement in statements)
+        {
+            if (statement.Trim() == "IT-10B2016")
+            {
+                it1 = "IT-10B2016";
+            }
+            if (statement.Trim() == "IT-10BB2016")
+            {
+                it2 = "IT-10BB2016";
+            }
+        }
+    }
+
+
+}
+<div id="basicInformationPartThreeId" class="form-slides">
+
+    <div class="row border m-1">
+        <div class="col-md-12 text-center p-3">
+            <h3>Instruction, Enclosures and Verification </h3>
+        </div>
+    </div>
+
+    <div class="row m-1 mt-minus border border-top-0">
+        <div class="col-md-1 pt-5">49</div>
+        <div class="col-md-11 border-left">
+            <p class="pt-3 m-0"><b>Instructions: </b></p>
+            <p>
+                1. Statement of assets, liabilities and expenses (IT-10B2016) and
+                statement of life style expense (IT-10BB2016) must be furnished with
+                the return unless you are exempted from furnishing such statement(s) under section 80.
+            </p>
+            <p>
+                2. Proof of payments of tax, including advance
+                tax and withholding tax and the proof of investment for tax rebate must be provided along with return.
+            </p>
+            <P>
+                3. Attach account statements and other documents where applicable.
+            </P>
+        </div>
+    </div>
+
+    <div class="row m-1 mt-minus border border-top-0">
+        <div class="col-md-1 pt-3 border-right">50</div>
+        <div class="col-md-7 border-right pt-2 pb-2">
+            If you are a parent of a person with disability,
+            has your spouse availed the extended tax exemption threshold? (tick one)
+        </div>
+        <div class="col-md-2 border-right pt-2">
+            @if (basicInformation.IsParentOfPersonWithDisability == "yes")
+            {
+                <label class="pt-4">
+                    <input type="radio" name="IsParentOfPersonWithDisability" value="yes" class=""
+                           style="margin-left: 10px;" checked /> Yes
+                </label>
+            }
+            else
+            {
+                <label class="pt-4">
+                    <input type="radio" name="IsParentOfPersonWithDisability" value="yes" class=""
+                           style="margin-left: 10px;" /> Yes
+                </label>
+            }
+        </div>
+        <div class="col-md-2 pt-2">
+            @if (basicInformation.IsParentOfPersonWithDisability == "no")
+            {
+
+                <label class="pt-4">
+                    <input type="radio" name="IsParentOfPersonWithDisability" value="no" style="margin-left: 10px;" checked /> No
+                </label>
+            }
+            else
+            {
+
+                <label class="pt-4">
+                    <input type="radio" name="IsParentOfPersonWithDisability" value="no" style="margin-left: 10px;" /> No
+                </label>
+            }
+        </div>
+    </div>
+
+    <div class="row m-1 mt-minus border border-top-0">
+        <div class="col-md-1 pt-3 border-right">51</div>
+        <div class="col-md-7 border-right pt-2 pb-2">
+            Are you required to submit a statement of assets,
+            liabilities and expenses (IT-10B2016) under section 80(1)? (tick one)
+        </div>
+        <div class="col-md-2 border-right pt-2">
+            @if (basicInformation.AreYouRequiredToSubmitStatementOfAssets == "yes")
+            {
+                <label class="pt-4">
+                    <input type="radio" name="AreYouRequiredToSubmitStatementOfAssets" value="yes" class=""
+                           style="margin-left: 10px;" checked /> Yes
+                </label>
+            }
+            else
+            {
+                <label class="pt-4">
+                    <input type="radio" name="AreYouRequiredToSubmitStatementOfAssets" value="yes" class=""
+                           style="margin-left: 10px;" /> Yes
+                </label>
+            }
+
+        </div>
+        <div class="col-md-2 pt-2">
+            @if (basicInformation.AreYouRequiredToSubmitStatementOfAssets == "no")
+            {
+                <label class="pt-4">
+                    <input type="radio" name="AreYouRequiredToSubmitStatementOfAssets" value="no" class=""
+                           style="margin-left: 10px;" checked /> No
+                </label>
+            }
+            else
+            {
+                <label class="pt-4">
+                    <input type="radio" name="AreYouRequiredToSubmitStatementOfAssets" value="no" class=""
+                           style="margin-left: 10px;" /> No
+                </label>
+            }
+
+        </div>
+    </div>
+
+    <div class="row m-1 mt-minus border border-top-0">
+        <div class="col-md-1 pt-3 border-right">52</div>
+        <div class="col-md-4 border-right pt-2 pb-2">
+            Schedules annexed (tick all that are applicable)
+        </div>
+
+        <div class="col-md-7">
+            <div class="container m-0 p-0">
+                <div class="row" id="scheduleAnnexedId">
+                    @if (a.Length > 0)
+                    {
+                        <div class="col-md-3 border-right pt-2">
+                            <label class="pt-3 pb-3">
+                                <input name="" type="checkbox" value="24A" checked /> 24A
+                            </label>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-3 border-right pt-2">
+                            <label class="pt-3 pb-3">
+                                <input name="" type="checkbox" value="24A" /> 24A
+                            </label>
+                        </div>
+                    }
+                    @if (b.Length > 0)
+                    {
+                        <div class="col-md-3 pt-2 border-right">
+                            <label class="pt-3 pb-3">
+                                <input name="" type="checkbox" value="24B" checked /> 24B
+                            </label>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-3 pt-2 border-right">
+                            <label class="pt-3 pb-3">
+                                <input name="" type="checkbox" value="24B" /> 24B
+                            </label>
+                        </div>
+                    }
+                    @if (c.Length > 0)
+                    {
+                        <div class="col-md-3 pt-2 border-right">
+                            <label class="pt-3 pb-3">
+                                <input name="" type="checkbox" value="24C" checked /> 24C
+                            </label>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-3 pt-2 border-right">
+                            <label class="pt-3 pb-3">
+                                <input name="" type="checkbox" value="24C" /> 24C
+                            </label>
+                        </div>
+                    }
+
+                    @if (d.Length > 0)
+                    {
+                        <div class="col-md-3 pt-2">
+                            <label class="pt-3 pb-3">
+                                <input name="" type="checkbox" value="24D" checked /> 24D
+                            </label>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-3 pt-2">
+                            <label class="pt-3 pb-3">
+                                <input name="" type="checkbox" value="24D" /> 24D
+                            </label>
+                        </div>
+                    }
+
+                    <input type="hidden" 
+                           name="SchedulesAnnexed" 
+                           value="@basicInformation.SchedulesAnnexed" 
+                           id="SchedulesAnnexedInputResult" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row m-1 mt-minus border border-top-0">
+        <div class="col-md-1 pt-3 border-right">53</div>
+        <div class="col-md-4 border-right pt-2 pb-2">
+            Statements annexed (tick all that are applicable)
+        </div>
+        <div class="col-md-7">
+            <div class="container m-0 p-0">
+                <div class="row m-0 p-0" id="statemantAnnexedId">
+                    @if (it1.Length > 0)
+                    {
+                        <div class="col-md-6 border-right">
+                            <label class="pt-4 pb-2">
+                                <input name="" type="checkbox" value="IT-10B2016" checked /> IT-10B2016
+                            </label>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-6 border-right">
+                            <label class="pt-4 pb-2">
+                                <input name="" type="checkbox" value="IT-10B2016" /> IT-10B2016
+                            </label>
+                        </div>
+                    }
+
+                    @if (it2.Length > 0)
+                    {
+                        <div class="col-md-6">
+                            <label class="pt-4 pb-2">
+                                <input name="" type="checkbox" value="IT-10BB2016" checked /> IT-10BB2016
+                            </label>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-6">
+                            <label class="pt-4 pb-2">
+                                <input name="" type="checkbox" value="IT-10BB2016" /> IT-10BB2016
+                            </label>
+                        </div>
+                    }
+
+
+                    <input type="hidden" name="StatementsAnnexed" id="StatementsAnnexedResultId" value="@basicInformation.StatementsAnnexed" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row m-1 mt-minus border border-top-0">
+        <div class="col-md-1 pt-3 border-right">54</div>
+        <div class="col-md-11 border-right pt-2 pb-2">
+            <label>Other statements, documents, etc. attached (list all)</label>
+            <textarea name="OtherStatementsDocuments" class="form-control" cols="6" rows="6"
+                      style="width: 97%;">@basicInformation.OtherStatementsDocuments</textarea>
+        </div>
+    </div>
+
+    <div class="row m-1 border mt-3 text-center bg-light">
+        <div class="col-md-12 p-2">
+            <b>Verification and signature</b>
+        </div>
+    </div>
+
+    <div class="row m-1 border mt-minus border-top-0">
+        <div class="col-md-1 p-2 border-right pt-3">55</div>
+        <div class="col-md-11">
+            <div class="container m-0 p-0">
+                <div class="row pt-2">
+                    <div class="col-md-12">
+                        <P>
+                            I solemnly declare that to the best of my knowledge and belief the
+                            information given in this return and statements and
+                            documents annexed or attached herewith are correct and complete.
+                        </P>
+                    </div>
+                </div>
+
+                <div class="row pt-2">
+                    <div class="col-md-6">
+                        <label>Name</label>
+                        <input type="text" value="@userInformation.NameOfAssessee" name="Name" class="form-control"
+                               readonly />
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>Signature</label>
+                        <div class="custom-file">
+                            @if (Session["Signature"] != null)
+                            {
+                                <img src="@Url.Content(Session["Signature"].ToString())"
+                                     style="width: 150px; height: 50px; box-shadow: 0 0 5px #ccc; padding: 3px;"/>
+                            }
+                            else
+                            {
+                                <b class="text-danger">Not provided signature.</b>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row pt-2">
+                    <div class="col-md-6">
+                        <label>Date of Signature (DD-MM-YYYY)</label>
+                        <input name="DateOfSignature" value="@basicInformation.DateOfSignature" type="date"
+                               class="form-control" />
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>Place of Signature</label>
+                        <input type="text" name="PlaceOfSignatur" value="@basicInformation.PlaceOfSignatur"
+                               class="form-control">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="row m-1 border mt-3 text-center bg-light">
+        <div class="col-md-12 p-2">
+            <b>For official use only</b>
+            <p>Return Submission Information</p>
+        </div>
+    </div>
+
+    <div class="row m-1 border mt-minus border-top-0">
+        <div class="col-md-6 p-2 border-right">
+            <label>Date of Submission (DD-MM-YYYY)</label>
+            <input name="DateOfSubmition" type="date" class="form-control" value="@basicInformation.DateOfSubmition" />
+        </div>
+        <div class="col-md-6 p-2">
+            <label>Tax Office Entry Number</label>
+            <div class="row" id="textOfficeEntryNumber">
+                <input type="number" name="TaxOfficeEntryNumber" value="@basicInformation.TaxOfficeEntryNumber"
+                       placeholder="Text Office Entry Number" class="form-control" style="margin-left: 15px;" />
+
+            </div>
+        </div>
+    </div>
+</div>

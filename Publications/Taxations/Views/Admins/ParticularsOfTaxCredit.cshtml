@@ -1,0 +1,249 @@
+﻿@model Taxations.Models.ParticularsOfTaxCredit
+@using Taxations.Models
+
+@{
+    //ViewBag.Title = "Report Of Statement Of Expenses";
+    Layout = null;
+
+    UserInformation ui = new UserInformation();
+    if (ViewBag.UserInformations != null)
+    {
+        ui = ViewBag.UserInformations;
+    }
+
+    User user = new User();
+    if (ViewBag.User != null)
+    {
+        user = ViewBag.User;
+    }
+
+    ParticularsOfIncomeFromSalary poifs = new ParticularsOfIncomeFromSalary();
+
+
+    if (ViewBag.ParticularsOfSalaries != null)
+    {
+        poifs = ViewBag.ParticularsOfSalaries;
+    }
+}
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 20px;
+        padding: 12px;
+        border-collapse: collapse;
+    }
+
+    tr td:first-child {
+        padding: 10px;
+    }
+
+    input[type="text"] {
+        width: 100%;
+        padding: 5px;
+    }
+
+    table tr td:nth-child(odd) {
+        text-align: center;
+    }
+
+    p,
+    input,
+    td {
+        margin: 0 !important;
+    }
+
+    tr th {
+        border: 1px solid black;
+        padding: 20px;
+    }
+
+    .page2Table {
+        width: 100%;
+        margin-top: 15px;
+    }
+
+        .page2Table tr th {
+            padding: 12px;
+        }
+</style>
+
+
+<h3 style="text-align:center;padding:0px;margin:0px;margin-top:5px">
+    SCHEDULE 24D
+</h3>
+<p style="font-weight: 600; text-align: center;">
+    Particulars of tax credit/rebate
+</p>
+<p style="text-align:center;padding:0px;margin:0px;">
+    To be annexed to return by an assessee claiming investment tax credit
+</p>
+<p style="text-align:center;padding:0px;margin:0px;">
+    (Attach the proof of claimed investment, contribution, etc.)
+</p>
+
+<table style="margin-top: 30px; margin-bottom: 30px">
+    <tr>
+        <td>01</td>
+        <td>Assessment Year <br>@ui.AssessmentYear</td>
+        <td>02</td>
+        <td>TIN <br>@ui.NewTIN</td>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <th colspan="2" style="text-align: left;">Particulars of rebatable investment, contribution, etc.</th>
+        <th>Amount</th>
+    </tr>
+
+    <tr>
+        <td style="width: 85px">03</td>
+        <td>Life insurance premium</td>
+        <td>@String.Format("{0:n0}", Convert.ToInt64(Model.LifeInsurance))</td>
+    </tr>
+
+    <tr>
+        <td style="width: 85px">04</td>
+        <td>Contribution to deposit pension scheme (not exceeding allowable limit)</td>
+        <td>@String.Format("{0:n0}", Convert.ToInt64(Model.ContributionToDeposit))</td>
+    </tr>
+
+    <tr>
+        <td style="width: 85px">05</td>
+        <td>Investment in approved savings certificate</td>
+        <td>@String.Format("{0:n0}", Convert.ToInt64(Model.InvestmentInApprovedSavings))</td>
+    </tr>
+
+    <tr>
+        <td style="width: 85px">06</td>
+        <td>Investment in approved debenture or debenture stock, Stock or Shares</td>
+        <td>@String.Format("{0:n0}", Convert.ToInt64(Model.InvestmentInApprovedDebenture))</td>
+    </tr>
+
+    <tr>
+        <td style="width: 85px">07</td>
+        <td>Contribution to provident fund to which Provident Fund Act, 1925 applies</td>
+        <td>@String.Format("{0:n0}", Convert.ToInt64(Model.ContributionToProvidentFund))</td>
+    </tr>
+
+    <tr>
+        <td style="width: 85px">08</td>
+        <td>Self contribution and employer’s contribution to Recognized Provident Fund</td>
+        <td>@String.Format("{0:n0}", Convert.ToInt64(Model.SelfContributionAndEmployer))</td>
+    </tr>
+
+    <tr>
+        <td style="width: 85px">09</td>
+        <td>Contribution to Super Annuation Fund</td>
+        <td>@String.Format("{0:n0}", Convert.ToInt64(Model.ContributionToSuperAnnuationFund))</td>
+    </tr>
+
+    <tr>
+        <td style="width: 85px">10</td>
+        <td>Contribution to Benevolent Fund and Group Insurance Premium</td>
+        <td>@String.Format("{0:n0}", Convert.ToInt64(Model.ContributionToBenevolentFund))</td>
+    </tr>
+
+    <tr>
+        <td style="width: 85px">11</td>
+        <td>Contribution to Zakat Fund</td>
+        <td>@String.Format("{0:n0}", Convert.ToInt64(Model.ContributionToZakatFund))</td>
+    </tr>
+
+    <tr>
+        <td style="width: 85px">12</td>
+        <td>Others, if any ( give details )</td>
+        <td>@String.Format("{0:n0}", Convert.ToInt64(Model.OthersIfAny))</td>
+    </tr>
+
+
+    <tr>
+        <td style="width: 85px">13</td>
+        <td>Total allowable investment, contribution etc.</td>
+        <td>@String.Format("{0:n0}", Convert.ToInt64(Model.TotalAllowableInvestment))</td>
+    </tr>
+
+    @* 14 row will be here *@
+
+    <tr style="width: 100%; border: none">
+        <td rowspan="4">14</td>
+        <td>Eligible amount for rebate (the lesser of 14A, 14B or 14C)</td>
+        <td style="text-align: center">@String.Format("{0:n0}", Convert.ToInt64(Model.EligibleAmountForRebate))</td>
+    </tr>
+
+    <tr style="padding: 0px;margin:0px;">
+        <td style="padding: 0px;margin:0px;">
+            <table style="padding: 0px;margin:0px;">
+                <tr style="padding: 0px;margin:0px;">
+                    <td style="border:none; width: 70px;">14A</td>
+                    <td style="border:none;border-left:1px solid;">
+                        Total allowable investment, contribution, etc. (as in 13)
+                    </td>
+                </tr>
+            </table>
+        </td>
+
+        <td style="text-align: center">@String.Format("{0:n0}", Convert.ToInt64(Model.TotalAllowableInvestmentContribution))</td>
+    </tr>
+    <tr style="padding: 0px;margin:0px;">
+
+        <td style="padding: 0px;margin:0px;">
+            <table style="padding: 0px;margin:0px;">
+                <tr style="padding: 0px;margin:0px;">
+                    <td style="border:none; width: 70px;">14B</td>
+                    <td style="border:none ;border-left:1px solid;">
+                        25% of the total income [excluding any income for which a tax exemption or a reduced rate is applicable under sub-section (4) of section 44 or any income from any source or sources mentioned in clause (a) of sub-section (2) of section 82C.]
+                    </td>
+                </tr>
+            </table>
+        </td>
+        <td style="text-align: center">@String.Format("{0:n0}", Convert.ToInt64(Model.TotalIncome14B))</td>
+    </tr>
+
+    <tr style="padding: 0px;margin:0px;">
+        <td style="padding: 0px;margin:0px;">
+            <table style="padding: 0px;margin:0px;">
+                <tr style="padding: 0px;margin:0px;">
+                    <td style="border:none; width: 70px;">14C</td>
+                    <td style="border:none ;border-left:1px solid;">1.5 crore</td>
+                </tr>
+            </table>
+        </td>
+        <td style="text-align: center">@String.Format("{0:n0}", Convert.ToInt64(Model.Crore14C))</td>
+    </tr>
+
+    <tr>
+        <td style="width: 85px">15</td>
+        <td>Eligible amount for rebate (the lesser of 14A, 14B or 14C)</td>
+        <td>@String.Format("{0:n0}", Convert.ToInt64(Model.EligibleAmountForRebate))</td>
+    </tr>
+</table>
+
+<table style="margin-top: 30px;">
+    <tr style="width: 100%; border: none">
+        <td>22</td>
+        <td>
+            Name <br />@ui.NameOfAssessee
+        </td>
+        <td style="text-align: left;">
+            Signature & date
+            <br>
+            @if (Model.SignatureAndDatePhoto != null || Model.SignatureAndDatePhoto !=
+            "NOIMAGE_PATH")
+            {
+                <img src="@Model.SignatureAndDatePhoto.Replace("~", "")" style="width: 50px; height: 50px;" />
+            }
+            else
+            {
+                <h3>Signature And Date isn't provided yet.</h3>
+            }
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,12 @@
+﻿* {
+    font-family: 'Open Sans';
+}
+
+.render-body {
+    margin-top: 20px;
+}
+.form-horizontal{
+    margin: 0;
+    padding: 30px;
+    padding-top: 10px;
+}

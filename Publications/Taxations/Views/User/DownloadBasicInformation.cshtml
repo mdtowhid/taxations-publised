@@ -1,0 +1,1139 @@
+﻿@model Taxations.Models.BasicInformation
+@using Taxations.Models
+
+
+@{
+    ViewBag.Title = "Download Basic Information";
+    Layout = "~/Views/Shared/downloads.cshtml";
+
+
+    UserInformation userInformation = new UserInformation();
+    TotalInfo totalInfo = new TotalInfo();
+    FinalCalculation fc = new FinalCalculation();
+    ParticularsOfIncomeFromSalary poifs = new ParticularsOfIncomeFromSalary();
+
+    if (ViewBag.UserInformations != null)
+    {
+        userInformation = ViewBag.UserInformations;
+    }
+
+    if (ViewBag.AllInformations != null)
+    {
+        totalInfo = ViewBag.AllInformations;
+    }
+    if (ViewBag.FinalCalculations != null)
+    {
+        fc = ViewBag.FinalCalculations;
+    }
+    if (ViewBag.ParticularsOfSalaries != null)
+    {
+        poifs = ViewBag.ParticularsOfSalaries;
+    }
+
+
+    ParticularsOfTaxCredit ptc = new ParticularsOfTaxCredit();
+    if (ViewBag.ParticularsOfTaxCredits != null)
+    {
+        ptc = ViewBag.ParticularsOfTaxCredits;
+    }
+}
+
+
+<style>
+    dl dt {
+        padding-bottom: 10px;
+    }
+
+    .c1 {
+        margin: 0px -8px;
+    }
+    .breakhere {
+        page-break-after: always
+    }
+
+
+    /*.row > div > div > div label{
+        padding-top: 2px !important
+    }
+    .row > div > div > div input {
+        padding-top: 2px !important
+    }*/
+</style>
+
+<div class="informations mt-3 p-3">
+    <div>
+        @*<button onclick="getPDF('BasicInformation')" class="btn btn- btn-success">Download</button>*@
+        <a href="/user/PrintBasicInformation/35">Download</a>
+    </div>
+
+    @if (Model != null)
+    {
+
+        <div id="downloadWrapper">
+            
+
+            <div>
+
+                <div class="row text-center">
+                    <div class="col-md-12">
+                        <h4>RETURN OF INCOME</h4>
+                        <p>For an Individual Assessee</p>
+                    </div>
+                </div>
+
+                <div class="row" style=" margin: -11px; margin-bottom: 10px;">
+                    <div class="col-md-8">
+                        <div class="m-0 border p-1">The following schedules shall be the integral part of this return and must be annexed to return in the following cases:</div>
+
+                        <div class="container mb-0">
+                            <div class="row border">
+                                <div class="col-md-4 border-right">Schedule 24A</div>
+                                <div class="col-md-8"><i>if  you have income from Salaries</i></div>
+                            </div>
+                        </div>
+
+                        <div class="container mb-0">
+                            <div class="row border">
+                                <div class="col-md-4 border-right">Schedule 24B</div>
+                                <div class="col-md-8"><i>if  you have income from house property</i></div>
+                            </div>
+                        </div>
+
+                        <div class="container mb-0">
+                            <div class="row border">
+                                <div class="col-md-4 border-right">Schedule 24C</div>
+                                <div class="col-md-8"><i>if  you have income from business or profession</i></div>
+                            </div>
+                        </div>
+
+                        <div class="container mb-0">
+                            <div class="row border">
+                                <div class="col-md-4 border-right">Schedule 24D</div>
+                                <div class="col-md-8"><i>if  you claim tax rebate</i></div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-4 border" style="height: 100px"></div>
+                </div>
+
+
+                <input type="hidden" name="UserId" value="@Session["UserId"]" />
+                <input type="hidden" name="AdditionalColumn" value="none" />
+                <input type="hidden" name="EmployeementStatus" value="@Session["UserType"]" />
+
+                <div class="row m-1 mb-0 bg-white border">
+                    <div class="col-md-6">
+                        <div class="container m-0 p-0">
+                            <div class="row border-right border-top-0">
+                                <div class="col-md-2 border-right pt-4 text-center">01</div>
+                                <div class="col-md-10">
+                                    <label class="pt-2">Assessment Year</label>
+                                    <input type="text" class="form-control mb-2 text-left" name="AssessmentYear" value="@userInformation.AssessmentYear" readonly />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="container m-0 p-0">
+                            <div class="row border-top-0">
+                                <div class="col-md-2 border-right pt-4 text-center">02</div>
+                                <div class="col-md-10">
+                                    <p class="pt-1 border-bottom m-0">Return submitted under section 82BB? (tick one)</p>
+                                    @if (userInformation.ReturnSubmitted == "Yes")
+                                    {
+                                        <label><input type="radio" name="ReturnSubmitted" value="Yes" checked /> Yes </label>
+                                    }
+                                    else
+                                    {
+                                        <label><input type="radio" name="ReturnSubmitted" value="No" checked /> No</label>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row m-1 mb-0 bg-white border mt-minus">
+                    <div class="col-md-6">
+                        <div class="container m-0 p-0">
+                            <div class="row border-right border-top-0">
+                                <div class="col-md-2 border-right pt-4 text-center">03</div>
+                                <div class="col-md-10">
+                                    <label class="pt-2">
+                                        Name of the Assessee
+                                        <span class="required-warning">*</span>
+                                    </label>
+                                    <input type="text" value="@userInformation.NameOfAssessee" class="form-control" name="NameOfAssessee" readonly />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="container m-0 p-0">
+                            <div class="row border-top-0">
+                                <div class="col-md-2 border-right pt-3 text-center" style="min-height: 100px">04</div>
+                                <div class="col-md-10">
+                                    <p class="border-bottom m-0 pt-2 pb-2">Gender (tick one)</p>
+                                    @if (userInformation.Gender == "Male")
+                                    {
+                                        <input type="radio" name="Gender" value="Male" checked class="mt-" /> <span>Male </span>
+                                    }
+                                    else
+                                    {
+                                        <input type="radio" name="Gender" value="Female" checked class="mt-" /> <span>Female </span>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row m-1 mb-0 bg-white border mt-minus border-top-0">
+                    <div class="col-md-6">
+                        <div class="container m-0 p-0">
+                            <div class="row border-right border-top-0">
+                                <div class="col-md-2 border-right pt-4 text-center">05</div>
+                                <div class="col-md-10">
+                                    <label class="pt-2">
+                                        Twelve-digit TIN
+                                        <span title="This Field Must Be Required." class="required-warning">*</span>
+                                    </label>
+                                    <input type="text" value="@userInformation.NewTIN" readonly name="NewTIN" class="form-control" placeholder="Twelve-digit TIN" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="container m-0 p-0">
+                            <div class="row border-top-0">
+                                <div class="col-md-2 border-right pt-4 text-center">06</div>
+                                <div class="col-md-10">
+                                    <label class="pt-2">
+                                        Old TIN <span title="This Field Must Be Required." class="required-warning">*</span>
+                                    </label>
+                                    <input type="text" value="@userInformation.OldTIN" readonly name="OldTIN" class="form-control" placeholder="Old TIN" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row m-1 mb-0 bg-white border mt-minus">
+                    <div class="col-md-6">
+                        <div class="container m-0 p-0">
+                            <div class="row border-right border-top-0">
+                                <div class="col-md-2 border-right pt-4 text-center">07</div>
+                                <div class="col-md-10">
+                                    <label class="pt-2">
+                                        Circle <span title="This Field Must Be Required." class="required-warning">*</span>
+                                    </label>
+                                    <input type="text" name="Circle" value="@userInformation.Circle" readonly class="form-control" placeholder="Circle" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="container m-0 p-0">
+                            <div class="row border-top-0">
+                                <div class="col-md-2 border-right pt-4 text-center">08</div>
+                                <div class="col-md-10">
+                                    <label class="pt-2">Zone <span title="This Field Must Be Required." class="required-warning">*</span></label>
+                                    <input type="text" name="Zone" value="@userInformation.Zone" readonly class="form-control" placeholder="Zone" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row m-1 mb-0 bg-white border mt-minus">
+                    <div class="col-md-6">
+                        <div class="container m-0 p-0">
+                            <div class="row border-right border-top-0">
+                                <div class="col-md-2 border-right pt-2 pb-2 text-center">09</div>
+                                <div class="col-md-10 pt-2">
+                                    Resident Status
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="container m-0 p-0">
+                            <div class="row border-top-0">
+                                @if (userInformation.ResidentStatus == "Yes")
+                                {
+
+                                    <div class="pt-1 pl-2">
+                                        Resident <input type="radio" name="ResidentStatus" value="@userInformation.ResidentStatus" checked />
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="pt-2 pl-2">
+                                        Non-Resident <input name="ResidentStatus" value="@userInformation.ResidentStatus" type="radio" checked />
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row m-1 mb-0 bg-white border mt-minus" id="TickOnBoxesDivId">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-1 border border-left-0 border-bottom-0 pt-3 text-center">10</div>
+                            <div class="col-md-11 pt-2 border-bottom">Tick on the box(es) below if you are:</div>
+
+                        </div>
+
+                        <div class="row border-top-0">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-1 border border-top-0 pt-3">10A</div>
+                            <div class="col-md-5 border-bottom">
+                                <label class="p-2">
+                                    A gazetted war-wounded freedom fighter
+                                    <input type="checkbox" name="" value="A gazetted war-wounded
+                            freedom fighter" class="checkbox-right" />
+                                </label>
+                            </div>
+                            <div class="col-md-1 border border-top-0 border-right-0 pt-3">10B</div>
+                            <div class="col-md-4 border border-top-0 border-right-0">
+                                <label class="pt-4">
+                                    A person with disability
+                                    <input type="checkbox" class="checkbox-right" name="" value="A person with disability" />
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="row border-top-0 border-bottom-0">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-1 border border-top-0 pt-3">10C</div>
+                            <div class="col-md-5 border-bottom">
+                                <label class="pt-3">
+                                    Aged 65 years or more
+                                    <input type="checkbox" name="" value="Aged 65 years or more" class="ml-2" />
+                                </label>
+                            </div>
+                            <div class="col-md-1 border border-top-0 pt-3 border-right-0">10D</div>
+                            <div class="col-md-4 border border-top-0 border-right-0">
+                                <label>
+                                    A parent/legal guardian of a person
+                                    <br />with disability
+                                    <input type="checkbox" name="" value="A parent/legal guardian of a person
+                                with disability" class="checkbox-right" />
+                                </label>
+                            </div>
+                        </div>
+
+                        <input type="hidden" name="TickOnBoxes" id="TickOnBoxesInputResult" value="@userInformation.TickOnBoxes" />
+                    </div>
+                </div>
+
+                <div class="row m-1 mb-0 bg-white border mt-minus border-top-0">
+                    <div class="col-md-6">
+                        <div class="container m-0 p-0">
+                            <div class="row border-right border-top-0">
+                                <div class="col-md-2 border-top border-right pt-4 text-center">11</div>
+                                <div class="col-md-10">
+                                    <label class="pt-2">Date of birth (DD-MM-YYYY)  <span title="This Field Must Be Required." class="required-warning">*</span></label>
+                                    <input name="DateOfBirth" type="date" class="form-control" value="@userInformation.DateOfBirth" readonly />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="container m-0 p-0">
+                            <div class="row border-top-0">
+                                <div class="col-md-2 border-right pt-4 text-center">12</div>
+                                <div class="col-md-10">
+                                    <label class="pt-2">Income Year </label>
+                                    <div class="container m-0 p-0">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <input type="text" value="@userInformation.IncomeYearFrom" readonly class="form-control" placeholder="From year" name="YearFrom" />
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="text" value="@userInformation.IncomeYearTo" readonly class="form-control" placeholder="To year" name="YearTo" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row m-1 mb-0 bg-white border mt-minus border-top-0">
+                    <div class="col-md-1 border-bottom border-right pt-4 text-center">13</div>
+                    <div class="col-md-11 border-bottom">
+                        <label class="pt-2">If employed, employer’s name</label>
+                        <input type="text" value="@userInformation.EmployerName" readonly class="form-control" name="EmployerName" />
+                    </div>
+                </div>
+
+                <div class="row m-1 mb-0 bg-white border mt-minus border-top-0">
+                    <div class="col-md-6">
+                        <div class="container m-0 p-0">
+                            <div class="row border-right border-top-0">
+                                <div class="col-md-2 border-right pt-4 text-center">14</div>
+                                <div class="col-md-10">
+                                    <label class="pt-2">Spouse Name</label>
+                                    <input type="text" class="form-control" value="@userInformation.SpouseName" readonly name="SpouseName" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="container m-0 p-0">
+                            <div class="row border-top-0">
+                                <div class="col-md-2 border-right pt-4 text-center">15</div>
+                                <div class="col-md-10">
+                                    <label class="pt-2">Spouse TIN (if any)</label>
+                                    <input type="text" class="form-control"
+                                           value="@userInformation.SpouseTIN" readonly name="SpouseTIN" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row m-1 mb-0 bg-white border mt-minus border-top-0">
+                    <div class="col-md-6 border-bottom">
+                        <div class="container m-0 p-0">
+                            <div class="row border-right border-top-0">
+                                <div class="col-md-2 border-right pt-4 text-center">16</div>
+                                <div class="col-md-10">
+                                    <label class="pt-2">Father’s Name</label>
+                                    <input type="text" class="form-control" value="@userInformation.FatherName" readonly name="FatherName" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 border-bottom">
+                        <div class="container m-0 p-0">
+                            <div class="row border-top-0">
+                                <div class="col-md-2 border-right pt-4 text-center">17</div>
+                                <div class="col-md-10">
+                                    <label class="pt-2">Mother’s Name</label>
+                                    <input type="text" class="form-control" value="@userInformation.MotherName" readonly name="MotherName" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row m-1 mb-0 bg-white border mt-minus border-top-0">
+                    <div class="col-md-6 border-bottom">
+                        <div class="container m-0 p-0">
+                            <div class="row border-right border-top-0">
+                                <div class="col-md-2 border-right pt-4 text-center">18</div>
+                                <div class="col-md-10">
+                                    <label class="pt-2">Present Address</label>
+                                    <input type="text" class="form-control" value="@userInformation.PresentAddress" readonly name="PresentAddress" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 border-bottom">
+                        <div class="container m-0 p-0">
+                            <div class="row border-top-0">
+                                <div class="col-md-2 border-right pt-4 text-center">19</div>
+                                <div class="col-md-10">
+                                    <label class="pt-2">Permanent Address</label>
+                                    <input type="text" class="form-control" value="@userInformation.PermanentAddress" readonly name="PermanentAddress" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row m-1 mb-0 bg-white border mt-minus border-top-0">
+                    <div class="col-md-6">
+                        <div class="container m-0 p-0">
+                            <div class="row border-right border-top-0">
+                                <div class="col-md-2 border-right pt-4 text-center">20</div>
+                                <div class="col-md-10">
+                                    <label class="pt-2">Contact Telephone  <span title="This Field Must Be Required." class="required-warning">*</span></label>
+                                    <input type="text" class="form-control" value="@userInformation.ContactTelephone" readonly name="ContactTelephone" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="container m-0 p-0">
+                            <div class="row border-top-0">
+                                <div class="col-md-2 border-right pt-4 text-center">21</div>
+                                <div class="col-md-10">
+                                    <label class="pt-2">E-mail  <span title="This Field Must Be Required." class="required-warning">*</span></label>
+                                    <input type="text" class="form-control" value="@userInformation.Email" readonly name="Email" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row m-1 mb-0 bg-white border mt-minus border-top-0">
+                    <div class="col-md-6 border-bottom">
+                        <div class="container m-0 p-0">
+                            <div class="row border-right border-top-0">
+                                <div class="col-md-2 border-right pt-4 text-center">22</div>
+                                <div class="col-md-10">
+                                    <label class="pt-2">National Identification Number  <span title="This Field Must Be Required." class="required-warning">*</span></label>
+                                    <input type="text" class="form-control" value="@userInformation.NID" readonly name="NID" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 border-bottom">
+                        <div class="container m-0 p-0">
+                            <div class="row border-top-0">
+                                <div class="col-md-2 border-right pt-4 text-center">23</div>
+                                <div class="col-md-10">
+                                    <label class="pt-2">Business Identification Number(s)</label>
+                                    <input type="text" class="form-control" value="@userInformation.BIN" readonly name="BIN" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row border m-1 bg-light">
+                <div class="col-md-8 p-2 border-right">
+                    <h3 class="m-0">Particulars of Total Income</h3>
+                </div>
+                <div class="col-md-4 p-2 ">
+                    <h3 class="m-0 text-center">Amount</h3>
+                </div>
+            </div>
+
+            <div class="row border m-1 mt-minus">
+                <div class="col-md-1 border-right pt-3 text-center">24</div>
+                <div class="col-md-7 border-right pt-3">Salaries (annex Schedule 24A)</div>
+                <div class="col-md-4">
+                    <div class="container m-0 p-0">
+                        <div class="row">
+                            <div class="col-md-3 pt-3 border-right">S.21</div>
+                            <div class="col-md-9 pb-2 pt-2">
+                                <input type="text" readonly id="Salaries" name="Salaries" value="@poifs.Total"
+                                       class="form-control 24-33" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row border m-1 mt-minus">
+                <div class="col-md-1 border-right pt-3 text-center">25</div>
+                <div class="col-md-7 border-right pt-3">Interest on securities</div>
+                <div class="col-md-4">
+                    <div class="container m-0 p-0">
+                        <div class="row">
+                            <div class="col-md-3 pt-3 border-right">S.22</div>
+                            <div class="col-md-9 pb-2 pt-2">
+                                <input type="text" id="InterestOnSecurities" value="@Model.InterestOnSecurities"
+                                       name="InterestOnSecurities" class="form-control 24-33" readonly />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row border m-1 mt-minus border-top-0">
+                <div class="col-md-1 border-right pt-3 text-center">26</div>
+                <div class="col-md-7 border-right pt-3">Income from house property (annex Schedule 24B)</div>
+                <div class="col-md-4">
+                    <div class="container m-0 p-0">
+                        <div class="row">
+                            <div class="col-md-3 pt-3 border-right">S.24</div>
+                            <div class="col-md-9 pb-2 pt-2">
+                                <input type="text" id="IncomeFromHouseProperty" name="IncomeFromHouseProperty"
+                                       class="form-control 24-33" readonly />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row border m-1 mt-minus border-top-0">
+                <div class="col-md-1 border-right pt-3 text-center">27</div>
+                <div class="col-md-7 border-right pt-3">Agricultural income</div>
+                <div class="col-md-4">
+                    <div class="container m-0 p-0">
+                        <div class="row">
+                            <div class="col-md-3 pt-3 border-right">S.26</div>
+                            <div class="col-md-9 pb-2 pt-2">
+                                <input readonly type="text" id="AgriculturalIncome" name="AgriculturalIncome" class="form-control 24-33" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row border m-1 mt-minus border-top-0">
+                <div class="col-md-1 border-right pt-3 text-center">28</div>
+                <div class="col-md-7 border-right pt-3">Income from business or profession (annex Schedule 24C)</div>
+                <div class="col-md-4">
+                    <div class="container m-0 p-0">
+                        <div class="row">
+                            <div class="col-md-3 pt-3 border-right">S.28</div>
+                            <div class="col-md-9 pb-2 pt-2">
+                                <input type="text" id="IncomeFromBusinessOrProfession" name="IncomeFromBusinessOrProfession"
+                                       class="form-control 24-33" readonly />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row border m-1 mt-minus border-top-0">
+                <div class="col-md-1 border-right pt-3 text-center">29</div>
+                <div class="col-md-7 border-right pt-3">Capital gains</div>
+                <div class="col-md-4">
+                    <div class="container m-0 p-0">
+                        <div class="row">
+                            <div class="col-md-3 pt-3 border-right">S.31</div>
+                            <div class="col-md-9 pb-2 pt-2">
+                                <input type="text" id="CapitalGains" name="CapitalGains" class="form-control 24-33" readonly />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row border m-1 mt-minus border-top-0">
+                <div class="col-md-1 border-right pt-3 text-center">30</div>
+                <div class="col-md-7 border-right pt-3">Income from other sources</div>
+                <div class="col-md-4">
+                    <div class="container m-0 p-0">
+                        <div class="row">
+                            <div class="col-md-3 pt-3 border-right">S.33</div>
+                            <div class="col-md-9 pb-2 pt-2">
+                                <input type="text" id="IncomeFromOtherSources" name="IncomeFromOtherSources"
+                                       class="form-control 24-33" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row border m-1 mt-minus border-top-0">
+                <div class="col-md-1 border-right pt-3 text-center">31</div>
+                <div class="col-md-7 border-right pt-3">Share of income from firm or AOP</div>
+                <div class="col-md-4">
+                    <div class="container m-0 p-0">
+                        <div class="row">
+                            <div class="col-md-3 pt-3"></div>
+                            <div class="col-md-9 pb-2 pt-2">
+                                <input type="text" id="ShareOfIncomeFromFirmOrAOP" name="ShareOfIncomeFromFirmOrAOP"
+                                       class="form-control 24-33" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row border m-1 mt-minus border-top-0">
+                <div class="col-md-1 border-right pt-3 text-center">32</div>
+                <div class="col-md-7 border-right pt-3">Income of minor or spouse under section 43(4)</div>
+                <div class="col-md-4">
+                    <div class="container m-0 p-0">
+                        <div class="row">
+                            <div class="col-md-3 pt-3 border-right">S.43</div>
+                            <div class="col-md-9 pb-2 pt-2">
+                                <input type="text" id="IncomeOfMinor" name="IncomeOfMinor" class="form-control 24-33" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row border m-1 mt-minus border-top-0">
+                <div class="col-md-1 border-right pt-3 text-center">33</div>
+                <div class="col-md-7 border-right pt-3">Foreign income</div>
+                <div class="col-md-4">
+                    <div class="container m-0 p-0">
+                        <div class="row">
+                            <div class="col-md-3 pt-3"></div>
+                            <div class="col-md-9 pb-2 pt-2">
+                                <input type="text" id="ForeignIncome" name="ForeignIncome" class="form-control 24-33" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row border m-1 mt-minus border-top-0">
+                <div class="col-md-1 border-right pt-3 text-center">34</div>
+                <div class="col-md-7 border-right pt-3">Total income (aggregate of 24 to 33)</div>
+                <div class="col-md-4">
+                    <div class="container m-0 p-0">
+                        <div class="row">
+                            <div class="col-md-3 pt-3"></div>
+                            <div class="col-md-9 pb-2 pt-2">
+                                <input type="text" readonly id="TotalIncome" name="TotalIncome" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!--::::::::::::::::::::::::::::::::::::::::-->
+
+            <div class="row border m-1 bg-light mt-3">
+                <div class="col-md-8 p-2 border-right">
+                    <h3 class="m-0">Tax Computation and Payment</h3>
+                </div>
+                <div class="col-md-4 p-2 ">
+                    <h3 class="m-0 text-center">Amount</h3>
+                </div>
+            </div>
+
+            <div class="row border m-1 mt-minus border-top-0">
+                <div class="col-md-1 border-right pt-3 text-center">35</div>
+                <div class="col-md-7 border-right pt-3">Gross tax before tax rebate</div>
+                <div class="col-md-4">
+                    <div class="container m-0 p-0">
+                        <div class="row">
+                            <div class="col-md-3 pt-3"></div>
+                            <div class="col-md-9 pb-2 pt-2">
+                                <input type="text" readonly id="GrossTaxBeforeTaxRebate" name="GrossTaxBeforeTaxRebate"
+                                       value="@poifs.GrossTaxBeforeTaxRebate" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row border m-1 mt-minus border-top-0">
+                <div class="col-md-1 border-right pt-3 text-center">36</div>
+                <div class="col-md-7 border-right pt-3">Tax rebate (annex Schedule 24D)</div>
+                <div class="col-md-4">
+                    <div class="container m-0 p-0">
+                        <div class="row">
+                            <div class="col-md-3 pt-3"></div>
+                            <div class="col-md-9 pb-2 pt-2">
+                                <input type="text" id="TaxRebate" name="TaxRebate" value="@ptc.AmountOfTaxRebateCalculated" readonly
+                                       class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row border m-1 mt-minus border-top-0">
+                <div class="col-md-1 border-right pt-3 text-center">37</div>
+                <div class="col-md-7 border-right pt-3">Net tax after tax rebate</div>
+                <div class="col-md-4">
+                    <div class="container m-0 p-0">
+                        <div class="row">
+                            <div class="col-md-3 pt-3"></div>
+                            <div class="col-md-9 pb-2 pt-2">
+                                <input type="text" id="NetTaxAfterTaxRebate" name="NetTaxAfterTaxRebate" value="@fc.TaxPayable"
+                                       readonly class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row border m-1 mt-minus border-top-0">
+                <div class="col-md-1 border-right pt-3 text-center">38</div>
+                <div class="col-md-7 border-right pt-3">Minimum tax</div>
+                <div class="col-md-4">
+                    <div class="container m-0 p-0">
+                        <div class="row">
+                            <div class="col-md-3 pt-3"></div>
+                            <div class="col-md-9 pb-2 pt-2">
+                                <input type="text" id="MinimumTax" name="MinimumTax" value="5000" readonly class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row border m-1 mt-minus border-top-0">
+                <div class="col-md-1 border-right pt-3 text-center">39</div>
+                <div class="col-md-7 border-right pt-3">Net wealth surcharge</div>
+                <div class="col-md-4">
+                    <div class="container m-0 p-0">
+                        <div class="row">
+                            <div class="col-md-3 pt-3"></div>
+                            <div class="col-md-9 pb-2 pt-2">
+                                <input type="text" id="NetWealthSurcharge" name="NetWealthSurcharge" value=""
+                                       readonly class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row border m-1 mt-minus border-top-0">
+                <div class="col-md-1 border-right pt-3 text-center">40</div>
+                <div class="col-md-7 border-right pt-1">Interest or any other amount under the Ordinance (if any)</div>
+                <div class="col-md-4">
+                    <div class="container m-0 p-0">
+                        <div class="row">
+                            <div class="col-md-3 pt-3"></div>
+                            <div class="col-md-9 pb-2 pt-2">
+                                <input type="text" id="InterestOrOrdinance" name="InterestOrOrdinance" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row border m-1 mt-minus border-top-0">
+                <div class="col-md-1 border-right pt-3 text-center">41</div>
+                <div class="col-md-7 border-right pt-3">Total amount payable</div>
+                <div class="col-md-4">
+                    <div class="container m-0 p-0">
+                        <div class="row">
+                            <div class="col-md-3 pt-3"></div>
+                            <div class="col-md-9 pb-2 pt-2">
+                                <input type="text" id="TotalAmountPayable" name="TotalAmountPayable" value="@fc.TaxPayable" readonly
+                                       class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row border m-1 mt-minus border-top-0">
+                <div class="col-md-1 border-right pt-3 text-center">42</div>
+                <div class="col-md-7 border-right pt-3">Tax deducted or collected at source (attach proof)</div>
+                <div class="col-md-4">
+                    <div class="container m-0 p-0">
+                        <div class="row">
+                            <div class="col-md-3 pt-3"></div>
+                            <div class="col-md-9 pb-2 pt-2">
+                                <input type="text" id="" name="TotalAmountPayable" value="@fc.TaxPayable" readonly
+                                       class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row border m-1 mt-minus border-top-0">
+                <div class="col-md-1 border-right pt-3 text-center">43</div>
+                <div class="col-md-7 border-right pt-3">Advance tax paid (attach proof)</div>
+                <div class="col-md-4">
+                    <div class="container m-0 p-0">
+                        <div class="row">
+                            <div class="col-md-3 pt-3"></div>
+                            <div class="col-md-9 pb-2 pt-2">
+                                <input type="text" id="AdvanceTaxPaid" name="AdvanceTaxPaid" value="@fc.DeductedSourceBank" readonly
+                                       class="form-control 46total" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row border m-1 mt-minus border-top-0">
+                <div class="col-md-1 border-right pt-3 text-center">44</div>
+                <div class="col-md-7 border-right pt-1">Adjustment of tax refund [mention assessment year(s) of refund]</div>
+                <div class="col-md-4">
+                    <div class="container m-0 p-0">
+                        <div class="row">
+                            <div class="col-md-3 pt-3"></div>
+                            <div class="col-md-9 pb-2 pt-2">
+                                <input type="text" id="AdjustmentOfTaxRefund" name="AdjustmentOfTaxRefund"
+                                       class="form-control 46total" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row border m-1 mt-minus border-top-0">
+                <div class="col-md-1 border-right pt-3 text-center">45</div>
+                <div class="col-md-7 border-right pt-3">Amount paid with return (attach proof)</div>
+                <div class="col-md-4">
+                    <div class="container m-0 p-0">
+                        <div class="row">
+                            <div class="col-md-3 pt-3"></div>
+                            <div class="col-md-9 pb-2 pt-2">
+                                <input type="text" id="AmountPaidWithReturn" name="AmountPaidWithReturn" value="@fc.NetPayableTax"
+                                       readonly class="form-control 46total" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row border m-1 mt-minus border-top-0">
+                <div class="col-md-1 border-right pt-3 text-center">46</div>
+                <div class="col-md-7 border-right pt-3">Total amount paid and adjusted (42+43+44+45)</div>
+                <div class="col-md-4">
+                    <div class="container m-0 p-0">
+                        <div class="row">
+                            <div class="col-md-3 pt-3"></div>
+                            <div class="col-md-9 pb-2 pt-2">
+                                <input type="text" id="TotalAmountPaidAndAdjusted" name="TotalAmountPaidAndAdjusted" readonly
+                                       class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row border m-1 mt-minus border-top-0">
+                <div class="col-md-1 border-right pt-3 text-center">47</div>
+                <div class="col-md-7 border-right pt-3">Deficit or excess (refundable) (41-46)</div>
+                <div class="col-md-4">
+                    <div class="container m-0 p-0">
+                        <div class="row">
+                            <div class="col-md-3 pt-3"></div>
+                            <div class="col-md-9 pb-2 pt-2">
+                                <input type="text" id="DeficitOrExcess" name="DeficitOrExcess" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row border m-1 mt-minus border-top-0">
+                <div class="col-md-1 border-right pt-3 text-center">48</div>
+                <div class="col-md-7 border-right pt-3">Tax exempted income</div>
+                <div class="col-md-4">
+                    <div class="container m-0 p-0">
+                        <div class="row">
+                            <div class="col-md-3 pt-3"></div>
+                            <div class="col-md-9 pb-2 pt-2">
+                                <input type="text" id="TaxExemptedIncome" readonly name="TaxExemptedIncome"
+                                       value="@poifs.TotalTaxExempted" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row m-1 mt-minus border border-top-0">
+                <div class="col-md-1 pt-5">49</div>
+                <div class="col-md-11 border-left">
+                    <p class="pt-3 m-0"><b>Instructions: </b></p>
+                    <p>
+                        1. Statement of assets, liabilities and expenses (IT-10B2016) and
+                        statement of life style expense (IT-10BB2016) must be furnished with
+                        the return unless you are exempted from furnishing such statement(s) under section 80.
+                    </p>
+                    <p>
+                        2. Proof of payments of tax, including advance
+                        tax and withholding tax and the proof of investment for tax rebate must be provided along with return.
+                    </p>
+                    <P>
+                        3. Attach account statements and other documents where applicable.
+                    </P>
+                </div>
+            </div>
+
+            <div class="row m-1 mt-minus border border-top-0">
+                <div class="col-md-1 pt-3 border-right">50</div>
+                <div class="col-md-7 border-right pt-2 pb-2">
+                    If you are a parent of a person with disability,
+                    has your spouse availed the extended tax exemption threshold? (tick one)
+                </div>
+                <div class="col-md-2 border-right pt-2">
+                    <label class="pt-4">
+                        <input type="radio" name="IsParentOfPersonWithDisability" value="yes" class="" style="margin-left: 10px;" /> Yes
+                    </label>
+                </div>
+                <div class="col-md-2 pt-2">
+                    <label class="pt-4">
+                        <input type="radio" name="IsParentOfPersonWithDisability"
+                               value="no" style="margin-left: 10px;" /> No
+                    </label>
+                </div>
+            </div>
+
+            <div class="row m-1 mt-minus border border-top-0">
+                <div class="col-md-1 pt-3 border-right">51</div>
+                <div class="col-md-7 border-right pt-2 pb-2">
+                    Are you required to submit a statement of assets,
+                    liabilities and expenses (IT-10B2016) under section 80(1)? (tick one)
+                </div>
+                <div class="col-md-2 border-right pt-2">
+                    <label class="pt-4">
+                        <input type="radio" name="AreYouRequiredToSubmitStatementOfAssets" value="yes" class="" style="margin-left: 10px;" /> Yes
+                    </label>
+                </div>
+                <div class="col-md-2 pt-2">
+                    <label class="pt-4">
+                        <input type="radio" name="AreYouRequiredToSubmitStatementOfAssets" value="no" class="" style="margin-left: 10px;" /> No
+                    </label>
+                </div>
+            </div>
+
+            <div class="row m-1 mt-minus border border-top-0">
+                <div class="col-md-1 pt-3 border-right">52</div>
+                <div class="col-md-4 border-right pt-2 pb-2">
+                    Schedules annexed (tick all that are applicable)
+                </div>
+
+                <div class="col-md-7">
+                    <div class="container m-0 p-0">
+                        <div class="row" id="scheduleAnnexedId">
+                            <div class="col-md-3 border-right pt-2">
+                                <label class="pt-3 pb-3">
+                                    <input name="" type="checkbox" value="24A" /> 24A
+                                </label>
+                            </div>
+                            <div class="col-md-3 pt-2 border-right">
+                                <label class="pt-3 pb-3">
+                                    <input name="" type="checkbox" value="24B" /> 24B
+                                </label>
+                            </div>
+                            <div class="col-md-3 pt-2 border-right">
+                                <label class="pt-3 pb-3">
+                                    <input name="" type="checkbox" value="24C" /> 24C
+                                </label>
+                            </div>
+                            <div class="col-md-3 pt-2">
+                                <label class="pt-3 pb-3">
+                                    <input name="" type="checkbox" value="24D" /> 24D
+                                </label>
+                            </div>
+
+                            <input type="hidden" name="SchedulesAnnexed" value="" id="SchedulesAnnexedInputResult" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row m-1 mt-minus border border-top-0">
+                <div class="col-md-1 pt-3 border-right">53</div>
+                <div class="col-md-4 border-right pt-2 pb-2">
+                    Statements annexed (tick all that are applicable)
+                </div>
+                <div class="col-md-7">
+                    <div class="container m-0 p-0">
+                        <div class="row m-0 p-0" id="statemantAnnexedId">
+                            <div class="col-md-6 border-right">
+                                <label class="pt-4 pb-2">
+                                    <input name="" type="checkbox" value="IT-10B2016 " /> IT-10B2016
+                                </label>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="pt-4 pb-2">
+                                    <input name="" type="checkbox" value="IT-10BB2016" /> IT-10BB2016
+                                </label>
+                            </div>
+
+                            <input type="hidden" name="StatementsAnnexed" id="StatementsAnnexedResultId" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row m-1 mt-minus border border-top-0">
+                <div class="col-md-1 pt-3 border-right">54</div>
+                <div class="col-md-11 border-right pt-2 pb-2">
+                    <label>Other statements, documents, etc. attached (list all)</label>
+                    <textarea name="OtherStatementsDocuments" class="form-control" cols="6" rows="6" style="width: 97%;"></textarea>
+                </div>
+            </div>
+
+            <div class="row m-1 border mt-3 text-center bg-light">
+                <div class="col-md-12 p-2">
+                    <b>Verification and signature</b>
+                </div>
+            </div>
+
+            <div class="row m-1 border mt-minus border-top-0">
+                <div class="col-md-1 p-2 border-right pt-3">55</div>
+                <div class="col-md-11">
+                    <div class="container m-0 p-0">
+                        <div class="row pt-2">
+                            <div class="col-md-12">
+                                <P>
+                                    I solemnly declare that to the best of my knowledge and belief the
+                                    information given in this return and statements and
+                                    documents annexed or attached herewith are correct and complete.
+                                </P>
+                            </div>
+                        </div>
+
+                        <div class="row pt-2">
+                            <div class="col-md-6">
+                                <label>Name</label>
+                                <input type="text" value="@userInformation.NameOfAssessee" name="Name" class="form-control" readonly />
+                            </div>
+
+                            <div class="col-md-6">
+                                <label>Signature</label>
+                                <div class="custom-file">
+                                    <input type="hidden" name="PhotoPat" value="replace" />
+                                    <input type="file" name="signature" class="custom-file-input" id="customFile" required>
+                                    <label class="custom-file-label" for="customFile">Choose file</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row pt-2">
+                            <div class="col-md-6">
+                                <label>Date of Signature (DD-MM-YYYY)</label>
+                                <input name="DateOfSignature" value="@Model.DateOfSignature" type="date" class="form-control" />
+                            </div>
+
+                            <div class="col-md-6">
+                                <label>Place of Signature</label>
+                                <input type="text" name="PlaceOfSignatur" value="@Model.PlaceOfSignatur" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row m-1 border mt-3 text-center bg-light">
+                <div class="col-md-12 p-2">
+                    <b>For official use only</b>
+                    <p>Return Submission Information</p>
+                </div>
+            </div>
+
+            <div class="row m-1 border mt-minus border-top-0">
+                <div class="col-md-6 p-2 border-right">
+                    <label>Date of Submission (DD-MM-YYYY)</label>
+                    <input name="DateOfSubmition" type="date" class="form-control" />
+                </div>
+                <div class="col-md-6 p-2">
+                    <label>Tax Office Entry Number</label>
+                    <div class="row" id="textOfficeEntryNumber">
+                        <input type="number" name="TaxOfficeEntryNumber"
+                               value="@Model.TaxOfficeEntryNumber"
+                               placeholder="Text Office Entry Number" class="form-control" style="margin-left: 15px;" />
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+    else
+    {
+        <h3 class="text-danger p-3">You haven't provided any basic informations.</h3>
+    }
+</div>
+
+<script src="@Url.Content("~/Scripts/BasicInformation.js")"></script>
+<script src="@Url.Content("~/Scripts/PDFMaker.js")"></script>
+<script>
+    $(() => {
+        let tickOnBoxesDivCheckBoxText = '';
+        $('#TickOnBoxesDivId input[type="checkbox"]').change(function () {
+            tickOnBoxesDivCheckBoxText += $(this).val().trim() + ', ';
+            $('#TickOnBoxesInputResult').val(tickOnBoxesDivCheckBoxText);
+        })
+    });
+</script>

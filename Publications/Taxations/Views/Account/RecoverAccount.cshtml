@@ -1,0 +1,66 @@
+﻿@using Taxations.Models
+@{
+    ViewBag.Title = "Recover Account";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+    User user = new User();
+
+    if (ViewBag.User != null)
+    {
+        user = ViewBag.User;
+    }
+}
+<style>
+    .c {
+        width: 600px;
+    }
+</style>
+<div class="container mt-3">
+    <div class="row justify-content-center">
+        @if (ViewBag.Success == null)
+        {
+            using (Html.BeginForm("recoverAccount", "Account", FormMethod.Post,
+                    new { enctype = "multipart/form-data", @class = "p-3 border c" }))
+            {
+                if (ViewBag.Error != null)
+                {
+                    <div class="alert alert-danger">
+                        <h4 class="m-0">@ViewBag.Error</h4>
+                    </div>
+                }
+
+                <div class="pt-2 pb-2">
+                    <h5><b>@user.FirstName</b> Recover your account.</h5>
+                    <input type="hidden" name="UserId" value="@user.Id" />
+                    <input type="hidden" name="RecoveryCode" value="@user.RecoveryCode" />
+                </div>
+                <div class="">
+                    <label for="Password" class="font-weight-bold">New Password</label>
+                    <input type="password" name="Password" class="form-control" required min="6" />
+                </div>
+                <div class="mt-2">
+                    <label for="ConfirmPassword" class="font-weight-bold">Confirm Password</label>
+                    <input type="password" name="ConfirmPassword" class="form-control" required min="6" />
+                </div>
+
+                <div class="mt-3">
+                    <input type="submit" value="Change Password" class="btn btn-block btn-success" />
+                </div>
+            }
+
+        }
+        else
+        {
+            if (ViewBag.Success != null)
+            {
+                <div class="alert alert-success">
+                    <h4>@ViewBag.Success</h4>
+                    @Html.ActionLink("Stay logged in.", "index", "default", new { @class = "" })
+                </div>
+            }
+        }
+    </div>
+</div>
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

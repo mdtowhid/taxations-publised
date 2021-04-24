@@ -1,0 +1,490 @@
+﻿@using Taxations.Models;
+@{
+    ViewBag.Title = "Particulars Of Income From Slaries";
+    Layout = "~/Views/shared/mainLayout.cshtml";
+    UserInformation userInformation = new UserInformation();
+    ParticularsOfIncomeFromSalary pifs = new ParticularsOfIncomeFromSalary();
+    TaxExempted te = new TaxExempted();
+
+    ParticularsOfIncomeAmount poia = new ParticularsOfIncomeAmount();
+
+    if (ViewBag.UserInformations != null)
+    {
+        userInformation = ViewBag.UserInformations;
+    }
+
+    if (ViewBag.ParticularsOfIncomeAmounts != null)
+    {
+        poia = ViewBag.ParticularsOfIncomeAmounts;
+    }
+
+    if (ViewBag.ParticularsOfIncomeFromSalaries != null)
+    {
+        pifs = ViewBag.ParticularsOfIncomeFromSalaries;
+    }
+
+    if (ViewBag.TaxExempteds != null)
+    {
+        te = ViewBag.TaxExempteds;
+    }
+}
+
+
+<div >
+    <div id="userInfo" class="d-none"><!---->
+        <p id="gender">
+            @Session["UserGender"]
+        </p>
+        <p id="autistic">
+            @Session["IsAutistc"]
+        </p>
+    </div>
+
+    <div class="d-none" id="tickedOnBoxes">
+        @userInformation.TickOnBoxes
+    </div>
+    
+    <input type="date" name="DateOfBirth" id="DateOfBirth" class="form-control d-none" value="@userInformation.DateOfBirth" />
+</div>
+
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 bg-white mt-3 p-0" id="">
+        <div class="alert alert-success text-center" style="border-radius: 0">
+            <h3 class="mb-2">Particulars of Income from Salaries Informations</h3>
+            <p class="lead mt-1">Please provide your Particulars of Income infomations.</p>
+        </div>
+
+        @using (Html
+            .BeginForm("Create", 
+                "ParticularsOfIncomeFromSlaries",
+                 FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+    <div class="forms" id="statementOfExpensesId">
+
+        @if (ViewBag.SuccessMessage != null)
+        {
+            <div class="row mt-minus p-2 bg-transparent shadow m-1 mt-3 mb-3 border" id="submittingStatus">
+                <div class="col-md-10">
+                    <p class="p-0 m-0 p-3 font-weight-bolder text-success"><b>@ViewBag.SuccessMessage</b></p>
+                </div>
+                <div class="col-md-2 border">
+                    <h3 id="cancelSubmittingStatus"
+                        class="m-0 text-center text-danger">
+                        <b style="font-size: 30px; font-weight: 900; cursor: pointer; padding-top: 15px; display: block">&times;</b>
+                    </h3>
+                </div>
+            </div>
+        }
+
+
+        <input type="hidden" name="UserId" value="@Session["UserId"]" />
+        <input id="EmployeementStatus" type="hidden" name="EmployeementStatus" value="@Session["UserType"]" />
+        <input type="hidden" id="HouseRentByOffice" value="@userInformation.HouseRentByOffice">
+        <input type="hidden" id="VehiclesByOffice" value="@userInformation.HouseRentByOffice">
+        <input type="hidden"
+               class="form-control text-left"
+               name="AssessmentYear"
+               value="@userInformation.AssessmentYear" readonly />
+
+        <div class="row">
+            <div class="col-md-12">
+                <p id="numberErrorId"></p>
+            </div>
+        </div>
+
+        <div class="row m-1 mb-0 mt-minus bg-white border">
+            <div class="col-md-6">
+                <div class="container m-0 p-0">
+                    <div class="row border border-right-0 border-top-0">
+                        <div class="col-md-2 border-right pt-4 text-center">01</div>
+                        <div class="col-md-10">
+                            <label class="pt-2">Assessment Year</label>
+                            @if (Session["FAY"] != null)
+                            {
+                                <input type="text"
+                                       class="form-control mb-2 text-left"
+                                       name=""
+                                       value="@Session["FAY"]" readonly />
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="container m-0 p-0">
+                    <div class="row border border-top-0">
+                        <div class="col-md-2 border-right pt-4 text-center">02</div>
+                        <div class="col-md-10">
+                            <label class="pt-2">TIN: </label>
+                            <input type="text" name="TIN" value="@userInformation.NewTIN"
+                                   class="form-control mb-2 text-left" readonly />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row border m-1 mt-3 bg-light">
+            <div class="col-md-6 p-2 text-center font-weight-bold border-right">Particulars</div>
+            <div class="col-md-2 p-2 text-center font-weight-bold border-right" style="white-space: nowrap">Amount (A)</div>
+            <div class="col-md-2 p-2 text-center font-weight-bold border-right" style="white-space: nowrap">Tax exempted (B)</div>
+            <div class="col-md-2 p-2 text-center font-weight-bold" style="white-space: nowrap">Taxable (C = A-B)</div>
+        </div>
+
+        <div class="row m-1 border border-top-0 mt-minus">
+            <div class="col-md-1 text-center pt-3 border-right">03</div>
+            <div class="col-md-5 border-right pt-3">Basic Pay</div>
+            <div class="col-md-2 border-right pt-2 pb-2">
+                <input required id="BasicPayAmountId" value="@poia.BasicPay" name="BasicPay" type="number" class="form-control a" />
+            </div>
+            <div class="col-md-2 border-right pt-2 pb-2">
+                <input value="@te.BasicPayTaxExempted" name="BasicPayTaxExempted" id="BasicPayTaxExemptedId" type="text" class="form-control b" readonly />
+            </div>
+            <div class="col-md-2 pt-2 pb-2">
+                <input id="BasicPayTaxableId" value="@pifs.BasicPayTaxable" name="BasicPayTaxable" type="text" class="form-control t" readonly />
+            </div>
+        </div>
+
+        <div class="row m-1 border border-top-0 mt-minus">
+            <div class="col-md-1 text-center pt-3 border-right">04</div>
+            <div class="col-md-5 border-right pt-3">Special pay</div>
+            <div class="col-md-2 border-right pt-2 pb-2">
+                <input type="number" name="SpecialPay" value="@poia.SpecialPay" id="SpecialPayAmountId" class="form-control a" />
+            </div>
+            <div class="col-md-2 border-right pt-2 pb-2">
+                <input value="@te.SpecialPayTaxExempted" name="SpecialPayTaxExempted" id="SpecialPayTaxExemptedId" type="text" class="form-control b" readonly />
+            </div>
+            <div class="col-md-2 pt-2 pb-2">
+                <input id="SpecialPayTaxableId" value="@pifs.SpecialPayTaxable" name="SpecialPayTaxable" type="text" class="form-control t" readonly />
+            </div>
+        </div>
+
+        <div class="row m-1 border border-top-0 mt-minus">
+            <div class="col-md-1 text-center pt-3 border-right">05</div>
+            <div class="col-md-5 border-right pt-2">Arrear pay (if not included in taxable income earlier)</div>
+            <div class="col-md-2 border-right pt-2 pb-2">
+                <input type="number" value="@poia.ArrearPay" name="ArrearPay" id="ArrearPayAmountId" class="form-control a" />
+            </div>
+            <div class="col-md-2 border-right pt-2 pb-2">
+                <input value="@te.ArrearPayTaxExempted" name="ArrearPayTaxExempted" type="text" id="ArrearPayTaxExemptedId" class="form-control b" readonly />
+            </div>
+            <div class="col-md-2 pt-2 pb-2">
+                <input type="text" id="ArrearPayTaxableId" value="@pifs.ArrearPayTaxable" name="ArrearPayTaxable" class="form-control t" readonly />
+            </div>
+        </div>
+
+
+        <div class="row m-1 border border-top-0 mt-minus">
+            <div class="col-md-1 text-center pt-3 border-right">06</div>
+            <div class="col-md-5 border-right pt-3">Dearness allowance</div>
+            <div class="col-md-2 border-right pt-2 pb-2">
+                <input type="number" value="@poia.DearnessAllowance" name="DearnessAllowance" id="DearnessAllowanceAmountId" class="form-control a" />
+            </div>
+            <div class="col-md-2 border-right pt-2 pb-2">
+                <input value="@te.DearnessAllowanceTaxExempted" name="DearnessAllowanceTaxExempted" type="text" id="DearnessAllowanceTaxExemptedId" class="form-control b" readonly />
+            </div>
+            <div class="col-md-2 pt-2 pb-2">
+                <input type="text" name="DearnessAllowanceTaxable" value="@pifs.DearnessAllowanceTaxable" id="DearnessAllowanceTaxableId" class="form-control t" readonly />
+            </div>
+        </div>
+
+        <div class="row m-1 border border-top-0 mt-minus">
+            <div class="col-md-1 text-center pt-3 border-right">07</div>
+            <div class="col-md-5 border-right pt-3">House rent allowance</div>
+            <div class="col-md-2 border-right pt-2 pb-2">
+                <input type="number" value="@poia.HouseRentAllowance" name="HouseRentAllowance" id="HouseRentAllowanceAmountId" class="form-control a" />
+            </div>
+            <div class="col-md-2 border-right pt-2 pb-2">
+                <input value="@te.HouseRentAllowanceTaxExempted" name="HouseRentAllowanceTaxExempted" type="text" id="HouseRentAllowanceTaxExemptedId" class="form-control b" readonly />
+            </div>
+            <div class="col-md-2 pt-2 pb-2">
+                <input type="text" name="HouseRentAllowanceTaxable" value="@pifs.HouseRentAllowanceTaxable" id="HouseRentAllowanceTaxableId" class="form-control t" readonly />
+            </div>
+        </div>
+
+        <div class="row m-1 border border-top-0 mt-minus">
+            <div class="col-md-1 text-center pt-3 border-right">08</div>
+            <div class="col-md-5 border-right pt-3">Medical allowance</div>
+            <div class="col-md-2 border-right pt-2 pb-2">
+                <input type="number" value="@poia.MedicalAllowance" name="MedicalAllowance" id="MedicalAllowanceAmountId" class="form-control a" />
+            </div>
+            <div class="col-md-2 border-right pt-2 pb-2">
+                <input value="@te.MedicalAllowanceTaxExempted" name="MedicalAllowanceTaxExempted" type="text" id="MedicalAllowanceTaxExemptedId" class="form-control b" readonly />
+            </div>
+            <div class="col-md-2 pt-2 pb-2">
+                <input type="text" name="MedicalAllowanceTaxable" value="@pifs.MedicalAllowanceTaxable" id="MedicalAllowanceTaxableId" class="form-control t" readonly />
+            </div>
+        </div>
+
+        <div class="row m-1 border border-top-0 mt-minus">
+            <div class="col-md-1 text-center pt-3 border-right">09</div>
+            <div class="col-md-5 border-right pt-3">Conveyance allowance</div>
+            <div class="col-md-2 border-right pt-2 pb-2">
+                <input type="number" value="@poia.ConveyanceAllowance" name="ConveyanceAllowance" id="ConveyanceAllowanceAmount" class="form-control a" />
+            </div>
+            <div class="col-md-2 border-right pt-2 pb-2">
+                <input value="" name="ConveyanceAllowanceTaxExempted" type="text" id="ConveyanceAllowanceTaxExempted" class="form-control b" readonly />
+            </div>
+            <div class="col-md-2 pt-2 pb-2">
+                <input type="text" name="ConveyanceAllowanceTaxable" value="@pifs.ConveyanceAllowanceTaxable" id="ConveyanceAllowanceTaxable" class="form-control t" readonly />
+            </div>
+        </div>
+
+        <div class="row m-1 border border-top-0 mt-minus">
+            <div class="col-md-1 text-center pt-3 border-right">10</div>
+            <div class="col-md-5 border-right pt-3">Festival Allowance</div>
+            <div class="col-md-2 border-right pt-2 pb-2">
+                <input type="number" value="@poia.FestivalAllowance" name="FestivalAllowance" id="FestivalAllowanceAmount" class="form-control a" />
+            </div>
+            <div class="col-md-2 border-right pt-2 pb-2">
+                <input value="@te.FestivalAllowanceTaxExempted" name="FestivalAllowanceTaxExempted" type="text" id="FestivalAllowanceTaxExempted" class="form-control b" readonly />
+            </div>
+            <div class="col-md-2 pt-2 pb-2">
+                <input type="text" name="FestivalAllowanceTaxable" value="@pifs.FestivalAllowanceTaxable" id="FestivalAllowanceTaxable" class="form-control t" readonly />
+            </div>
+        </div>
+
+        <div class="row m-1 border border-top-0 mt-minus">
+            <div class="col-md-1 text-center pt-3 border-right">11</div>
+            <div class="col-md-5 border-right pt-3">Allowance for support staff</div>
+            <div class="col-md-2 border-right pt-2 pb-2">
+                <input type="number" value="@poia.AllowanceStaff" name="AllowanceStaff" id="AllowanceStaffAmount" class="form-control a" />
+            </div>
+            <div class="col-md-2 border-right pt-2 pb-2">
+                <input value="@te.AllowanceStaffTaxExempted" name="AllowanceStaffTaxExempted" type="text" id="AllowanceStaffTaxExempted" class="form-control b" readonly />
+            </div>
+            <div class="col-md-2 pt-2 pb-2">
+                <input type="text" name="AllowanceStaffTaxable" value="@pifs.AllowanceStaffTaxable" id="AllowanceStaffTaxable" class="form-control t" readonly />
+            </div>
+        </div>
+
+        <div class="row m-1 border border-top-0 mt-minus">
+            <div class="col-md-1 text-center pt-3 border-right">12</div>
+            <div class="col-md-5 border-right pt-3">Leave allowance</div>
+            <div class="col-md-2 border-right pt-2 pb-2">
+                <input type="number" value="@poia.LeaveAllowance" name="LeaveAllowance" id="LeaveAllowanceAmount" class="form-control a" />
+            </div>
+            <div class="col-md-2 border-right pt-2 pb-2">
+                <input value="@te.LeaveAllowanceTaxExempted" name="LeaveAllowanceTaxExempted" type="text" id="LeaveAllowanceTaxExempted" class="form-control b" readonly />
+            </div>
+            <div class="col-md-2 pt-2 pb-2">
+                <input type="text" name="LeaveAllowanceTaxable" value="@pifs.LeaveAllowanceTaxable" id="LeaveAllowanceTaxable" class="form-control t" readonly />
+            </div>
+        </div>
+
+        <div class="row m-1 border border-top-0 mt-minus">
+            <div class="col-md-1 text-center pt-3 border-right">13</div>
+            <div class="col-md-5 border-right pt-3">Honorarium/ Reward/Fee</div>
+            <div class="col-md-2 border-right pt-2 pb-2">
+                <input type="number" value="@poia.HonorariumAmount" name="HonorariumAmount" id="HonorariumAmount" class="form-control a" />
+            </div>
+            <div class="col-md-2 border-right pt-2 pb-2">
+                <input value="@te.HonorariumTaxExempted" name="HonorariumTaxExempted" type="text" id="HonorariumTaxExempted" class="form-control b" readonly />
+            </div>
+            <div class="col-md-2 pt-2 pb-2">
+                <input type="text" name="HonorariumTaxable" value="@pifs.HonorariumTaxable" id="HonorariumTaxable" class="form-control t" readonly />
+            </div>
+        </div>
+
+        <div class="row m-1 border border-top-0 mt-minus">
+            <div class="col-md-1 text-center pt-3 border-right">14</div>
+            <div class="col-md-5 border-right pt-3">Overtime allowance</div>
+            <div class="col-md-2 border-right pt-2 pb-2">
+                <input type="number" value="@poia.OvertimeAllowance" name="OvertimeAllowance" id="OvertimeAllowanceAmount" class="form-control a" />
+            </div>
+            <div class="col-md-2 border-right pt-2 pb-2">
+                <input value="@te.OtherAllowancesExempted" name="OvertimeAllowanceExempted" type="text" id="OvertimeAllowanceExempted" class="form-control b" readonly />
+            </div>
+            <div class="col-md-2 pt-2 pb-2">
+                <input type="text" id="OvertimeAllowanceTaxable"
+                       name="OvertimeAllowanceTaxable" value="@pifs.OvertimeAllowanceTaxable" class="form-control t" readonly />
+            </div>
+        </div>
+
+        <div class="row m-1 border border-top-0 mt-minus">
+            <div class="col-md-1 text-center pt-3 border-right">15</div>
+            <div class="col-md-5 border-right pt-3">Bonus / Ex-gratia</div>
+            <div class="col-md-2 border-right pt-2 pb-2">
+                <input type="number" value="@poia.BonusAmount" name="BonusAmount" id="BonusAmount" class="form-control a" />
+            </div>
+            <div class="col-md-2 border-right pt-2 pb-2">
+                <input value="@te.BonusExempted" name="BonusExempted" type="text" id="BonusExempted" class="form-control b" readonly />
+            </div>
+            <div class="col-md-2 pt-2 pb-2">
+                <input type="text" name="BonusTaxable" value="@pifs.BonusTaxable" id="BonusTaxable" class="form-control t" readonly />
+            </div>
+        </div>
+
+        <div class="row m-1 border border-top-0 mt-minus">
+            <div class="col-md-1 text-center pt-3 border-right">16</div>
+            <div class="col-md-5 border-right pt-3">Other allowances</div>
+            <div class="col-md-2 border-right pt-2 pb-2">
+                <input type="number" value="@poia.OtherAllowances" name="OtherAllowances" id="OtherAllowancesAmount" class="form-control a" />
+            </div>
+            <div class="col-md-2 border-right pt-2 pb-2">
+                <input value="@te.OtherAllowancesExempted" name="OtherAllowancesExempted" type="text" id="OtherAllowancesExempted" class="form-control b" readonly />
+            </div>
+            <div class="col-md-2 pt-2 pb-2">
+                <input type="text" name="OtherAllowancesTaxable" value="@pifs.OtherAllowancesTaxable" id="OtherAllowancesTaxable" class="form-control t" readonly />
+            </div>
+        </div>
+
+        <div class="row m-1 border border-top-0 mt-minus">
+            <div class="col-md-1 text-center pt-3 border-right">17</div>
+            <div class="col-md-5 border-right pt-3">Employer’s contribution to a recognized provident fund</div>
+            <div class="col-md-2 border-right pt-2 pb-2">
+                <input type="number" value="@poia.EmployerContribution" name="EmployerContribution" id="EmployerContributionAmount" class="form-control a" />
+            </div>
+            <div class="col-md-2 border-right pt-2 pb-2">
+                <input value="@te.EmployerContributionExempted" name="EmployerContributionExempted" type="text" id="EmployerContributionExempted" class="form-control b" readonly />
+            </div>
+            <div class="col-md-2 pt-2 pb-2">
+                <input type="text" name="EmployerContributionTaxable" value="@pifs.EmployerContributionTaxable" id="EmployerContributionTaxable" class="form-control t" readonly />
+            </div>
+        </div>
+
+        <div class="row m-1 border border-top-0 mt-minus">
+            <div class="col-md-1 text-center pt-3 border-right">18</div>
+            <div class="col-md-5 border-right pt-3">Interest accrued on a recognized provident fund</div>
+            <div class="col-md-2 border-right pt-2 pb-2">
+                <input type="number" value="@poia.InterestAccrued" name="InterestAccrued" id="InterestAccruedAmount" class="form-control a" />
+            </div>
+            <div class="col-md-2 border-right pt-2 pb-2">
+                <input value="@te.InterestAccruedExempted" name="InterestAccruedExempted" type="text" id="InterestAccruedExempted" class="form-control b" readonly />
+            </div>
+            <div class="col-md-2 pt-2 pb-2">
+                <input type="text" name="InterestAccruedTaxable" value="@pifs.InterestAccruedTaxable" id="InterestAccruedTaxable"
+                       class="form-control t" readonly />
+            </div>
+        </div>
+
+        <div class="row m-1 border border-top-0 mt-minus">
+            <div class="col-md-1 text-center pt-3 border-right">19</div>
+            <div class="col-md-5 border-right pt-3">Deemed income for transport facility </div>
+            <div class="col-md-2 border-right pt-2 pb-2">
+                <input type="number" value="@poia.DeemedIncomeTransport" name="DeemedIncomeTransport" id="DeemedIncomeTransportAmount" class="form-control a" />
+            </div>
+            <div class="col-md-2 border-right pt-2 pb-2">
+                <input value="@te.DeemedIncomeTransportExempted" name="DeemedIncomeTransportExempted" type="text" id="DeemedIncomeTransportExempted" class="form-control b" readonly />
+            </div>
+            <div class="col-md-2 pt-2 pb-2">
+                <input type="text" name="DeemedIncomeTransportTaxable" value="@pifs.DeemedIncomeTransportTaxable" id="DeemedIncomeTransportTaxable" class="form-control t" readonly />
+            </div>
+        </div>
+
+        <div class="row m-1 border border-top-0 mt-minus">
+            <div class="col-md-1 text-center pt-3 border-right">20</div>
+            <div class="col-md-5 border-right pt-3">Deemed income for free furnished/ unfurnished accommodation </div>
+            <div class="col-md-2 border-right pt-2 pb-2">
+                <input type="number" value="@poia.DeemedIncomeFurnished" name="DeemedIncomeFurnished" id="DeemedIncomeFurnishedAmount" class="form-control a" />
+            </div>
+            <div class="col-md-2 border-right pt-2 pb-2">
+                <input value="@te.DeemedIncomeFurnishedExempted" name="DeemedIncomeFurnishedExempted" type="text" id="DeemedIncomeFurnishedExempted" class="form-control b" readonly />
+            </div>
+            <div class="col-md-2 pt-2 pb-2">
+                <input type="text" name="DeemedIncomeFurnishedTaxable" value="@pifs.DeemedIncomeFurnishedTaxable" id="DeemedIncomeFurnishedTaxable" class="form-control t" readonly />
+            </div>
+        </div>
+
+        <div class="row m-1 border border-top-0 mt-minus">
+            <div class="col-md-1 text-center pt-3 border-right">21</div>
+            <div class="col-md-5 border-right pt-3">Other, if any (give detail)</div>
+            <div class="col-md-2 border-right pt-2 pb-2">
+                <input type="number" value="@poia.OtherIfAny" name="OtherIfAny" class="form-control a" id="OtherIfAnyAmount" />
+            </div>
+            <div class="col-md-2 border-right pt-2 pb-2">
+                <input value="@te.OtherIfAnyExempted" name="OtherIfAnyExempted" type="text" class="form-control b" id="OtherIfAnyExempted" readonly />
+            </div>
+            <div class="col-md-2 pt-2 pb-2">
+                <input type="text" name="OtherIfAny" id="OtherIfAnyTaxable" value="@pifs.OtherIfAny" class="form-control t" readonly />
+            </div>
+        </div>
+
+        <div class="row m-1 border border-top-0 mt-minus">
+            <div class="col-md-6 border-right pt-3 font-weight-bold">Total</div>
+            <div class="col-md-2 border-right pt-2 pb-2">
+                @*<span id="taxExamptedPrevValue" class="d-none">@pifs.TotalTaxExempted</span>*@
+                <input readonly
+                       name="AmountTotal"
+                       id="amountTotal"
+                       value=""
+                       class="form-control" />
+            </div>
+            <div class="col-md-2 border-right pt-2 pb-2">
+                <span id="taxExamptedPrevValue" class="d-none">@pifs.TotalTaxExempted</span>
+                <input readonly
+                       name="TotalTaxExempted"
+                       id="TotalTaxExempted"
+                       value="@pifs.TotalTaxExempted"
+                       class="form-control" />
+            </div>
+            <div class="col-md-2 border-right pt-2 pb-2">
+                <input type="text" name="Total" id="total" value="@pifs.Total" class="form-control" readonly />
+
+                <input type="hidden" name="GrossTaxBeforeTaxRebate" id="grossTaxBeforeTaxRebate" value="@pifs.GrossTaxBeforeTaxRebate" class="form-control" readonly />
+                <input type="hidden" name="GrossTaxBeforeTaxRebateMaxPercentage" id="grossTaxBeforeTaxRebateMaxPercentage" value="@pifs.GrossTaxBeforeTaxRebateMaxPercentage" class="form-control" readonly />
+
+
+                @*
+                :::SURCHAGE CALCUKATIONS
+                *@
+
+                <input type="hidden" name="TotalSurcharge" id="totalSurcharge" value="@pifs.TotalSurcharge" class="form-control" readonly />
+                <input type="hidden" name="SurchargePercentage" id="surchargePercentage" value="@pifs.SurchargePercentage" class="form-control" readonly />
+
+
+            </div>
+        </div>
+
+        <div class="row m-1 border border-top-0 mt-minus">
+            <div class="col-md-1 text-center pt-3 border-right">22</div>
+            <div class="col-md-11">
+                <div class="container p-0 m-0">
+                    <div class="row">
+                        <div class="border-right col-md-6">
+                            <label>Name</label>
+                            <input type="text" readonly
+                                   name="Name" value="@userInformation.NameOfAssessee" class="form-control text-left" />
+                        </div>
+                        <div class="col-md-6">
+                            <label>Signature & date</label>
+                            @if (Session["Signature"] != null)
+                            {
+                                <img src="@Url.Content(Session["Signature"].ToString())"
+                                     style="width: 150px; height: 50px; box-shadow: 0 0 5px #ccc;
+                                                    padding: 3px; display: block; margin-bottom: 5px" />
+                            }
+                            else
+                            {
+                                <b class="text-danger">Not provided signature.</b>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row m-1 border border-top-0 mt-minus p-3">
+            <div class="col-md-10 text-center pt-3"></div>
+            <div class="col-md-2">
+                <input id="particularincomeSalariesSubmitBtn" name="submit" type="submit" value="Save" class="btn btn-md btn-success float-right" />
+            </div>
+        </div>
+    </div>
+        }
+    </div>
+    <div class="col-md-2">
+    </div>
+</div>
+
+<h4 id="res"></h4>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script src="@Url.Content("~/Scripts/IncomeFromSalaries.js")" type="module"></script>
+ <script src="@Url.Content("~/scripts/TaxesBasedOnIncome.js")" type="module"></script>
+

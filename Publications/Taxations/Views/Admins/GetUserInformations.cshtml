@@ -1,0 +1,195 @@
+﻿@model IEnumerable<Taxations.Models.UserInformation>
+
+@{
+    ViewBag.Title = "User Informations";
+    Layout = "~/Views/Containers/Admin.cshtml";
+}
+
+<div id="adminUsersTableWrapper">
+    <h2>User Informations</h2>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AssessmentYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NameOfAssessee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NewTIN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OldTIN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Circle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Zone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TickOnBoxes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateOfBirth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IncomeYearFrom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IncomeYearTo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SpouseName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SpouseTIN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FatherName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MotherName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PresentAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PermanentAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContactTelephone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BIN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReturnSubmitted)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ResidentStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeementStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HouseRentByOffice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VehiclesByOffice)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AssessmentYear)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NameOfAssessee)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NewTIN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OldTIN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Circle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Zone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TickOnBoxes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateOfBirth)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IncomeYearFrom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IncomeYearTo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SpouseName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SpouseTIN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FatherName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MotherName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PresentAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PermanentAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContactTelephone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BIN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReturnSubmitted)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ResidentStatus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeementStatus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HouseRentByOffice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VehiclesByOffice)
+                </td>
+                <td>
+                    @*<a href="/Admins/getUserInformations?id=@item.Id">Details</a>*@
+                    @Html.ActionLink("Details", "GetUserInformations", new { id = item.Id }, new { @class = "btn btn-sm btn-outline-successs" })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

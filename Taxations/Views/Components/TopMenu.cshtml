@@ -1,0 +1,214 @@
+﻿@using Taxations.Models;
+@{
+    User user = new User();
+    if (ViewBag.User != null)
+    {
+        user = ViewBag.User;
+    }
+}
+
+<style>
+    #custDrop {
+        width: 300px;
+        height: auto;
+        background: white;
+        position: absolute;
+        right: -999px;
+        /*left: -400px;*/
+        box-shadow: 0 0 3px #ddd;
+        transition: .5s linear;
+    }
+
+    img {
+        cursor: pointer;
+    }
+
+    #rightDropMenuWrap:hover #custDrop, userIMGBox:hover #custDrop {
+        right: 10px;
+    }
+
+    .profile-edit {
+        padding: 0 !important;
+        color: blue !important;
+        font-weight: 600;
+        text-decoration: underline !important;
+        background: transparent !important;
+    }
+
+        .profile-edit:hover {
+            color: blue !important;
+            background: transparent !important;
+        }
+</style>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <nav class="navbar navbar-expand-lg navbar-light bg-white p-0" style="height: 50px">
+                <a class="navbar-brand d-none" href="/default/index/">Home</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto bg-white overflow-hidden">
+
+                        <li class="nav-item">@Html.ActionLink("User Informations", "create", "UserInformation")</li>
+                        @if (ViewBag.UserInformations == null)
+                        {
+                            <li class="nav-item">
+                                @Html.ActionLink("Basic Informations", "BasicInformations", "BasicInformation", new object
+                                    { }, new { @class = "disabled nav-link" })
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Particulars Of Income From Salaries", "Create",
+                            "ParticularsOfIncomeFromSlaries", new object { }, new { @class = "disabled nav-link" })
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Statement Of Expenses", "CreateStatementOfExpenses",
+                            "StatementOfExpenses", new object { }, new { @class = "disabled nav-link" })
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Tax Credit", "CreateParticularsOfTaxCredit", "ParticularsOfTaxCredit", new
+                            object
+                                    { }, new { @class = "disabled nav-link" })
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Statement Of Assets", "StatementOfAssets", "StatementOfAssets", new object
+                                    { }, new { @class = "disabled nav-link" })
+                            </li>
+                        }
+
+                        else
+                        {
+                            <li class="nav-item">
+                                @Html.ActionLink("Basic Informations", "BasicInformations", "BasicInformation", new object
+                                    { }, new { @class = "nav-link" })
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Particulars Of Income From Salaries", "Create",
+                            "ParticularsOfIncomeFromSlaries", new object { }, new { @class = "nav-link" })
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Statement Of Expenses", "CreateStatementOfExpenses",
+                            "StatementOfExpenses", new object { }, new { @class = "nav-link" })
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Tax Credit", "CreateParticularsOfTaxCredit", "ParticularsOfTaxCredit", new
+                            object
+                                    { }, new { @class = "nav-link" })
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Statement Of Assets", "StatementOfAssets", "StatementOfAssets", new object
+                                    { }, new { @class = "nav-link" })
+                            </li>
+                            @* if ((bool)Session["IsReportMenuItemActive"])
+                                {
+                                <li class="nav-item">
+                                @Html.ActionLink("Report", "Home", "CrystalReport", new object
+                                { }, new { @class = "nav-link" })
+                                </li>
+                                } *@
+                        }
+                    </ul>
+                </div>
+            </nav>
+
+        </div>
+
+        <div class="col-md-1" style="position:relative" id="rightDropMenuWrap">
+            @if (user != null)
+            {
+                <div style="width: 50%; position: relative">
+                    <img style="width: 50px; height: 50px" src="@Url.Content(user.PhotoPath)"
+                         alt="@Session["UserName"]" id="userIMG" />
+                </div>
+            }
+
+            <ul id="custDrop">
+                <li class="nav-item bg-light">
+                    @if (user != null)
+                    {
+                        <div class="card" style="width: 100%">
+                            <img src="@Url.Content(user.PhotoPath)" class="card-img-top" alt="..." style="max-height: 250px">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    @Session["UserName"]
+                                    <span class="float-right">
+                                        @Html.ActionLink("Edit", "editProfile", "account", new { id= @Session["UserId"] },
+                                            new { @class = "profile-edit" })
+                                        @*<a href="/account/editProfile?id=@Session["UserId"]" class="profile-edit">Edit</a>*@
+                                    </span>
+                                </h5>
+                                <h6>@user.WhoYouAre</h6>
+                                <p class="card-text text-left">
+                                    @if (!string.IsNullOrEmpty(user.Bio))
+                                    {
+                                        if (user.Bio.Length > 100)
+                                        {
+                                            <span>
+                                                @user.Bio.Substring(0, 90)
+                                                <b>[---]</b>
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span>
+                                                @user.Bio
+                                            </span>
+                                        }
+                                    }
+
+                                </p>
+                            </div>
+                            <ul class="list-group list-group-flush">
+
+                                <li class="list-group-item">
+
+                                    @*@Html.ActionLink("Your Reports", "Home", "CrystalReport", new object
+                                        { }, new { @class = "btn btn-light" })*@
+
+
+                                    @if(Session["IsReportMenuItemActive"] != null) { 
+                                        if ((bool)Session["IsReportMenuItemActive"])
+                                        {
+                                            @Html.ActionLink("Your Reports", "Home", "CrystalReport", new object
+                                                { }, new { @class = "btn btn-light" })
+                                        }
+                                    }
+
+                                    <button onclick="logout()" class="btn btn-outline-warning">Log out</button>
+                                </li>
+
+                            </ul>
+                        </div>
+                    }
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    let redirectUrl = '/';
+    const iisAppName = '/tax';
+    const href = window.location.href;
+    const hrefSplitted = href.split('/');
+    const isExist = hrefSplitted.includes('tax');
+
+    console.log(isExist);
+    function logout() {
+        
+
+        $.post('@Url.Action("logout", "account")', {}, function (data) {
+            if (data === 'Logout') {
+                redirectUrl = isExist ? iisAppName : '/';
+                window.location.href = redirectUrl;
+            }
+        })
+    }
+</script>

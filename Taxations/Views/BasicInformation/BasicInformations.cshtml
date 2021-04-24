@@ -1,0 +1,143 @@
+﻿@using Taxations.Models;
+
+@{
+    ViewBag.Title = "Basic Informations";
+    Layout = "~/Views/shared/mainLayout.cshtml";
+    UserInformation userInformation = ViewBag.UserInformations;
+}
+
+
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 bg-white mt-3 p-0" id="">
+        <div class="alert alert-success text-center" style="border-radius: 0">
+            <h3 class="mb-2">Basic Informations</h3>
+            <p class="lead mt-1">Please provide your basic infomations.</p>
+        </div>
+        @using (Html.BeginForm("BasicInformations", "BasicInformation", FormMethod.Post,
+            new { enctype = "multipart/form-data", id = "basicInformationFormId" }))
+        {
+            if (ViewBag.SuccessMessage != null)
+            {
+                <div class="row mt-minus p-2 bg-transparent shadow m-3 mt-3 mb-3 border" id="submittingStatus">
+                    <div class="col-md-10">
+                        <p class="p-0 m-0 p-3 font-weight-bolder text-success"><b>@ViewBag.SuccessMessage</b></p>
+                    </div>
+                    <div class="col-md-2 border">
+                        <h3 id="cancelSubmittingStatus"
+                            class="m-0 text-center text-danger">
+                            <b style="font-size: 30px; font-weight: 900; cursor: pointer; padding-top: 15px; display: block">&times;</b>
+                        </h3>
+                    </div>
+                </div>
+            }
+
+            @Html.Partial("~/Views/BasicInformation/DataCollectStepOne.cshtml", null)
+
+            @Html.Partial("~/Views/BasicInformation/DataCollectStepTwo.cshtml", userInformation)
+
+            @Html.Partial("~/Views/BasicInformation/DataCollectStepThree.cshtml", null)
+
+            <div class="next-perv-wrapper">
+                <div class="next-prev">
+                    <button type="button" id="nextBtn" onclick="nextPrev(1)" class="btn btn-md btn-outline-success">Next</button>
+                    <button type="button" id="prevBtn" onclick="nextPrev(-1)" class="btn btn-md btn-outline-info">Previous</button>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="col-md-3"></div>
+</div>
+<script>
+    //third step
+    let schedulesAnnexedInputResultText = '';
+    const scheduleInputs = $('#scheduleAnnexedId input[type="checkbox"]');
+    const statemantInputs = $('#statemantAnnexedId input[type="checkbox"]');
+
+    //scheduleInputs.change(scheduleInputChange());
+
+    let res1 = [];
+
+    getMultipleCheckboxValue(scheduleInputs, $('#SchedulesAnnexedInputResult'));
+    getMultipleCheckboxValue(scheduleInputs, $('#SchedulesAnnexedInputResult'));
+
+    function getMultipleCheckboxValue(elemref, resElemRef) {
+        elemref.each((i, v) => {
+            $(v).change(() => {
+                if ($(v).prop("checked")) {
+                    let val = $(v).val();
+                    let c = res1.find(x => x == val);
+                    if (c)
+                        console.log('exist');
+                    else
+                        res1.push(val);
+
+                }
+
+                if ($(v).prop("checked") === false) {
+                    let val = $(v).val();
+                    let index = res1.map(x => x).indexOf(val == val);
+                    res1.splice(index, 1);
+                }
+
+                let res = "";
+                if (res1.length > 0) {
+                    res1.forEach(x => {
+                        res += x + ',';
+                    });
+                }
+
+                resElemRef.val(res == "" ? 0 : res);
+            });
+        });
+
+        res1 = [];
+    }
+
+
+    let statemantAnnexedIdText = '';
+    $('#statemantAnnexedId input[type="checkbox"]').change(function () {
+        statemantAnnexedIdText += this.value + ',';
+        $('#StatementsAnnexedResultId').val(statemantAnnexedIdText);
+        console.log(statemantAnnexedIdText);
+    });
+
+    var currentTab = 0;
+    showTab(currentTab);
+
+    function showTab(n) {
+        var x = document.getElementsByClassName("form-slides");
+        x[n].style.display = "block";
+
+        if (n == 0) {
+            document.getElementById("prevBtn").style.display = "none";
+        } else {
+            document.getElementById("prevBtn").style.display = "inline";
+        }
+        if (n == (x.length - 1)) {
+            document.getElementById("nextBtn").innerHTML = "Save";
+        } else {
+            document.getElementById("nextBtn").innerHTML = "Next";
+        }
+
+    }
+
+
+    function nextPrev(n) {
+        var x = document.getElementsByClassName("form-slides");
+        x[currentTab].style.display = "none";
+        currentTab += n;
+        if (currentTab >= x.length) {
+            document.getElementById("basicInformationFormId").submit();
+            return false;
+        }
+        showTab(currentTab);
+    }
+
+</script>
+
+@section Scripts{
+    <script src="@Url.Content("~/Scripts/BasicInformation.js")"></script>
+}
+
+<script src="@Url.Content("~/scripts/surcharge.js")"></script>

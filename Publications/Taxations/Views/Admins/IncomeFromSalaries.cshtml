@@ -1,0 +1,275 @@
+﻿@model Taxations.Models.ParticularsOfIncomeFromSalary
+@using Taxations.Models
+
+@{
+    ViewBag.Title = "Report Of Statement Of Expenses";
+    Layout = null;
+
+    UserInformation ui = new UserInformation();
+    if (ViewBag.UserInformations != null)
+    {
+        ui = ViewBag.UserInformations;
+    }
+
+    User user = new User();
+    if (ViewBag.User != null)
+    {
+        user = ViewBag.User;
+    }
+
+    ParticularsOfIncomeFromSalary poifs = new ParticularsOfIncomeFromSalary();
+
+
+    if (ViewBag.ParticularsOfSalaries != null)
+    {
+        poifs = ViewBag.ParticularsOfSalaries;
+    }
+
+    TaxExempted te = new TaxExempted();
+
+    if (ViewBag.TaxExempteds != null)
+    {
+        te = ViewBag.TaxExempteds;
+    }
+
+    ParticularsOfIncomeAmount poia = new ParticularsOfIncomeAmount();
+
+    if (ViewBag.ParticularsOfIncomeAmounts != null)
+    {
+        poia = ViewBag.ParticularsOfIncomeAmounts;
+    }
+}
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 20px;
+        padding: 5px;
+        border-collapse: collapse;
+    }
+
+    tr td:first-child {
+        padding: 10px;
+    }
+
+    input[type="text"] {
+        width: 100%;
+        padding: 5px;
+    }
+
+    table tr td:nth-child(odd) {
+        text-align: center;
+    }
+
+    p,
+    input,
+    td {
+        margin: 0 !important;
+    }
+
+    tr th {
+        border: 1px solid black;
+    }
+
+    .page2Table {
+        width: 100%;
+        margin-top: 15px;
+    }
+
+    .page2Table tr th {
+        padding: 12px;
+    }
+</style>
+
+
+<h3 style="text-align:center;padding:0px;margin:0px;margin-top:5px">
+    SCHEDULE 24A
+</h3>
+<p style="font-weight: 600; text-align: center;">
+    Particulars of income from Salaries
+</p>
+<p style="text-align:center;padding:0px;margin:0px;">
+    <i>
+        Annex this Schedule to the return of income if you have income from Salaries
+    </i>
+</p>
+
+<table style="margin-top: 15px; margin-bottom: 15px">
+    <tr>
+        <td>01</td>
+        <td>Assessment Year <br>@ui.AssessmentYear</td>
+        <td>02</td>
+        <td>TIN <br>@ui.NewTIN</td>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <th colspan="2" style="text-align: center;width: 55%;">Particulars</th>
+        <th style="width: 15%">Amount (A)</th>
+        <th style="width: 15%">Tax exempted (B)</th>
+        <th style="width: 15%">Taxable (C = A-B)</th>
+    </tr>
+
+    <tr>
+        <td style="width: 10%;">03</td>
+        <td style="width: 45%;">Basic Pay</td>
+        <td>@String.Format("{0:n0}", Convert.ToInt64(poia.BasicPay))</td>
+        <td style="text-align: center">@String.Format("{0:n0}", Convert.ToInt64(te.BasicPayTaxExempted))</td>
+        <td>@String.Format("{0:n0}", Convert.ToInt64(Model.BasicPayTaxable))</td>
+    </tr>
+
+    <tr>
+        <td style="width: 10%;">04</td>
+        <td style="width: 45%;">Special pay</td>
+        <td>@String.Format("{0:n0}", Convert.ToInt64(poia.SpecialPay))</td>
+        <td style="text-align: center">@String.Format("{0:n0}", Convert.ToInt64(te.SpecialPayTaxExempted))</td>
+        <td>@String.Format("{0:n0}", Convert.ToInt64(Model.SpecialPayTaxable))</td>
+    </tr>
+    <tr>
+        <td style="width: 10%;">05</td>
+        <td style="width: 45%;">Arrear pay (if not included in taxable income earlier)</td>
+        <td>@String.Format("{0:n0}", Convert.ToInt64(poia.ArrearPay))</td>
+        <td style="text-align: center">@String.Format("{0:n0}", Convert.ToInt64(te.ArrearPayTaxExempted))</td>
+        <td>@String.Format("{0:n0}", Convert.ToInt64(Model.ArrearPayTaxable))</td>
+    </tr>
+    <tr>
+        <td style="width: 10%;">06</td>
+        <td style="width: 45%;">Dearness allowance</td>
+        <td>@String.Format("{0:n0}", Convert.ToInt64(poia.DearnessAllowance))</td>
+        <td style="text-align: center">@String.Format("{0:n0}", Convert.ToInt64(te.DearnessAllowanceTaxExempted))</td>
+        <td>@String.Format("{0:n0}", Convert.ToInt64(Model.DearnessAllowanceTaxable))</td>
+    </tr>
+    <tr>
+        <td style="width: 10%;">07</td>
+        <td style="width: 45%;">House rent allowance</td>
+        <td>@String.Format("{0:n0}", Convert.ToInt64(poia.HouseRentAllowance))</td>
+        <td style="text-align: center">@String.Format("{0:n0}", Convert.ToInt64(te.HouseRentAllowanceTaxExempted))</td>
+        <td>@String.Format("{0:n0}", Convert.ToInt64(Model.HouseRentAllowanceTaxable))</td>
+    </tr>
+    <tr>
+        <td style="width: 10%;">08</td>
+        <td style="width: 45%;">Medical allowance</td>
+        <td>@String.Format("{0:n0}", Convert.ToInt64(poia.MedicalAllowance))</td>
+        <td style="text-align: center">@String.Format("{0:n0}", Convert.ToInt64(te.MedicalAllowanceTaxExempted))</td>
+        <td>@String.Format("{0:n0}", Convert.ToInt64(Model.MedicalAllowanceTaxable))</td>
+    </tr>
+    <tr>
+        <td style="width: 10%;">09</td>
+        <td style="width: 45%;">Conveyance allowance</td>
+        <td>@String.Format("{0:n0}", Convert.ToInt64(poia.ConveyanceAllowance))</td>
+        <td style="text-align: center">@String.Format("{0:n0}", Convert.ToInt64(te.ConveyanceAllowanceTaxExempted))</td>
+        <td>@String.Format("{0:n0}", Convert.ToInt64(Model.ConveyanceAllowanceTaxable))</td>
+    </tr>
+    <tr>
+        <td style="width: 10%;">10</td>
+        <td style="width: 45%;">Festival Allowance</td>
+        <td>@String.Format("{0:n0}", Convert.ToInt64(poia.FestivalAllowance))</td>
+        <td style="text-align: center">@String.Format("{0:n0}", Convert.ToInt64(te.FestivalAllowanceTaxExempted))</td>
+        <td>@String.Format("{0:n0}", Convert.ToInt64(Model.FestivalAllowanceTaxable))</td>
+    </tr>
+    <tr>
+        <td style="width: 10%;">11</td>
+        <td style="width: 45%;">Allowance for support staff</td>
+        <td>@String.Format("{0:n0}", Convert.ToInt64(poia.AllowanceStaff))</td>
+        <td style="text-align: center">@String.Format("{0:n0}", Convert.ToInt64(te.AllowanceStaffTaxExempted))</td>
+        <td>@String.Format("{0:n0}", Convert.ToInt64(Model.AllowanceStaffTaxable))</td>
+    </tr>
+    <tr>
+        <td style="width: 10%;">12</td>
+        <td style="width: 45%;">Leave allowance</td>
+        <td>@String.Format("{0:n0}", Convert.ToInt64(poia.LeaveAllowance))</td>
+        <td style="text-align: center">@String.Format("{0:n0}", Convert.ToInt64(te.LeaveAllowanceTaxExempted))</td>
+        <td>@String.Format("{0:n0}", Convert.ToInt64(Model.LeaveAllowanceTaxable))</td>
+    </tr>
+    <tr>
+        <td style="width: 10%;">13</td>
+        <td style="width: 45%;">Honorarium/ Reward/Fee</td>
+        <td>@String.Format("{0:n0}", Convert.ToInt64(poia.HonorariumAmount))</td>
+        <td style="text-align: center">@String.Format("{0:n0}", Convert.ToInt64(te.HonorariumTaxExempted))</td>
+        <td>@String.Format("{0:n0}", Convert.ToInt64(Model.HonorariumTaxable))</td>
+    </tr>
+    <tr>
+        <td style="width: 10%;">14</td>
+        <td style="width: 45%;">Overtime allowance</td>
+        <td>@String.Format("{0:n0}", Convert.ToInt64(poia.OvertimeAllowance))</td>
+        <td style="text-align: center">@String.Format("{0:n0}", Convert.ToInt64(te.OtherAllowancesExempted))</td>
+        <td>@String.Format("{0:n0}", Convert.ToInt64(Model.OvertimeAllowanceTaxable))</td>
+    </tr>
+    <tr>
+        <td style="width: 10%;">15</td>
+        <td style="width: 45%;">Bonus / Ex-gratia</td>
+        <td>@String.Format("{0:n0}", Convert.ToInt64(poia.BonusAmount))</td>
+        <td style="text-align: center">@String.Format("{0:n0}", Convert.ToInt64(te.BonusExempted))</td>
+        <td>@String.Format("{0:n0}", Convert.ToInt64(Model.BonusTaxable))</td>
+    </tr>
+    <tr>
+        <td style="width: 10%;">16</td>
+        <td style="width: 45%;">Other allowances</td>
+        <td>@String.Format("{0:n0}", Convert.ToInt64(poia.OtherAllowances))</td>
+        <td style="text-align: center">@String.Format("{0:n0}", Convert.ToInt64(te.OtherAllowancesExempted))</td>
+        <td>@String.Format("{0:n0}", Convert.ToInt64(Model.OtherAllowancesTaxable))</td>
+    </tr>
+    <tr>
+        <td style="width: 10%;">17</td>
+        <td style="width: 45%;">Employer’s contribution to a recognized provident fund</td>
+        <td>@String.Format("{0:n0}", Convert.ToInt64(poia.EmployerContribution))</td>
+        <td style="text-align: center">@String.Format("{0:n0}", Convert.ToInt64(te.EmployerContributionExempted))</td>
+        <td>@String.Format("{0:n0}", Convert.ToInt64(Model.EmployerContributionTaxable))</td>
+    </tr>
+    <tr>
+        <td style="width: 10%;">18</td>
+        <td style="width: 45%;">Interest accrued on a recognized provident fund</td>
+        <td>@String.Format("{0:n0}", Convert.ToInt64(poia.InterestAccrued))</td>
+        <td style="text-align: center">@String.Format("{0:n0}", Convert.ToInt64(te.InterestAccruedExempted))</td>
+        <td>@String.Format("{0:n0}", Convert.ToInt64(Model.InterestAccruedTaxable))</td>
+    </tr>
+    <tr>
+        <td style="width: 10%;">19</td>
+        <td style="width: 45%;">Deemed income for transport facility</td>
+        <td>@String.Format("{0:n0}", Convert.ToInt64(poia.DeemedIncomeTransport))</td>
+        <td style="text-align: center">@String.Format("{0:n0}", Convert.ToInt64(te.DeemedIncomeTransportExempted))</td>
+        <td>@String.Format("{0:n0}", Convert.ToInt64(Model.DeemedIncomeTransportTaxable))</td>
+    </tr>
+    <tr>
+        <td style="width: 10%;">20</td>
+        <td style="width: 45%;">Deemed income for free furnished/ unfurnished accommodation</td>
+        <td>@String.Format("{0:n0}", Convert.ToInt64(poia.DeemedIncomeFurnished))</td>
+        <td style="text-align: center">@String.Format("{0:n0}", Convert.ToInt64(te.DeemedIncomeFurnishedExempted))</td>
+        <td>@String.Format("{0:n0}", Convert.ToInt64(Model.DeemedIncomeFurnishedTaxable))</td>
+    </tr>
+    <tr>
+        <td style="width: 10%;">21</td>
+        <td style="width: 45%;">Other, if any (give detail)</td>
+        <td>@String.Format("{0:n0}", Convert.ToInt64(poia.OtherIfAny))</td>
+        <td style="text-align: center">@String.Format("{0:n0}", Convert.ToInt64(te.OtherIfAnyExempted))</td>
+        <td>@String.Format("{0:n0}", Convert.ToInt64(Model.OtherIfAny))</td>
+    </tr>
+</table>
+
+<table style="margin-top: 30px;">
+    <tr style="width: 100%; border: none">
+        <td>22</td>
+        <td>
+            Name <br />@ui.NameOfAssessee
+        </td>
+        <td style="text-align: left;">
+            Signature & date
+            <br>
+            @if (!string.IsNullOrEmpty(Model.PhotoPath))
+            {
+                <img src="@Model.PhotoPath.Replace("~", "")" style="width: 50px; height: 50px;" />
+            }
+            else
+            {
+                <h3>Signature And Date isn't provided yet.</h3>
+            }
+        </td>
+    </tr>
+</table>

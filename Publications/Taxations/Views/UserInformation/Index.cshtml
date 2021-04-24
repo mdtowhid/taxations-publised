@@ -1,0 +1,226 @@
+﻿@model Taxations.Models.UserInformation
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/containers/userinformation.cshtml";
+}
+
+<h2>Index</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>UserInformation</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AssessmentYear)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AssessmentYear)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NameOfAssessee)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NameOfAssessee)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Gender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Gender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NewTIN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NewTIN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OldTIN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OldTIN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Circle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Circle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Zone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Zone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TickOnBoxes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TickOnBoxes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfBirth)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOfBirth)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IncomeYearFrom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IncomeYearFrom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IncomeYearTo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IncomeYearTo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmployerName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SpouseName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SpouseName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SpouseTIN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SpouseTIN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FatherName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FatherName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MotherName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MotherName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PresentAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PresentAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PermanentAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PermanentAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactTelephone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContactTelephone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BIN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BIN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReturnSubmitted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReturnSubmitted)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ResidentStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ResidentStatus)
+        </dd>
+        
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

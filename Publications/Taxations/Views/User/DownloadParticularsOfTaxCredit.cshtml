@@ -1,0 +1,315 @@
+﻿@model Taxations.Models.ParticularsOfTaxCredit
+@using Taxations.Models
+
+@{
+    ViewBag.Title = "Download Particulars Of Tax Credit";
+    Layout = "~/Views/Shared/downloads.cshtml";
+
+    UserInformation user = new UserInformation();
+    ParticularsOfTaxCredit parTaxCredit = new ParticularsOfTaxCredit();
+    ParticularsOfIncomeFromSalary poifs = new ParticularsOfIncomeFromSalary();
+    if (ViewBag.UserInformations != null)
+    {
+        user = ViewBag.UserInformations;
+    }
+    if (ViewBag.ParticularsOfTaxCredits != null)
+    {
+        parTaxCredit = ViewBag.ParticularsOfTaxCredits;
+    }
+    if (ViewBag.ParticularsOfIncomeFromSalariesTotal != null)
+    {
+        poifs = ViewBag.ParticularsOfIncomeFromSalariesTotal;
+    }
+}
+
+<style>
+    #downloadWrapper {
+        width: calc(100% - 40px);
+        margin: 0 auto;
+        box-shadow: 0.5px 2px 2px whitesmoke
+    }
+</style>
+<div class="informations mt-3">
+    @if (Model != null)
+    {
+
+        <div class="mt-3 ml-4">
+            <br />
+            <button onclick="getPDF('Particular of tax credit')" class="btn btn- btn-success">Download</button>
+        </div>
+
+        <div class="forms" id="downloadWrapper">
+
+            <div class="alert alert-success render-body-heade text-center" style="border-radius: 0">
+                <h3 class="mb-2">SCHEDULE 24D</h3>
+                <p class="lead m-0">Particulars of tax credit/rebate</p>
+                <p class="lead m-0">To be annexed to return by an assessee claiming investment tax credit</p>
+                <p class="lead mt-1">Particulars of tax credit/rebate</p>
+            </div>
+
+
+
+            <input type="hidden" name="UserId" id="UserId" value="@Session["UserId"]" />
+            <input type="hidden" name="EmployeementStatus" id="EmployeementStatus" value="@Session["UserType"]" />
+
+            <div class="data-wrapper border--bottom" style="margin-bottom: 20px">
+                <div class="left">
+                    <div class="data-indicators" style="height: 100px">
+                        01
+                    </div>
+                    <div class="assesment-">
+                        <div class="form-data">
+                            <label class="assesment-year-label">Assessment Year</label>
+                            <input type="text" name="AssessmentYear" id="AssessmentYear" value="@user.AssessmentYear" class="form-control" readonly />
+                        </div>
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="data-indicators" style="height: 100px">
+                        02
+                    </div>
+                    <div class="form-data">
+                        <label class="tin-label">TIN: </label>
+                        <input type="text" name="TIN" id="TIN" value="@user.NewTIN" class="form-control" readonly />
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="dataWrapperParticularsOfTaxCreditId">
+
+                <div class="data-wrapper">
+                    <div class="left ovrride-left-particular-tax">
+                        <h4 class="p-2">Particulars of rebatable investment, contribution, etc.</h4>
+                    </div>
+                    <div class="right ovrride-left-particular-tax"><h4 class="p-2">Amount</h4></div>
+                </div>
+
+                <div class="data-wrapper">
+                    <div class="left">
+                        <div class="data-indicators">03</div>
+                        <p class="p-3 pl-5">Life insurance premium</p>
+                    </div>
+                    <div class="right">
+                        <input type="number" name="LifeInsurance" id="LifeInsurance" value="@parTaxCredit.LifeInsurance"
+                               class="form-control margin-top15px a" />
+                    </div>
+                </div>
+
+                <div class="data-wrapper">
+                    <div class="left">
+                        <div class="data-indicators">04</div>
+                        <p class="display--initial p-3">Contribution to deposit pension scheme (not exceeding allowable limit)</p>
+                    </div>
+                    <div class="right">
+                        <input readonly type="number" name="ContributionToDeposit" id="ContributionToDeposit" value="@parTaxCredit.ContributionToDeposit" class="margin-top15px form-control a" />
+                    </div>
+                </div>
+
+                <div class="data-wrapper">
+                    <div class="left">
+                        <div class="data-indicators">05</div>
+                        <label class="pt-4">Investment in approved savings certificate</label>
+                    </div>
+                    <div class="right">
+                        <input type="number" name="InvestmentInApprovedSavings" id="InvestmentInApprovedSavings"
+                               value="@parTaxCredit.InvestmentInApprovedSavings" class="form-control margin-top15px a" />
+                    </div>
+                </div>
+
+                <div class="data-wrapper">
+                    <div class="left">
+                        <div class="data-indicators">06</div>
+                        <label class="display--initial">Investment in approved debenture or debenture stock, Stock or Shares</label>
+                    </div>
+                    <div class="right">
+                        <input type="number" name="InvestmentInApprovedDebenture" id="InvestmentInApprovedDebenture" value="@parTaxCredit.InvestmentInApprovedDebenture" class="form-control margin-top15px a" />
+                    </div>
+                </div>
+
+
+
+                <div class="data-wrapper">
+                    <div class="left">
+                        <div class="data-indicators">07</div>
+                        <label>Contribution to provident fund to which Provident Fund  Act, 1925 applies</label>
+                    </div>
+                    <div class="right">
+                        <input type="number" name="ContributionToProvidentFund" id="ContributionToProvidentFund"
+                               value="@parTaxCredit.ContributionToProvidentFund" class="form-control margin-top15px a" />
+                    </div>
+                </div>
+
+
+                <div class="data-wrapper">
+                    <div class="left">
+                        <div class="data-indicators">08</div>
+                        <label>Self contribution and employer’s contribution to Recognized Provident Fund</label>
+                    </div>
+                    <div class="right">
+                        <input type="number" name="SelfContributionAndEmployer" id="SelfContributionAndEmployer" value="@parTaxCredit.SelfContributionAndEmployer" class="form-control margin-top15px a" />
+                    </div>
+                </div>
+
+                <div class="data-wrapper">
+                    <div class="left">
+                        <div class="data-indicators">09</div>
+                        <label>Contribution to Super Annuation Fund</label>
+                    </div>
+                    <div class="right">
+                        <input type="number" name="ContributionToSuperAnnuationFund" id="ContributionToSuperAnnuationFund"
+                               value="@parTaxCredit.ContributionToSuperAnnuationFund" class="form-control margin-top15px a" />
+                    </div>
+                </div>
+
+
+
+                <div class="data-wrapper">
+                    <div class="left">
+                        <div class="data-indicators">10</div>
+                        <label>Contribution to Benevolent Fund and Group Insurance Premium </label>
+                    </div>
+                    <div class="right">
+                        <input type="number" name="ContributionToBenevolentFund" id="ContributionToBenevolentFund" value="@parTaxCredit.ContributionToBenevolentFund" class="form-control margin-top15px a" />
+                    </div>
+                </div>
+
+
+
+                <div class="data-wrapper">
+                    <div class="left">
+                        <div class="data-indicators">11</div>
+                        <label>Contribution to Zakat Fund</label>
+                    </div>
+                    <div class="right">
+                        <input type="number" name="ContributionToZakatFund" id="ContributionToZakatFund" value="@parTaxCredit.ContributionToZakatFund" class="form-control margin-top15px a" />
+                    </div>
+                </div>
+
+
+                <div class="data-wrapper">
+                    <div class="left">
+                        <div class="data-indicators">12</div>
+                        <label> Others, if any ( give details )</label>
+                    </div>
+                    <div class="right">
+                        <input type="number" name="OthersIfAny" id="OthersIfAny" value="@parTaxCredit.OthersIfAny" class="form-control margin-top15px a" />
+                    </div>
+                </div>
+
+                <div class="data-wrapper">
+                    <div class="left">
+                        <div class="data-indicators">13</div>
+                        <label>Total allowable investment, contribution etc.</label>
+                    </div>
+                    <div class="right">
+                        <input readonly type="number" name="TotalAllowableInvestment" id="TotalAllowableInvestment" value="@parTaxCredit.TotalAllowableInvestment" class="form-control margin-top15px" />
+                    </div>
+                </div>
+
+
+
+                <div class="data-wrapper">
+                    <div class="data-indicators" style=" height: 218px">14</div>
+                    <div class="root-header">
+                        <div class="left">
+                            <div class="root-header-heading">Eligible amount for rebate (the lesser of 14A, 14B or 14C)</div>
+                        </div>
+                        <div class="right" style="border-bottom: 1px solid #ccc">
+                            <input type="number" readonly name="EligibleAmountForRebate" id="EligibleAmountForRebate" value="@parTaxCredit.EligibleAmountForRebate" class="form-control" />
+                        </div>
+                    </div>
+
+
+                    <div class="sub-root-header">
+                        <div class="data-indicators border--bottom">14A</div>
+                        <div class="left">
+                            <div class="sub-root-header-heading">Total allowable investment, contribution, etc. (as in 13)</div>
+                        </div>
+                        <div class="right">
+                            <input readonly
+                                   type="number"
+                                   name="TotalAllowableInvestmentContribution"
+                                   id="TotalAllowableInvestmentContribution"
+                                   value="@parTaxCredit.TotalAllowableInvestment"
+                                   class="form-control" />
+                        </div>
+                    </div>
+
+
+                    <div class="sub-root-header border--bottom">
+                        <div class="data-indicators" style="height: 75px">14B</div>
+                        <div class="left border--bottom-none">
+                            <div class="sub-root-header-heading" style="height: 70px; overflow: hidden; overflow-y: scroll">
+                                ........  % of the total income [excluding any income for which a
+                                tax exemption or a reduced rate is applicable under sub-section (4)
+                                of section 44 or any income from any
+                                source or sources mentioned in clause (a) of sub-section (2) of section 82C.]
+                            </div>
+                        </div>
+                        <div class="right border--bottom-none">
+                            <input readonly type="number" name="TotalIncome14B" id="TotalIncome14B" value="@parTaxCredit.TotalIncome14B" class="form-control" style="margin-top: 20px" />
+                        </div>
+                    </div>
+
+
+                    <div class="sub-root-header">
+                        <div class="data-indicators">14C</div>
+                        <div class="left border--bottom-none">
+                            <div class="sub-root-header-heading">1.5 crore</div>
+                        </div>
+                        <div class="right border--bottom-none">
+                            <input type="number" name="Crore14C" id="Crore14C" value="150000000" class="form-control" readonly />
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="data-wrapper border--bottom">
+                    <div class="left">
+                        <div class="data-indicators">15</div>
+                        <label style="display: initial">Amount of tax rebate calculated on eligible amount (Serial14) under section 44(2)(b)</label>
+
+                    </div>
+                    <div class="right">
+                        <input readonly type="number" name="AmountOfTaxRebateCalculated"
+                               id="AmountOfTaxRebateCalculated"
+                               value="@parTaxCredit.AmountOfTaxRebateCalculated" class="form-control margin-top15px" />
+                    </div>
+                </div>
+
+                <div class="data-wrapper border-bottom" style="margin-top: 25px" id="offBottomForm">
+                    <div class="data-indicators" style="height: 100px">16</div>
+                    <div style="" class="off-bottom-form">
+                        <div class="left">
+                            <label style="padding-left: 20px;">Name</label>
+                            <input type="text" name="Name" id="Name" value="@parTaxCredit.Name" class="form-control" />
+                        </div>
+                        <div class="right">
+                            @if (parTaxCredit.SignatureAndDatePhoto != null)
+                            {
+                                <div id="prevImage">
+                                    <p class="lead mb-1">Photo</p>
+                                    <img class="img-thumbnail" src="@Url.Content(parTaxCredit.SignatureAndDatePhoto)"
+                                         alt="@parTaxCredit.SignatureAndDatePhoto"
+                                         style="width: 120px; height: 120px;
+                                            display: block;margin: 0 auto; margin-top: 0;" />
+                                </div>
+                            }
+                            else
+                            {
+
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <h3 class="text-danger">Please provide Particulars Of Tax Credit</h3>
+    }
+</div>
+<script src="@Url.Content("~/Scripts/PDFMaker.js")"></script>

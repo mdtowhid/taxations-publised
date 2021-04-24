@@ -1,0 +1,72 @@
+﻿@model Taxations.Models.User
+
+@{
+    ViewBag.Title = "User Profile";
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+}
+<div class="informations mt-3">
+    <div class="p-3">
+        <h4><b>@Html.DisplayFor(model => model.FirstName) 
+            @Html.DisplayFor(model => model.LastName)</b></h4>
+        <hr />
+        <dl class="dl-horizontal">
+
+            <dt>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FirstName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.LastName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LastName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.IsEmailConfirmed)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.IsEmailConfirmed)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Active)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Active)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.PhotoPath)
+            </dt>
+
+            <dd>
+                <img src="@Url.Content(Model.PhotoPath)" class="img-thumbnail" style="width: 320px;height: 340px;" />
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.EmploymentStatus)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.EmploymentStatus)
+            </dd>
+
+        </dl>
+    </div>
+</div>

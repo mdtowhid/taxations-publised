@@ -1,0 +1,146 @@
+﻿@using Taxations.Models
+@using Taxations.Dtos
+
+@{
+    ViewBag.Title = "Rebate Calculation";
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+    ParticularsOfTaxCredit potc = new ParticularsOfTaxCredit();
+    if (ViewBag.TaxCredit != null)
+    {
+        potc = ViewBag.TaxCredit;
+    }
+    var maxDpsInfo = ViewBag.MaxDpsInfo;
+}
+
+
+
+<div class="informations mt-3 investment-rebate" style="width: 600px;">
+    <h2>Rebate Calculation</h2>
+    @if (ViewBag.TaxCredit == null)
+    {
+        <div class="alert alert-danger text-danger">
+            <p class="font-weight-bolder m-0 text-center">Rebate isn't calculated yet.</p>
+        </div>
+    }
+    <table class="table table-bordered table-condensed table-responsive table-hover bg-white"
+        style="overflow: hidden !important;">
+
+        <tbody id="rebateInformations">
+            @if (potc.SelfContributionAndEmployer != null && potc.SelfContributionAndEmployer != "0")
+            {
+                <tr>
+                    <td class="pt-3">Provident Fund (PF)</td>
+                    <td><input type="text" value="@potc.SelfContributionAndEmployer" class="form-control income" readonly />
+                    </td>
+                </tr>
+            }
+            @if (maxDpsInfo != null)
+            {
+                <tr>
+                    <td class="pt-3">DPS (Max)</td>
+                    <td><input type="text" class="form-control income" readonly value="@maxDpsInfo" /></td>
+                </tr>
+            }
+            @if (potc.LifeInsurance != null && potc.LifeInsurance != "0")
+            {
+                <tr>
+                    <td class="pt-3">Life insurance premium</td>
+                    <td><input type="text" class="form-control income" readonly value="@potc.LifeInsurance" /></td>
+                </tr>
+            }
+            @if (potc.InvestmentInApprovedSavings != null && potc.InvestmentInApprovedSavings != "0")
+            {
+                <tr>
+                    <td class="pt-3">Investment in approved savings certificate</td>
+                    <td><input type="text" class="form-control income" readonly value="@potc.LifeInsurance" /></td>
+                </tr>
+            }
+            @if (potc.InvestmentInApprovedDebenture != null && potc.InvestmentInApprovedDebenture != "0")
+            {
+                <tr>
+                    <td class="pt-3">Investment in approved debenture or debenture stock, Stock or Shares</td>
+                    <td><input type="text" class="form-control income" readonly
+                            value="@potc.InvestmentInApprovedDebenture" /></td>
+                </tr>
+            }
+            @if (potc.ContributionToProvidentFund != null && potc.ContributionToProvidentFund != "0")
+            {
+                <tr>
+                    <td class="pt-3">Contribution to provident fund to which Provident Fund Act, 1925 applies</td>
+                    <td><input type="text" class="form-control income" readonly value="@potc.ContributionToProvidentFund" />
+                    </td>
+                </tr>
+            }
+            @if (potc.ContributionToSuperAnnuationFund != null && potc.ContributionToSuperAnnuationFund != "0")
+            {
+                <tr>
+                    <td class="pt-3">Contribution to Super Annuation Fund</td>
+                    <td><input type="text" class="form-control income" readonly
+                            value="@potc.ContributionToSuperAnnuationFund" /></td>
+                </tr>
+            }
+            @if (potc.ContributionToBenevolentFund != null && potc.ContributionToBenevolentFund != "0")
+            {
+
+                <tr>
+                    <td class="pt-3">Contribution to Benevolent Fund and Group Insurance Premium</td>
+                    <td><input type="text" class="form-control income" readonly
+                            value="@potc.ContributionToBenevolentFund" /></td>
+                </tr>
+            }
+            @if (potc.ContributionToZakatFund != null && potc.ContributionToZakatFund != "0")
+            {
+                <tr>
+                    <td class="pt-3">Contribution to Zakat Fund</td>
+                    <td><input type="text" class="form-control income" readonly value="@potc.ContributionToZakatFund" />
+                    </td>
+                </tr>
+            }
+            @if (potc.OthersIfAny != null && potc.OthersIfAny != "0")
+            {
+                <tr>
+                    <td class="pt-3">Others, if any ( give details )</td>
+                    <td><input type="text" class="form-control income" readonly value="@potc.OthersIfAny" /></td>
+                </tr>
+            }
+
+
+            @if (potc.TotalAllowableInvestment != null && potc.TotalAllowableInvestment != "0")
+            {
+                <tr>
+                    <td class="pt-3">Actual Investment</td>
+                    <td><input type="text" class="form-control income" readonly value="@potc.TotalAllowableInvestment" />
+                    </td>
+                </tr>
+            }
+
+            @if (potc.TotalAllowableInvestment != null && potc.TotalAllowableInvestment != "0")
+            {
+                <tr>
+                    <td class="pt-3">25% of Taxable Income</td>
+                    <td><input type="text" class="form-control income" readonly value="@potc.TotalIncome14B" /></td>
+                </tr>
+            }
+
+
+
+            @if (potc.Crore14C != null && potc.Crore14C != "0")
+            {
+                <tr>
+                    <td class="pt-3">15000000</td>
+                    <td><input type="text" class="form-control income" readonly value="@potc.Crore14C" /></td>
+                </tr>
+            }
+
+            @if (potc.AmountOfTaxRebateCalculated != null && potc.AmountOfTaxRebateCalculated != "0")
+            {
+                <tr>
+                    <td class="pt-3 font-weight-bolder">Rebate on investment</td>
+                    <td><input type="text" class="form-control income" readonly value="@potc.AmountOfTaxRebateCalculated" />
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>

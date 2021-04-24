@@ -1,0 +1,665 @@
+﻿@using Taxations.Models
+@model Taxations.Models.StatementOfExpense
+
+@{
+    ViewBag.Title = "Download Statement Of Expenses";
+    Layout = "~/Views/Shared/downloads.cshtml";
+
+    UserInformation user = new UserInformation();
+    StatementOfExpense statementOfExpense = new StatementOfExpense();
+    if (ViewBag.StatementOfExpense != null)
+    {
+        statementOfExpense = ViewBag.StatementOfExpense;
+    }
+
+    if (ViewBag.UserInformations != null)
+    {
+        user = ViewBag.UserInformations;
+    }
+}
+
+
+<style>
+    #formWrapperDiv {
+        margin: 0 auto;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        box-shadow: none
+    }
+</style>
+
+
+<div class="mt-3 ml-4">
+    <br />
+    <button onclick="getPDF('Statement Of Expenses')" class="btn btn- btn-success">Download</button>
+</div>
+<div id="downloadWrapper">
+
+    <div id="formWrapperDiv">
+
+        <div class="alert alert-success render-body-header text-center" style="border-radius: 0">
+            <h4>STATEMENT OF EXPENSES RELATING TO LIFESTYLE</h4>
+            <p>under section 80(2) of the Income Tax Ordinance, 1984 (XXXVI of 1984)</p>
+
+        </div>
+
+        <div class="forms" id="statementOfExpensesId">
+
+            <div class="data-wrapper">
+                <div class="left">
+                    <div class="data-indicators">
+                        01
+                    </div>
+                    <div class="assesment-year">
+                        <div class="form-data">
+                            <label>Assessment Year</label>
+                            <input type="text" class="form-control" name="AssessmentYear" value="@user.AssessmentYear" readonly />
+                        </div>
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="data-indicators">
+                        02
+                    </div>
+                    <div class="form-data">
+                        <div class="date-birth">
+                            <label>Statement as on (DD-MM-YYYY)</label>
+                            <input type="date" class="form-control" name="StatementDate" required />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="data-wrapper" style="border-bottom: 1px solid #ccc; margin-bottom: 20px;">
+                <div class="left">
+                    <div class="data-indicators">03</div>
+                    <div class="form-data">
+                        <label>Name of the Assessee</label>
+                        <input type="text" class="form-control" name="NameOfAssessee" value="@user.NameOfAssessee" readonly />
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="data-indicators">04</div>
+                    <div class="form-data">
+                        <h3 class="lead">TIN: </h3>
+                        <input type="text" name="TIN" value="@user.NewTIN" class="form-control" readonly />
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="data-wrapper">
+                <div class="data-form-header">
+                    <div class="left" style="width: 56.3%">
+                        <h3 class="text-monospace text-capitalize" style="padding: 3px;">Particulars</h3>
+                    </div>
+                    <div class="right" style="width:42.8%">
+                        <div class="left"><h3 class="text-monospace text-capitalize text-center" style="height: 42px;">Amount</h3></div>
+                        <div class="right"><h3 class="text-monospace text-capitalize text-center">Comment</h3></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="dataWrapperStatementOfExpensesId">
+
+
+                <div class="data-wrapper">
+                    <div class="data-indicators" style="height: 50px">05</div>
+                    <div class="root-header">
+                        <div class="left border--bottom-none expenses-header-wrapper">
+                            <div class="root-header-heading">Expenses for food, clothing and other essentials</div>
+                        </div>
+                        <div class="right border--bottom-none expenses-fields">
+                            <div class="left border--bottom-none">
+                                <input type="number"
+                                       id="AgriculturalProperty"
+                                       name="AgriculturalProperty"
+                                       value="@statementOfExpense.AgriculturalProperty"
+                                       class="form-control t" />
+                            </div>
+                            <div class="right border--bottom-none">
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="data-wrapper">
+                    <div class="data-indicators" style="height: 50px">06</div>
+                    <div class="root-header">
+                        <div class="left border--bottom-none expenses-header-wrapper">
+                            <div class="root-header-heading">Housing expense</div>
+                        </div>
+                        <div class="right border--bottom-none expenses-fields">
+                            <div class="left border--bottom-none">
+                                <input type="number"
+                                       id="HousingExpense"
+                                       name="HousingExpense"
+                                       value="@statementOfExpense.HousingExpense" class="form-control t" />
+                            </div>
+                            <div class="right border--bottom-none">
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="data-wrapper">
+                    <div class="data-indicators" style="height: 150px">07</div>
+                    <div class="root-header">
+                        <div class="left" style="border-bottom: 1px solid #ccc">
+                            <div class="root-header-heading">Auto and transportation expenses (07A+07B)</div>
+                        </div>
+                        <div class="right" style="border-bottom: 1px solid #ccc">
+                            <div class="left border--bottom-none">
+                                <input type="text"
+                                       id="AutoAndTransportationExpenses07A08B"
+                                       name="AutoAndTransportationExpenses07A08B"
+                                       value="@statementOfExpense.AutoAndTransportationExpenses07A08B"
+                                       readonly class="form-control t" />
+                            </div>
+                            <div class="right border--bottom-none">
+                                <input type="text"
+                                       readonly class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="sub-root-header">
+                        <div class="data-indicators border--bottom">07A</div>
+                        <div class="left">
+                            <div class="sub-root-header-heading">Driver’s salary, fuel and maintenance </div>
+                        </div>
+                        <div class="right">
+                            <div class="left border--bottom-none">
+                                <input type="number"
+                                       name="DriverSalary07A"
+                                       id="DriverSalary07A"
+                                       value="@statementOfExpense.DriverSalary07A" class="form-control 7" />
+                            </div>
+                            <div class="right border--bottom-none">
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="sub-root-header">
+                        <div class="data-indicators border--bottom-none">07B</div>
+                        <div class="left border--bottom-none">
+                            <div class="sub-root-header-heading">Other transportation  </div>
+                        </div>
+                        <div class="right border--bottom-none">
+                            <div class="left border--bottom-none">
+                                <input type="number"
+                                       id="OtherTransportation"
+                                       name="OtherTransportation"
+                                       value="@statementOfExpense.OtherTransportation" class="form-control 7" />
+                            </div>
+                            <div class="right border--bottom-none">
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="data-wrapper">
+                    <div class="data-indicators" style="height: 250px">08</div>
+                    <div class="root-header">
+                        <div class="left" style="border-bottom: 1px solid #ccc">
+                            <div class="root-header-heading">Household and utility expenses(8A+8B+8C+8D)</div>
+                        </div>
+                        <div class="right" style="border-bottom: 1px solid #ccc">
+                            <div class="left border--bottom-none">
+                                <input type="number"
+                                       id="HouseholdAndUtilityExpenses08A08B08C08D"
+                                       name="HouseholdAndUtilityExpenses08A08B08C08D"
+                                       value="@statementOfExpense.HouseholdAndUtilityExpenses08A08B08C08D"
+                                       readonly class="form-control t" />
+                            </div>
+                            <div class="right border--bottom-none">
+                                <input type="text" readonly
+                                       class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="sub-root-header">
+                        <div class="data-indicators border--bottom">08A</div>
+                        <div class="left">
+                            <div class="sub-root-header-heading">Electricity  </div>
+                        </div>
+                        <div class="right">
+                            <div class="left border--bottom-none">
+                                <input type="number"
+                                       id="Electricity08A"
+                                       name="Electricity08A"
+                                       value="@statementOfExpense.Electricity08A" class="form-control 8" />
+                            </div>
+                            <div class="right border--bottom-none">
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="sub-root-header">
+                        <div class="data-indicators border--bottom">08B</div>
+                        <div class="left border--bottom">
+                            <div class="sub-root-header-heading">Gas, water, sewer and garbage  </div>
+                        </div>
+                        <div class="right border--bottom">
+                            <div class="left border--bottom-none">
+                                <input type="number"
+                                       id="GasWaterSewerAndGarbage08B"
+                                       name="GasWaterSewerAndGarbage08B"
+                                       value="@statementOfExpense.GasWaterSewerAndGarbage08B" class="form-control 8" />
+                            </div>
+                            <div class="right">
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="sub-root-header">
+                        <div class="data-indicators border--bottom">08C</div>
+                        <div class="left">
+                            <div class="sub-root-header-heading">Phone, internet, TV channels subscription </div>
+                        </div>
+                        <div class="right border--bottom">
+                            <div class="left border--bottom-none">
+                                <input type="number"
+                                       id="PhoneInternet08C"
+                                       name="PhoneInternet08C"
+                                       value="@statementOfExpense.PhoneInternet08C" class="form-control 8" />
+                            </div>
+                            <div class="right ">
+                                <input type="text"
+                                       class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="sub-root-header">
+                        <div class="data-indicators border--bottom-none">08D</div>
+                        <div class="left border--bottom-none">
+                            <div class="sub-root-header-heading">Home-support staff and other expenses</div>
+                        </div>
+                        <div class="right border--bottom-none">
+                            <div class="left border--bottom-none">
+                                <input type="number"
+                                       id="HomeSupport08D"
+                                       name="HomeSupport08D"
+                                       value="@statementOfExpense.HomeSupport08D" class="form-control 8" />
+                            </div>
+                            <div class="right border--bottom-none">
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="data-wrapper">
+                    <div class="data-indicators" style="height: 50px">09</div>
+                    <div class="root-header">
+                        <div class="left border--bottom-none expenses-header-wrapper">
+                            <div class="root-header-heading">Children’s education expenses</div>
+                        </div>
+                        <div class="right border--bottom-none expenses-fields">
+                            <div class="left border--bottom-none">
+                                <input type="number"
+                                       id="ChildrenEducation"
+                                       name="ChildrenEducation"
+                                       value="@statementOfExpense.ChildrenEducation" class="form-control t" />
+                            </div>
+                            <div class="right border--bottom-none">
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="data-wrapper">
+                    <div class="data-indicators" style="height: 250px">10</div>
+                    <div class="root-header">
+                        <div class="left" style="border-bottom: 1px solid #ccc">
+                            <div class="root-header-heading">Special expenses (10A+10B+10C+10D)</div>
+                        </div>
+                        <div class="right" style="border-bottom: 1px solid #ccc">
+                            <div class="left border--bottom-none">
+                                <input type="number"
+                                       id="SpecialExpenses10A10B10C10D"
+                                       name="SpecialExpenses10A10B10C10D"
+                                       readonly
+                                       value="@statementOfExpense.SpecialExpenses10A10B10C10D"
+                                       class="form-control t" />
+                            </div>
+                            <div class="right border--bottom-none">
+                                <input type="text" readonly class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="sub-root-header">
+                        <div class="data-indicators border--bottom">10A</div>
+                        <div class="left">
+                            <div class="sub-root-header-heading">Festival, party, events and gifts</div>
+                        </div>
+                        <div class="right">
+                            <div class="left border--bottom-none">
+                                <input type="number"
+                                       id="FestivalParty10A"
+                                       name="FestivalParty10A"
+                                       value="@statementOfExpense.FestivalParty10A" class="form-control 10" />
+                            </div>
+                            <div class="right border--bottom-none">
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="sub-root-header">
+                        <div class="data-indicators border--bottom">10B</div>
+                        <div class="left border--bottom">
+                            <div class="sub-root-header-heading">Domestic and overseas tour, holiday, etc.</div>
+                        </div>
+                        <div class="right border--bottom">
+                            <div class="left border--bottom-none">
+                                <input type="number"
+                                       id="DomesticAndOverseasTour10B"
+                                       name="DomesticAndOverseasTour10B"
+                                       value="@statementOfExpense.DomesticAndOverseasTour10B" class="form-control 10" />
+                            </div>
+                            <div class="right border--bottom-none">
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="sub-root-header">
+                        <div class="data-indicators border--bottom">10C</div>
+                        <div class="left border--bottom">
+                            <div class="sub-root-header-heading">Donation, philanthropy, etc.</div>
+                        </div>
+                        <div class="right border--bottom">
+                            <div class="left border--bottom-none">
+                                <input type="number"
+                                       id="Donation10C"
+                                       name="Donation10C"
+                                       value="@statementOfExpense.Donation10C" class="form-control 10" />
+                            </div>
+                            <div class="right border--bottom">
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="sub-root-header">
+                        <div class="data-indicators border--bottom-none">10D</div>
+                        <div class="left border--bottom-none">
+                            <div class="sub-root-header-heading">Other special expenses</div>
+                        </div>
+                        <div class="right border--bottom-none">
+                            <div class="left border--bottom-none">
+                                <input type="number"
+                                       id="OtherSpecialExpenses10D"
+                                       name="OtherSpecialExpenses10D"
+                                       value="@statementOfExpense.OtherSpecialExpenses10D" class="form-control 10" />
+                            </div>
+                            <div class="right border--bottom-none">
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div class="data-wrapper">
+                    <div class="data-indicators" style="height: 50px">11</div>
+                    <div class="root-header">
+                        <div class="left border--bottom-none expenses-header-wrapper">
+                            <div class="root-header-heading">Any other expenses</div>
+                        </div>
+                        <div class="right border--bottom-none expenses-fields">
+                            <div class="left border--bottom-none">
+                                <input type="number"
+                                       id="AnyOtherExpenses"
+                                       name="AnyOtherExpenses"
+                                       value="@statementOfExpense.AnyOtherExpenses"
+                                       class="form-control t" />
+                            </div>
+                            <div class="right border--bottom-none">
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="data-wrapper">
+                    <div class="data-indicators" style="height: 60px">12</div>
+                    <div class="root-header">
+                        <div class="left border--bottom-none expenses-header-wrapper" style="height: 60px">
+                            <div class="root-header-heading">Total expense relating to lifestyle (5+6+7+8+9+10+11)</div>
+                        </div>
+                        <div class="right border--bottom-none expenses-fields" style="height: 60px">
+                            <div class="left border--bottom-none">
+                                <input type="number"
+                                       readonly
+                                       id="TotalExpenseRelating"
+                                       name="TotalExpenseRelating"
+                                       value="@statementOfExpense.TotalExpenseRelating" class="form-control" />
+                            </div>
+                            <div class="right border--bottom-none">
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="data-wrapper">
+                    <div class="data-indicators" style="height: 150px">13</div>
+                    <div class="root-header">
+                        <div class="left" style="border-bottom: 1px solid #ccc">
+                            <div class="root-header-heading">Payment of tax, charges, etc. (13A+13B)</div>
+                        </div>
+                        <div class="right" style="border-bottom: 1px solid #ccc">
+                            <div class="left border--bottom-none">
+                                <input type="number"
+                                       id="PaymentOfTax13A13B"
+                                       name="PaymentOfTax13A13B"
+                                       readonly
+                                       value="@statementOfExpense.PaymentOfTax13A13B" class="form-control" />
+                            </div>
+                            <div class="right border--bottom-none">
+                                <input type="text" readonly class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="sub-root-header">
+                        <div class="data-indicators border--bottom">13A</div>
+                        <div class="left">
+                            <div class="sub-root-header-heading">Payment of tax at source </div>
+                        </div>
+                        <div class="right">
+                            <div class="left border--bottom-none">
+                                <input type="number"
+                                       id="PaymentOfTax13A"
+                                       name="PaymentOfTax13A"
+                                       value="@statementOfExpense.PaymentOfTax13A" class="form-control 13" />
+                            </div>
+                            <div class="right border--bottom-none">
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="sub-root-header">
+                        <div class="data-indicators border--bottom-none">13B</div>
+                        <div class="left border--bottom-none">
+                            <div class="sub-root-header-heading">Payment of tax, surcharge or other amount </div>
+                        </div>
+                        <div class="right border--bottom-none">
+                            <div class="left border--bottom-none">
+                                <input type="number"
+                                       id="PaymentOfTax13B"
+                                       name="PaymentOfTax13B"
+                                       value="@statementOfExpense.PaymentOfTax13B" class="form-control 13" />
+                            </div>
+                            <div class="right border--bottom-none">
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div class="data-wrapper border--bottom">
+                    <div class="data-indicators" style="height: 50px">14</div>
+                    <div class="root-header">
+                        <div class="left border--bottom-none expenses-header-wrapper">
+                            <div class="root-header-heading">Total amount of expense and tax (12+13)</div>
+                        </div>
+                        <div class="right border--bottom-none expenses-fields">
+                            <div class="left border--bottom-none">
+                                <input type="number"
+                                       readonly
+                                       id="TotalAmountOfExpense"
+                                       name="TotalAmountOfExpense"
+                                       value="@statementOfExpense.TotalAmountOfExpense" class="form-control" />
+                            </div>
+                            <div class="right border--bottom-none">
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="data-wrapper row border border-top-0 font-weight-bolder p-3" style="margin-left:0px">
+                    <div class="col-md-8 border-right">Total</div>
+                    <div class="col-md-4">
+                        <input id="total" readonly name="Total" type="number" value="@statementOfExpense.Total" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="data-wrapper border-bottom" style="margin-top: 25px" id="offBottomForm">
+                    <div class="data-indicators" style="height: 255px">15</div>
+                    <div style="" class="off-bottom-form">
+                        <p class="text-center text-monospace lead">Verification and signature</p>
+                        <div style="">
+                            <b>Verification</b>
+                            <p>
+                                I solemnly declare that to the best of my knowledge and belief the information
+                                given in this statement and the schedule annexed herewith are correct and complete.
+                            </p>
+                        </div>
+                        <div class="form-data" style="width: 100%; padding: 0;">
+                            <div class="left">
+                                <label>Name</label>
+                                <input type="text" name="Name" value="@statementOfExpense.Name" class="form-control" />
+                            </div>
+                            <div class="right">
+                                @*<label>Signature & date</label>*@
+                                @if (@statementOfExpense.SignatureAndDatePhotoPath != null)
+                                {
+
+                                    @*<div class="custom-file">
+                                            <input type="hidden" name="PhotoPath" value="replace" />
+                                            <input type="file" name="file" class="custom-file-input" id="customFile">
+                                            <label class="custom-file-label" for="customFile">Choose file</label>
+                                        </div>*@
+                                    <div id="prevImage">
+                                        <p class="lead mb-1">Photo</p>
+                                        <img class="img-thumbnail" src="@Url.Content(statementOfExpense.SignatureAndDatePhotoPath)"
+                                             style="        width: 120px;
+                                                height: 120px;
+                                                display: block;
+                                                margin: 0 auto;" />
+                                    </div>
+                                }
+                                else
+                                {
+                                    @*<div class="custom-file">
+                                            <input type="hidden" name="PhotoPath" value="replace" />
+                                            <input type="file" name="file" class="custom-file-input" id="customFile" required>
+                                            <label class="custom-file-label" for="customFile">Choose file</label>
+                                        </div>*@
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(e => { $('#offBottomForm .data-indicators').height($('#offBottomForm').height()); });
+</script>
+@section Scripts{
+    <script src="@Url.Content("~/Scripts/StatementOfExpenses.js")" type="module"></script>
+}
+<script>
+
+    function getPDF(filename) {
+        var HTML_Width = $("#formWrapperDiv").width();
+        var HTML_Height = $("#formWrapperDiv").height();
+        var top_left_margin = 15;
+        var PDF_Width = HTML_Width + (top_left_margin * 2);
+        var PDF_Height = (PDF_Width * 1.5) + (top_left_margin * 2);
+        var canvas_image_width = HTML_Width;
+        var canvas_image_height = HTML_Height;
+
+        var totalPDFPages = Math.ceil(HTML_Height / PDF_Height) - 1;
+
+
+        html2canvas($("#formWrapperDiv")[0], { allowTaint: true }).then(function (canvas) {
+            canvas.getContext('2d');
+
+            console.log(canvas.height + "  " + canvas.width);
+
+            var imgData = canvas.toDataURL("image/jpeg", 1.0);
+            var pdf = new jsPDF('p', 'pt', [PDF_Width, PDF_Height]);
+            pdf.addImage(imgData, 'JPG', top_left_margin, top_left_margin, canvas_image_width, canvas_image_height);
+
+
+            for (var i = 1; i <= totalPDFPages; i++) {
+                pdf.addPage(PDF_Width, PDF_Height);
+                pdf.addImage(imgData, 'JPG', top_left_margin, -(PDF_Height * i)
+                    + (top_left_margin * 4), canvas_image_width, canvas_image_height);
+            }
+
+            pdf.save(filename + ".pdf");
+        });
+    };
+</script>

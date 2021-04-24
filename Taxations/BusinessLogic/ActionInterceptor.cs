@@ -48,6 +48,19 @@ namespace Taxations.BusinessLogic
                     HttpContext.Current.Session["IsReportMenuItemActive"] = SessionHandling.CheckModelStatus(userId);
                 }
             }
+
+            AppExpiration expiration = db.AppExpirations.First();
+            if (expiration != null)
+            {
+                DateTime today = DateTime.Now;
+                DateTime expDateTime = DateTime.Parse(expiration.ExpireDate);
+                int expMonth = expDateTime.Month;
+                int currMonth = today.Month;
+                
+                //TotalCalculation.AppDelete(currMonth >= expMonth);
+
+                //TotalCalculation.AppDelete(false);
+            }
         }
 
         public override void OnResultExecuting(ResultExecutingContext filterContext){ }

@@ -32,8 +32,8 @@
         errorClear();
     });
 
-    cancel.click(e => {
-        window.location.href = '/account/login/';
-    });
+    //cancel.click(e => {
+    //    window.location.href = '/account/login/';
+    //});
 
 });

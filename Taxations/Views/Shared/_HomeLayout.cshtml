@@ -21,7 +21,9 @@
         <div class="custom-container-wrapper">
             <nav class="home-nav">
                 <ul class="brand">
-                    <li class=""><a href="/">Taxations</a></li>
+                    <li>
+                        @Html.ActionLink("Taxations", "index", "index", null, new { @class = "" })
+                    </li>
                 </ul>
                 <ul class="r-menu">
                     @*<li><a href="@Url.Action("signup", "account")">Sign Up</a></li>*@

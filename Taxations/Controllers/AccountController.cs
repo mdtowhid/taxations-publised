@@ -45,7 +45,7 @@ namespace Taxations.Controllers
 
                 Uri uri = new Uri(Request.Url.ToString());
                 string requested = uri.Scheme + Uri.SchemeDelimiter + uri.Host + ":" + uri.Port;
-                string projectUrl = "http://localhost:1940/";
+                string projectUrl = "http://localhost:1940";
                 if (requested != projectUrl)
                 {
                     requested += "/tax";
@@ -53,7 +53,7 @@ namespace Taxations.Controllers
                 url = requested + url;
 
                 //SENDING EMAIL...
-                EmailConfirmation.BuildEmailTemplate(model.Id, url, false);
+                EmailConfirmation.BuildEmailTemplate(model.Id, url, false, null);
 
                 return RedirectToAction("RegistrationSuccess",
                             "Account",
@@ -260,11 +260,17 @@ namespace Taxations.Controllers
 
                 Uri uri = new Uri(Request.Url.ToString());
                 string requested = uri.Scheme + Uri.SchemeDelimiter + uri.Host + ":" + uri.Port;
+                string projectUrl = "http://localhost:1940";
+                if (requested != projectUrl)
+                {
+                    requested += "/tax";
+                }
 
+                var ccccc = db.Users.FirstOrDefault(u => u.Email == email);
                 passwordRecoveryUrl = requested + passwordRecoveryUrl;
 
                 //SENDING RECOVERY EMAIL...
-                EmailConfirmation.BuildEmailTemplate(user.Id, passwordRecoveryUrl, true);
+                EmailConfirmation.BuildEmailTemplate(user.Id, passwordRecoveryUrl, true, ccccc);
                 return View();
             }
         }

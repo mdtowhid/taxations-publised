@@ -54,7 +54,8 @@
             {
                 <div class="alert alert-success">
                     <h4>@ViewBag.Success</h4>
-                    @Html.ActionLink("Stay logged in.", "index", "default", new { @class = "" })
+                    @Html.ActionLink("Goto Login Page", "Login", "account", null, 
+                        new { @class = "btn btn-md btn-outline-success" })
                 </div>
             }
         }

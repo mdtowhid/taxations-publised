@@ -10,7 +10,7 @@
     const lifeInsurance = $('#LifeInsurance');
 
     const getInsurances = () => {
-        $.get('/ParticularsOfTaxCredit/GetInsurances/', (insurences, status) => {
+        $.get('GetInsurances/ParticularsOfTaxCredit', (insurences, status) => {
             let template = ``;
 
             setTimeout(() => {
@@ -49,7 +49,7 @@
             let id = el.getAttribute('id');
             document.getElementById(id).addEventListener('click', e => {
                 if (confirm("Want to delete this record?")) {
-                    $.post('/ParticularsOfTaxCredit/DeleteInsurance/', { id }, (data, status) => {
+                    $.post('DeleteInsurance/ParticularsOfTaxCredit', { id }, (data, status) => {
                         if (data === "deleted") {
                             getInsurances();
                         }
@@ -85,7 +85,7 @@
             return;
         }
 
-        $.post('/ParticularsOfTaxCredit/SaveInsurance/', { model: obj }, (data, status) => {
+        $.post('SaveInsurance/ParticularsOfTaxCredit', { model: obj }, (data, status) => {
             getInsurances();
 
             insuraceAmount.val('');

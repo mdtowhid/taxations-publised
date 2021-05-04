@@ -17,7 +17,7 @@ namespace Taxations.Models
     {
         private static readonly TaxationDbContext db = new TaxationDbContext();
 
-        public static void BuildEmailTemplate(long id, string url, bool isPasswordRecovery)
+        public static void BuildEmailTemplate(long id, string url, bool isPasswordRecovery, User user)
         {
             string body = "";
             var regInfo = db.Users.Where(x => x.Id == id).FirstOrDefault();
@@ -29,17 +29,16 @@ namespace Taxations.Models
                 body = body.Replace("regUser", "Welcome! "+ regInfo.FirstName);
                 body = body.Replace("@ViewBag.ConfirmationLink", url);
                 body = body.ToString();
+                BuildEmailTemplate("Your Account is successfully created.", body, regInfo.Email);
             }
             else
             {
                 body = System.IO.File.ReadAllText(HostingEnvironment.MapPath("~/views/components/") + "RecoverEmailTemplate.cshtml");
-                url = url + id + "&&recoverCode=" + regInfo.RecoveryCode;
+                url = url + id + "&&recoverCode=" + user.RecoveryCode;
                 body = body.Replace("regUser", regInfo.FirstName + " " + regInfo.LastName);
                 body = body.Replace("@ViewBag.RecoverAccountLink", url);
-
+                BuildEmailTemplate($"{regInfo.FirstName} recover your account ", body, regInfo.Email);
             }
-            
-            BuildEmailTemplate("Your Account is successfully created.", body, regInfo.Email);
         }
 
         public static void BuildEmailTemplate(string subjectText, string bodyText, string sendTo)

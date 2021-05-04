@@ -10,19 +10,20 @@
     const leaveAllowanceTaxable = $('#LeaveAllowanceTaxable');
     const honorariumTaxable = $('#HonorariumTaxable');
     const houseRentByOffice = $('#HouseRentByOffice').val();
-    function calculatePercentage(amount, percentage) {
-        return +(percentage / 100) * amount;
-    }
-        
+    //const roundNumber = num => Math.round(num);
+
+
+    //function deemedFurniture(num) {}
+       
     //Step 3...
     $("#BasicPayAmountId").change(function (e) {
         let amount = +$(this).val();
         $("#BasicPayTaxExemptedId").val("0");
-        basicPayTaxableId.val(amount);
+        basicPayTaxableId.val(Math.round(amount));
         basicPayTaxableAmount = amount;
 
-        if (houseRentByOffice === "Yes")
-            deemedFurniture(0);
+        //if (houseRentByOffice === "Yes")
+        //    deemedFurniture(0);
         if (houseRentByOffice === "No") {
             $('#DeemedIncomeFurnishedTaxable').val(0);
         }
@@ -32,21 +33,21 @@
     $("#SpecialPayAmountId").change(function (e) {
         let amount = +$(this).val();
         $("#SpecialPayTaxExemptedId").val("0");
-        specialPayTaxableId.val(amount);
+        specialPayTaxableId.val(roundNumber(amount));
     });
 
     //Step 5...
     $("#ArrearPayAmountId").change(function (e) {
         let amount = $(this).val();
         $("#ArrearPayTaxExemptedId").val("0");
-        arrearPayTaxableId.val(amount);
+        arrearPayTaxableId.val(roundNumber(amount));
     });
 
     //Step 6...
     $("#DearnessAllowanceAmountId").change(function (e) {
         let amount = $(this).val();
         $("#DearnessAllowanceTaxExemptedId").val("0");
-        dearnessAllowanceTaxableId.val(amount);
+        dearnessAllowanceTaxableId.val(roundNumber(amount));
     });
 
 
@@ -63,18 +64,17 @@
         } else if (basicPayTaxable < yearly) {
             res1 = basicPayTaxable;
         }
-
+        //roundNumber()
         if (houseRentAllowanceAmount > res1)
-            $('#HouseRentAllowanceTaxExemptedId').val(res1);
+            $('#HouseRentAllowanceTaxExemptedId').val(roundNumber(res1));
         else if (res1 > houseRentAllowanceAmount)
-            $('#HouseRentAllowanceTaxExemptedId').val(houseRentAllowanceAmount)
+            $('#HouseRentAllowanceTaxExemptedId').val(roundNumber(houseRentAllowanceAmount))
 
 
 
         let result = houseRentAllowanceAmount - +$('#HouseRentAllowanceTaxExemptedId').val();
-        console.log(result);
         $('#HouseRentAllowanceTaxableId')
-            .val(result);
+            .val(roundNumber(result));
     });
 
     //Step 8...
@@ -96,13 +96,13 @@
         }
 
         if (amount > res1) {
-            $('#MedicalAllowanceTaxExemptedId').val(res1);
+            $('#MedicalAllowanceTaxExemptedId').val(roundNumber(res1));
         } else if (amount < res1) {
-            $('#MedicalAllowanceTaxExemptedId').val(amount);
+            $('#MedicalAllowanceTaxExemptedId').val(roundNumber(amount));
         }
 
         let result = amount - +$('#MedicalAllowanceTaxExemptedId').val();
-        $('#MedicalAllowanceTaxableId').val(result);
+        $('#MedicalAllowanceTaxableId').val(roundNumber(result));
     });
 
     //Step 9...
@@ -110,7 +110,7 @@
         let amount = +$(this).val();
         const fixedExempted = 30000;
         if (amount > fixedExempted)
-            $('#ConveyanceAllowanceTaxable').val(amount - fixedExempted);
+            $('#ConveyanceAllowanceTaxable').val(roundNumber(amount - fixedExempted));
         else
             $('#ConveyanceAllowanceTaxable').val(0);
     });
@@ -119,28 +119,28 @@
     $("#FestivalAllowanceAmount").change(function (e) {
         let amount = $(this).val();
         $("#FestivalAllowanceTaxExempted").val("0");
-        $('#FestivalAllowanceTaxable').val(amount);
+        $('#FestivalAllowanceTaxable').val(roundNumber(amount));
     });
 
     //Step 11...
     $("#AllowanceStaffAmount").change(function (e) {
         let amount = $(this).val();
         $("#AllowanceStaffTaxExempted").val("0");
-        allowanceStaffTaxable.val(amount);
+        allowanceStaffTaxable.val(roundNumber(amount));
     });
 
     //Step 12...
     $("#LeaveAllowanceAmount").change(function (e) {
         let amount = +$(this).val();
         $("#LeaveAllowanceTaxExempted").val("0");
-        leaveAllowanceTaxable.val(amount);
+        leaveAllowanceTaxable.val(roundNumber(amount));
     });
 
     //Step 13...
     $("#HonorariumAmount").change(function (e) {
         let amount = $(this).val();
         $("#HonorariumTaxExempted").val("0");
-        honorariumTaxable.val(amount);
+        honorariumTaxable.val(roundNumber(amount));
     }
     )
 });
@@ -149,28 +149,28 @@
 $("#OvertimeAllowanceAmount").change(function (e) {
     let amount = $(this).val();
     $("#OvertimeAllowanceExempted").val("0");
-    $('#OvertimeAllowanceTaxable').val(amount);
+    $('#OvertimeAllowanceTaxable').val(roundNumber(amount));
 });
 
 //Step 15...
 $("#BonusAmount").change(function (e) {
     let amount = $(this).val();
     $("#BonusExempted").val("0");
-    $('#BonusTaxable').val(amount);
+    $('#BonusTaxable').val(roundNumber(amount));
 });
 
 //Step 16...
 $("#OtherAllowancesAmount").change(function (e) {
     let amount = $(this).val();
     $("#OtherAllowancesExempted").val("0");
-    $('#OtherAllowancesTaxable').val(amount);
+    $('#OtherAllowancesTaxable').val(roundNumber(amount));
 });
 
 //Step 17...
 $("#EmployerContributionAmount").change(function (e) {
     let amount = $(this).val();
     $("#EmployerContributionExempted").val("0");
-    $('#EmployerContributionTaxable').val(amount);
+    $('#EmployerContributionTaxable').val(roundNumber(amount));
 });
 
 //Step 18...
@@ -188,7 +188,7 @@ $("#InterestAccruedAmount").change(function (e) {
     $('#InterestAccruedExempted').val(min);
 
     let subs = Math.ceil(+interestAccruedAmount.val() - min);
-    $('#InterestAccruedTaxable').val(subs);
+    $('#InterestAccruedTaxable').val(roundNumber(subs));
 });
 
 
@@ -210,30 +210,15 @@ $("#DeemedIncomeFurnishedAmount").change((e) => {
     $('#DeemedIncomeFurnishedExempted').val(0);
 });
 
-function deemedFurniture(amount) {
-    //debugger;
-    //let basicPay = +$('#BasicPayTaxableId').val();
-    //let hr = $('#HouseRentByOffice').val();
-    //if ((basicPay !== null || basicPay !== 'undefined') && hr !== 'No') {
-    //    let basicTwentyFive = (25 / 100) * +basicPay;
 
-    //    if (+amount <= 0 || +amount === '') {
-    //        $('#DeemedIncomeFurnishedExempted').val(basicTwentyFive);
-    //        $('#DeemedIncomeFurnishedTaxable').val(basicTwentyFive);
-    //    } else {
-    //        $('#DeemedIncomeFurnishedExempted').val('0');
-    //    }
-    //}
-}
-
-deemedFurniture(0);
+//deemedFurniture(0);
 
 //Step 21...
 $("#OtherIfAnyAmount").change(function (e) {
     let amount = $(this).val();
 
     $("#OtherIfAnyExempted").val("0");
-    $('#OtherIfAnyTaxable').val(amount);
+    $('#OtherIfAnyTaxable').val(roundNumber(amount));
 });
 
 $("#particularincomeSalariesSubmitBtn").click((e) => {
@@ -273,7 +258,7 @@ function calculateCTotal() {
                 if (!isNaN(val))
                     ctotal += val;
                     
-                $('#total').val(ctotal);
+                $('#total').val(roundNumber(ctotal));
             }, 30);
                 
         });
@@ -291,7 +276,7 @@ function calculateCTotal() {
             ctotal = +$('#BasicPayTaxableId').val() +
                 +$('#FestivalAllowanceTaxable').val() +
                 +$('#BonusTaxable').val();
-            $('#total').val(ctotal);    
+            $('#total').val(roundNumber(ctotal));    
         }, 30);
     }
 }
@@ -315,9 +300,9 @@ function bTotal(bol) {
     // console.log(bsum);
 
     if (bol && taxExamptedPrevValue.length > 0)
-        $('#TotalTaxExempted').val(taxExamptedPrevValue);
+        $('#TotalTaxExempted').val(roundNumber(taxExamptedPrevValue));
     else
-        $('#TotalTaxExempted').val(bsum);
+        $('#TotalTaxExempted').val(roundNumber(bsum));
 }
 
 bTotal(true);
@@ -328,7 +313,7 @@ const atotal = () => {
     $('.a').each((i, el) => {
         t += +$(el).val();
     });
-    $('#amountTotal').val(t);
+    $('#amountTotal').val(roundNumber(t));
 }
 
 atotal();
@@ -337,4 +322,9 @@ $('.a').each((i, el) => {
     $(el).change(() => {
         atotal();
     })
-})
+});
+
+
+function roundNumber(num) { return Math.round(num) }
+
+
